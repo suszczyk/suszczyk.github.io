@@ -38,15 +38,6 @@
     </item>
     
     <item>
-      <title>TEST - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/encrypted/test/</link>
-      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/encrypted/test/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
       <title>LogForge - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/encrypted/logforge/</link>
       <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
