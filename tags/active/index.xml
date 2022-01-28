@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Active on Lavatann</title>
+    <link>//public/tags/active/</link>
+    <description>Recent content in Active on Lavatann</description>
+    <image>
+      <url>//public/papermod-cover.png</url>
+      <link>//public/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 20 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="//public/tags/active/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Devzat - HackTheBox</title>
+      <link>//public/posts/hackthebox/devzat/</link>
+      <pubDate>Mon, 13 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/devzat/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Shibboleth - HackTheBox</title>
+      <link>//public/posts/hackthebox/shibboleth/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/shibboleth/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Backdoor - HackTheBox</title>
+      <link>//public/posts/hackthebox/backdoor/</link>
+      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/backdoor/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Secret - HackTheBox</title>
+      <link>//public/posts/hackthebox/secret/</link>
+      <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/secret/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Driver - HackTheBox</title>
+      <link>//public/posts/hackthebox/driver/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/driver/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Forge - HackTheBox</title>
+      <link>//public/posts/hackthebox/forge/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/forge/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Previse - HackTheBox</title>
+      <link>//public/posts/hackthebox/previse/</link>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/previse/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Timing - HackTheBox</title>
+      <link>//public/posts/hackthebox/timing/</link>
+      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/timing/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Devzat - HackTheBox</title>
+      <link>//public/posts/hackthebox/encrypted/devzat/</link>
+      <pubDate>Mon, 13 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/encrypted/devzat/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+  </channel>
+</rss>

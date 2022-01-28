@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Active Directory on Lavatann</title>
+    <link>//public/tags/active-directory/</link>
+    <description>Recent content in Active Directory on Lavatann</description>
+    <image>
+      <url>//public/papermod-cover.png</url>
+      <link>//public/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 11 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="//public/tags/active-directory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Arctic - HackTheBox</title>
+      <link>//public/posts/hackthebox/arctic/</link>
+      <pubDate>Wed, 11 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/arctic/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Active - HackTheBox</title>
+      <link>//public/posts/hackthebox/active/</link>
+      <pubDate>Mon, 02 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/active/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Forest - HackTheBox</title>
+      <link>//public/posts/hackthebox/forest/</link>
+      <pubDate>Mon, 02 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/forest/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Bastion - HackTheBox</title>
+      <link>//public/posts/hackthebox/bastion/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>//public/posts/hackthebox/bastion/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+  </channel>
+</rss>
