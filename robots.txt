@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: //public/sitemap.xml
+Sitemap: https://lavatann.github.io/sitemap.xml

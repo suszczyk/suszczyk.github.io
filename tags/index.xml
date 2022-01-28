@@ -2,110 +2,110 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Lavatann</title>
-    <link>//public/tags/</link>
+    <link>https://lavatann.github.io/tags/</link>
     <description>Recent content in Tags on Lavatann</description>
     <image>
-      <url>//public/papermod-cover.png</url>
-      <link>//public/papermod-cover.png</link>
+      <url>https://lavatann.github.io/papermod-cover.png</url>
+      <link>https://lavatann.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="//public/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Easy</title>
-      <link>//public/tags/easy/</link>
+      <link>https://lavatann.github.io/tags/easy/</link>
       <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/easy/</guid>
+      <guid>https://lavatann.github.io/tags/easy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>//public/tags/linux/</link>
+      <link>https://lavatann.github.io/tags/linux/</link>
       <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/linux/</guid>
+      <guid>https://lavatann.github.io/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Retired</title>
-      <link>//public/tags/retired/</link>
+      <link>https://lavatann.github.io/tags/retired/</link>
       <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/retired/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Medium</title>
-      <link>//public/tags/medium/</link>
-      <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>//public/tags/medium/</guid>
+      <guid>https://lavatann.github.io/tags/retired/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Active</title>
-      <link>//public/tags/active/</link>
-      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
+      <link>https://lavatann.github.io/tags/active/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/active/</guid>
+      <guid>https://lavatann.github.io/tags/active/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Medium</title>
+      <link>https://lavatann.github.io/tags/medium/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/tags/medium/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Other</title>
-      <link>//public/tags/other/</link>
+      <link>https://lavatann.github.io/tags/other/</link>
       <pubDate>Sun, 03 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/other/</guid>
+      <guid>https://lavatann.github.io/tags/other/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Windows</title>
-      <link>//public/tags/windows/</link>
+      <link>https://lavatann.github.io/tags/windows/</link>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/windows/</guid>
+      <guid>https://lavatann.github.io/tags/windows/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Active Directory</title>
-      <link>//public/tags/active-directory/</link>
+      <link>https://lavatann.github.io/tags/active-directory/</link>
       <pubDate>Wed, 11 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/active-directory/</guid>
+      <guid>https://lavatann.github.io/tags/active-directory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Starting Point</title>
-      <link>//public/tags/starting-point/</link>
+      <link>https://lavatann.github.io/tags/starting-point/</link>
       <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/starting-point/</guid>
+      <guid>https://lavatann.github.io/tags/starting-point/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Very Easy</title>
-      <link>//public/tags/very-easy/</link>
+      <link>https://lavatann.github.io/tags/very-easy/</link>
       <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/very-easy/</guid>
+      <guid>https://lavatann.github.io/tags/very-easy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Android</title>
-      <link>//public/tags/android/</link>
+      <link>https://lavatann.github.io/tags/android/</link>
       <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>//public/tags/android/</guid>
+      <guid>https://lavatann.github.io/tags/android/</guid>
       <description></description>
     </item>
     
