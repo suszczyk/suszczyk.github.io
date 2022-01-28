@@ -5,13 +5,7 @@
     <loc>https://lavatann.github.io/posts/hackthebox/horizontall/</loc>
     <lastmod>2022-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/encrypted/devzat/</loc>
-    <lastmod>2022-01-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/encrypted/devzat2/</loc>
-    <lastmod>2022-01-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/encrypted/logforge/</loc>
+    <loc>https://lavatann.github.io/posts/hackthebox/logforge-encrypted/</loc>
     <lastmod>2021-12-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lavatann.github.io/posts/hackthebox/logforge/</loc>
@@ -99,9 +93,6 @@
     <lastmod>2021-08-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lavatann.github.io/posts/hackthebox/access/</loc>
-    <lastmod>2021-08-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/encrypted/access/</loc>
     <lastmod>2021-08-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lavatann.github.io/posts/hackthebox/granny/</loc>
@@ -194,9 +185,6 @@
     <loc>https://lavatann.github.io/posts/hackthebox/academy/</loc>
     <lastmod>2021-02-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/encrypted/academy/</loc>
-    <lastmod>2021-02-09T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://lavatann.github.io/posts/hackthebox/template/template/</loc>
     <lastmod>2021-02-09T00:00:00+00:00</lastmod>
   </url><url>
@@ -233,11 +221,11 @@
     <loc>https://lavatann.github.io/tags/</loc>
     <lastmod>2022-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://lavatann.github.io/tags/active/</loc>
-    <lastmod>2022-01-13T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://lavatann.github.io/tags/medium/</loc>
-    <lastmod>2022-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2021-12-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lavatann.github.io/tags/active/</loc>
+    <lastmod>2021-12-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lavatann.github.io/tags/other/</loc>
     <lastmod>2021-10-03T00:00:00+00:00</lastmod>

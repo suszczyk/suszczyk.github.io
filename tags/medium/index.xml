@@ -9,31 +9,13 @@
       <link>https://lavatann.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/medium/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Devzat - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/encrypted/devzat/</link>
-      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/encrypted/devzat/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Devzat - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/encrypted/devzat2/</link>
-      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/encrypted/devzat2/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku &lt;code&gt;/etc/shadow&lt;/code&gt; aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
+    <lastBuildDate>Fri, 31 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/medium/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LogForge - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/encrypted/logforge/</link>
+      <link>https://lavatann.github.io/posts/hackthebox/logforge-encrypted/</link>
       <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/encrypted/logforge/</guid>
+      <guid>https://lavatann.github.io/posts/hackthebox/logforge-encrypted/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
