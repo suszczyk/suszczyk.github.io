@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/mirai/" />
-<meta property="og:image" content="https://lavatann.github.io/Mirai.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Mirai.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-14T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-08-14T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Mirai.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Mirai.png" />
 <meta name="twitter:title" content="Mirai - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Mirai - 14.08.2021  NMap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV -T4 -p- 10.10.10.48 Starting Nmap 7.91 ( https://nmap.org ) at 2021-08-14 15:54 CEST Nmap scan report for 10.10.10.48 Host is up (0.054s latency). Not shown: 65529 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 6.7p1 Debian 5+deb8u3 (protocol 2.0) | ssh-hostkey: | 1024 aa:ef:5c:e0:8e:86:97:82:47:ff:4a:e5:40:18:90:c5 (DSA) | 2048 e8:c1:9d:c5:43:ab:fe:61:23:3b:d7:e4:af:9b:74:18 (RSA) | 256 b6:a0:78:38:d0:c8:10:94:8b:44:b2:ea:a0:17:42:2b (ECDSA) |_ 256 4d:68:40:f7:20:c4:e5:52:80:7a:44:38:b8:a2:a7:52 (ED25519) 53/tcp open domain dnsmasq 2.76 | dns-nsid: |_ bind.version: dnsmasq-2.76 80/tcp open http lighttpd 1.4.35 |_http-server-header: lighttpd/1.4.35 |_http-title: Site doesn't have a title (text/html; charset=UTF-8). 1210/tcp open upnp Platinum UPnP 1.0.5.13 (UPnP/1.0 DLNADOC/1.50) 32400/tcp open http Plex Media Server httpd | http-auth: | HTTP/1.1 401 Unauthorized\\x0D |_ Server returned status 401 but no WWW-Authenticate header. |_http-cors: HEAD GET POST PUT DELETE OPTIONS |_http-favicon: Plex |_http-title: Unauthorized 32469/tcp open upnp Platinum UPnP 1.0.5.13 (UPnP/1.0 DLNADOC/1.50) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  FeroxBuster  Pi-hole Pi-hole Version v3.1.4 Web Interface Version v3.1 FTL Version v2.10\n AdminLTE  Próba Hydra na strone Plex - nieudana hydra -L /usr/share/metasploit-framework/data/wordlists/mirai_user.txt -P /usr/share/metasploit-framework/data/wordlists/mirai_pass.txt 10.10.10.48 -V http-form-post '/api/v2/users/signin:login=^USER^\u0026password=^PASS^:not'  Próba Hydra na SSH - udana hydra -L /opt/SecLists/Usernames/top-usernames-shortlist.txt -P /opt/SecLists/Passwords/Common-Credentials/top-20-common-SSH-passwords.txt ssh://10.10.10.48 -V user.txt\nff837707441b257a20e32199d7c8838d\n Privilage Escalation root.txt\n3d3e483143ff12ec505d026fa13e020b\n",
   "wordCount" : "196",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Mirai.png","datePublished": "2021-08-14T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Mirai.png","datePublished": "2021-08-14T00:00:00Z",
   "dateModified": "2021-08-14T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Mirai.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Mirai.png" alt="">
         
 </figure><div class="toc">
     <details >

@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/bank/" />
-<meta property="og:image" content="https://lavatann.github.io/Bank.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Bank.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-12T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-08-12T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Bank.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Bank.png" />
 <meta name="twitter:title" content="Bank - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Bank - 12.08.2021  Nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV -T4 -p- 10.10.10.29 Starting Nmap 7.91 ( https://nmap.org ) at 2021-08-12 22:23 CEST Warning: 10.10.10.29 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.29 Host is up (0.056s latency). Not shown: 65530 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08:ee:d0:30:d5:45:e4:59:db:4d:54:a8:dc:5c:ef:15 (DSA) | 2048 b8:e0:15:48:2d:0d:f0:f1:73:33:b7:81:64:08:4a:91 (RSA) | 256 a0:4c:94:d1:7b:6e:a8:fd:07:fe:11:eb:88:d5:16:65 (ECDSA) |_ 256 2d:79:44:30:c8:bb:5e:8f:07:cf:5b:72:ef:a1:6d:67 (ED25519) 53/tcp open domain ISC BIND 9.9.5-3ubuntu0.14 (Ubuntu Linux) | dns-nsid: |_ bind.version: 9.9.5-3ubuntu0.14-Ubuntu 80/tcp open http Apache httpd 2.4.7 ((Ubuntu)) |_http-server-header: Apache/2.4.7 (Ubuntu) |_http-title: Apache2 Ubuntu Default Page: It works 11100/tcp filtered unknown 44091/tcp filtered unknown Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  DNS Enum Dodanie do /etc/resolv.conf\n10.10.10.29  Strona główna  FeroxBuster Jeżeli są strony .php, warto spróbować feroxbustera z rozszerzeniem php\n BurpSuite Ignore Redirect  Support.php W kodzie źródłowym support.php była następująca notka\nZatem upload shella i w burpie zmiana .php na .htb\nOtrzymanie shella\nuser.txt\ndda4a74ea3550e6f5644f5fdf97c1db1\n Privilages Escalation /etc/passwd is writable\nHASŁO: password\necho mati1:pATfNCwRanDjY:0:0:mati1:/home/mati1:/bin/bash  /etc/passwd root.txt\ne01f6ff796ef083748b7011a912a60c4\n",
   "wordCount" : "180",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Bank.png","datePublished": "2021-08-12T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Bank.png","datePublished": "2021-08-12T00:00:00Z",
   "dateModified": "2021-08-12T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Bank.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Bank.png" alt="">
         
 </figure><div class="toc">
     <details >

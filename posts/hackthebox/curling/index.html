@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/curling/" />
-<meta property="og:image" content="https://lavatann.github.io/Curling.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Curling.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-29T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-08-29T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Curling.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Curling.png" />
 <meta name="twitter:title" content="Curling - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Curling - 29.08.2021  NMap sudo nmap -p- -v -sS -A -T4 10.10.10.150 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 8a:d1:69:b4:90:20:3e:a7:b6:54:01:eb:68:30:3a:ca (RSA) | 256 9f:0b:c2:b2:0b:ad:8f:a1:4e:0b:f6:33:79:ef:fb:43 (ECDSA) |_ 256 c1:2a:35:44:30:0c:5b:56:6a:3f:a5:cc:64:66:d9:a9 (ED25519) 80/tcp open http Apache httpd 2.4.29 ((Ubuntu)) |_http-favicon: Unknown favicon MD5: 1194D7D32448E1F90741A97B42AF91FA |_http-generator: Joomla! - Open Source Content Management | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-server-header: Apache/2.4.29 (Ubuntu) |_http-title: Home  Source code Q3VybGluZzIwMTgh\npo odszyfrowaniu z BASE64 napis to Curling2018!\n Joomscan joomscan --url http://10.10.10.150 [+] Detecting Joomla Version [++] Joomla 3.8.8 [+] Core Joomla Vulnerability [++] Target Joomla core is not vulnerable [+] Checking Directory Listing [++] directory has directory listing : http://10.10.10.150/administrator/components http://10.10.10.150/administrator/modules http://10.10.10.150/administrator/templates http://10.10.10.150/images/banners [+] Checking apache info/status files [++] Readable info/status files are not found [+] admin finder [++] Admin page : http://10.10.10.150/administrator/  Udało się zalogować na:\nfloris:Curling2018!\nCall to a member function format() on null?\nhttps://solmedia.pl/blog/joomla-bialy-ekran-po-zalogowaniu-call-to-a-member-function-format-on-null/\n www-data https://www.hackingarticles.in/joomla-reverse-shell/\nSOCKET: Shell has connected! PID: 3753 id uid=33(www-data) gid=33(www-data) groups=33(www-data) /usr/bin/script -qc /bin/bash /dev/null whoami whoami www-data www-data@curling:/var/www/html$  Ciekawy plik password_backup w folderze domowym usera floris.\n xxd Typ uzyskanego pliku jest ciekawy\n┌──(kali㉿kali)-[~/htb/curling] └─$ cat password_backup | xxd -r | file - 4 ⚙ /dev/stdin: bzip2 compressed data, block size = 900k ┌──(kali㉿kali)-[~/htb/curling] └─$ cat password_backup | xxd -r | bzip2 -d | gzip -d |bzip2 -d |tar -xvf - password.txt ┌──(kali㉿kali)-[~/htb/curling] └─$ ls JoomlaMassExploiter joomla.png linpeas.sh password.txt reverse-shell-win.php admin.req joomlavs out.jpg password_backup ┌──(kali㉿kali)-[~/htb/curling] └─$ cat password.txt 5d)|hChXll Hasło to 5d\n SSH ssh floris@10.10.10.150 user.txt\n65dd1df0713b40d88ead98cf11b8530b\n Privilege Escalation Nietypowe pliki w folderze domowym\nreport to index.php maszyny\ninput to url = \"http://127.0.0.1\"\nMożna dokonywać zmian w plikach. Skrypt działa z prawami administratora, można to wykorzystać aby odczytać pliki niedostępne dla użytkownika. Zatem można zmienić parametr url\nTym poleceniem odświeżamy ekran co 1 sekundę, ‘czytając’ plik report\nwatch -n 1 cat report root.txt\n82c198ab6fc5365fdc6da2ee5c26064a\n",
   "wordCount" : "309",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Curling.png","datePublished": "2021-08-29T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Curling.png","datePublished": "2021-08-29T00:00:00Z",
   "dateModified": "2021-08-29T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Curling.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Curling.png" alt="">
         
 </figure><div class="toc">
     <details >

