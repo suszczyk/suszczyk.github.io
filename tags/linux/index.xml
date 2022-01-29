@@ -21,10 +21,10 @@
     
     <item>
       <title>LogForge - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/logforge-encrypted/</link>
+      <link>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</link>
       <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/logforge-encrypted/</guid>
+      <guid>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
@@ -34,6 +34,15 @@
       <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/logforge/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>LogForge - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/template/-encrypted/</link>
+      <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/template/-encrypted/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
