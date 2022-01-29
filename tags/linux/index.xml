@@ -11,6 +11,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 31 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Devzat - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</link>
+      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
       <title>Friendzone - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
       <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
@@ -61,15 +70,6 @@
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Devzat - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</link>
-      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
