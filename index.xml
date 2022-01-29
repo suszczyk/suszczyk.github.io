@@ -9,14 +9,23 @@
       <link>https://lavatann.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 28 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>LogForge - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/template/backdoor-encrypted/</link>
-      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
+      <title>Friendzone - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
+      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/template/backdoor-encrypted/</guid>
+      <guid>https://lavatann.github.io/posts/hackthebox/friendzone/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Timing - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/timing/</link>
+      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/timing/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
     <item>
@@ -38,20 +47,20 @@
     </item>
     
     <item>
+      <title>Backdoor - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</link>
+      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
       <title>Devzat - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Driver - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</link>
-      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
@@ -115,15 +124,6 @@
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/toolbox/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Friendzone - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
-      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/friendzone/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
@@ -560,15 +560,6 @@
     </item>
     
     <item>
-      <title>Academy - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/template/template/</link>
-      <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/template/template/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
       <title>Archetype - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/archetype/</link>
       <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
@@ -584,15 +575,6 @@
       
       <guid>https://lavatann.github.io/posts/hackthebox/blunder/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Timing - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/timing/</link>
-      <pubDate>Mon, 20 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/timing/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
     

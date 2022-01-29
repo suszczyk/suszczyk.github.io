@@ -9,40 +9,40 @@
       <link>https://lavatann.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 28 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Linux</title>
-      <link>https://lavatann.github.io/tags/linux/</link>
-      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Medium</title>
-      <link>https://lavatann.github.io/tags/medium/</link>
-      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/tags/medium/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Retired</title>
-      <link>https://lavatann.github.io/tags/retired/</link>
-      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/tags/retired/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Easy</title>
       <link>https://lavatann.github.io/tags/easy/</link>
       <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/tags/easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://lavatann.github.io/tags/linux/</link>
+      <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Retired</title>
+      <link>https://lavatann.github.io/tags/retired/</link>
+      <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/tags/retired/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Medium</title>
+      <link>https://lavatann.github.io/tags/medium/</link>
+      <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/tags/medium/</guid>
       <description></description>
     </item>
     

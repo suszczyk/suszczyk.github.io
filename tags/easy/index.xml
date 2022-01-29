@@ -11,6 +11,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/easy/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Friendzone - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
+      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/friendzone/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
       <title>Horizontall - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/horizontall/</link>
       <pubDate>Thu, 20 Jan 2022 00:00:00 +0000</pubDate>
@@ -20,7 +29,7 @@
     </item>
     
     <item>
-      <title>Driver - HackTheBox</title>
+      <title>Backdoor - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
       
@@ -79,15 +88,6 @@
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/toolbox/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Friendzone - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
-      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/friendzone/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
@@ -493,15 +493,6 @@
       <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/academy/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Academy - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/template/template/</link>
-      <pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/template/template/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
