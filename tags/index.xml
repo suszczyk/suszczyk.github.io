@@ -9,13 +9,31 @@
       <link>https://lavatann.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 31 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Easy</title>
+      <link>https://lavatann.github.io/tags/easy/</link>
+      <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/tags/easy/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Linux</title>
       <link>https://lavatann.github.io/tags/linux/</link>
-      <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Retired</title>
+      <link>https://lavatann.github.io/tags/retired/</link>
+      <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/tags/retired/</guid>
       <description></description>
     </item>
     
@@ -29,29 +47,11 @@
     </item>
     
     <item>
-      <title>Retired</title>
-      <link>https://lavatann.github.io/tags/retired/</link>
-      <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/tags/retired/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Active</title>
       <link>https://lavatann.github.io/tags/active/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/tags/active/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Easy</title>
-      <link>https://lavatann.github.io/tags/easy/</link>
-      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/tags/easy/</guid>
       <description></description>
     </item>
     
