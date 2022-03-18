@@ -61,12 +61,12 @@
 <meta property="og:description" content="Basic challange" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lavatann.github.io/posts/ctf/picoctf2022/basic-mod1/" />
-<meta property="og:image" content="https://lavatann.github.io/thumbnails/.jpg" /><meta property="article:section" content="posts" />
+<meta property="og:image" content="https://lavatann.github.io/thumbnails/Access.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-17T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2022-03-17T00:00:00&#43;00:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/.jpg" />
+<meta name="twitter:image" content="https://lavatann.github.io/thumbnails/Access.png" />
 <meta name="twitter:title" content="basic-mod1 - PicoCTF2022"/>
 <meta name="twitter:description" content="Basic challange"/>
 
@@ -104,7 +104,7 @@
   "articleBody": "basic-mod1 - PicoCTF2022 100 points\nAUTHOR: WILL HONG\nDescription We found this weird message being passed around on the servers, we think we have a working decrpytion scheme.Download the message here.Take each number mod 37 and map it to the following character set: 0-25 is the alphabet (uppercase), 26-35 are the decimal digits, and 36 is an underscore.Wrap your decrypted message in the picoCTF flag format (i.e. picoCTF{decrypted_message})\nmessage 91 322 57 124 40 406 272 147 239 285 353 272 77 110 296 262 299 323 255 337 150 102  Answer import string alphabet=string.ascii_lowercase+string.digits+'_' text='91 322 57 124 40 406 272 147 239 285 353 272 77 110 296 262 299 323 255 337 150 102' tab_text=text.split() #print(tab_text) for digit in tab_text: digit=int(digit)%37 print(alphabet[digit], end=\"\") #print(alphabet) Po zastosowaniu takiego kodu otrzymałem r0und_n_r0und_add17ec2. Co było poprawną odpowiedzią :)\npicoCTF{r0und_n_r0und_add17ec2}\n",
   "wordCount" : "139",
   "inLanguage": "en",
-  "image":"https://lavatann.github.io/thumbnails/.jpg","datePublished": "2022-03-17T00:00:00Z",
+  "image":"https://lavatann.github.io/thumbnails/Access.png","datePublished": "2022-03-17T00:00:00Z",
   "dateModified": "2022-03-17T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -201,7 +201,7 @@
 
 </div>
   </header> 
-<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/.jpg" alt="">
+<figure class="entry-cover"><img loading="lazy" src="https://lavatann.github.io/thumbnails/Access.png" alt="">
         
 </figure><div class="toc">
     <details >

@@ -101,7 +101,7 @@
   "keywords": [
     "CTF", "PicoCTF", "Forensics"
   ],
-  "articleBody": "Enhance! - PicoCTF2022 100 points\nAUTHOR: LT ‘SYREAL’ JONES\nDescription Download this image file and find the flag.\n Download image file  file\n104 290 356 313 262 337 354 229 146 297 118 373 221 359 338 321 288 79 214 277 131 190 377  Answer import string alphabet=' '+string.ascii_lowercase+string.digits+'_' #print(alphabet[37]) text='104 290 356 313 262 337 354 229 146 297 118 373 221 359 338 321 288 79 214 277 131 190 377' tab_text=text.split() #print(tab_text) for digit in tab_text: digit=int(digit)%41 for i in range(41): if (digit*i)%41==1: print(alphabet[i], end=\"\") #print(alphabet) Po zastosowaniu takiego kodu otrzymałem 1nv3r53ly_h4rd_8a05d939. Co było poprawną odpowiedzią :)\npicoCTF{1nv3r53ly_h4rd_8a05d939}\n",
+  "articleBody": "Enhance! - PicoCTF2022 100 points\nAUTHOR: LT ‘SYREAL’ JONES\nDescription Download this image file and find the flag.\n Download image file  file\n Podczas odczytu pliku poleceniem cat zauważyłem nietypowe znaki między znacznikami tspan\nPo użyciu kilku poleceń uzyskałem flagę. Najpierw odczytałem plik następnie grepem wyszukałem frazę tspan, następnie odczysciłem najpierw z lewej do separatora , podobnie z prawym . A potem tylko złączyłem linie sedem.\nAnswer ┌─[parrot@parrot]─[~/Desktop/picoctf2022/enhance!] └──╼ [★ ]$ cat drawing.flag.svg | grep tspan | awk -F'' '{print $2}' | awk -F' '{print $1}' ORS='' |sed 's/ //g' picoCTF{3nh4nc3d_d0a757bf} Po zastosowaniu takiego kodu otrzymałem 3nh4nc3d_d0a757bf. Co było poprawną odpowiedzią :)\npicoCTF{3nh4nc3d_d0a757bf}\n",
   "wordCount" : "102",
   "inLanguage": "en",
   "image":"https://lavatann.github.io/thumbnails/.jpg","datePublished": "2022-03-17T00:00:00Z",
@@ -238,25 +238,19 @@
 <li><a href="https://artifacts.picoctf.net/c/138/drawing.flag.svg">Download image file</a></li>
 </ul>
 <p>file</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">104 290 356 313 262 337 354 229 146 297 118 373 221 359 338 321 288 79 214 277 131 190 377
-</code></pre></div><hr>
+<p><img loading="lazy" src="../../../../static/screenshots/Pasted%20image%2020220317201528.png" alt=""  />
+</p>
+<hr>
+<p>Podczas odczytu pliku  poleceniem <code>cat</code>  zauważyłem nietypowe znaki między znacznikami <code>tspan</code></p>
+<p><img loading="lazy" src="../../../../static/screenshots/Pasted%20image%2020220317201859.png" alt=""  />
+</p>
+<p>Po użyciu kilku poleceń uzyskałem flagę. Najpierw odczytałem plik następnie <code>grepem</code>  wyszukałem frazę tspan, następnie odczysciłem najpierw z lewej do separatora <code>&gt;</code>, podobnie z prawym <code>&lt;</code>. A potem tylko złączyłem linie <code>sedem</code>.</p>
 <h3 id="answer">Answer<a hidden class="anchor" aria-hidden="true" href="#answer">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> string
-
-alphabet<span style="color:#f92672">=</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">+</span>string<span style="color:#f92672">.</span>ascii_lowercase<span style="color:#f92672">+</span>string<span style="color:#f92672">.</span>digits<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span>
-<span style="color:#75715e">#print(alphabet[37])</span>
-
-text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;104 290 356 313 262 337 354 229 146 297 118 373 221 359 338 321 288 79 214 277 131 190 377&#39;</span>
-tab_text<span style="color:#f92672">=</span>text<span style="color:#f92672">.</span>split()
-<span style="color:#75715e">#print(tab_text)</span>
-<span style="color:#66d9ef">for</span> digit <span style="color:#f92672">in</span> tab_text:
-    digit<span style="color:#f92672">=</span>int(digit)<span style="color:#f92672">%</span><span style="color:#ae81ff">41</span>
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">41</span>):
-      <span style="color:#66d9ef">if</span> (digit<span style="color:#f92672">*</span>i)<span style="color:#f92672">%</span><span style="color:#ae81ff">41</span><span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>: print(alphabet[i], end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
-    
-<span style="color:#75715e">#print(alphabet)</span>
-</code></pre></div><p>Po zastosowaniu takiego kodu otrzymałem <code>1nv3r53ly_h4rd_8a05d939</code>. Co było poprawną odpowiedzią :)</p>
-<p><code>picoCTF{1nv3r53ly_h4rd_8a05d939}</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌─<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/Desktop/picoctf2022/enhance!<span style="color:#f92672">]</span>
+└──╼ <span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$ cat drawing.flag.svg | grep tspan | awk -F<span style="color:#e6db74">&#39;&gt;&#39;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span> | awk -F<span style="color:#e6db74">&#39;&lt;&#39;</span> <span style="color:#e6db74">&#39;{print $1}&#39;</span> ORS<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> |sed <span style="color:#e6db74">&#39;s/ //g&#39;</span>
+picoCTF<span style="color:#f92672">{</span>3nh4nc3d_d0a757bf<span style="color:#f92672">}</span>
+</code></pre></div><p>Po zastosowaniu takiego kodu otrzymałem <code>3nh4nc3d_d0a757bf</code>. Co było poprawną odpowiedzią :)</p>
+<p><code>picoCTF{3nh4nc3d_d0a757bf}</code></p>
 
 
   </div>
