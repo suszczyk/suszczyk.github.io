@@ -9,7 +9,7 @@
       <link>https://lavatann.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 17 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devzat - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/devzat-encrypted/</link>
@@ -62,33 +62,6 @@
       
       <guid>https://lavatann.github.io/posts/hackthebox/heist/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>basic-mod1 - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/basic-mod1/</link>
-      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/basic-mod1/</guid>
-      <description>Basic challange</description>
-    </item>
-    
-    <item>
-      <title>basic-mod2 - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/basic-mod2/</link>
-      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/basic-mod2/</guid>
-      <description>Basic challange</description>
-    </item>
-    
-    <item>
-      <title>Enhance! - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/enhance/</link>
-      <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/enhance/</guid>
-      <description>Basic challange</description>
     </item>
     
     <item>
