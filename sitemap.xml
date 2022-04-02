@@ -128,6 +128,9 @@
     <loc>https://lavatann.github.io/tags/medium/</loc>
     <lastmod>2021-12-31T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://lavatann.github.io/posts/hackthebox/shibboleth/</loc>
+    <lastmod>2021-11-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://lavatann.github.io/tags/active/</loc>
     <lastmod>2021-11-22T00:00:00+00:00</lastmod>
   </url><url>
@@ -137,11 +140,8 @@
     <loc>https://lavatann.github.io/posts/hackthebox/driver-encrypted/</loc>
     <lastmod>2021-11-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/secret-encrypted/</loc>
-    <lastmod>2021-11-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lavatann.github.io/posts/hackthebox/shibboleth-encrypted/</loc>
-    <lastmod>2021-11-22T00:00:00+00:00</lastmod>
+    <loc>https://lavatann.github.io/posts/hackthebox/secret/</loc>
+    <lastmod>2021-11-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lavatann.github.io/posts/hackthebox/networked/</loc>
     <lastmod>2021-09-29T00:00:00+00:00</lastmod>
