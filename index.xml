@@ -11,42 +11,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ToolBox - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/toolbox/</link>
-      <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/toolbox/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Friendzone - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
-      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/friendzone/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Validation - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/validation/</link>
-      <pubDate>Wed, 29 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/validation/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
-      <title>Seal - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/seal/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lavatann.github.io/posts/hackthebox/seal/</guid>
-      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
-    </item>
-    
-    <item>
       <title>Heist - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/heist/</link>
       <pubDate>Wed, 15 Sep 2021 00:00:00 +0000</pubDate>
@@ -263,6 +227,15 @@
     </item>
     
     <item>
+      <title>Backdoor - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/backdoor/</link>
+      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/backdoor/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
       <title>Secret - HackTheBox</title>
       <link>https://lavatann.github.io/posts/hackthebox/secret/</link>
       <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
@@ -286,6 +259,42 @@
       <pubDate>Wed, 29 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://lavatann.github.io/posts/hackthebox/networked/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Validation - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/validation/</link>
+      <pubDate>Wed, 29 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/validation/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>ToolBox - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/toolbox/</link>
+      <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/toolbox/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Friendzone - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/friendzone/</link>
+      <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/friendzone/</guid>
+      <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Seal - HackTheBox</title>
+      <link>https://lavatann.github.io/posts/hackthebox/seal/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lavatann.github.io/posts/hackthebox/seal/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
