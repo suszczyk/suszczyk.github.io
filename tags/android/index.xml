@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Android on Lavatann</title>
-    <link>https://lavatann.github.io/tags/android/</link>
+    <link>https://suszczyk.github.io/tags/android/</link>
     <description>Recent content in Android on Lavatann</description>
     <image>
-      <url>https://lavatann.github.io/papermod-cover.png</url>
-      <link>https://lavatann.github.io/papermod-cover.png</link>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 30 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Explore - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/explore/</link>
+      <link>https://suszczyk.github.io/posts/hackthebox/explore/</link>
       <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/explore/</guid>
+      <guid>https://suszczyk.github.io/posts/hackthebox/explore/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     

@@ -2,155 +2,155 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Lavatann</title>
-    <link>https://lavatann.github.io/tags/</link>
+    <link>https://suszczyk.github.io/tags/</link>
     <description>Recent content in Tags on Lavatann</description>
     <image>
-      <url>https://lavatann.github.io/papermod-cover.png</url>
-      <link>https://lavatann.github.io/papermod-cover.png</link>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cryptography</title>
-      <link>https://lavatann.github.io/tags/cryptography/</link>
+      <link>https://suszczyk.github.io/tags/cryptography/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/cryptography/</guid>
+      <guid>https://suszczyk.github.io/tags/cryptography/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CTF</title>
-      <link>https://lavatann.github.io/tags/ctf/</link>
+      <link>https://suszczyk.github.io/tags/ctf/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/ctf/</guid>
+      <guid>https://suszczyk.github.io/tags/ctf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>PicoCTF</title>
-      <link>https://lavatann.github.io/tags/picoctf/</link>
+      <link>https://suszczyk.github.io/tags/picoctf/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/picoctf/</guid>
+      <guid>https://suszczyk.github.io/tags/picoctf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Forensics</title>
-      <link>https://lavatann.github.io/tags/forensics/</link>
+      <link>https://suszczyk.github.io/tags/forensics/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/forensics/</guid>
+      <guid>https://suszczyk.github.io/tags/forensics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reverse Engineering</title>
-      <link>https://lavatann.github.io/tags/reverse-engineering/</link>
+      <link>https://suszczyk.github.io/tags/reverse-engineering/</link>
       <pubDate>Sat, 19 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/reverse-engineering/</guid>
+      <guid>https://suszczyk.github.io/tags/reverse-engineering/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Web Exploitation</title>
-      <link>https://lavatann.github.io/tags/web-exploitation/</link>
+      <link>https://suszczyk.github.io/tags/web-exploitation/</link>
       <pubDate>Sat, 19 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/web-exploitation/</guid>
+      <guid>https://suszczyk.github.io/tags/web-exploitation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Easy</title>
-      <link>https://lavatann.github.io/tags/easy/</link>
+      <link>https://suszczyk.github.io/tags/easy/</link>
       <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/easy/</guid>
+      <guid>https://suszczyk.github.io/tags/easy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://lavatann.github.io/tags/linux/</link>
+      <link>https://suszczyk.github.io/tags/linux/</link>
       <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/linux/</guid>
+      <guid>https://suszczyk.github.io/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Retired</title>
-      <link>https://lavatann.github.io/tags/retired/</link>
+      <link>https://suszczyk.github.io/tags/retired/</link>
       <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/retired/</guid>
+      <guid>https://suszczyk.github.io/tags/retired/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Medium</title>
-      <link>https://lavatann.github.io/tags/medium/</link>
+      <link>https://suszczyk.github.io/tags/medium/</link>
       <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/medium/</guid>
+      <guid>https://suszczyk.github.io/tags/medium/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Active</title>
-      <link>https://lavatann.github.io/tags/active/</link>
+      <link>https://suszczyk.github.io/tags/active/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/active/</guid>
+      <guid>https://suszczyk.github.io/tags/active/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Windows</title>
-      <link>https://lavatann.github.io/tags/windows/</link>
+      <link>https://suszczyk.github.io/tags/windows/</link>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/windows/</guid>
+      <guid>https://suszczyk.github.io/tags/windows/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Active Directory</title>
-      <link>https://lavatann.github.io/tags/active-directory/</link>
+      <link>https://suszczyk.github.io/tags/active-directory/</link>
       <pubDate>Wed, 11 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/active-directory/</guid>
+      <guid>https://suszczyk.github.io/tags/active-directory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Starting Point</title>
-      <link>https://lavatann.github.io/tags/starting-point/</link>
+      <link>https://suszczyk.github.io/tags/starting-point/</link>
       <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/starting-point/</guid>
+      <guid>https://suszczyk.github.io/tags/starting-point/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Very Easy</title>
-      <link>https://lavatann.github.io/tags/very-easy/</link>
+      <link>https://suszczyk.github.io/tags/very-easy/</link>
       <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/very-easy/</guid>
+      <guid>https://suszczyk.github.io/tags/very-easy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Android</title>
-      <link>https://lavatann.github.io/tags/android/</link>
+      <link>https://suszczyk.github.io/tags/android/</link>
       <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/tags/android/</guid>
+      <guid>https://suszczyk.github.io/tags/android/</guid>
       <description></description>
     </item>
     

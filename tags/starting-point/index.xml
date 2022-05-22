@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Starting Point on Lavatann</title>
-    <link>https://lavatann.github.io/tags/starting-point/</link>
+    <link>https://suszczyk.github.io/tags/starting-point/</link>
     <description>Recent content in Starting Point on Lavatann</description>
     <image>
-      <url>https://lavatann.github.io/papermod-cover.png</url>
-      <link>https://lavatann.github.io/papermod-cover.png</link>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 07 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/starting-point/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/starting-point/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Included - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/included/</link>
+      <link>https://suszczyk.github.io/posts/hackthebox/included/</link>
       <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/included/</guid>
+      <guid>https://suszczyk.github.io/posts/hackthebox/included/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
     <item>
       <title>Archetype - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/archetype/</link>
+      <link>https://suszczyk.github.io/posts/hackthebox/archetype/</link>
       <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/archetype/</guid>
+      <guid>https://suszczyk.github.io/posts/hackthebox/archetype/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     

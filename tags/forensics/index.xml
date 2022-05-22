@@ -2,56 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Forensics on Lavatann</title>
-    <link>https://lavatann.github.io/tags/forensics/</link>
+    <link>https://suszczyk.github.io/tags/forensics/</link>
     <description>Recent content in Forensics on Lavatann</description>
     <image>
-      <url>https://lavatann.github.io/papermod-cover.png</url>
-      <link>https://lavatann.github.io/papermod-cover.png</link>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Packets Primer - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/packets-primer/</link>
+      <link>https://suszczyk.github.io/posts/ctf/picoctf2022/packets-primer/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/packets-primer/</guid>
+      <guid>https://suszczyk.github.io/posts/ctf/picoctf2022/packets-primer/</guid>
       <description>Basic challange</description>
     </item>
     
     <item>
       <title>SideChannel - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/sidechannel/</link>
+      <link>https://suszczyk.github.io/posts/ctf/picoctf2022/sidechannel/</link>
       <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/sidechannel/</guid>
+      <guid>https://suszczyk.github.io/posts/ctf/picoctf2022/sidechannel/</guid>
       <description>Basic challange</description>
     </item>
     
     <item>
       <title>Lookey here - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/lookey-here/</link>
+      <link>https://suszczyk.github.io/posts/ctf/picoctf2022/lookey-here/</link>
       <pubDate>Sat, 19 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/lookey-here/</guid>
+      <guid>https://suszczyk.github.io/posts/ctf/picoctf2022/lookey-here/</guid>
       <description>Basic challange</description>
     </item>
     
     <item>
       <title>Enhance! - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/enhance/</link>
+      <link>https://suszczyk.github.io/posts/ctf/picoctf2022/enhance/</link>
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/enhance/</guid>
+      <guid>https://suszczyk.github.io/posts/ctf/picoctf2022/enhance/</guid>
       <description>Basic challange</description>
     </item>
     
     <item>
       <title>File types - PicoCTF2022</title>
-      <link>https://lavatann.github.io/posts/ctf/picoctf2022/file-types/</link>
+      <link>https://suszczyk.github.io/posts/ctf/picoctf2022/file-types/</link>
       <pubDate>Thu, 17 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/ctf/picoctf2022/file-types/</guid>
+      <guid>https://suszczyk.github.io/posts/ctf/picoctf2022/file-types/</guid>
       <description>Basic challange</description>
     </item>
     

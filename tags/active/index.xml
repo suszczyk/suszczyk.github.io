@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Active on Lavatann</title>
-    <link>https://lavatann.github.io/tags/active/</link>
+    <link>https://suszczyk.github.io/tags/active/</link>
     <description>Recent content in Active on Lavatann</description>
     <image>
-      <url>https://lavatann.github.io/papermod-cover.png</url>
-      <link>https://lavatann.github.io/papermod-cover.png</link>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 22 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/tags/active/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/active/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Backdoor - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</link>
+      <link>https://suszczyk.github.io/posts/hackthebox/backdoor-encrypted/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/backdoor-encrypted/</guid>
+      <guid>https://suszczyk.github.io/posts/hackthebox/backdoor-encrypted/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
     <item>
       <title>Forge - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/forge/</link>
+      <link>https://suszczyk.github.io/posts/hackthebox/forge/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/forge/</guid>
+      <guid>https://suszczyk.github.io/posts/hackthebox/forge/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     
     <item>
       <title>Previse - HackTheBox</title>
-      <link>https://lavatann.github.io/posts/hackthebox/previse/</link>
+      <link>https://suszczyk.github.io/posts/hackthebox/previse/</link>
       <pubDate>Mon, 16 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/posts/hackthebox/previse/</guid>
+      <guid>https://suszczyk.github.io/posts/hackthebox/previse/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;aktywny&lt;/code&gt; na HackTheBox, poczekaj, aż zostanie wycofana lub jeżeli już masz roota, to wklej flagę w pole poniżej aby odblokować writeup. Ciesz się writeup&amp;rsquo;em :)</description>
     </item>
     

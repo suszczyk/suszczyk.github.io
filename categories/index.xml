@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Lavatann</title>
-    <link>https://lavatann.github.io/categories/</link>
+    <link>https://suszczyk.github.io/categories/</link>
     <description>Recent content in Categories on Lavatann</description>
     <image>
-      <url>https://lavatann.github.io/papermod-cover.png</url>
-      <link>https://lavatann.github.io/papermod-cover.png</link>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lavatann.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CTF</title>
-      <link>https://lavatann.github.io/categories/ctf/</link>
+      <link>https://suszczyk.github.io/categories/ctf/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/categories/ctf/</guid>
+      <guid>https://suszczyk.github.io/categories/ctf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>HackTheBox</title>
-      <link>https://lavatann.github.io/categories/hackthebox/</link>
+      <link>https://suszczyk.github.io/categories/hackthebox/</link>
       <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://lavatann.github.io/categories/hackthebox/</guid>
+      <guid>https://suszczyk.github.io/categories/hackthebox/</guid>
       <description></description>
     </item>
     
