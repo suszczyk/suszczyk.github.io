@@ -256,11 +256,11 @@ PORT   STATE SERVICE VERSION
 |_http-title: Home
 </code></pre></div><hr>
 <h2 id="source-code">Source code<a hidden class="anchor" aria-hidden="true" href="#source-code">#</a></h2>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210829174810.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210829174810.png" alt=""  />
 </p>
 <p><code>Q3VybGluZzIwMTgh</code></p>
 <p>po odszyfrowaniu z BASE64 napis to <code>Curling2018!</code></p>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210829192311.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210829192311.png" alt=""  />
 </p>
 <hr>
 <h1 id="joomscan">Joomscan<a hidden class="anchor" aria-hidden="true" href="#joomscan">#</a></h1>
@@ -303,11 +303,11 @@ www-data
 www-data@curling:/var/www/html$
 </code></pre></div><hr>
 <p>Ciekawy plik password_backup w folderze domowym usera <code>floris</code>.</p>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210829234443.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210829234443.png" alt=""  />
 </p>
 <hr>
 <h2 id="xxd">xxd<a hidden class="anchor" aria-hidden="true" href="#xxd">#</a></h2>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210829234530.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210829234530.png" alt=""  />
 </p>
 <p>Typ uzyskanego pliku jest ciekawy</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/curling<span style="color:#f92672">]</span>
@@ -329,25 +329,25 @@ admin.req            joomlavs    out.jpg     password_backup
 <hr>
 <h1 id="ssh">SSH<a hidden class="anchor" aria-hidden="true" href="#ssh">#</a></h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh floris@10.10.10.150
-</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830004803.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210830004803.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>65dd1df0713b40d88ead98cf11b8530b</code></p>
 <hr>
 <h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
 <p>Nietypowe pliki w folderze domowym</p>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830014609.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210830014609.png" alt=""  />
 </p>
 <p>report to index.php maszyny</p>
 <p>input to <code>url = &quot;http://127.0.0.1&quot;</code></p>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830015342.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210830015342.png" alt=""  />
 </p>
 <p>Można dokonywać zmian w plikach. Skrypt działa z prawami administratora, można to wykorzystać aby odczytać pliki niedostępne dla użytkownika. Zatem można zmienić parametr url</p>
-<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830020651.png" alt=""  />
+<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210830020651.png" alt=""  />
 </p>
 <p>Tym poleceniem odświeżamy ekran co 1 sekundę, &lsquo;czytając&rsquo; plik report</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> cat report
-</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830020334.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210830020334.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>82c198ab6fc5365fdc6da2ee5c26064a</code></p>
