@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Beginner on Mateusz Suszczyk</title>
+    <link>https://suszczyk.github.io/tags/beginner/</link>
+    <description>Recent content in Beginner on Mateusz Suszczyk</description>
+    <image>
+      <url>https://suszczyk.github.io/papermod-cover.png</url>
+      <link>https://suszczyk.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 11 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ha-wordy</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/ha-wordy/</link>
+      <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/ha-wordy/</guid>
+      <description>As this is a wordpress based lab, it is designed so that users can practice following vulnerabilities: - LFI - RFI - CSRF - File Upload - SQL</description>
+    </item>
+    
+  </channel>
+</rss>

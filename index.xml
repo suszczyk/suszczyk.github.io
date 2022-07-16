@@ -9,7 +9,7 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devzat - HackTheBox</title>
       <link>https://suszczyk.github.io/posts/hackthebox/devzat/</link>
@@ -35,6 +35,15 @@
       
       <guid>https://suszczyk.github.io/posts/hackthebox/logforge/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>ha-wordy</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/ha-wordy/</link>
+      <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/ha-wordy/</guid>
+      <description>As this is a wordpress based lab, it is designed so that users can practice following vulnerabilities: - LFI - RFI - CSRF - File Upload - SQL</description>
     </item>
     
     <item>
