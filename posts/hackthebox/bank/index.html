@@ -264,52 +264,52 @@ PORT      STATE    SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </code></pre></div><hr>
 <h1 id="dns-enum">DNS Enum<a hidden class="anchor" aria-hidden="true" href="#dns-enum">#</a></h1>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813011126.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813011126.png" alt=""  />
 
-<img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813011205.png" alt=""  />
+<img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813011205.png" alt=""  />
 
-<img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813011224.png" alt=""  />
+<img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813011224.png" alt=""  />
 </p>
 <p>Dodanie do /etc/resolv.conf</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">10.10.10.29
 </code></pre></div><hr>
 <h2 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h2>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210812225445.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210812225445.png" alt=""  />
 </p>
 <hr>
 <h1 id="feroxbuster">FeroxBuster<a hidden class="anchor" aria-hidden="true" href="#feroxbuster">#</a></h1>
 <p>Jeżeli są strony .php, warto spróbować feroxbustera z rozszerzeniem php</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813020857.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813020857.png" alt=""  />
 </p>
 <hr>
 <h1 id="burpsuite-ignore-redirect">BurpSuite Ignore Redirect<a hidden class="anchor" aria-hidden="true" href="#burpsuite-ignore-redirect">#</a></h1>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813023452.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813023452.png" alt=""  />
 </p>
 <hr>
 <h2 id="supportphp">Support.php<a hidden class="anchor" aria-hidden="true" href="#supportphp">#</a></h2>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813131742.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813131742.png" alt=""  />
 </p>
 <p>W kodzie źródłowym support.php była następująca notka</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813131729.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813131729.png" alt=""  />
 </p>
 <p>Zatem upload shella i w burpie zmiana .php na .htb</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813131816.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813131816.png" alt=""  />
 </p>
 <p>Otrzymanie shella</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813131836.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813131836.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813132305.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813132305.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>dda4a74ea3550e6f5644f5fdf97c1db1</code></p>
 <hr>
 <h1 id="privilages-escalation">Privilages Escalation<a hidden class="anchor" aria-hidden="true" href="#privilages-escalation">#</a></h1>
 <p>/etc/passwd is writable</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813133147.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813133147.png" alt=""  />
 </p>
 <p>HASŁO: password</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo mati1:pATfNCwRanDjY:0:0:mati1:/home/mati1:/bin/bash &gt;&gt; /etc/passwd
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020210813134555.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210813134555.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>e01f6ff796ef083748b7011a912a60c4</code></p>

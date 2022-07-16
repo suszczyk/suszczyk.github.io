@@ -278,16 +278,16 @@ Host script results:
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
 <hr>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211020221328.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211020221328.png" alt=""  />
 </p>
 <p>Próba udana:
 <code>admin:admin</code></p>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211020221251.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211020221251.png" alt=""  />
 </p>
 <p>W kodzie znajduje się wzmianka <code>support@driver.htb</code> zatem dodaje <code>driver.htb</code> do <code>/etc/hosts</code></p>
 <hr>
 <h2 id="potencjalny-upload">Potencjalny upload<a hidden class="anchor" aria-hidden="true" href="#potencjalny-upload">#</a></h2>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211020222349.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211020222349.png" alt=""  />
 </p>
 <p>Nie znalazłem folderu uploads ani nic podobnego.</p>
 <hr>
@@ -323,13 +323,13 @@ Command<span style="color:#f92672">=</span>ToggleDesktop
 </code></pre></div><p>gdzie <code>X.X.X.X</code> to adres IP Kali Linuxa</p>
 <p>Włączamy reponder, który nasłuchuje</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo responder -wrf -I eth0
-</code></pre></div><p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211027161923.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211027161923.png" alt=""  />
 </p>
 <p>Otrzymany hash to NetNTLMv2:</p>
 <pre tabindex="0"><code>TONY::DRIVER:562dd35b9e487dce:01f51915adc4b8d83959422978a60486:0101000000000000d5f880df61b8d701cd1c216050281cb200000000020000000000000000000000:liltony
 </code></pre><hr>
 <h1 id="evil-winrm">Evil-WinRM<a hidden class="anchor" aria-hidden="true" href="#evil-winrm">#</a></h1>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211027163132.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211027163132.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>0698c94d1fd4cde598d15fc3af624940</code></p>
@@ -337,19 +337,19 @@ Command<span style="color:#f92672">=</span>ToggleDesktop
 <h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
 <p><a href="https://vk9-sec.com/sherlock-find-missing-windows-patches-for-local-privilege-escalation/">https://vk9-sec.com/sherlock-find-missing-windows-patches-for-local-privilege-escalation/</a></p>
 <h2 id="sherlockps1">Sherlock.ps1<a hidden class="anchor" aria-hidden="true" href="#sherlockps1">#</a></h2>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211027192342.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211027192342.png" alt=""  />
 </p>
 <p>Jeżeli nie działa skrypt.ps1 należy:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">Set</span><span style="color:#f92672">-</span>ExecutionPolicy RemoteSigned <span style="color:#f92672">-</span><span style="color:#66d9ef">Scope</span> CurrentUser
 </code></pre></div><p>Niestety, jest to ślepa uliczka.</p>
 <hr>
 <h1 id="spoolsvc">Spoolsvc<a hidden class="anchor" aria-hidden="true" href="#spoolsvc">#</a></h1>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211027231419.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211027231419.png" alt=""  />
 </p>
 <p>Jak się okazuje, na maszynie działa usługa drukarki. I tutaj pojawia się temat ostatniej głośniej sprawy wokół exploita.</p>
 <p><a href="https://0xdf.gitlab.io/2021/07/08/playing-with-printnightmare.html">https://0xdf.gitlab.io/2021/07/08/playing-with-printnightmare.html</a></p>
 <h2 id="sprawdzenie-czy-jest-podatność-na-printnightmare">Sprawdzenie czy jest podatność na PrintNightmare<a hidden class="anchor" aria-hidden="true" href="#sprawdzenie-czy-jest-podatność-na-printnightmare">#</a></h2>
-<p><img loading="lazy" src="../../../public/screenshots/Pasted%20image%2020211027231752.png" alt=""  />
+<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211027231752.png" alt=""  />
 </p>
 <hr>
 <h2 id="exploit">Exploit<a hidden class="anchor" aria-hidden="true" href="#exploit">#</a></h2>
