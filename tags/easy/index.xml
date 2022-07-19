@@ -20,6 +20,15 @@
     </item>
     
     <item>
+      <title>dc-1</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/dc-1/</link>
+      <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/dc-1/</guid>
+      <description>There are five flags in total, but the ultimate goal is to find and read the flag in root&amp;rsquo;s home directory. You don&amp;rsquo;t even need to be root to do this, however, you will require root privileges. Depending on your skill level, you may be able to skip finding most of these flags and go straight for root.</description>
+    </item>
+    
+    <item>
       <title>ha-wordy</title>
       <link>https://suszczyk.github.io/posts/vulnhub/ha-wordy/</link>
       <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>
