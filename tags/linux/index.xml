@@ -9,7 +9,7 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devzat - HackTheBox</title>
       <link>https://suszczyk.github.io/posts/hackthebox/devzat/</link>
@@ -35,6 +35,15 @@
       
       <guid>https://suszczyk.github.io/posts/hackthebox/logforge/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Healthcare 1</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/healthcare-1/</link>
+      <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/healthcare-1/</guid>
+      <description>This machine was developed to train the student to think according to the OSCP methodology. Pay attention to each step, because if you lose something you will not reach the goal: to become root in the system. It is boot2root, tested on VirtualBox (but works on VMWare) and has two flags: user.txt and root.txt.</description>
     </item>
     
     <item>

@@ -9,22 +9,31 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://suszczyk.github.io/tags/linux/</link>
+      <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Medium</title>
+      <link>https://suszczyk.github.io/tags/medium/</link>
+      <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/tags/medium/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Easy</title>
       <link>https://suszczyk.github.io/tags/easy/</link>
       <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://suszczyk.github.io/tags/easy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://suszczyk.github.io/tags/linux/</link>
-      <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -97,15 +106,6 @@
       <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://suszczyk.github.io/tags/retired/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Medium</title>
-      <link>https://suszczyk.github.io/tags/medium/</link>
-      <pubDate>Fri, 31 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/tags/medium/</guid>
       <description></description>
     </item>
     
