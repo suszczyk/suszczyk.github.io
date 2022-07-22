@@ -9,7 +9,16 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/vulnhub/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/vulnhub/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tiki: 1</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/tiki-1/</link>
+      <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/tiki-1/</guid>
+      <description>Oh no our webserver got compromised. The attacker used an 0day, so we dont know how he got into the admin panel. Investigate that. This is an OSCP Prep Box, its based on a CVE I recently found. Its on the OSCP lab machines level.</description>
+    </item>
+    
     <item>
       <title>Healthcare 1</title>
       <link>https://suszczyk.github.io/posts/vulnhub/healthcare-1/</link>
