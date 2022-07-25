@@ -9,7 +9,16 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/vulnhub/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/vulnhub/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Development</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/development/</link>
+      <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/development/</guid>
+      <description>This machine reminds us of a DEVELOPMENT environment: misconfigurations rule the roost. This is designed for OSCP practice, and the original version of the machine was used for a CTF. It is now revived, and made slightly more nefarious than the original.</description>
+    </item>
+    
     <item>
       <title>Tiki: 1</title>
       <link>https://suszczyk.github.io/posts/vulnhub/tiki-1/</link>
