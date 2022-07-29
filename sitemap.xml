@@ -11,25 +11,34 @@
     <loc>https://suszczyk.github.io/posts/hackthebox/logforge/</loc>
     <lastmod>2021-12-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://suszczyk.github.io/categories/</loc>
-    <lastmod>2022-07-25T00:00:00+00:00</lastmod>
+    <loc>https://suszczyk.github.io/posts/hackthebox/catch/</loc>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://suszczyk.github.io/posts/vulnhub/development/</loc>
-    <lastmod>2022-07-25T00:00:00+00:00</lastmod>
+    <loc>https://suszczyk.github.io/categories/</loc>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://suszczyk.github.io/categories/hackthebox/</loc>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/tags/linux/</loc>
-    <lastmod>2022-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/</loc>
-    <lastmod>2022-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/tags/medium/</loc>
-    <lastmod>2022-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/posts/</loc>
-    <lastmod>2022-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://suszczyk.github.io/tags/retired/</loc>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/tags/</loc>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://suszczyk.github.io/posts/vulnhub/development/</loc>
     <lastmod>2022-07-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/categories/vulnhub/</loc>
@@ -142,12 +151,6 @@
   </url><url>
     <loc>https://suszczyk.github.io/posts/ctf/picoctf2022/test/</loc>
     <lastmod>2022-03-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://suszczyk.github.io/categories/hackthebox/</loc>
-    <lastmod>2022-02-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://suszczyk.github.io/tags/retired/</loc>
-    <lastmod>2022-02-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://suszczyk.github.io/posts/hackthebox/shibboleth/</loc>
     <lastmod>2021-11-25T00:00:00+00:00</lastmod>

