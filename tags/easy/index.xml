@@ -9,7 +9,7 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 04 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/easy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/easy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Horizontall - HackTheBox</title>
       <link>https://suszczyk.github.io/posts/hackthebox/horizontall/</link>
@@ -17,6 +17,15 @@
       
       <guid>https://suszczyk.github.io/posts/hackthebox/horizontall/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>Stapler</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/stapler/</link>
+      <pubDate>Sat, 06 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/stapler/</guid>
+      <description>Average beginner/intermediate VM. May find it easy/hard (depends on YOUR background). There are multiple methods to-do this machine. At least two (2) paths to get a limited shell. At least three (3) ways to get a root access</description>
     </item>
     
     <item>

