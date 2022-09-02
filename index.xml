@@ -9,7 +9,7 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 11 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devzat - HackTheBox</title>
       <link>https://suszczyk.github.io/posts/hackthebox/devzat/</link>
@@ -35,6 +35,24 @@
       
       <guid>https://suszczyk.github.io/posts/hackthebox/logforge/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>CMesS</title>
+      <link>https://suszczyk.github.io/posts/tryhackme/cmess/</link>
+      <pubDate>Fri, 02 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/tryhackme/cmess/</guid>
+      <description>Can you root this Gila CMS box?</description>
+    </item>
+    
+    <item>
+      <title>netstart</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/netstart/</link>
+      <pubDate>Fri, 02 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/netstart/</guid>
+      <description>This is a Linux box, running a WINE Application vulnerable to Buffer Overflow, escalation is pretty simple.</description>
     </item>
     
     <item>
