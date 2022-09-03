@@ -9,7 +9,7 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 02 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devzat - HackTheBox</title>
       <link>https://suszczyk.github.io/posts/hackthebox/devzat/</link>
@@ -35,6 +35,15 @@
       
       <guid>https://suszczyk.github.io/posts/hackthebox/logforge/</guid>
       <description>Ta maszyna ma obecnie status &lt;code&gt;wycofany&lt;/code&gt; na HackTheBox. Ciesz się writeup&amp;rsquo;em :)</description>
+    </item>
+    
+    <item>
+      <title>LazyAdmin</title>
+      <link>https://suszczyk.github.io/posts/tryhackme/lazyadmin/</link>
+      <pubDate>Sat, 03 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/tryhackme/lazyadmin/</guid>
+      <description>Easy linux machine to practice your skills</description>
     </item>
     
     <item>
