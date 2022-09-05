@@ -9,7 +9,7 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 03 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Devzat - HackTheBox</title>
       <link>https://suszczyk.github.io/posts/hackthebox/devzat/</link>
@@ -38,6 +38,24 @@
     </item>
     
     <item>
+      <title>Brainpan 1</title>
+      <link>https://suszczyk.github.io/posts/tryhackme/brainpan-1/</link>
+      <pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/tryhackme/brainpan-1/</guid>
+      <description>Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine.</description>
+    </item>
+    
+    <item>
+      <title>netstart</title>
+      <link>https://suszczyk.github.io/posts/vulnhub/netstart/</link>
+      <pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/posts/vulnhub/netstart/</guid>
+      <description>This is a Linux box, running a WINE Application vulnerable to Buffer Overflow, escalation is pretty simple.</description>
+    </item>
+    
+    <item>
       <title>LazyAdmin</title>
       <link>https://suszczyk.github.io/posts/tryhackme/lazyadmin/</link>
       <pubDate>Sat, 03 Sep 2022 00:00:00 +0000</pubDate>
@@ -53,15 +71,6 @@
       
       <guid>https://suszczyk.github.io/posts/tryhackme/cmess/</guid>
       <description>Can you root this Gila CMS box?</description>
-    </item>
-    
-    <item>
-      <title>netstart</title>
-      <link>https://suszczyk.github.io/posts/vulnhub/netstart/</link>
-      <pubDate>Fri, 02 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/posts/vulnhub/netstart/</guid>
-      <description>This is a Linux box, running a WINE Application vulnerable to Buffer Overflow, escalation is pretty simple.</description>
     </item>
     
     <item>
