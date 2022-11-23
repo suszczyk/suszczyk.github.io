@@ -9,7 +9,16 @@
       <link>https://suszczyk.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 07 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://suszczyk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox</title>
+      <link>https://suszczyk.github.io/categories/hackthebox/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://suszczyk.github.io/categories/hackthebox/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>TryHackMe</title>
       <link>https://suszczyk.github.io/categories/tryhackme/</link>
@@ -25,15 +34,6 @@
       <pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate>
       
       <guid>https://suszczyk.github.io/categories/vulnhub/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HackTheBox</title>
-      <link>https://suszczyk.github.io/categories/hackthebox/</link>
-      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://suszczyk.github.io/categories/hackthebox/</guid>
       <description></description>
     </item>
     

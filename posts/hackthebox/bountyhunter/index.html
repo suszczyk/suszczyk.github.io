@@ -261,7 +261,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 
 </code></pre></div><p>Ciekawy POST</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730012004.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730012004.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.--&gt;
 
@@ -283,7 +283,7 @@ Tasks:
 &lt;/bugreport&gt;
 
 </code></pre><p>Mamy odpowiedź od serwera</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730140026.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730140026.png" alt=""  />
 </p>
 <pre tabindex="0"><code>&lt;?xml  version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
 &lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
@@ -303,7 +303,7 @@ Tasks:
 		&lt;cvss&gt;12312&lt;/cvss&gt;
 		&lt;reward&gt;453234234&lt;/reward&gt;
 		&lt;/bugreport&gt;
-</code></pre><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730151427.png" alt=""  />
+</code></pre><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730151427.png" alt=""  />
 </p>
 <pre tabindex="0"><code>&lt;?php
 // TODO -&gt; Implement login system with the database.
@@ -314,21 +314,21 @@ $dbpassword = &quot;m19RoAU0hP41A1sTsq6K&quot;;
 $testuser = &quot;test&quot;;
 ?&gt;
 </code></pre><p>Niestety na w .ssh nie można było odczytać id_rsa
-<img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730181748.png" alt=""  />
+<img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730181748.png" alt=""  />
 </p>
 <p>Próba logowania na SSH z hasła powyżej:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh development@10.10.11.100			hasło: m19RoAU0hP41A1sTsq6K
 </code></pre></div><p>Zadziałało :)</p>
 <hr>
 <h1 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730162046.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730162046.png" alt=""  />
 </p>
 <p>sudo python3.8 /opt/skytrain_inc/ticketValidator.py ????</p>
 <p>Po małych zmianach skrypt ticketValidator.py zaczał działać</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730181314.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730181314.png" alt=""  />
 </p>
 <p>Było zacięcie z importem, wystarczyło dodać dwie podłogi __ przy imporcie</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210730181357.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210730181357.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>d73ac628f0ae8d232bfefb3f0e5dc32e</code></p>

