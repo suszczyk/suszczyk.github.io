@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Paper - HackTheBox | Mateusz Suszczyk</title>
+<meta name="keywords" content="Linux, Easy, Retired" />
+<meta name="description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)">
+<meta name="author" content="Mateusz Suszczyk">
+<link rel="canonical" href="https://suszczyk.github.io/posts/hackthebox/paper/" />
+<link crossorigin="anonymous" href="../../../assets/css/stylesheet.min.05ec22396353f5838fc267c8a7e9d490b0f9679d599623d1abcb52b3a80b2af6.css" integrity="sha256-BewiOWNT9YOPwmfIp&#43;nUkLD5Z51ZliPRq8tSs6gLKvY=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="../../../assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://suszczyk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://suszczyk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://suszczyk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://suszczyk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://suszczyk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Paper - HackTheBox" />
+<meta property="og:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://suszczyk.github.io/posts/hackthebox/paper/" />
+<meta property="og:image" content="https://suszczyk.github.io/thumbnails/Paper.jpg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-09T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-02-09T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://suszczyk.github.io/thumbnails/Paper.jpg" />
+<meta name="twitter:title" content="Paper - HackTheBox"/>
+<meta name="twitter:description" content="Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup&rsquo;em :)"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://suszczyk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Paper - HackTheBox",
+      "item": "https://suszczyk.github.io/posts/hackthebox/paper/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Paper - HackTheBox",
+  "name": "Paper - HackTheBox",
+  "description": "Ta maszyna ma obecnie status wycofany na HackTheBox. Ciesz się writeup\u0026rsquo;em :)",
+  "keywords": [
+    "Linux", "Easy", "Retired"
+  ],
+  "articleBody": "Paper - 09.02.2022 Adres IP Pandora: 10.129.155.118 Adres IP mojego Linuxa: `10.10.14.224\n NMap ┌──(kali㉿kali)-[~/htb/paper] └─$ nmap -sC -sV 10.129.155.118 Starting Nmap 7.91 ( https://nmap.org ) at 2022-02-08 12:47 CET Nmap scan report for 10.129.155.118 Host is up (0.076s latency). Not shown: 997 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.0 (protocol 2.0) | ssh-hostkey: | 2048 10:05:ea:50:56:a6:00:cb:1c:9c:93:df:5f:83:e0:64 (RSA) | 256 58:8c:82:1c:c6:63:2a:83:87:5c:2f:2b:4f:4d:c3:79 (ECDSA) |_ 256 31:78:af:d1:3b:c4:2e:9d:60:4e:eb:5d:03:ec:a0:22 (ED25519) 80/tcp open http Apache httpd 2.4.37 ((centos) OpenSSL/1.1.1k mod_fcgid/2.3.9) |_http-generator: HTML Tidy for HTML5 for Linux version 5.7.28 | http-methods: |_ Potentially risky methods: TRACE |_http-server-header: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9 |_http-title: HTTP Server Test Page powered by CentOS 443/tcp open ssl/http Apache httpd 2.4.37 ((centos) OpenSSL/1.1.1k mod_fcgid/2.3.9) |_http-generator: HTML Tidy for HTML5 for Linux version 5.7.28 | http-methods: |_ Potentially risky methods: TRACE |_http-server-header: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9 |_http-title: HTTP Server Test Page powered by CentOS | ssl-cert: Subject: commonName=localhost.localdomain/organizationName=Unspecified/countryName=US | Subject Alternative Name: DNS:localhost.localdomain | Not valid before: 2021-07-03T08:52:34 |_Not valid after: 2022-07-08T10:32:34 |_ssl-date: TLS randomness does not represent time | tls-alpn: |_ http/1.1 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds Mamy otwarte kilka portów:\n22 - SSH 80 - HTTP Apache 443 - HTTPS  FeroxBuster Następnie przechodzę do enumeracji folderów na Apache.\n┌──(kali㉿kali)-[~/htb/paper] └─$ feroxbuster -u http://10.129.155.118 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -d 1 -t 50 ___ ___ __ __ __ __ __ ___ |__ |__ |__) |__) | / ` / \\ \\_/ | | \\ |__ | |___ | \\ | \\ | \\__, \\__/ / \\ | |__/ |___ by Ben \"epi\" Risher 🤓 ver: 2.4.1 ───────────────────────────┬────────────────────── 🎯 Target Url │ http://10.129.155.118 🚀 Threads │ 50 📖 Wordlist │ /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 👌 Status Codes │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500] 💥 Timeout (secs) │ 7 🦡 User-Agent │ feroxbuster/2.4.1 💉 Config File │ /etc/feroxbuster/ferox-config.toml 🔃 Recursion Depth │ 1 🎉 New Version Available │ https://github.com/epi052/feroxbuster/releases/latest ───────────────────────────┴────────────────────── 🏁 Press [ENTER] to use the Scan Management Menu™ ────────────────────────────────────────────────── 301 7l 20w 237c http://10.129.155.118/manual [####################] - 13m 220545/220545 0s found:1 errors:0  [####################] - 13m 220545/220545 277/s http://10.129.155.118 Mamy jeden wynik. Podfolder/manual.\n Nikto ┌──(kali㉿kali)-[~/htb/paper] └─$ nikto -h http://10.129.155.118 -C all - Nikto v2.1.6 --------------------------------------------------------------------------- + Target IP: 10.129.155.118 + Target Hostname: 10.129.155.118 + Target Port: 80 + Start Time: 2022-02-08 12:48:51 (GMT1) --------------------------------------------------------------------------- + Server: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9 + The anti-clickjacking X-Frame-Options header is not present. + The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS + Uncommon header 'x-backend-server' found, with contents: office.paper + The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type + Retrieved x-powered-by header: PHP/7.2.24 + Allowed HTTP Methods: POST, OPTIONS, HEAD, GET, TRACE + OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST + OSVDB-3092: /manual/: Web server manual found. + OSVDB-3268: /icons/: Directory indexing found. + OSVDB-3268: /manual/images/: Directory indexing found. + OSVDB-3233: /icons/README: Apache default file found. + 26522 requests: 0 error(s) and 11 item(s) reported on remote host + End Time: 2022-02-08 13:30:45 (GMT1) (2514 seconds) --------------------------------------------------------------------------- + 1 host(s) tested  Strona główna Możemy sprawdzić sobie stronę pod adresem http://10.129.155.118.\n W logach można zobaczyć coś niestandardowego a mianowicie + Uncommon header 'x-backend-server' found, with contents: office.paper. Zatem mamy prawdopodobną domenę. Dodaję wpis do /etc/hosts 10.129.155.118 office.paper.\nPo wejściu na http://office.paper mamy CMS Wordpress. Przechodzę zatem do jego enumeracji.\n wpscan ┌──(kali㉿kali)-[~/htb/paper] └─$ wpscan --url http://office.paper _______________________________________________________________ __ _______ _____ \\ \\  / / __ \\ / ____| \\ \\  /\\  / /| |__) | (___ ___ __ _ _ __ ® \\ \\/ \\/ / | ___/ \\___ \\ / __|/ _` | `_ \\  \\  /\\  / | | ____) | (__| (_| | | | | \\/ \\/ |_| |_____/ \\___|\\__,_|_| |_| WordPress Security Scanner by the WPScan Team Version 3.8.18 Sponsored by Automattic - https://automattic.com/ @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart _______________________________________________________________ [i] It seems like you have not updated the database for some time. [?] Do you want to update now? [Y]es [N]o, default: [N]y [i] Updating the Database ... [i] Update completed. [+] URL: http://office.paper/ [10.129.155.118] [+] Started: Wed Feb 9 11:06:18 2022 Interesting Finding(s): [+] Headers | Interesting Entries: | - Server: Apache/2.4.37 (centos) OpenSSL/1.1.1k mod_fcgid/2.3.9 | - X-Powered-By: PHP/7.2.24 | - X-Backend-Server: office.paper | Found By: Headers (Passive Detection) | Confidence: 100% [+] WordPress readme found: http://office.paper/readme.html | Found By: Direct Access (Aggressive Detection) | Confidence: 100% [+] WordPress version 5.2.3 identified (Insecure, released on 2019-09-05). | Found By: Rss Generator (Passive Detection) | - http://office.paper/index.php/feed/, https://wordpress.org/?v=5.2.3 | - http://office.paper/index.php/comments/feed/, https://wordpress.org/?v=5.2.3 [+] WordPress theme in use: construction-techup | Location: http://office.paper/wp-content/themes/construction-techup/ | Last Updated: 2021-07-17T00:00:00.000Z | Readme: http://office.paper/wp-content/themes/construction-techup/readme.txt | [!] The version is out of date, the latest version is 1.4 | Style URL: http://office.paper/wp-content/themes/construction-techup/style.css?ver=1.1 | Style Name: Construction Techup | Description: Construction Techup is child theme of Techup a Free WordPress Theme useful for Business, corporate a... | Author: wptexture | Author URI: https://testerwp.com/ | | Found By: Css Style In Homepage (Passive Detection) | | Version: 1.1 (80% confidence) | Found By: Style (Passive Detection) | - http://office.paper/wp-content/themes/construction-techup/style.css?ver=1.1, Match: 'Version: 1.1' [+] Enumerating All Plugins (via Passive Methods) [i] No plugins Found. [+] Enumerating Config Backups (via Passive and Aggressive Methods) Checking Config Backups - Time: 00:00:01 ======================================= (137 / 137) 100.00% Time: 00:00:01 [i] No Config Backups Found. [!] No WPScan API Token given, as a result vulnerability data has not been output. [!] You can get a free API token with 25 daily requests by registering at https://wpscan.com/register [+] Finished: Wed Feb 9 11:06:26 2022 [+] Requests Done: 180 [+] Cached Requests: 5 [+] Data Sent: 43.575 KB [+] Data Received: 17.792 MB [+] Memory used: 223.547 MB [+] Elapsed time: 00:00:07 Zatem wiemy, że jest to Wordpress 5.2.3 na motywie construction-techup 1.1. Jednak nic konkretnego nie mamy.\n Enumeracja subdomen Przechodzę do dalszego szukania wektora ataku. Nie przeprowadziłem jeszcze enumeracji subdomen. Użyję do tego celu gobuster.\n┌──(kali㉿kali)-[~/htb/paper] └─$ gobuster vhost -w /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://office.paper -o subdomains.txt =============================================================== Gobuster v3.1.0 by OJ Reeves (@TheColonial) \u0026 Christian Mehlmauer (@firefart) =============================================================== [+] Url: http://office.paper [+] Method: GET [+] Threads: 10 [+] Wordlist: /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt [+] User Agent: gobuster/3.1.0 [+] Timeout: 10s =============================================================== 2022/02/09 12:24:58 Starting gobuster in VHOST enumeration mode =============================================================== Found: chat.office.paper (Status: 200) [Size: 223163] =============================================================== 2022/02/09 12:37:48 Finished =============================================================== Mamy jeden wynik. chat.office.paper oczywiście dodaje do /etc/hosts.\n chat.office.paper Po wejściu widzimy panel logowania rocket.chat.\nSprawdziłem w internecie czy można w jakiś sposób ustalić wersję zainstalowanego rocket.chat. Jeden z użytkowników zasugerował aby wysłać request do /api/info.\nPo przejściu na URL. Udało mi się ustalić wersję rocket.chat. Jest to wersja 3.16.1.\nNiestety ponownie nie mamy żadnej podatności na tą wersję.\n Wordpress enumeration Postanowiłem jeszcze poszukać czegoś wokół Wordpressa. Jeden z postów miał taki komentarz. To nauka na przyszłość, żeby te najprostsze rzeczy sprawdzać na samym początku.\nPost stworzył user prisonmike, poniżej mamy komentarze z potencjalnymi userami.\nprisonmike nick michael Wordpress umożliwia sprawdzenie czy użytkownicy z danymi nazwami istnieją. Po prostym sprawdzeniu wiemy, że nick oraz prisonmike to na pewno userzy na Wordpressie.\nNiestety bruteforce się nie udał.\n Searchsploit wordpress Warto spojrzeć również na podatności na tą wersję Wordpressa.\n┌──(kali㉿kali)-[~/htb/paper] └─$ searchsploit wordpress 5.2.3 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------------------------- Exploit Title | Path --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------------------------- WordPress Core 5.2.3 - Cross-Site Host Modification | php/webapps/47361.pl WordPress Core 'xmlrpc.php' Denial of Service | php/dos/47800.py WordPress Plugin DZS Videogallery Widzimy, że wersja jest podatna na Viewing Unauthenticated/Password/Private Posts. To brzmi ciekawie w kontekście poprzedniego postu, w którym jeden z adminów prosi o usunięcie secret contentu. Faktycznie po wpisaniu http://office.paper/?static=1 otrzymałem “ukrytą stronę” z tekstem.\nMamy URL do rejestracji nowego użytkownika czatu.\nhttp://chat.office.paper/register/8qozr226AhkCHZdyY\nRównież wyżej na screenie jest wspomniane, że rejestracja odbywa się przy pomocy specjalnego linku. Zatem mogę przejść i spróbować stworzyć nowego usera.\nPo wpisaniu testowych danych jestem przekierowany na panel rocket.chat.\n Chat Mamy tutaj czat, szukałem tutaj chwilę i udało się się znaleźć coś ciekawego. Na tym serwerze tekstowym jest dodany bot recyclops. Jego zadania to m. in:\nFor security reasons, the access is limited to the Sales folder. 3. Files: eg: 'recyclops get me the file test.txt', or 'recyclops could you send me the file src/test.php' or just 'recyclops file test.txt' 4. List: You can ask me to list the files Ale jak się okazuje da się wyjść z folderu sales poprzez ../../.\nPrawdopodobnie będę mógł sprawdzić config Wordpressa lub klucze SSH.\nDo Wordpressa nie mogę się dostać, nie ma też id_rsa w .ssh. Natomiast są dziwne folder hubot oraz skrypt bot_restart.sh.\nSprawdziłem folder hubot i znalazłem plik .env, w którym zapisane były istotne informacje. Jest to plik przechowujący zmienne środowiskowe.\nexport ROCKETCHAT_URL='http://127.0.0.1:48320' export ROCKETCHAT_USER=recyclops export ROCKETCHAT_PASSWORD=Queenofblad3s!23 export ROCKETCHAT_USESSL=false export RESPOND_TO_DM=true export RESPOND_TO_EDITED=true export PORT=8000 export BIND_ADDRESS=127.0.0.1 export ROCKETCHAT_URL='http://127.0.0.1:48320' export ROCKETCHAT_USER=recyclops export ROCKETCHAT_PASSWORD=Queenofblad3s!23 export ROCKETCHAT_USESSL=false export RESPOND_TO_DM=true export RESPOND_TO_EDITED=true export PORT=8000 export BIND_ADDRESS=127.0.0.1 =====End of file ../../../home/dwight/hubot/.env===== =====End of file ../../../home/dwight/hubot/.env===== Mamy zapisane dane logowania w zmiennych:\nrecyclops:Queenofblad3s!23\nPróbowałem zalogować się na bota i spróbować wyciągnąć jakieś istotne informacje z czatów, ale bot miał wyłączoną możliwość interakcji przez stronę. Jednak sprawdziłem hasło dla usera dwight i okazało się, że da się zalogować.\nuser.txt 8b2cc3456f506dc23821b271e122eb64\n Privilege Escalation linpeas LinPEAS od razu wykrył problem z wersją sudo.\n╔══════════╣ Sudo version ╚ https://book.hacktricks.xyz/linux-unix/privilege-escalation#sudo-version Sudo version 1.8.29 Invalid configuration value: failovermethod=priority in /etc/yum.repos.d/nodesource-el8.repo; Configuration: OptionBinding with id \"failovermethod\" does not exist Invalid configuration value: failovermethod=priority in /etc/yum.repos.d/nodesource-el8.repo; Configuration: OptionBinding with id \"failovermethod\" does not exist Modular dependency problems: Problem 1: conflicting requests - nothing provides module(perl:5.26) needed by module perl-IO-Socket-SSL:2.066:8030020201222215140:1e4bbb35.x86_64 Problem 2: conflicting requests - nothing provides module(perl:5.26) needed by module perl-libwww-perl:6.34:8030020201223164340:b967a9a2.x86_64 Vulnerable to CVE-2021-3560 Proste googlowanie potwierdziło, że to podatność CVE-2021-3560.\n[dwight@paper p]$ ./polkadots account: boris account name: Boris Ivanovich Grishenko hashed_password: $6$cGKhfu9znRnOQV1h$2j/3WKyqTcCaftP1PGhW8Pghj2qV5j8zwy1gHrt9eILUE6WKeWVCTa9QgkskIfwVXpjVI.TuX2D.rEkbwKubi/ iters: 20 root.txt\na291accfcede74a3136bbbce7035fda6\n",
+  "wordCount" : "1685",
+  "inLanguage": "en",
+  "image":"https://suszczyk.github.io/thumbnails/Paper.jpg","datePublished": "2022-02-09T00:00:00Z",
+  "dateModified": "2022-02-09T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Mateusz Suszczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://suszczyk.github.io/posts/hackthebox/paper/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mateusz Suszczyk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://suszczyk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://suszczyk.github.io" accesskey="h" title="Mateusz Suszczyk (Alt + H)">Mateusz Suszczyk</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://suszczyk.github.io/archives/" title="Archiwum">
+                    <span>Archiwum</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/categories/" title="Kategorie">
+                    <span>Kategorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/tags/" title="Tagi">
+                    <span>Tagi</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://suszczyk.github.io/search/" title="Szukaj">
+                    <span>Szukaj</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://suszczyk.github.io">Home</a>&nbsp;»&nbsp;<a href="https://suszczyk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Paper - HackTheBox
+    </h1>
+    <div class="post-meta"><span title='2022-02-09 00:00:00 +0000 UTC'>February 9, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Mateusz Suszczyk
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="lazy" src="https://suszczyk.github.io/thumbnails/Paper.jpg" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#paper---09022022" aria-label="Paper - 09.02.2022">Paper - 09.02.2022</a><ul>
+                        
+                <li>
+                    <a href="#nmap" aria-label="NMap">NMap</a></li>
+                <li>
+                    <a href="#feroxbuster" aria-label="FeroxBuster">FeroxBuster</a></li>
+                <li>
+                    <a href="#nikto" aria-label="Nikto">Nikto</a></li>
+                <li>
+                    <a href="#strona-g%c5%82%c3%b3wna" aria-label="Strona główna">Strona główna</a></li>
+                <li>
+                    <a href="#wpscan" aria-label="wpscan">wpscan</a></li>
+                <li>
+                    <a href="#enumeracja-subdomen" aria-label="Enumeracja subdomen">Enumeracja subdomen</a></li>
+                <li>
+                    <a href="#chatofficepaper" aria-label="chat.office.paper">chat.office.paper</a></li>
+                <li>
+                    <a href="#wordpress-enumeration" aria-label="Wordpress enumeration">Wordpress enumeration</a></li>
+                <li>
+                    <a href="#searchsploit-wordpress" aria-label="Searchsploit wordpress">Searchsploit wordpress</a></li>
+                <li>
+                    <a href="#chat" aria-label="Chat">Chat</a></li>
+                <li>
+                    <a href="#privilege-escalation" aria-label="Privilege Escalation">Privilege Escalation</a><ul>
+                        
+                <li>
+                    <a href="#linpeas" aria-label="linpeas">linpeas</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="paper---09022022">Paper - 09.02.2022<a hidden class="anchor" aria-hidden="true" href="#paper---09022022">#</a></h1>
+<p>Adres IP Pandora: <code>10.129.155.118</code>
+Adres IP mojego Linuxa: `10.10.14.224</p>
+<hr>
+<h2 id="nmap">NMap<a hidden class="anchor" aria-hidden="true" href="#nmap">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/paper<span style="color:#f92672">]</span>                                                                                                                                                                                                                
+└─$ nmap -sC -sV 10.129.155.118                                                                                                                                                                                                              
+Starting Nmap 7.91 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2022-02-08 12:47 CET                                                                                                                                                                              
+Nmap scan report <span style="color:#66d9ef">for</span> 10.129.155.118                                                                                                                                                                                                          
+Host is up <span style="color:#f92672">(</span>0.076s latency<span style="color:#f92672">)</span>.                                                                                                                                                                                                                 
+Not shown: <span style="color:#ae81ff">997</span> closed ports                                                                                                                                                                                                                  
+PORT    STATE SERVICE  VERSION                                                                                                                                                                                                               
+22/tcp  open  ssh      OpenSSH 8.0 <span style="color:#f92672">(</span>protocol 2.0<span style="color:#f92672">)</span>                                                                                                                                                                                            
+| ssh-hostkey:                                                                                                                                                                                                                               
+|   <span style="color:#ae81ff">2048</span> 10:05:ea:50:56:a6:00:cb:1c:9c:93:df:5f:83:e0:64 <span style="color:#f92672">(</span>RSA<span style="color:#f92672">)</span>                                                                                                                                                                               
+|   <span style="color:#ae81ff">256</span> 58:8c:82:1c:c6:63:2a:83:87:5c:2f:2b:4f:4d:c3:79 <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span>                                                                                                                                                                              
+|_  <span style="color:#ae81ff">256</span> 31:78:af:d1:3b:c4:2e:9d:60:4e:eb:5d:03:ec:a0:22 <span style="color:#f92672">(</span>ED25519<span style="color:#f92672">)</span>                                                                                                                                                                            
+80/tcp  open  http     Apache httpd 2.4.37 <span style="color:#f92672">((</span>centos<span style="color:#f92672">)</span> OpenSSL/1.1.1k mod_fcgid/2.3.9<span style="color:#f92672">)</span>                                                                                                                                                         
+|_http-generator: HTML Tidy <span style="color:#66d9ef">for</span> HTML5 <span style="color:#66d9ef">for</span> Linux version 5.7.28                                                                                                                                                                               
+| http-methods:                                                                                                                                                                                                                              
+|_  Potentially risky methods: TRACE                                                                                                                                                                                                         
+|_http-server-header: Apache/2.4.37 <span style="color:#f92672">(</span>centos<span style="color:#f92672">)</span> OpenSSL/1.1.1k mod_fcgid/2.3.9                                                                                                                                                                  
+|_http-title: HTTP Server Test Page powered by CentOS                                                                                                                                                                                        
+443/tcp open  ssl/http Apache httpd 2.4.37 <span style="color:#f92672">((</span>centos<span style="color:#f92672">)</span> OpenSSL/1.1.1k mod_fcgid/2.3.9<span style="color:#f92672">)</span>                                                                                                                                                         
+|_http-generator: HTML Tidy <span style="color:#66d9ef">for</span> HTML5 <span style="color:#66d9ef">for</span> Linux version 5.7.28                                                                                                                                                                               
+| http-methods:                                                                                                                                                                                                                              
+|_  Potentially risky methods: TRACE                                                                                                                                                                                                         
+|_http-server-header: Apache/2.4.37 <span style="color:#f92672">(</span>centos<span style="color:#f92672">)</span> OpenSSL/1.1.1k mod_fcgid/2.3.9                                                                                                                                                                  
+|_http-title: HTTP Server Test Page powered by CentOS                                                                                                                                                                                        
+| ssl-cert: Subject: commonName<span style="color:#f92672">=</span>localhost.localdomain/organizationName<span style="color:#f92672">=</span>Unspecified/countryName<span style="color:#f92672">=</span>US                                                                                                                                            
+| Subject Alternative Name: DNS:localhost.localdomain                                                                                                                                                                                        
+| Not valid before: 2021-07-03T08:52:34                                                                                                                                                                                                      
+|_Not valid after:  2022-07-08T10:32:34                                                                                                                                                                                                      
+|_ssl-date: TLS randomness does not represent time                                                                                                                                                                                           
+| tls-alpn:                                                                                                                                                                                                                                  
+|_  http/1.1                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                             
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .                                                                                                                                               
+Nmap <span style="color:#66d9ef">done</span>: <span style="color:#ae81ff">1</span> IP address <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> host up<span style="color:#f92672">)</span> scanned in 20.22 seconds
+</code></pre></div><p>Mamy otwarte kilka portów:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">22 - SSH
+80 - HTTP Apache
+443 - HTTPS
+</code></pre></div><hr>
+<h2 id="feroxbuster">FeroxBuster<a hidden class="anchor" aria-hidden="true" href="#feroxbuster">#</a></h2>
+<p>Następnie przechodzę do enumeracji folderów na Apache.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/paper<span style="color:#f92672">]</span>                                                                                                                                                                                                                
+└─$ feroxbuster -u http://10.129.155.118 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -d <span style="color:#ae81ff">1</span> -t <span style="color:#ae81ff">50</span>                                                                                                                          
+                                                                                                                                                                                                                                             
+ ___  ___  __   __     __      __         __   ___                                                                                                                                                                                           
+|__  |__  |__<span style="color:#f92672">)</span> |__<span style="color:#f92672">)</span> | /  <span style="color:#e6db74">`</span>    /  <span style="color:#ae81ff">\ \_</span>/ | |  <span style="color:#ae81ff">\ </span>|__                                                                                                                                                                                            
+|    |___ |  <span style="color:#ae81ff">\ </span>|  <span style="color:#ae81ff">\ </span>| <span style="color:#ae81ff">\_</span>_,    <span style="color:#ae81ff">\_</span>_/ / <span style="color:#ae81ff">\ </span>| |__/ |___                                                                                                                                                                                           
+by Ben <span style="color:#e6db74">&#34;epi&#34;</span> Risher 🤓                 ver: 2.4.1                                                                                                                                                                                            
+───────────────────────────┬──────────────────────                                                                                                                                                                                           
+ 🎯  Target Url            │ http://10.129.155.118                                                                                                                                                                                           
+ 🚀  Threads               │ <span style="color:#ae81ff">50</span>                                                                                                                                                                                                              
+ 📖  Wordlist              │ /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt                                                                                                                                                    
+ 👌  Status Codes          │ <span style="color:#f92672">[</span>200, 204, 301, 302, 307, 308, 401, 403, 405, 500<span style="color:#f92672">]</span>                                                                                                                                                              
+ 💥  Timeout <span style="color:#f92672">(</span>secs<span style="color:#f92672">)</span>        │ <span style="color:#ae81ff">7</span>                                                                                                                                                                                                               
+ 🦡  User-Agent            │ feroxbuster/2.4.1                                                                                                                                                                                               
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml                                                                                                                                                                              
+ 🔃  Recursion Depth       │ <span style="color:#ae81ff">1</span>                                                                                                                                                                                                               
+ 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest                                                                                                                                                           
+───────────────────────────┴──────────────────────                                                                                                                                                                                           
+ 🏁  Press <span style="color:#f92672">[</span>ENTER<span style="color:#f92672">]</span> to use the Scan Management Menu™                                                                                                                                                                                          
+──────────────────────────────────────────────────                                                                                                                                                                                           
+<span style="color:#ae81ff">301</span>        7l       20w      237c http://10.129.155.118/manual                                                                                                                                                                               
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 13m   220545/220545  0s      found:1       errors:0                                                                                                                                                                 </span>
+<span style="color:#f92672">[</span><span style="color:#75715e">####################] - 13m   220545/220545  277/s   http://10.129.155.118</span>
+</code></pre></div><p>Mamy jeden wynik.  Podfolder<code>/manual</code>.</p>
+<hr>
+<h2 id="nikto">Nikto<a hidden class="anchor" aria-hidden="true" href="#nikto">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/paper<span style="color:#f92672">]</span>                                                                                                                                                                                                                
+└─$ nikto -h http://10.129.155.118 -C all                                                                                                                                                                                                    
+- Nikto v2.1.6                                                                                                                                                                                                                               
+---------------------------------------------------------------------------                                                                                                                                                                  
++ Target IP:          10.129.155.118                                                                                                                                                                                                         
++ Target Hostname:    10.129.155.118                                                                                                                                                                                                         
++ Target Port:        <span style="color:#ae81ff">80</span>                                                                                                                                                                                                                     
++ Start Time:         2022-02-08 12:48:51 <span style="color:#f92672">(</span>GMT1<span style="color:#f92672">)</span>                                                                                                                                                                                             
+---------------------------------------------------------------------------                                                                                                                                                                  
++ Server: Apache/2.4.37 <span style="color:#f92672">(</span>centos<span style="color:#f92672">)</span> OpenSSL/1.1.1k mod_fcgid/2.3.9                                                                                                                                                                              
++ The anti-clickjacking X-Frame-Options header is not present.                                                                                                                                                                               
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS                                                                                                                    
++ Uncommon header <span style="color:#e6db74">&#39;x-backend-server&#39;</span> found, with contents: office.paper                                                                                                                                                                      
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type                                                                                    
++ Retrieved x-powered-by header: PHP/7.2.24                                                                                                                                                                                                  
++ Allowed HTTP Methods: POST, OPTIONS, HEAD, GET, TRACE                                                                                                                                                                                      
++ OSVDB-877: HTTP TRACE method is active, suggesting the host is vulnerable to XST                                                                                                                                                           
++ OSVDB-3092: /manual/: Web server manual found.           
++ OSVDB-3268: /icons/: Directory indexing found.           
++ OSVDB-3268: /manual/images/: Directory indexing found.                                                              
++ OSVDB-3233: /icons/README: Apache default file found.                                                               
++ <span style="color:#ae81ff">26522</span> requests: <span style="color:#ae81ff">0</span> error<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> and <span style="color:#ae81ff">11</span> item<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> reported on remote host                                                   
++ End Time:           2022-02-08 13:30:45 <span style="color:#f92672">(</span>GMT1<span style="color:#f92672">)</span> <span style="color:#f92672">(</span><span style="color:#ae81ff">2514</span> seconds<span style="color:#f92672">)</span>                                                       
+---------------------------------------------------------------------------                                           
++ <span style="color:#ae81ff">1</span> host<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> tested
+</code></pre></div><hr>
+<h2 id="strona-główna">Strona główna<a hidden class="anchor" aria-hidden="true" href="#strona-główna">#</a></h2>
+<p>Możemy sprawdzić sobie stronę pod adresem <code>http://10.129.155.118</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209110230.png" alt=""  />
+</p>
+<hr>
+<p>W logach można zobaczyć coś niestandardowego a mianowicie <code>+ Uncommon header 'x-backend-server' found, with contents: office.paper</code>. Zatem mamy prawdopodobną domenę. Dodaję wpis do <code>/etc/hosts</code> <code>10.129.155.118 office.paper</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209110427.png" alt=""  />
+</p>
+<p>Po wejściu na <code>http://office.paper</code> mamy CMS Wordpress. Przechodzę zatem do jego enumeracji.</p>
+<hr>
+<h2 id="wpscan">wpscan<a hidden class="anchor" aria-hidden="true" href="#wpscan">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/paper<span style="color:#f92672">]</span>
+└─$ wpscan --url http://office.paper                                              
+_______________________________________________________________
+         __          _______   _____
+         <span style="color:#ae81ff">\ \ </span>       / /  __ <span style="color:#ae81ff">\ </span>/ ____|
+          <span style="color:#ae81ff">\ \ </span> /<span style="color:#ae81ff">\ </span> / /| |__<span style="color:#f92672">)</span> | <span style="color:#f92672">(</span>___   ___  __ _ _ __ ®
+           <span style="color:#ae81ff">\ \/</span>  <span style="color:#ae81ff">\/</span> / |  ___/ <span style="color:#ae81ff">\_</span>__ <span style="color:#ae81ff">\ </span>/ __|/ _<span style="color:#e6db74">`</span> | <span style="color:#e6db74">`</span>_ <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>            <span style="color:#ae81ff">\ </span> /<span style="color:#ae81ff">\ </span> /  | |     ____<span style="color:#f92672">)</span> | <span style="color:#f92672">(</span>__| <span style="color:#f92672">(</span>_| | | | |
+             <span style="color:#ae81ff">\/</span>  <span style="color:#ae81ff">\/</span>   |_|    |_____/ <span style="color:#ae81ff">\_</span>__|<span style="color:#ae81ff">\_</span>_,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.18
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> It seems like you have not updated the database <span style="color:#66d9ef">for</span> some time.
+<span style="color:#f92672">[</span>?<span style="color:#f92672">]</span> Do you want to update now? <span style="color:#f92672">[</span>Y<span style="color:#f92672">]</span>es <span style="color:#f92672">[</span>N<span style="color:#f92672">]</span>o, default: <span style="color:#f92672">[</span>N<span style="color:#f92672">]</span>y
+<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> Updating the Database ...
+<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> Update completed.
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> URL: http://office.paper/ <span style="color:#f92672">[</span>10.129.155.118<span style="color:#f92672">]</span>
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Started: Wed Feb  <span style="color:#ae81ff">9</span> 11:06:18 <span style="color:#ae81ff">2022</span>
+
+Interesting Finding<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>:
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Headers
+ | Interesting Entries:
+ |  - Server: Apache/2.4.37 <span style="color:#f92672">(</span>centos<span style="color:#f92672">)</span> OpenSSL/1.1.1k mod_fcgid/2.3.9
+ |  - X-Powered-By: PHP/7.2.24
+ |  - X-Backend-Server: office.paper
+ | Found By: Headers <span style="color:#f92672">(</span>Passive Detection<span style="color:#f92672">)</span>
+ | Confidence: 100%
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> WordPress readme found: http://office.paper/readme.html
+ | Found By: Direct Access <span style="color:#f92672">(</span>Aggressive Detection<span style="color:#f92672">)</span>
+ | Confidence: 100%
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> WordPress version 5.2.3 identified <span style="color:#f92672">(</span>Insecure, released on 2019-09-05<span style="color:#f92672">)</span>.
+ | Found By: Rss Generator <span style="color:#f92672">(</span>Passive Detection<span style="color:#f92672">)</span>
+ |  - http://office.paper/index.php/feed/, &lt;generator&gt;https://wordpress.org/?v<span style="color:#f92672">=</span>5.2.3&lt;/generator&gt;
+ |  - http://office.paper/index.php/comments/feed/, &lt;generator&gt;https://wordpress.org/?v<span style="color:#f92672">=</span>5.2.3&lt;/generator&gt;
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> WordPress theme in use: construction-techup
+ | Location: http://office.paper/wp-content/themes/construction-techup/
+ | Last Updated: 2021-07-17T00:00:00.000Z
+ | Readme: http://office.paper/wp-content/themes/construction-techup/readme.txt
+ | <span style="color:#f92672">[</span>!<span style="color:#f92672">]</span> The version is out of date, the latest version is 1.4
+ | Style URL: http://office.paper/wp-content/themes/construction-techup/style.css?ver<span style="color:#f92672">=</span>1.1
+ | Style Name: Construction Techup
+ | Description: Construction Techup is child theme of Techup a Free WordPress Theme useful <span style="color:#66d9ef">for</span> Business, corporate a...
+ | Author: wptexture
+ | Author URI: https://testerwp.com/
+ |
+ | Found By: Css Style In Homepage <span style="color:#f92672">(</span>Passive Detection<span style="color:#f92672">)</span>
+ |
+ | Version: 1.1 <span style="color:#f92672">(</span>80% confidence<span style="color:#f92672">)</span>
+ | Found By: Style <span style="color:#f92672">(</span>Passive Detection<span style="color:#f92672">)</span>
+ |  - http://office.paper/wp-content/themes/construction-techup/style.css?ver<span style="color:#f92672">=</span>1.1, Match: <span style="color:#e6db74">&#39;Version: 1.1&#39;</span>
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Enumerating All Plugins <span style="color:#f92672">(</span>via Passive Methods<span style="color:#f92672">)</span>
+
+<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> No plugins Found.
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Enumerating Config Backups <span style="color:#f92672">(</span>via Passive and Aggressive Methods<span style="color:#f92672">)</span>
+ Checking Config Backups - Time: 00:00:01 &lt;<span style="color:#f92672">=======================================</span>&gt; <span style="color:#f92672">(</span><span style="color:#ae81ff">137</span> / 137<span style="color:#f92672">)</span> 100.00% Time: 00:00:01
+
+<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> No Config Backups Found.
+
+<span style="color:#f92672">[</span>!<span style="color:#f92672">]</span> No WPScan API Token given, as a result vulnerability data has not been output.
+<span style="color:#f92672">[</span>!<span style="color:#f92672">]</span> You can get a free API token with <span style="color:#ae81ff">25</span> daily requests by registering at https://wpscan.com/register
+
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Finished: Wed Feb  <span style="color:#ae81ff">9</span> 11:06:26 <span style="color:#ae81ff">2022</span>
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Requests Done: <span style="color:#ae81ff">180</span>
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Cached Requests: <span style="color:#ae81ff">5</span>
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Data Sent: 43.575 KB
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Data Received: 17.792 MB
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Memory used: 223.547 MB
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Elapsed time: 00:00:07
+</code></pre></div><p>Zatem wiemy, że jest to <code>Wordpress 5.2.3</code> na motywie <code>construction-techup 1.1</code>. Jednak nic konkretnego nie mamy.</p>
+<hr>
+<h2 id="enumeracja-subdomen">Enumeracja subdomen<a hidden class="anchor" aria-hidden="true" href="#enumeracja-subdomen">#</a></h2>
+<p>Przechodzę do dalszego szukania wektora ataku. Nie przeprowadziłem jeszcze enumeracji subdomen. Użyję do tego celu <code>gobuster</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/paper<span style="color:#f92672">]</span>                                                                            
+└─$ gobuster vhost -w /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://office.paper -o subdomains.txt                                                                                       
+<span style="color:#f92672">===============================================================</span>
+Gobuster v3.1.0                                     
+by OJ Reeves <span style="color:#f92672">(</span>@TheColonial<span style="color:#f92672">)</span> &amp; Christian Mehlmauer <span style="color:#f92672">(</span>@firefart<span style="color:#f92672">)</span>
+<span style="color:#f92672">===============================================================</span>
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Url:          http://office.paper
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Method:       GET                               
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Threads:      <span style="color:#ae81ff">10</span>                                
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Wordlist:     /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> User Agent:   gobuster/3.1.0
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Timeout:      10s                               
+<span style="color:#f92672">===============================================================</span>
+2022/02/09 12:24:58 Starting gobuster in VHOST enumeration mode
+<span style="color:#f92672">===============================================================</span>
+Found: chat.office.paper <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 223163<span style="color:#f92672">]</span>
+                                                      
+<span style="color:#f92672">===============================================================</span>
+2022/02/09 12:37:48 Finished
+<span style="color:#f92672">===============================================================</span>
+</code></pre></div><p>Mamy jeden wynik. <code>chat.office.paper</code> oczywiście dodaje do <code>/etc/hosts</code>.</p>
+<hr>
+<h2 id="chatofficepaper">chat.office.paper<a hidden class="anchor" aria-hidden="true" href="#chatofficepaper">#</a></h2>
+<p>Po wejściu widzimy panel logowania <code>rocket.chat</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209120541.png" alt=""  />
+</p>
+<p>Sprawdziłem w internecie czy można w jakiś sposób ustalić wersję zainstalowanego <code>rocket.chat</code>. Jeden z użytkowników zasugerował aby wysłać request do <code>/api/info</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209125644.png" alt=""  />
+</p>
+<p>Po przejściu na URL. Udało mi się ustalić wersję <code>rocket.chat</code>. Jest to wersja <code>3.16.1</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209125657.png" alt=""  />
+</p>
+<p>Niestety ponownie nie mamy żadnej podatności na tą wersję.</p>
+<hr>
+<h2 id="wordpress-enumeration">Wordpress enumeration<a hidden class="anchor" aria-hidden="true" href="#wordpress-enumeration">#</a></h2>
+<p>Postanowiłem jeszcze poszukać czegoś wokół Wordpressa. Jeden z postów miał taki komentarz. To nauka na przyszłość, żeby te najprostsze rzeczy sprawdzać na samym początku.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209130251.png" alt=""  />
+</p>
+<p>Post stworzył user <code>prisonmike</code>, poniżej mamy komentarze z potencjalnymi userami.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">prisonmike
+nick
+michael
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209130356.png" alt=""  />
+</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209130416.png" alt=""  />
+</p>
+<p>Wordpress umożliwia sprawdzenie czy użytkownicy z danymi nazwami istnieją. Po prostym sprawdzeniu wiemy, że <code>nick</code> oraz <code>prisonmike</code> to na pewno userzy na Wordpressie.</p>
+<p>Niestety bruteforce się nie udał.</p>
+<hr>
+<h2 id="searchsploit-wordpress">Searchsploit wordpress<a hidden class="anchor" aria-hidden="true" href="#searchsploit-wordpress">#</a></h2>
+<p>Warto spojrzeć również na podatności na tą wersję Wordpressa.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌──<span style="color:#f92672">(</span>kali㉿kali<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/htb/paper<span style="color:#f92672">]</span>
+└─$ searchsploit wordpress 5.2.3
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                                                   |  Path
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+WordPress Core 5.2.3 - Cross-Site Host Modification                                                                                                                              | php/webapps/47361.pl
+WordPress Core &lt; 5.2.3 - Viewing Unauthenticated/Password/Private Posts                                                                                                          | multiple/webapps/47690.md
+WordPress Core &lt; 5.3.x - <span style="color:#e6db74">&#39;xmlrpc.php&#39;</span> Denial of Service                                                                                                                          | php/dos/47800.py
+WordPress Plugin DZS Videogallery &lt; 8.60 - Multiple Vulnerabilities                                                                                                              | php/webapps/39553.txt
+WordPress Plugin iThemes Security &lt; 7.0.3 - SQL Injection                                                                                                                        | php/webapps/44943.txt
+WordPress Plugin Rest Google Maps &lt; 7.11.18 - SQL Injection                                                                                                                      | php/webapps/48918.sh
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Shellcodes: No Results
+Papers: No Results
+</code></pre></div><p>Widzimy, że wersja jest podatna na <code>Viewing Unauthenticated/Password/Private Posts</code>. To brzmi ciekawie w kontekście poprzedniego postu, w którym jeden z adminów prosi o usunięcie <code>secret contentu</code>. Faktycznie po wpisaniu <code>http://office.paper/?static=1</code> otrzymałem &ldquo;ukrytą stronę&rdquo; z tekstem.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209140027.png" alt=""  />
+</p>
+<p>Mamy URL do rejestracji nowego użytkownika czatu.</p>
+<p><a href="http://chat.office.paper/register/8qozr226AhkCHZdyY">http://chat.office.paper/register/8qozr226AhkCHZdyY</a></p>
+<p>Również wyżej na screenie jest wspomniane, że rejestracja odbywa się przy pomocy specjalnego linku. Zatem mogę przejść i spróbować stworzyć nowego usera.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209140231.png" alt=""  />
+</p>
+<p>Po wpisaniu testowych danych jestem przekierowany na panel <code>rocket.chat</code>.</p>
+<hr>
+<h2 id="chat">Chat<a hidden class="anchor" aria-hidden="true" href="#chat">#</a></h2>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209141627.png" alt=""  />
+</p>
+<p>Mamy tutaj czat, szukałem tutaj chwilę i udało się się znaleźć coś ciekawego. Na tym serwerze tekstowym jest dodany bot <code>recyclops</code>. Jego zadania to m. in:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">For security reasons, the access is limited to the Sales folder.
+
+3. Files:
+eg: &#39;recyclops get me the file test.txt&#39;, or &#39;recyclops could you send me the file src/test.php&#39; or just &#39;recyclops file test.txt&#39;
+4. List:
+You can ask me to list the files
+</code></pre></div><p>Ale jak się okazuje da się wyjść z folderu <code>sales</code> poprzez <code>../../</code>.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209141854.png" alt=""  />
+</p>
+<p>Prawdopodobnie będę mógł sprawdzić config Wordpressa lub klucze SSH.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209142436.png" alt=""  />
+</p>
+<p>Do Wordpressa nie mogę się dostać, nie ma też <code>id_rsa</code> w <code>.ssh</code>. Natomiast są dziwne folder <code>hubot</code> oraz skrypt <code>bot_restart.sh</code>.</p>
+<p>Sprawdziłem folder <code>hubot</code> i znalazłem plik <code>.env</code>, w którym zapisane były istotne informacje. Jest to plik przechowujący zmienne środowiskowe.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> export ROCKETCHAT_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;http://127.0.0.1:48320&#39;</span>
+export ROCKETCHAT_USER<span style="color:#f92672">=</span>recyclops
+export ROCKETCHAT_PASSWORD<span style="color:#f92672">=</span>Queenofblad3s!23
+export ROCKETCHAT_USESSL<span style="color:#f92672">=</span>false
+export RESPOND_TO_DM<span style="color:#f92672">=</span>true
+export RESPOND_TO_EDITED<span style="color:#f92672">=</span>true
+export PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span>
+export BIND_ADDRESS<span style="color:#f92672">=</span>127.0.0.1
+export ROCKETCHAT_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;http://127.0.0.1:48320&#39;</span>
+export ROCKETCHAT_USER<span style="color:#f92672">=</span>recyclops
+export ROCKETCHAT_PASSWORD<span style="color:#f92672">=</span>Queenofblad3s!23
+export ROCKETCHAT_USESSL<span style="color:#f92672">=</span>false
+export RESPOND_TO_DM<span style="color:#f92672">=</span>true
+export RESPOND_TO_EDITED<span style="color:#f92672">=</span>true
+export PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span>
+export BIND_ADDRESS<span style="color:#f92672">=</span>127.0.0.1
+&lt;!<span style="color:#f92672">=====</span>End of file ../../../home/dwight/hubot/.env<span style="color:#f92672">=====</span>&gt;
+&lt;!<span style="color:#f92672">=====</span>End of file ../../../home/dwight/hubot/.env<span style="color:#f92672">=====</span>&gt;
+</code></pre></div><p>Mamy zapisane dane logowania w zmiennych:</p>
+<p><code>recyclops:Queenofblad3s!23</code></p>
+<p>Próbowałem zalogować się na bota i spróbować wyciągnąć jakieś istotne informacje z czatów, ale bot miał wyłączoną możliwość interakcji przez stronę. Jednak sprawdziłem hasło dla usera <code>dwight</code> i okazało się, że da się zalogować.</p>
+<p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220209221337.png" alt=""  />
+</p>
+<p>user.txt
+<code>8b2cc3456f506dc23821b271e122eb64</code></p>
+<hr>
+<h2 id="privilege-escalation">Privilege Escalation<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation">#</a></h2>
+<h3 id="linpeas">linpeas<a hidden class="anchor" aria-hidden="true" href="#linpeas">#</a></h3>
+<p>LinPEAS od razu wykrył problem z wersją <code>sudo</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">╔══════════╣ Sudo version
+╚ https://book.hacktricks.xyz/linux-unix/privilege-escalation#sudo-version
+Sudo version 1.8.29
+
+Invalid configuration value: failovermethod<span style="color:#f92672">=</span>priority in /etc/yum.repos.d/nodesource-el8.repo; Configuration: OptionBinding with id <span style="color:#e6db74">&#34;failovermethod&#34;</span> does not exist
+Invalid configuration value: failovermethod<span style="color:#f92672">=</span>priority in /etc/yum.repos.d/nodesource-el8.repo; Configuration: OptionBinding with id <span style="color:#e6db74">&#34;failovermethod&#34;</span> does not exist
+Modular dependency problems:
+
+ Problem 1: conflicting requests
+  - nothing provides module<span style="color:#f92672">(</span>perl:5.26<span style="color:#f92672">)</span> needed by module perl-IO-Socket-SSL:2.066:8030020201222215140:1e4bbb35.x86_64
+ Problem 2: conflicting requests
+  - nothing provides module<span style="color:#f92672">(</span>perl:5.26<span style="color:#f92672">)</span> needed by module perl-libwww-perl:6.34:8030020201223164340:b967a9a2.x86_64
+Vulnerable to CVE-2021-3560
+</code></pre></div><p>Proste googlowanie potwierdziło, że to podatność  <a href="https://github.com/swapravo/polkadots">CVE-2021-3560</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>dwight@paper p<span style="color:#f92672">]</span>$ ./polkadots                                                                                                                                                                                      
+account: boris                                                                                                                                                                                                     
+account name: Boris Ivanovich Grishenko                                                                                                                                                                            
+hashed_password: $6$cGKhfu9znRnOQV1h$2j/3WKyqTcCaftP1PGhW8Pghj2qV5j8zwy1gHrt9eILUE6WKeWVCTa9QgkskIfwVXpjVI.TuX2D.rEkbwKubi/                                                                                        
+iters: <span style="color:#ae81ff">20</span>
+</code></pre></div><p><img loading="lazy" src="../../../screenshots/Pasted%20image%2020220210033955.png" alt=""  />
+</p>
+<p>root.txt</p>
+<p><code>a291accfcede74a3136bbbce7035fda6</code></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://suszczyk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://suszczyk.github.io/tags/easy/">Easy</a></li>
+      <li><a href="https://suszczyk.github.io/tags/retired/">Retired</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://suszczyk.github.io/posts/ctf/picoctf2022/test/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>test</span>
+  </a>
+  <a class="next" href="https://suszczyk.github.io/posts/hackthebox/meta/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Meta - HackTheBox</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Paper - HackTheBox on twitter"
+        href="https://twitter.com/intent/tweet/?text=Paper%20-%20HackTheBox&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f&amp;hashtags=Linux%2cEasy%2cRetired">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Paper - HackTheBox on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f&amp;title=Paper%20-%20HackTheBox&amp;summary=Paper%20-%20HackTheBox&amp;source=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Paper - HackTheBox on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f&title=Paper%20-%20HackTheBox">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Paper - HackTheBox on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Paper - HackTheBox on whatsapp"
+        href="https://api.whatsapp.com/send?text=Paper%20-%20HackTheBox%20-%20https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Paper - HackTheBox on telegram"
+        href="https://telegram.me/share/url?text=Paper%20-%20HackTheBox&amp;url=https%3a%2f%2fsuszczyk.github.io%2fposts%2fhackthebox%2fpaper%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://suszczyk.github.io">Mateusz Suszczyk</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
